@@ -1,0 +1,11 @@
+include feffery_leaflet_components/feffery_leaflet_components.min.js
+include feffery_leaflet_components/feffery_leaflet_components.min.js.map
+include feffery_leaflet_components/async-*.js
+include feffery_leaflet_components/async-*.js.map
+include feffery_leaflet_components/*-shared.js
+include feffery_leaflet_components/*-shared.js.map
+include feffery_leaflet_components/metadata.json
+include feffery_leaflet_components/package-info.json
+include README.md
+include LICENSE
+include package.json
