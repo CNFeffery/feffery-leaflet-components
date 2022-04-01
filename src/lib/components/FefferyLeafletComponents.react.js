@@ -1,31 +1,33 @@
+/* eslint-disable no-magic-numbers */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-    Circle,
-    CircleMarker,
     MapContainer,
-    Polyline,
-    Polygon,
     Popup,
-    Rectangle,
     TileLayer,
-    Marker,
-    SVGOverlay
+    Marker
 } from 'react-leaflet';
 import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-import markerIcon from "./images/marker-icon.png";
+import 'leaflet/dist/leaflet.css';
+import {
+    markerIcon,
+    marker2xIcon,
+    markerShadow,
+    layersIcon,
+    layers2xIcon,
+} from './exportImages.react'
 
 console.log(new L.Icon.Default())
 
 const icon = L.icon({
     iconUrl: markerIcon,
-    iconRetinaUrl: markerIcon,
-    iconSize: [60, 55],
-    shadowSize: [50, 64],
-    iconAnchor: [22, 94],
-    shadowAnchor: [4, 62],
-    popupAnchor: [-3, -76]
+    iconRetinaUrl: marker2xIcon,
+    shadowUrl: markerShadow,
+    iconAnchor: [12, 41],
+    iconSize: [25, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+    tooltipAnchor: [16, -28]
 });
 
 

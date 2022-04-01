@@ -1,6 +1,8 @@
 /* eslint-disable import/prefer-default-export */
-import FefferyLeafletComponents from './components/FefferyLeafletComponents.react';
+import LeafletMap from './components/LeafletMap.react';
+import LeafletTileLayer from './components/LeafletTileLayer.react';
 
 export {
-    FefferyLeafletComponents
+    LeafletMap,
+    LeafletTileLayer
 };

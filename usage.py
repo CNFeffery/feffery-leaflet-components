@@ -1,4 +1,4 @@
-import feffery_leaflet_components
+import feffery_leaflet_components as flc
 import dash
 from dash.dependencies import Input, Output
 from dash import html
@@ -6,19 +6,15 @@ from dash import html
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
-    feffery_leaflet_components.FefferyLeafletComponents(
-        id='input',
-        value='my-value',
-        label='my-label'
-    ),
-    html.Div(id='output')
+    flc.LeafletMap(
+        [
+            flc.LeafletTileLayer()
+        ],
+        style={
+            'height': '800px'
+        }
+    )
 ])
-
-
-@app.callback(Output('output', 'children'), [Input('input', 'value')])
-def display_output(value):
-    return 'You have entered {}'.format(value)
-
 
 if __name__ == '__main__':
     app.run_server(debug=True)
