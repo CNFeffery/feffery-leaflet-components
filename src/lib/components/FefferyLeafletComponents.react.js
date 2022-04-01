@@ -12,7 +12,22 @@ import {
     Marker,
     SVGOverlay
 } from 'react-leaflet';
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import markerIcon from "./images/marker-icon.png";
+
+console.log(new L.Icon.Default())
+
+const icon = L.icon({
+    iconUrl: markerIcon,
+    iconRetinaUrl: markerIcon,
+    iconSize: [60, 55],
+    shadowSize: [50, 64],
+    iconAnchor: [22, 94],
+    shadowAnchor: [4, 62],
+    popupAnchor: [-3, -76]
+});
+
 
 const position = [51.505, -0.09]
 const bounds = [
@@ -32,18 +47,21 @@ export default class FefferyLeafletComponents extends Component {
         const { id, label, setProps, value } = this.props;
 
         return (
-            <MapContainer center={position} zoom={13} style={{ height: 500 }}>
+            <MapContainer
+                center={[51.505, -0.09]}
+                zoom={13}
+                style={{ height: 800 }}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <SVGOverlay attributes={{ stroke: 'red' }} bounds={bounds}>
-                    <rect x="0" y="0" width="100%" height="100%" fill="blue" />
-                    <circle r="5" cx="10" cy="10" fill="red" />
-                    <text x="50%" y="50%" stroke="white">
-                        text
-                    </text>
-                </SVGOverlay>
+                <Marker position={[51.505, -0.09]}
+                    icon={icon}
+                >
+                    <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                </Marker>
             </MapContainer>
         );
     }

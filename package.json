@@ -27,6 +27,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.16.7",
     "file-loader": "^6.2.0",
     "leaflet": "^1.7.1",
+    "leaflet-defaulticon-compatibility": "^0.1.1",
     "ramda": "^0.26.1",
     "react-leaflet": "^3.2.5",
     "svg-url-loader": "^7.1.1",

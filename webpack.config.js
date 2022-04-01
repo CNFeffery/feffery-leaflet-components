@@ -97,9 +97,9 @@ module.exports = (env, argv) => {
                     test: /\.(png|jpe?g|gif)$/i,
                     use: [
                         {
-                            loader: 'file-loader',
+                            loader: 'url-loader',
                             options: {
-                                limit: 1024 * 8
+                                limit: 1024 * 1000
                             },
                         },
                     ],
