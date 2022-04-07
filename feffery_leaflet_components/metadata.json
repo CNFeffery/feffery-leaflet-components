@@ -1,43 +1,21 @@
 {
-  "src/lib/components/FefferyLeafletComponents.react.js": {
-    "description": "ExampleComponent is an example component.\r\nIt takes a property, `label`, and\r\ndisplays it.\r\nIt renders an input with the property `value`\r\nwhich is editable by the user.",
-    "displayName": "FefferyLeafletComponents",
-    "methods": [],
-    "props": {
-      "id": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "The ID used to identify this component in Dash callbacks."
-      },
-      "label": {
-        "type": {
-          "name": "string"
-        },
-        "required": true,
-        "description": "A label that will be printed when this component is rendered."
-      },
-      "value": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "The value displayed in the input."
-      },
-      "setProps": {
-        "type": {
-          "name": "func"
-        },
-        "required": false,
-        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
-      }
-    }
-  },
   "src/lib/components/LeafletMap.react.js": {
     "description": "",
     "displayName": "LeafletMap",
-    "methods": [],
+    "methods": [
+      {
+        "name": "UpdateMap",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "props",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
     "props": {
       "id": {
         "type": {
@@ -63,6 +41,212 @@
       "style": {
         "type": {
           "name": "object"
+        },
+        "required": false,
+        "description": ""
+      },
+      "center": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "lng": {
+              "name": "number",
+              "required": false
+            },
+            "lat": {
+              "name": "number",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "{ lng: 0, lat: 0 }",
+          "computed": false
+        }
+      },
+      "zoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "3",
+          "computed": false
+        }
+      },
+      "editToolbar": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "editToolbarControlsOptions": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "editToolbarPosition": {
+              "name": "enum",
+              "value": [
+                {
+                  "value": "'topleft'",
+                  "computed": false
+                },
+                {
+                  "value": "'topright'",
+                  "computed": false
+                },
+                {
+                  "value": "'bottomleft'",
+                  "computed": false
+                },
+                {
+                  "value": "'bottomright'",
+                  "computed": false
+                }
+              ],
+              "required": false
+            },
+            "drawMarker": {
+              "name": "bool",
+              "required": false
+            },
+            "drawCircleMarker": {
+              "name": "bool",
+              "required": false
+            },
+            "drawPolyline": {
+              "name": "bool",
+              "required": false
+            },
+            "drawRectangle": {
+              "name": "bool",
+              "required": false
+            },
+            "drawPolygon": {
+              "name": "bool",
+              "required": false
+            },
+            "drawCircle": {
+              "name": "bool",
+              "required": false
+            },
+            "editMode": {
+              "name": "bool",
+              "required": false
+            },
+            "dragMode": {
+              "name": "bool",
+              "required": false
+            },
+            "cutPolygon": {
+              "name": "bool",
+              "required": false
+            },
+            "removalMode": {
+              "name": "bool",
+              "required": false
+            },
+            "rotateMode": {
+              "name": "bool",
+              "required": false
+            },
+            "oneBlock": {
+              "name": "bool",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "showMeasurements": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "_drawnShapes": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": ""
+      },
+      "_center": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "lng": {
+              "name": "number",
+              "required": false
+            },
+            "lat": {
+              "name": "number",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "_zoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
+      "_clickedLatLng": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "lng": {
+              "name": "number",
+              "required": false
+            },
+            "lat": {
+              "name": "number",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "_bounds": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "minx": {
+              "name": "number",
+              "required": false
+            },
+            "miny": {
+              "name": "number",
+              "required": false
+            },
+            "maxx": {
+              "name": "number",
+              "required": false
+            },
+            "maxy": {
+              "name": "number",
+              "required": false
+            }
+          }
         },
         "required": false,
         "description": ""
@@ -136,13 +320,6 @@
       "style": {
         "type": {
           "name": "object"
-        },
-        "required": false,
-        "description": ""
-      },
-      "loading": {
-        "type": {
-          "name": "bool"
         },
         "required": false,
         "description": ""

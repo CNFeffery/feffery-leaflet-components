@@ -25,13 +25,16 @@
   "license": "MIT",
   "dependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.16.7",
+    "@geoman-io/leaflet-geoman-free": "^2.11.4",
     "file-loader": "^6.2.0",
     "leaflet": "^1.7.1",
     "leaflet-defaulticon-compatibility": "^0.1.1",
+    "lodash": "^4.17.21",
     "ramda": "^0.26.1",
     "react-leaflet": "^3.2.5",
     "svg-url-loader": "^7.1.1",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",

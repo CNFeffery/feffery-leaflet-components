@@ -1,14 +1,14 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-export ''_leaflettilelayer
+export ''_leafletgeometryeditor
 
 """
-    ''_leaflettilelayer(;kwargs...)
-    ''_leaflettilelayer(children::Any;kwargs...)
-    ''_leaflettilelayer(children_maker::Function;kwargs...)
+    ''_leafletgeometryeditor(;kwargs...)
+    ''_leafletgeometryeditor(children::Any;kwargs...)
+    ''_leafletgeometryeditor(children_maker::Function;kwargs...)
 
 
-A LeafletTileLayer component.
+A LeafletGeometryEditor component.
 
 Keyword arguments:
 - `children` (a list of or a singular dash component, string or number; optional)
@@ -21,12 +21,12 @@ Those elements have the following types:
   - `component_name` (String; optional): Holds the name of the component that is loading
 - `style` (Dict; optional)
 """
-function ''_leaflettilelayer(; kwargs...)
+function ''_leafletgeometryeditor(; kwargs...)
         available_props = Symbol[:children, :id, :className, :loading_state, :style]
         wild_props = Symbol[]
-        return Component("''_leaflettilelayer", "LeafletTileLayer", "feffery_leaflet_components", available_props, wild_props; kwargs...)
+        return Component("''_leafletgeometryeditor", "LeafletGeometryEditor", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
 
-''_leaflettilelayer(children::Any; kwargs...) = ''_leaflettilelayer(;kwargs..., children = children)
-''_leaflettilelayer(children_maker::Function; kwargs...) = ''_leaflettilelayer(children_maker(); kwargs...)
+''_leafletgeometryeditor(children::Any; kwargs...) = ''_leafletgeometryeditor(;kwargs..., children = children)
+''_leafletgeometryeditor(children_maker::Function; kwargs...) = ''_leafletgeometryeditor(children_maker(); kwargs...)
 

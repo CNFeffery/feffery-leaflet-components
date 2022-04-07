@@ -47,9 +47,6 @@ LeafletTileLayer.propTypes = {
     // 自定义css字典
     style: PropTypes.object,
 
-    // 用于设置是否为按钮渲染“加载中不可点击”效果，默认为false
-    loading: PropTypes.bool,
-
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
