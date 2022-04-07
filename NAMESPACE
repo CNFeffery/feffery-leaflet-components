@@ -1,6 +1,5 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+export(''LeafletGeoJSON)
 export(''LeafletMap)
 export(''LeafletTileLayer)
-export(FefferyLeafletComponents)
-export(LeafletGeometryEditor)

@@ -12,6 +12,9 @@ export default class LeafletTileLayer extends Component {
             children,
             className,
             style,
+            url,
+            attribution,
+            opacity,
             loading_state
         } = this.props;
 
@@ -21,8 +24,9 @@ export default class LeafletTileLayer extends Component {
                 id={id}
                 className={className}
                 style={style}
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution={attribution}
+                url={url}
+                opacity={opacity}
                 data-dash-is-loading={
                     (loading_state && loading_state.is_loading) || undefined
                 }
@@ -46,6 +50,15 @@ LeafletTileLayer.propTypes = {
 
     // 自定义css字典
     style: PropTypes.object,
+
+    // 设置地图服务的url参数
+    url: PropTypes.string,
+
+    // 设置attribution参数
+    attribution: PropTypes.string,
+
+    // 设置图层透明度，默认为1
+    opacity: PropTypes.number,
 
     loading_state: PropTypes.shape({
         /**
@@ -71,4 +84,6 @@ LeafletTileLayer.propTypes = {
 
 // 设置默认参数
 LeafletTileLayer.defaultProps = {
+    url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    opacity: 1
 }

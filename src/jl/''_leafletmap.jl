@@ -50,18 +50,19 @@ Those elements have the following types:
   - `removalMode` (Bool; optional)
   - `rotateMode` (Bool; optional)
   - `oneBlock` (Bool; optional)
-- `loading` (Bool; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
+- `maxDrawnShapes` (Real; optional)
 - `showMeasurements` (Bool; optional)
 - `style` (Dict; optional)
+- `useFlyTo` (Bool; optional)
 - `zoom` (Real; optional)
 """
 function ''_leafletmap(; kwargs...)
-        available_props = Symbol[:children, :id, :_bounds, :_center, :_clickedLatLng, :_drawnShapes, :_zoom, :center, :className, :editToolbar, :editToolbarControlsOptions, :loading, :loading_state, :showMeasurements, :style, :zoom]
+        available_props = Symbol[:children, :id, :_bounds, :_center, :_clickedLatLng, :_drawnShapes, :_zoom, :center, :className, :editToolbar, :editToolbarControlsOptions, :loading_state, :maxDrawnShapes, :showMeasurements, :style, :useFlyTo, :zoom]
         wild_props = Symbol[]
         return Component("''_leafletmap", "LeafletMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

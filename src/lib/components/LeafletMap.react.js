@@ -14,7 +14,7 @@ import {
     markerIcon,
     marker2xIcon,
     markerShadow
-} from './exportImages.react'
+} from './utils/exportImages.react'
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 import { transform, isEqual, isObject, intersection } from 'lodash';
 
@@ -76,6 +76,8 @@ class LeafletMap extends Component {
         // 计算发生变化的参数名
         const changedProps = Object.keys(difference(this.props, nextProps))
 
+        console.log({ changedProps })
+
         // 若无变化的props，则不触发重绘
         if (changedProps.length === 0) {
             return false;
@@ -99,13 +101,26 @@ class LeafletMap extends Component {
     UpdateMap(props) {
         const {
             center,
-            zoom
+            zoom,
+            useFlyTo
         } = props;
 
         const map = useMap();
 
         // 根据传入的center和zoom属性，调整地图
-        map.setView(center, zoom);
+        if (useFlyTo) {
+            // 使用flyto效果
+            try {
+                map.flyTo(center, zoom);
+            } catch (error) {
+                // 回滚到默认效果
+                map.setView(center, zoom);
+            }
+
+        } else {
+            // 使用默认效果
+            map.setView(center, zoom);
+        }
 
         return null;
     }
@@ -119,9 +134,11 @@ class LeafletMap extends Component {
             children,
             center,
             zoom,
+            useFlyTo,
             editToolbar,
             editToolbarControlsOptions,
             showMeasurements,
+            maxDrawnShapes,
             setProps,
             loading_state
         } = this.props;
@@ -155,15 +172,15 @@ class LeafletMap extends Component {
                     })
 
                     // 初始化各项基础事件监听
-                    this.mapRef.current.on('click zoomend moveend', (e) => {
+                    map.on('click zoomend moveend', (e) => {
 
-                        const currentBounds = this.mapRef.current.getBounds()
+                        const currentBounds = map.getBounds()
 
                         if (e.type === 'click') {
 
                             setProps({
-                                _zoom: this.mapRef.current.getZoom(),
-                                _center: this.mapRef.current.getCenter(),
+                                _zoom: map.getZoom(),
+                                _center: map.getCenter(),
                                 _clickedLatLng: e.latlng,
                                 _bounds: {
                                     minx: currentBounds._southWest.lng,
@@ -174,8 +191,8 @@ class LeafletMap extends Component {
                             })
                         } else {
                             setProps({
-                                _zoom: this.mapRef.current.getZoom(),
-                                _center: this.mapRef.current.getCenter(),
+                                _zoom: map.getZoom(),
+                                _center: map.getCenter(),
                                 _bounds: {
                                     minx: currentBounds._southWest.lng,
                                     miny: currentBounds._southWest.lat,
@@ -188,24 +205,42 @@ class LeafletMap extends Component {
 
                     if (editToolbar) {
                         // 测试，添加可编辑要素功能
-                        this.mapRef.current.pm.addControls({
+                        map.pm.addControls({
+                            ...{
+                                cutPolygon: false
+                            },
                             ...editToolbarControlsOptions
                         })
 
                         // 设置显示文字语言为中文
-                        this.mapRef.current.pm.setLang('zh')
+                        map.pm.setLang('zh')
 
-                        this.mapRef.current.on('pm:create pm:cut pm:remove', function (e) {
+                        map.on('pm:create pm:cut pm:remove', function (e) {
                             if (showMeasurements && e.layer.showMeasurements) {
                                 e.layer.showMeasurements();
                             }
 
-                            const drawnShapes = map.pm.getGeomanDrawLayers().map(
-                                (item, i) => {
-                                    return extractDrawnShapes(item, i)
-                                }
+                            const drawnShapes = map.pm
+                                .getGeomanDrawLayers()
+                                .filter((item, i, arr) => {
+                                    if (maxDrawnShapes === null) {
+                                        return true
+                                    }
+                                    if (arr.length > maxDrawnShapes) {
+                                        if (i < arr.length - maxDrawnShapes) {
+                                            // 移除先前的图层
+                                            map.removeLayer(item)
+                                            return false;
+                                        }
+                                    }
+                                    return true;
+                                })
+                                .map(
+                                    (item, i) => {
+                                        return extractDrawnShapes(item, i)
+                                    }
 
-                            );
+                                );
                             // 更新当前已绘制的所有矢量要素
                             setProps({ _drawnShapes: drawnShapes })
 
@@ -226,7 +261,8 @@ class LeafletMap extends Component {
             >
                 <this.UpdateMap
                     center={center}
-                    zoom={zoom} />
+                    zoom={zoom}
+                    useFlyTo={useFlyTo} />
                 {children}
             </MapContainer>
         );
@@ -263,6 +299,9 @@ LeafletMap.propTypes = {
     // 设置地图的缩放级别，默认为1
     zoom: PropTypes.number,
 
+    // 设置center或zoom主动设置从而改变地图视角时是否启用'FlyTo'模式，默认为false
+    useFlyTo: PropTypes.bool,
+
     // 地图编辑模式配置类参数
 
     // 设置是否渲染编辑模式工具栏，默认为false
@@ -298,7 +337,7 @@ LeafletMap.propTypes = {
         // 设置是否渲染“拖拽要素”按钮，默认为true
         dragMode: PropTypes.bool,
 
-        // 设置是否渲染“剪切要素”按钮，默认为true
+        // 设置是否渲染“剪切要素”按钮，默认为false
         cutPolygon: PropTypes.bool,
 
         // 设置是否渲染“移除要素”按钮，默认为true
@@ -313,6 +352,9 @@ LeafletMap.propTypes = {
 
     // 设置是否为编辑模式下创建的矢量要素添加长度、面积标注，默认为true
     showMeasurements: PropTypes.bool,
+
+    // 设置最大同时存在的已绘制矢量要素，默认为null不限制
+    maxDrawnShapes: PropTypes.number,
 
     // 事件监听类属性值
     _drawnShapes: PropTypes.any,
@@ -344,9 +386,6 @@ LeafletMap.propTypes = {
         maxy: PropTypes.number
     }),
 
-    // 用于设置是否为按钮渲染“加载中不可点击”效果，默认为false
-    loading: PropTypes.bool,
-
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -374,7 +413,9 @@ LeafletMap.defaultProps = {
     center: { lng: 0, lat: 0 },
     zoom: 3,
     editToolbar: false,
-    showMeasurements: true
+    showMeasurements: true,
+    maxDrawnShapes: null,
+    useFlyTo: false
 }
 
 
