@@ -14,10 +14,9 @@ app.layout = html.Div([
             ),
             flc.LeafletGeoJSON(
                 data=json.load(open('./四大片区.geojson', encoding='utf-8')),
-                fitBounds=True,
-                editable=False,
-                selectMode='default'
-            )
+                selectMode='multiple',
+            ),
+            flc.LeafletHeatMap()
         ],
         id='map-demo',
         editToolbar=True,
@@ -34,21 +33,22 @@ app.layout = html.Div([
         },
         style={
             'height': '700px',
-            'width': '900px'
+            'width': '100%'
         }
     )
 ])
 
 
-@app.callback(
-    Output('map-demo', 'center'),
-    Input('map-demo', '_drawnShapes')
-)
-def center_to_clicked_point(_drawnShapes):
+# @app.callback(
+#     Output('map-demo', 'center'),
+#     Input('map-demo', '_clickedLatLng')
+# )
+# def center_to_clicked_point(_clickedLatLng):
 
-    print(_drawnShapes)
+#     if _clickedLatLng:
+#         return _clickedLatLng
 
-    return dash.no_update
+#     return dash.no_update
 
 
 if __name__ == '__main__':

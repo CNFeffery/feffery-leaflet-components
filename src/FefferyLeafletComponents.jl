@@ -6,6 +6,7 @@ const resources_path = realpath(joinpath( @__DIR__, "..", "deps"))
 const version = "0.0.1-a1"
 
 include("jl/''_leafletgeojson.jl")
+include("jl/''_leafletheatmap.jl")
 include("jl/''_leafletmap.jl")
 include("jl/''_leaflettilelayer.jl")
 

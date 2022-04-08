@@ -3,8 +3,8 @@
 from dash.development.base_component import Component, _explicitize_args
 
 
-class LeafletGeoJSON(Component):
-    """A LeafletGeoJSON component.
+class LeafletHeatMap(Component):
+    """A LeafletHeatMap component.
 
 
 Keyword arguments:
@@ -12,12 +12,6 @@ Keyword arguments:
 - id (string; optional)
 
 - className (string; optional)
-
-- data (dict; optional)
-
-- featureIdField (string; default 'id')
-
-- fitBounds (boolean; default True)
 
 - loading_state (dict; optional)
 
@@ -32,18 +26,14 @@ Keyword arguments:
     - prop_name (string; optional):
         Holds which property is loading.
 
-- selectMode (a value equal to: 'single', 'multiple'; optional)
-
-- selectedFeatureIds (list; optional)
-
 - style (dict; optional)"""
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, data=Component.UNDEFINED, fitBounds=Component.UNDEFINED, featureIdField=Component.UNDEFINED, selectMode=Component.UNDEFINED, selectedFeatureIds=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'className', 'data', 'featureIdField', 'fitBounds', 'loading_state', 'selectMode', 'selectedFeatureIds', 'style']
-        self._type = 'LeafletGeoJSON'
+    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'className', 'loading_state', 'style']
+        self._type = 'LeafletHeatMap'
         self._namespace = 'feffery_leaflet_components'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'className', 'data', 'featureIdField', 'fitBounds', 'loading_state', 'selectMode', 'selectedFeatureIds', 'style']
+        self.available_properties = ['id', 'className', 'loading_state', 'style']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
@@ -53,4 +43,4 @@ Keyword arguments:
             if k not in args:
                 raise TypeError(
                     'Required argument `' + k + '` was not specified.')
-        super(LeafletGeoJSON, self).__init__(**args)
+        super(LeafletHeatMap, self).__init__(**args)

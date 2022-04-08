@@ -11,13 +11,6 @@
         "required": false,
         "description": ""
       },
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": ""
-      },
       "className": {
         "type": {
           "name": "string"
@@ -39,7 +32,18 @@
         "required": false,
         "description": ""
       },
-      "idFieldName": {
+      "fitBounds": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "featureIdField": {
         "type": {
           "name": "string"
         },
@@ -55,7 +59,7 @@
           "name": "enum",
           "value": [
             {
-              "value": "'default'",
+              "value": "'single'",
               "computed": false
             },
             {
@@ -65,11 +69,7 @@
           ]
         },
         "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "null",
-          "computed": false
-        }
+        "description": ""
       },
       "selectedFeatureIds": {
         "type": {
@@ -82,38 +82,64 @@
           "computed": false
         }
       },
-      "selectedFeatureStyle": {
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
+  "src/lib/components/LeafletHeatMap.react.js": {
+    "description": "",
+    "displayName": "LeafletHeatMap",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "style": {
         "type": {
           "name": "object"
         },
         "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "{\r\n    color: '#ff0000'\r\n}",
-          "computed": false
-        }
-      },
-      "fitBounds": {
-        "type": {
-          "name": "bool"
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "false",
-          "computed": false
-        }
-      },
-      "editable": {
-        "type": {
-          "name": "bool"
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "false",
-          "computed": false
-        }
+        "description": ""
       },
       "loading_state": {
         "type": {
@@ -151,20 +177,7 @@
   "src/lib/components/LeafletMap.react.js": {
     "description": "",
     "displayName": "LeafletMap",
-    "methods": [
-      {
-        "name": "UpdateMap",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "props",
-            "type": null
-          }
-        ],
-        "returns": null
-      }
-    ],
+    "methods": [],
     "props": {
       "id": {
         "type": {

@@ -2,9 +2,11 @@
 import LeafletMap from './components/LeafletMap.react';
 import LeafletTileLayer from './components/LeafletTileLayer.react';
 import LeafletGeoJSON from './components/LeafletGeoJSON.react';
+import LeafletHeatMap from './components/LeafletHeatMap.react';
 
 export {
     LeafletMap,
     LeafletTileLayer,
-    LeafletGeoJSON
+    LeafletGeoJSON,
+    LeafletHeatMap
 };

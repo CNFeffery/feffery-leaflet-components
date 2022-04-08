@@ -14,7 +14,7 @@ import {
     markerIcon,
     marker2xIcon,
     markerShadow
-} from './utils/exportImages.react'
+} from './utils/exportImages.react';
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 import { transform, isEqual, isObject, intersection } from 'lodash';
 
@@ -63,7 +63,7 @@ const extractDrawnShapes = (item, i) => {
 }
 
 // 定义不触发render()逻辑的props数组
-const preventUpdateProps = ['loading_state', '_center', '_zoom', '_clickedLatLng', '_drawnShapes'];
+const preventUpdateProps = ['_center', '_zoom', '_clickedLatLng', '_drawnShapes'];
 
 class LeafletMap extends Component {
     constructor(props) {
@@ -75,8 +75,6 @@ class LeafletMap extends Component {
 
         // 计算发生变化的参数名
         const changedProps = Object.keys(difference(this.props, nextProps))
-
-        console.log({ changedProps })
 
         // 若无变化的props，则不触发重绘
         if (changedProps.length === 0) {
@@ -95,34 +93,6 @@ class LeafletMap extends Component {
         }
 
         return true;
-    }
-
-    // 用于动态调整地图各项属性
-    UpdateMap(props) {
-        const {
-            center,
-            zoom,
-            useFlyTo
-        } = props;
-
-        const map = useMap();
-
-        // 根据传入的center和zoom属性，调整地图
-        if (useFlyTo) {
-            // 使用flyto效果
-            try {
-                map.flyTo(center, zoom);
-            } catch (error) {
-                // 回滚到默认效果
-                map.setView(center, zoom);
-            }
-
-        } else {
-            // 使用默认效果
-            map.setView(center, zoom);
-        }
-
-        return null;
     }
 
     render() {
@@ -151,6 +121,8 @@ class LeafletMap extends Component {
                 data-dash-is-loading={
                     (loading_state && loading_state.is_loading) || undefined
                 }
+                center={center}
+                zoom={zoom}
                 whenCreated={map => {
                     // 绑定ref
                     this.mapRef.current = map
@@ -259,10 +231,6 @@ class LeafletMap extends Component {
                 }
                 }
             >
-                <this.UpdateMap
-                    center={center}
-                    zoom={zoom}
-                    useFlyTo={useFlyTo} />
                 {children}
             </MapContainer>
         );

@@ -29,6 +29,7 @@
     "file-loader": "^6.2.0",
     "leaflet": "^1.7.1",
     "leaflet-defaulticon-compatibility": "^0.1.1",
+    "leaflet.heat": "^0.2.0",
     "lodash": "^4.17.21",
     "ramda": "^0.26.1",
     "react-leaflet": "^3.2.5",
