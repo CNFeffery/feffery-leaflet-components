@@ -19,26 +19,34 @@ export default class LeafletHeatMap extends Component {
         // 取得必要属性或参数
         const {
             id,
-            className,
-            style,
+            points,
+            minOpacity,
+            max,
+            radius,
+            blur,
+            gradient,
             setProps,
             loading_state
         } = this.props;
 
         // 返回定制化的前端组件
         return (
-            <MapConsumer >
+            <MapConsumer
+                id={id}
+                data-dash-is-loading={
+                    (loading_state && loading_state.is_loading) || undefined
+                } >
                 {(map) => {
-
-                    const points = addressPoints
-                        ? addressPoints.map((p) => {
-                            return [p[0], p[1]];
-                        })
-                        : [];
-
-                    console.log(L.heatLayer)
-                    L.heatLayer(points).addTo(map);
-                    console.log('热力图渲染完成')
+                    // 初始化热力图层
+                    L.heatLayer(points.map(item => {
+                        return item.weight ? [item.lat, item.lng, item.weight] : [item.lat, item.lng];
+                    }), {
+                        minOpacity,
+                        max,
+                        radius,
+                        blur,
+                        gradient
+                    }).addTo(map);
 
                     return null;
                 }}
@@ -52,11 +60,30 @@ LeafletHeatMap.propTypes = {
     // 组件id
     id: PropTypes.string,
 
-    // css类名
-    className: PropTypes.string,
+    // 设置热力图渲染所需点数据，格式为由{lng: xxx, lat: xxx, weight: xxx}
+    // 所组成的数组，其中weight可选，表示权重
+    points: PropTypes.arrayOf(
+        PropTypes.exact({
+            lng: PropTypes.number,
+            lat: PropTypes.number,
+            weight: PropTypes.number
+        })
+    ),
 
-    // 自定义css字典
-    style: PropTypes.object,
+    // 设置最小透明度，取值在0~1之间，0表示完全透明
+    minOpacity: PropTypes.number,
+
+    // 设置权重的上限，默认为1.0
+    max: PropTypes.number,
+
+    // 设置每个热力点的半径大小，默认为25
+    radius: PropTypes.number,
+
+    // 设置每个热力点的模糊程度，默认为15
+    blur: PropTypes.number,
+
+    // 自定义色彩过渡断点规则，例如：{0.4: 'blue', 0.65: 'lime', 1: 'red'}
+    gradient: PropTypes.object,
 
     loading_state: PropTypes.shape({
         /**
@@ -82,4 +109,8 @@ LeafletHeatMap.propTypes = {
 
 // 设置默认参数
 LeafletHeatMap.defaultProps = {
+    minOpacity: 0,
+    max: 1,
+    radius: 25,
+    blur: 15
 }

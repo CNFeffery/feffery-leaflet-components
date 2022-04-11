@@ -9,16 +9,24 @@ A LeafletHeatMap component.
 
 Keyword arguments:
 - `id` (String; optional)
-- `className` (String; optional)
+- `blur` (Real; optional)
+- `gradient` (Dict; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
-- `style` (Dict; optional)
+- `max` (Real; optional)
+- `minOpacity` (Real; optional)
+- `points` (optional): . points has the following type: Array of lists containing elements 'lng', 'lat', 'weight'.
+Those elements have the following types:
+  - `lng` (Real; optional)
+  - `lat` (Real; optional)
+  - `weight` (Real; optional)s
+- `radius` (Real; optional)
 """
 function ''_leafletheatmap(; kwargs...)
-        available_props = Symbol[:id, :className, :loading_state, :style]
+        available_props = Symbol[:id, :blur, :gradient, :loading_state, :max, :minOpacity, :points, :radius]
         wild_props = Symbol[]
         return Component("''_leafletheatmap", "LeafletHeatMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

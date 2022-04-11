@@ -11,7 +11,9 @@ Keyword arguments:
 
 - id (string; optional)
 
-- className (string; optional)
+- blur (number; default 15)
+
+- gradient (dict; optional)
 
 - loading_state (dict; optional)
 
@@ -26,14 +28,28 @@ Keyword arguments:
     - prop_name (string; optional):
         Holds which property is loading.
 
-- style (dict; optional)"""
+- max (number; default 1)
+
+- minOpacity (number; default 0)
+
+- points (list of dicts; optional)
+
+    `points` is a list of dicts with keys:
+
+    - lat (number; optional)
+
+    - lng (number; optional)
+
+    - weight (number; optional)
+
+- radius (number; default 25)"""
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'className', 'loading_state', 'style']
+    def __init__(self, id=Component.UNDEFINED, points=Component.UNDEFINED, minOpacity=Component.UNDEFINED, max=Component.UNDEFINED, radius=Component.UNDEFINED, blur=Component.UNDEFINED, gradient=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'blur', 'gradient', 'loading_state', 'max', 'minOpacity', 'points', 'radius']
         self._type = 'LeafletHeatMap'
         self._namespace = 'feffery_leaflet_components'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'className', 'loading_state', 'style']
+        self.available_properties = ['id', 'blur', 'gradient', 'loading_state', 'max', 'minOpacity', 'points', 'radius']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

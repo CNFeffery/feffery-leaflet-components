@@ -13,11 +13,33 @@ Keyword arguments:
 
 - className (string; optional)
 
+- clickFeatureZoom (boolean; default False)
+
 - data (dict; optional)
+
+- defaultStyle (optional)
+
+- editable (boolean; default False)
+
+- featureColourParams (dict; optional)
+
+    `featureColourParams` is a dict with keys:
+
+    - bins (list of list of numberss; optional)
+
+    - closed (a value equal to: 'left', 'right'; optional)
+
+    - colors (list of strings; optional)
 
 - featureIdField (string; default 'id')
 
+- featureValueField (string; default 'value')
+
 - fitBounds (boolean; default True)
+
+- hoverStyle (optional)
+
+- hoverable (boolean; default False)
 
 - loading_state (dict; optional)
 
@@ -36,14 +58,16 @@ Keyword arguments:
 
 - selectedFeatureIds (list; optional)
 
-- style (dict; optional)"""
+- selectedStyle (optional)
+
+- style (dict | string; optional)"""
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, data=Component.UNDEFINED, fitBounds=Component.UNDEFINED, featureIdField=Component.UNDEFINED, selectMode=Component.UNDEFINED, selectedFeatureIds=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'className', 'data', 'featureIdField', 'fitBounds', 'loading_state', 'selectMode', 'selectedFeatureIds', 'style']
+    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, hoverable=Component.UNDEFINED, defaultStyle=Component.UNDEFINED, hoverStyle=Component.UNDEFINED, selectedStyle=Component.UNDEFINED, data=Component.UNDEFINED, fitBounds=Component.UNDEFINED, clickFeatureZoom=Component.UNDEFINED, featureIdField=Component.UNDEFINED, featureValueField=Component.UNDEFINED, selectMode=Component.UNDEFINED, selectedFeatureIds=Component.UNDEFINED, featureColourParams=Component.UNDEFINED, editable=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'className', 'clickFeatureZoom', 'data', 'defaultStyle', 'editable', 'featureColourParams', 'featureIdField', 'featureValueField', 'fitBounds', 'hoverStyle', 'hoverable', 'loading_state', 'selectMode', 'selectedFeatureIds', 'selectedStyle', 'style']
         self._type = 'LeafletGeoJSON'
         self._namespace = 'feffery_leaflet_components'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'className', 'data', 'featureIdField', 'fitBounds', 'loading_state', 'selectMode', 'selectedFeatureIds', 'style']
+        self.available_properties = ['id', 'className', 'clickFeatureZoom', 'data', 'defaultStyle', 'editable', 'featureColourParams', 'featureIdField', 'featureValueField', 'fitBounds', 'hoverStyle', 'hoverable', 'loading_state', 'selectMode', 'selectedFeatureIds', 'selectedStyle', 'style']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

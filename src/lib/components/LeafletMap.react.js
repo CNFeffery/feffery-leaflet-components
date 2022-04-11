@@ -105,6 +105,12 @@ class LeafletMap extends Component {
             center,
             zoom,
             useFlyTo,
+            doubleClickZoom,
+            dragging,
+            closePopupOnClick,
+            minZoom,
+            maxZoom,
+            scrollWheelZoom,
             editToolbar,
             editToolbarControlsOptions,
             showMeasurements,
@@ -123,6 +129,12 @@ class LeafletMap extends Component {
                 }
                 center={center}
                 zoom={zoom}
+                doubleClickZoom={doubleClickZoom}
+                dragging={dragging}
+                closePopupOnClick={closePopupOnClick}
+                minZoom={minZoom}
+                maxZoom={maxZoom}
+                scrollWheelZoom={scrollWheelZoom}
                 whenCreated={map => {
                     // 绑定ref
                     this.mapRef.current = map
@@ -270,6 +282,28 @@ LeafletMap.propTypes = {
     // 设置center或zoom主动设置从而改变地图视角时是否启用'FlyTo'模式，默认为false
     useFlyTo: PropTypes.bool,
 
+    // 设置是否允许双击地图进行放大，默认为true
+    doubleClickZoom: PropTypes.bool,
+
+    // 设置是否允许鼠标拖拽地图，默认为true
+    dragging: PropTypes.bool,
+
+    // 设置是否允许用户鼠标点击地图空白处来关闭popup卡片，默认为true
+    closePopupOnClick: PropTypes.bool,
+
+    // 设置zoom级别下限
+    minZoom: PropTypes.number,
+
+    // 设置zoom级别上限
+    maxZoom: PropTypes.number,
+
+    // 设置是否允许用户鼠标滚轮缩放地图，默认为true
+    // 亦可传入'center'使得地图无视鼠标实际位置，仅以地图当前中心作为缩放依据的中心
+    scrollWheelZoom: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.oneOf(['center'])
+    ]),
+
     // 地图编辑模式配置类参数
 
     // 设置是否渲染编辑模式工具栏，默认为false
@@ -380,6 +414,12 @@ LeafletMap.propTypes = {
 LeafletMap.defaultProps = {
     center: { lng: 0, lat: 0 },
     zoom: 3,
+    doubleClickZoom: true,
+    dragging: true,
+    closePopupOnClick: true,
+    minZoom: 0,
+    maxZoom: 18,
+    scrollWheelZoom: true,
     editToolbar: false,
     showMeasurements: true,
     maxDrawnShapes: null,

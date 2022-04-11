@@ -20,7 +20,50 @@
       },
       "style": {
         "type": {
-          "name": "object"
+          "name": "union",
+          "value": [
+            {
+              "name": "object"
+            },
+            {
+              "name": "string"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      },
+      "hoverable": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "defaultStyle": {
+        "type": {
+          "name": "custom",
+          "raw": "geoJsonStylePropType"
+        },
+        "required": false,
+        "description": ""
+      },
+      "hoverStyle": {
+        "type": {
+          "name": "custom",
+          "raw": "geoJsonStylePropType"
+        },
+        "required": false,
+        "description": ""
+      },
+      "selectedStyle": {
+        "type": {
+          "name": "custom",
+          "raw": "geoJsonStylePropType"
         },
         "required": false,
         "description": ""
@@ -43,6 +86,17 @@
           "computed": false
         }
       },
+      "clickFeatureZoom": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
       "featureIdField": {
         "type": {
           "name": "string"
@@ -51,6 +105,17 @@
         "description": "",
         "defaultValue": {
           "value": "'id'",
+          "computed": false
+        }
+      },
+      "featureValueField": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'value'",
           "computed": false
         }
       },
@@ -79,6 +144,57 @@
         "description": "",
         "defaultValue": {
           "value": "[]",
+          "computed": false
+        }
+      },
+      "featureColourParams": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "bins": {
+              "name": "arrayOf",
+              "value": {
+                "name": "arrayOf",
+                "value": {
+                  "name": "number"
+                }
+              },
+              "required": false
+            },
+            "colors": {
+              "name": "arrayOf",
+              "value": {
+                "name": "string"
+              },
+              "required": false
+            },
+            "closed": {
+              "name": "enum",
+              "value": [
+                {
+                  "value": "'left'",
+                  "computed": false
+                },
+                {
+                  "value": "'right'",
+                  "computed": false
+                }
+              ],
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "editable": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
           "computed": false
         }
       },
@@ -127,14 +243,75 @@
         "required": false,
         "description": ""
       },
-      "className": {
+      "points": {
         "type": {
-          "name": "string"
+          "name": "arrayOf",
+          "value": {
+            "name": "exact",
+            "value": {
+              "lng": {
+                "name": "number",
+                "required": false
+              },
+              "lat": {
+                "name": "number",
+                "required": false
+              },
+              "weight": {
+                "name": "number",
+                "required": false
+              }
+            }
+          }
         },
         "required": false,
         "description": ""
       },
-      "style": {
+      "minOpacity": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "max": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "1",
+          "computed": false
+        }
+      },
+      "radius": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "25",
+          "computed": false
+        }
+      },
+      "blur": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "15",
+          "computed": false
+        }
+      },
+      "gradient": {
         "type": {
           "name": "object"
         },
@@ -247,6 +424,86 @@
         "description": "",
         "defaultValue": {
           "value": "false",
+          "computed": false
+        }
+      },
+      "doubleClickZoom": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "dragging": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "closePopupOnClick": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "minZoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "maxZoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "18",
+          "computed": false
+        }
+      },
+      "scrollWheelZoom": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "bool"
+            },
+            {
+              "name": "enum",
+              "value": [
+                {
+                  "value": "'center'",
+                  "computed": false
+                }
+              ]
+            }
+          ]
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "true",
           "computed": false
         }
       },

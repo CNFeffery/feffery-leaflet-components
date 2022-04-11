@@ -34,6 +34,9 @@ Those elements have the following types:
   - `lng` (Real; optional)
   - `lat` (Real; optional)
 - `className` (String; optional)
+- `closePopupOnClick` (Bool; optional)
+- `doubleClickZoom` (Bool; optional)
+- `dragging` (Bool; optional)
 - `editToolbar` (Bool; optional)
 - `editToolbarControlsOptions` (optional): . editToolbarControlsOptions has the following type: lists containing elements 'editToolbarPosition', 'drawMarker', 'drawCircleMarker', 'drawPolyline', 'drawRectangle', 'drawPolygon', 'drawCircle', 'editMode', 'dragMode', 'cutPolygon', 'removalMode', 'rotateMode', 'oneBlock'.
 Those elements have the following types:
@@ -56,13 +59,16 @@ Those elements have the following types:
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
 - `maxDrawnShapes` (Real; optional)
+- `maxZoom` (Real; optional)
+- `minZoom` (Real; optional)
+- `scrollWheelZoom` (Bool | a value equal to: 'center'; optional)
 - `showMeasurements` (Bool; optional)
 - `style` (Dict; optional)
 - `useFlyTo` (Bool; optional)
 - `zoom` (Real; optional)
 """
 function ''_leafletmap(; kwargs...)
-        available_props = Symbol[:children, :id, :_bounds, :_center, :_clickedLatLng, :_drawnShapes, :_zoom, :center, :className, :editToolbar, :editToolbarControlsOptions, :loading_state, :maxDrawnShapes, :showMeasurements, :style, :useFlyTo, :zoom]
+        available_props = Symbol[:children, :id, :_bounds, :_center, :_clickedLatLng, :_drawnShapes, :_zoom, :center, :className, :closePopupOnClick, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :loading_state, :maxDrawnShapes, :maxZoom, :minZoom, :scrollWheelZoom, :showMeasurements, :style, :useFlyTo, :zoom]
         wild_props = Symbol[]
         return Component("''_leafletmap", "LeafletMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
