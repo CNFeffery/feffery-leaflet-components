@@ -119,6 +119,31 @@
           "computed": false
         }
       },
+      "mode": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'default'",
+              "computed": false
+            },
+            {
+              "value": "'selectable'",
+              "computed": false
+            },
+            {
+              "value": "'choropleth'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'default'",
+          "computed": false
+        }
+      },
       "selectMode": {
         "type": {
           "name": "enum",
@@ -134,7 +159,11 @@
           ]
         },
         "required": false,
-        "description": ""
+        "description": "",
+        "defaultValue": {
+          "value": "'single'",
+          "computed": false
+        }
       },
       "selectedFeatureIds": {
         "type": {
@@ -147,7 +176,7 @@
           "computed": false
         }
       },
-      "featureColourParams": {
+      "featureStyleParams": {
         "type": {
           "name": "exact",
           "value": {
@@ -161,10 +190,11 @@
               },
               "required": false
             },
-            "colors": {
+            "styles": {
               "name": "arrayOf",
               "value": {
-                "name": "string"
+                "name": "custom",
+                "raw": "geoJsonStylePropType"
               },
               "required": false
             },
@@ -197,6 +227,20 @@
           "value": "false",
           "computed": false
         }
+      },
+      "_clickedFeature": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": ""
+      },
+      "_hoveredFeature": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": ""
       },
       "loading_state": {
         "type": {

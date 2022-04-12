@@ -1,21 +1,14 @@
 /* eslint-disable no-undefined */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { isUndefined } from 'lodash';
 import { GeoJSON, MapConsumer } from 'react-leaflet';
+import { transform, isEqual, isObject, intersection, isUndefined } from 'lodash';
 
 // 定义默认状态下的默认style样式
 const _defaultStyle = {
-    stroke: true,
     color: '#3388ff',
-    weight: 3,
-    opacity: 1,
-    lineCap: 'round',
-    lineJoin: 'round',
-    dashArray: null,
-    dashOffset: null,
-    fill: true,
     fillColor: '#3388ff',
+    opacity: 1,
     fillOpacity: 0.2
 }
 
@@ -28,7 +21,24 @@ const _hoverStyle = {
 const _selectedStyle = {
     color: '#f5222d',
     fillColor: '#f5222d',
+    fillOpacity: 0.2,
+    opacity: 1,
 }
+
+// 计算两个对象之间的属性名差异数组
+const difference = (object, base) => {
+    const changes = (object, base) => {
+        return transform(object, function (result, value, key) {
+            if (!isEqual(value, base[key])) {
+                result[key] = (isObject(value) && isObject(base[key])) ? changes(value, base[key]) : value;
+            }
+        });
+    }
+    return changes(object, base);
+}
+
+// 定义不触发render()逻辑的props数组
+const preventUpdateProps = ['_clickedFeature', '_hoveredFeature'];
 
 // 定义GeoJSON图层组件LeafletGeoJSON，api参数参考
 export default class LeafletGeoJSON extends Component {
@@ -38,13 +48,38 @@ export default class LeafletGeoJSON extends Component {
         this.geoJsonRef = React.createRef();
     }
 
+    shouldComponentUpdate(nextProps) {
+
+        // 计算发生变化的参数名
+        const changedProps = Object.keys(difference(this.props, nextProps))
+
+        // 若无变化的props，则不触发重绘
+        if (changedProps.length === 0) {
+            return false;
+        }
+
+        // 计算发生变化的参数名与需要阻止重绘的参数名数组的交集
+        const changedPreventUpdateProps = intersection(
+            changedProps,
+            preventUpdateProps
+        )
+
+        // 若有交集，则不触发重绘
+        if (changedPreventUpdateProps.length !== 0) {
+            return false;
+        }
+
+        return true;
+    }
+
     render() {
         // 取得必要属性或参数
-        let {
+        var {
             id,
             className,
             style,
             data,
+            mode,
             fitBounds,
             clickFeatureZoom,
             featureIdField,
@@ -56,10 +91,12 @@ export default class LeafletGeoJSON extends Component {
             defaultStyle,
             hoverStyle,
             selectedStyle,
-            featureColourParams,
+            featureStyleParams,
             setProps,
             loading_state
         } = this.props;
+
+        console.log(selectedFeatureIds)
 
         // 预处理defaultStyle、hoverStyle、selectedStyle
         defaultStyle = { ..._defaultStyle, ...defaultStyle };
@@ -75,94 +112,174 @@ export default class LeafletGeoJSON extends Component {
                             id={id}
                             className={className}
                             style={(feature) => {
-                                // 检查是否开启要素选择模式
-                                // 若为要素选择模式，则忽略由featureColourParams所设置的要素着色功能
-                                if (selectMode) {
+                                // 若mode为'default'，则渲染defaultStyle
+                                if (mode === 'default') {
+                                    return {
+                                        ...defaultStyle,
+                                        ...{
+                                            pmIgnore: !editable,
+                                        }
+                                    };
+                                } else if (mode === 'selectable') {
+                                    // 若mode为'selectable'，则迎合要素点击渲染模式
+                                    // 根据当前selectedFeatureIds中已选的要素id
+                                    // 控制不同要素返回defaultStyle或selectedStyle
+                                    console.log({ selectedFeatureIds })
+                                    if (selectedFeatureIds.indexOf(feature.properties[featureIdField]) === -1) {
+                                        return {
+                                            ...defaultStyle,
+                                            ...{
+                                                pmIgnore: !editable,
+                                            }
+                                        };
+                                    } else {
+                                        return {
+                                            ...selectedStyle,
+                                            ...{
+                                                pmIgnore: !editable,
+                                            }
+                                        };
+                                    }
+                                } else if (mode === 'choropleth') {
+                                    // 若mode为'choropleth'，则基于featureStyleParams参数进行渲染
+                                    // 根据当前要素的featureValueField属性值，根据其在featureStyleParams.bins
+                                    // 中的区间分布情况，返回对应的styles参数样式
 
-                                    // 检查当前要素的featureIdField指定属性字段是否在selectedFeatureIds中
-                                    // 从而设置相应的选中状态样式
-                                    if (selectedFeatureIds.indexOf(feature.properties[featureIdField]) !== -1) {
-                                        return selectedStyle;
-                                    }
-                                } else if (featureColourParams) {
-                                    // 否则若featureColourParams参数存在，则使用featureColourParams中的要素着色功能
+                                    // 取出当前要素的featureValueField属性值
                                     let currentFeatureValue = feature.properties[featureValueField];
-                                    // 检查要素内有无此字段
+
+                                    // 检查currentFeatureValue是否为空
                                     if (isUndefined(currentFeatureValue)) {
-                                        // 若无，则使用默认样式作为缺省样式
-                                        return defaultStyle;
+                                        // 若为空，则返回defaultStyle
+                                        return {
+                                            ...defaultStyle,
+                                            ...{
+                                                pmIgnore: !editable,
+                                            }
+                                        };
                                     }
-                                    for (let i = 0; i < featureColourParams.bins.length; i++) {
-                                        // 若为右闭模式
-                                        if (featureColourParams.closed === 'right') {
-                                            if (currentFeatureValue > featureColourParams.bins[i][0] && currentFeatureValue <= featureColourParams.bins[i][1]) {
+
+                                    // 否则，基于featureStyleParams参数进行分层样式渲染
+                                    for (let i = 0; i < featureStyleParams.bins.length; i++) {
+                                        // 若区间开闭方式为“右闭”
+                                        if (featureStyleParams.closed === 'right') {
+                                            // 判断currentFeatureValue是否大于当前区间范围的左边界且小于等于当前区间范围的右边界
+                                            if (currentFeatureValue > featureStyleParams.bins[i][0] &&
+                                                currentFeatureValue <= featureStyleParams.bins[i][1]) {
+                                                // 若匹配，则返回对应的styles参数样式
                                                 return {
-                                                    ...defaultStyle,
+                                                    ...featureStyleParams.styles[i],
                                                     ...{
-                                                        color: featureColourParams.colors[i],
-                                                        fillColor: featureColourParams.colors[i]
+                                                        pmIgnore: !editable,
                                                     }
-                                                }
+                                                };
                                             }
                                         } else {
-                                            if (currentFeatureValue >= featureColourParams.bins[i][0] && currentFeatureValue < featureColourParams.bins[i][1]) {
+                                            // 否则一律视作“左闭”
+                                            if (currentFeatureValue >= featureStyleParams.bins[i][0] &&
+                                                currentFeatureValue < featureStyleParams.bins[i][1]) {
+                                                // 若匹配，则返回对应的styles参数样式
                                                 return {
-                                                    ...defaultStyle,
+                                                    ...featureStyleParams.styles[i],
                                                     ...{
-                                                        color: featureColourParams.colors[i],
-                                                        fillColor: featureColourParams.colors[i]
+                                                        pmIgnore: !editable,
                                                     }
-                                                }
+                                                };
                                             }
                                         }
                                     }
                                 }
-
-                                // 否则，按照常规方式返回样式
-                                return defaultStyle;
+                                // 否则，将defaultStyle作为缺省样式予以返回
+                                return {
+                                    ...defaultStyle,
+                                    ...{
+                                        pmIgnore: !editable,
+                                    }
+                                };
                             }}
                             data={data}
                             onEachFeature={(feature, layer) => {
-                                // 鼠标移入事件
-                                layer.on('mouseover', (e) => {
-                                    if (hoverable) {
-                                        e.target.setStyle({
-                                            ...e.target.options,
-                                            ...hoverStyle
-                                        });
+                                // 绑定各监听事件
+                                layer.on({
+
+                                    // 鼠标点击事件
+                                    click: (e) => {
+                                        // 若clickFeatureZoom为true，则点击要素时进行聚焦缩放
+                                        if (clickFeatureZoom) {
+                                            map.fitBounds(e.target.getBounds());
+                                        }
+
+                                        // 图层置顶
+                                        e.target.bringToFront();
+
+                                        // 更新_clickedFeature信息
+                                        setProps({
+                                            _clickedFeature: {
+                                                featureId: e.target.feature.properties[featureIdField],
+                                            }
+                                        })
+                                    },
+
+                                    add: (e) => {
+                                        // 将处于选择状态的要素置顶
+                                        if (selectedFeatureIds.indexOf(e.target.feature.properties[featureIdField]) !== -1) {
+                                            e.target.bringToFront();
+                                        } else {
+                                            e.target.bringToBack();
+                                        }
                                     }
-                                })
-                                // 鼠标移出事件
-                                layer.on('mouseout', (e) => {
-                                    if (hoverable) {
-                                        e.target.setStyle({
-                                            ...e.target.options,
-                                            ...defaultStyle
-                                        });
-                                    }
-                                })
-                                // 鼠标点击事件
-                                layer.on('click', (e) => {
-                                    if (clickFeatureZoom) {
-                                        map.fitBounds(e.target.getBounds());
-                                    }
-                                })
+                                });
                             }}
                             eventHandlers={{
+                                // 鼠标移入事件
+                                mouseover: (e) => {
+                                    // 若开启要素悬浮模式
+                                    if (hoverable) {
+                                        // 则更新要素的样式
+                                        e.layer.setStyle({
+                                            ...e.layer.options,
+                                            ...hoverStyle
+                                        });
+
+                                        // 图层置顶
+                                        e.layer.bringToFront();
+
+                                        // 更新_hoveredFeature信息
+                                        setProps({
+                                            _hoveredFeature: {
+                                                featureId: e.layer.feature.properties[featureIdField],
+                                            }
+                                        })
+                                    }
+                                },
+                                mouseout: (e) => {
+                                    if (hoverable) {
+
+                                        // 若当前鼠标移出的要素未处于选中状态
+                                        if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
+                                            console.log('移出事件：')
+                                            console.log({ e })
+                                            this.geoJsonRef.current.resetStyle(e.layer);
+                                        } else {
+                                            // 否则，更新要素的样式
+                                            e.layer.setStyle({
+                                                ...e.layer.options,
+                                                ...selectedStyle
+                                            });
+                                        }
+
+                                    }
+                                },
                                 add: () => {
+
                                     // 处理是否对当前的GeoJSON层进行fitBounds操作
                                     if (fitBounds) {
                                         map.fitBounds(this.geoJsonRef.current.getBounds());
                                     }
-
-                                    // 处理当前的GeoJSON图层是否可编辑
-                                    if (!editable) {
-                                        this.geoJsonRef.current.setStyle({ pmIgnore: true });
-                                    }
                                 },
                                 click: (e) => {
                                     // 处理要素选择事件
-                                    if (selectMode) {
+                                    if (mode === 'selectable') {
                                         // 单选模式
                                         if (selectMode === 'single') {
                                             if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
@@ -280,6 +397,9 @@ LeafletGeoJSON.propTypes = {
     // 设置作为要素数值的字段名，默认为'value'
     featureValueField: PropTypes.string,
 
+    // 设置绘图模式，可选的有'default'、'selectable'（选择模式）以及'choropleth'（分层设色模式）
+    mode: PropTypes.oneOf(['default', 'selectable', 'choropleth']),
+
     // 要素点击选择模式，可选的有'single'（单选模式）及'multiple'（多选模式），默认为null时不开启要素点击选择功能
     selectMode: PropTypes.oneOf(['single', 'multiple']),
 
@@ -287,12 +407,12 @@ LeafletGeoJSON.propTypes = {
     selectedFeatureIds: PropTypes.array,
 
     // 配置色彩映射功能所需的分段区间数组及分段对应色彩值参数
-    featureColourParams: PropTypes.exact({
+    featureStyleParams: PropTypes.exact({
         // 分段区间数组，每个元素格式为[左区间值, 右区间值]
         bins: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
 
-        // 设置与区间一一对应的色彩值数组
-        colors: PropTypes.arrayOf(PropTypes.string),
+        // 设置与区间一一对应的样式对象数组
+        styles: PropTypes.arrayOf(geoJsonStylePropType),
 
         // 设置区间是左闭还是右闭，默认为'left'
         closed: PropTypes.oneOf(['left', 'right'])
@@ -300,6 +420,13 @@ LeafletGeoJSON.propTypes = {
 
     // 设置当前GeoJSON矢量图层是否可编辑，默认为false
     editable: PropTypes.bool,
+
+    // 要素常规事件记录
+    // 要素点击事件
+    _clickedFeature: PropTypes.object,
+
+    // 要素鼠标悬浮事件
+    _hoveredFeature: PropTypes.object,
 
     loading_state: PropTypes.shape({
         /**
@@ -329,6 +456,8 @@ LeafletGeoJSON.defaultProps = {
     featureIdField: 'id',
     featureValueField: 'value',
     selectedFeatureIds: [],
+    mode: 'default',
+    selectMode: 'single',
     editable: false,
     hoverable: false,
     clickFeatureZoom: false

@@ -9,6 +9,8 @@ import mapclassify as mc
 
 app = dash.Dash(__name__, compress=True)
 
+addressPoints = json.load(open('heatmap-demo-points.json'))
+
 county_mock_values = np.random.rand(38)
 
 bins = [0] + mc.NaturalBreaks(county_mock_values, 5).bins.tolist()[:-1] + [1]
@@ -24,20 +26,32 @@ app.layout = html.Div([
                 url='http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
             ),
             flc.LeafletGeoJSON(
+                id='geojson-demo',
                 data=county_features,
-                # selectMode='multiple',
+                mode='choropleth',
+                selectMode='multiple',
                 fitBounds=True,
                 featureIdField='county',
-                defaultStyle={
-                    'fillOpacity': 1,
-                    'weight': 1
+                # selectedFeatureIds=['秀山县'],
+                selectedStyle={
+                    'fillOpacity': 0.2,
                 },
-                featureColourParams={
+                # hoverStyle={
+                #     'fillOpacity': 0.9
+                # },
+                featureStyleParams={
                     'bins': [
                         [left, right]
                         for left, right in zip(bins[:-1], bins[1:])
                     ],
-                    'colors': Reds_5.hex_colors,
+                    'styles': [
+                        {
+                            'color': 'white',
+                            'fillColor': c,
+                            'fillOpacity': 1,
+                            'weight': 2
+                        } for c in Reds_5.hex_colors
+                    ],
                     'closed': 'left'
                 },
                 hoverable=True,
@@ -77,10 +91,6 @@ app.layout = html.Div([
             'lat': 29.560087,
             'lng': 106.573344
         },
-        # center={
-        #     'lat': -37.9124889333,
-        #     'lng': 175.4727737833
-        # },
         style={
             'height': '700px',
             'width': '100%'
@@ -91,11 +101,11 @@ app.layout = html.Div([
 
 @app.callback(
     Output('map-demo', 'center'),
-    Input('map-demo', '_zoom')
+    Input('geojson-demo', '_hoveredFeature')
 )
-def center_to_clicked_point(_zoom):
+def center_to_clicked_point(_hoveredFeature):
 
-    print(_zoom)
+    print(_hoveredFeature)
 
     return dash.no_update
 
