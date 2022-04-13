@@ -5,15 +5,8 @@ import L from "leaflet";
 import "leaflet.heat";
 import { MapConsumer } from 'react-leaflet';
 
-const addressPoints = [];
-
 // 定义热力图层组件LeafletHeatMap，api参数参考
 export default class LeafletHeatMap extends Component {
-
-    constructor(props) {
-        super(props);
-        this.geoJsonRef = React.createRef();
-    }
 
     render() {
         // 取得必要属性或参数

@@ -96,8 +96,6 @@ export default class LeafletGeoJSON extends Component {
             loading_state
         } = this.props;
 
-        console.log(selectedFeatureIds)
-
         // 预处理defaultStyle、hoverStyle、selectedStyle
         defaultStyle = { ..._defaultStyle, ...defaultStyle };
         hoverStyle = { ..._hoverStyle, ...hoverStyle };
@@ -124,7 +122,6 @@ export default class LeafletGeoJSON extends Component {
                                     // 若mode为'selectable'，则迎合要素点击渲染模式
                                     // 根据当前selectedFeatureIds中已选的要素id
                                     // 控制不同要素返回defaultStyle或selectedStyle
-                                    console.log({ selectedFeatureIds })
                                     if (selectedFeatureIds.indexOf(feature.properties[featureIdField]) === -1) {
                                         return {
                                             ...defaultStyle,
@@ -257,8 +254,6 @@ export default class LeafletGeoJSON extends Component {
 
                                         // 若当前鼠标移出的要素未处于选中状态
                                         if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
-                                            console.log('移出事件：')
-                                            console.log({ e })
                                             this.geoJsonRef.current.resetStyle(e.layer);
                                         } else {
                                             // 否则，更新要素的样式

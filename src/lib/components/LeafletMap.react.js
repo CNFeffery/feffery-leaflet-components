@@ -110,6 +110,9 @@ class LeafletMap extends Component {
             closePopupOnClick,
             minZoom,
             maxZoom,
+            zoomDelta,
+            zoomControl,
+            wheelPxPerZoomLevel,
             scrollWheelZoom,
             editToolbar,
             editToolbarControlsOptions,
@@ -134,6 +137,10 @@ class LeafletMap extends Component {
                 closePopupOnClick={closePopupOnClick}
                 minZoom={minZoom}
                 maxZoom={maxZoom}
+                zoomDelta={zoomDelta}
+                zoomSnap={zoomDelta}
+                wheelPxPerZoomLevel={wheelPxPerZoomLevel}
+                zoomControl={zoomControl}
                 scrollWheelZoom={scrollWheelZoom}
                 whenCreated={map => {
                     // 绑定ref
@@ -297,12 +304,21 @@ LeafletMap.propTypes = {
     // 设置zoom级别上限
     maxZoom: PropTypes.number,
 
+    // 设置地图缩放级别变化的步长，默认为1
+    zoomDelta: PropTypes.number,
+
+    // 设置是否显示地图缩放组件，默认为true
+    zoomControl: PropTypes.bool,
+
     // 设置是否允许用户鼠标滚轮缩放地图，默认为true
     // 亦可传入'center'使得地图无视鼠标实际位置，仅以地图当前中心作为缩放依据的中心
     scrollWheelZoom: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.oneOf(['center'])
     ]),
+
+    // 设置鼠标滚轮滚动多少像素会触发一个单位zoomDelta的缩放，默认为60
+    wheelPxPerZoomLevel: PropTypes.number,
 
     // 地图编辑模式配置类参数
 
@@ -419,6 +435,9 @@ LeafletMap.defaultProps = {
     closePopupOnClick: true,
     minZoom: 0,
     maxZoom: 18,
+    zoomDelta: 1,
+    wheelPxPerZoomLevel: 60,
+    zoomControl: true,
     scrollWheelZoom: true,
     editToolbar: false,
     showMeasurements: true,

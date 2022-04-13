@@ -1,6 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+export(''LeafletAction)
 export(''LeafletGeoJSON)
 export(''LeafletHeatMap)
 export(''LeafletMap)
 export(''LeafletTileLayer)
+export(LeafletMapAction)

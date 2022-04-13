@@ -120,14 +120,20 @@ Keyword arguments:
 
 - useFlyTo (boolean; default False)
 
-- zoom (number; default 3)"""
+- wheelPxPerZoomLevel (number; default 60)
+
+- zoom (number; default 3)
+
+- zoomControl (boolean; default True)
+
+- zoomDelta (number; default 1)"""
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, center=Component.UNDEFINED, zoom=Component.UNDEFINED, useFlyTo=Component.UNDEFINED, doubleClickZoom=Component.UNDEFINED, dragging=Component.UNDEFINED, closePopupOnClick=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, scrollWheelZoom=Component.UNDEFINED, editToolbar=Component.UNDEFINED, editToolbarControlsOptions=Component.UNDEFINED, showMeasurements=Component.UNDEFINED, maxDrawnShapes=Component.UNDEFINED, _drawnShapes=Component.UNDEFINED, _center=Component.UNDEFINED, _zoom=Component.UNDEFINED, _clickedLatLng=Component.UNDEFINED, _bounds=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', '_bounds', '_center', '_clickedLatLng', '_drawnShapes', '_zoom', 'center', 'className', 'closePopupOnClick', 'doubleClickZoom', 'dragging', 'editToolbar', 'editToolbarControlsOptions', 'loading_state', 'maxDrawnShapes', 'maxZoom', 'minZoom', 'scrollWheelZoom', 'showMeasurements', 'style', 'useFlyTo', 'zoom']
+    def __init__(self, children=None, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, center=Component.UNDEFINED, zoom=Component.UNDEFINED, useFlyTo=Component.UNDEFINED, doubleClickZoom=Component.UNDEFINED, dragging=Component.UNDEFINED, closePopupOnClick=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, zoomDelta=Component.UNDEFINED, zoomControl=Component.UNDEFINED, scrollWheelZoom=Component.UNDEFINED, wheelPxPerZoomLevel=Component.UNDEFINED, editToolbar=Component.UNDEFINED, editToolbarControlsOptions=Component.UNDEFINED, showMeasurements=Component.UNDEFINED, maxDrawnShapes=Component.UNDEFINED, _drawnShapes=Component.UNDEFINED, _center=Component.UNDEFINED, _zoom=Component.UNDEFINED, _clickedLatLng=Component.UNDEFINED, _bounds=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', '_bounds', '_center', '_clickedLatLng', '_drawnShapes', '_zoom', 'center', 'className', 'closePopupOnClick', 'doubleClickZoom', 'dragging', 'editToolbar', 'editToolbarControlsOptions', 'loading_state', 'maxDrawnShapes', 'maxZoom', 'minZoom', 'scrollWheelZoom', 'showMeasurements', 'style', 'useFlyTo', 'wheelPxPerZoomLevel', 'zoom', 'zoomControl', 'zoomDelta']
         self._type = 'LeafletMap'
         self._namespace = 'feffery_leaflet_components'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', '_bounds', '_center', '_clickedLatLng', '_drawnShapes', '_zoom', 'center', 'className', 'closePopupOnClick', 'doubleClickZoom', 'dragging', 'editToolbar', 'editToolbarControlsOptions', 'loading_state', 'maxDrawnShapes', 'maxZoom', 'minZoom', 'scrollWheelZoom', 'showMeasurements', 'style', 'useFlyTo', 'zoom']
+        self.available_properties = ['children', 'id', '_bounds', '_center', '_clickedLatLng', '_drawnShapes', '_zoom', 'center', 'className', 'closePopupOnClick', 'doubleClickZoom', 'dragging', 'editToolbar', 'editToolbarControlsOptions', 'loading_state', 'maxDrawnShapes', 'maxZoom', 'minZoom', 'scrollWheelZoom', 'showMeasurements', 'style', 'useFlyTo', 'wheelPxPerZoomLevel', 'zoom', 'zoomControl', 'zoomDelta']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

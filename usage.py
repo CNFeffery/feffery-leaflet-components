@@ -7,7 +7,7 @@ from dash import html
 from palettable.colorbrewer.sequential import Reds_5
 import mapclassify as mc
 
-app = dash.Dash(__name__, compress=True)
+app = dash.Dash(__name__, compress=True, suppress_callback_exceptions=True)
 
 addressPoints = json.load(open('heatmap-demo-points.json'))
 
@@ -20,8 +20,38 @@ for i in range(38):
     county_features['features'][i]['properties']['value'] = county_mock_values[i]
 
 app.layout = html.Div([
+    # 地图动作测试
+    html.H4('地图动作测试：'),
+    html.Div(
+        [
+            html.Button(
+                '放大3单位level',
+                id='zoom-in-demo'
+            ),
+            html.Button(
+                '缩小3单位level',
+                id='zoom-out-demo'
+            ),
+            html.Button(
+                'set-view到北京市',
+                id='set-view-demo'
+            ),
+            html.Button(
+                'fly-to到北京市',
+                id='fly-to-demo'
+            ),
+            html.Button(
+                'fly-to-bounds长沙市',
+                id='fly-to-bounds-demo'
+            )
+        ]
+    ),
+
     flc.LeafletMap(
         [
+            flc.LeafletAction(
+                id='map-action-demo'
+            ),
             flc.LeafletTileLayer(
                 url='http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
             ),
@@ -78,19 +108,24 @@ app.layout = html.Div([
             )
         ],
         id='map-demo',
-        editToolbar=True,
+        editToolbar=False,
+        # wheelPxPerZoomLevel=720,
+        # zoomDelta=0.1,
         # maxDrawnShapes=3,
         # showMeasurements=True,
         # editToolbarControlsOptions={
         #     'cutPolygon': True
         # },
         # useFlyTo=False,
-        doubleClickZoom=True,
-        zoom=12,
-        center={
-            'lat': 29.560087,
-            'lng': 106.573344
-        },
+        # zoom=10,
+        # maxZoom=7,
+        # minZoom=7,
+        # zoomControl=False,
+        # dragging=False,
+        # center={
+        #     'lat': 29.560087,
+        #     'lng': 106.573344
+        # },
         style={
             'height': '700px',
             'width': '100%'
@@ -101,13 +136,69 @@ app.layout = html.Div([
 
 @app.callback(
     Output('map-demo', 'center'),
-    Input('geojson-demo', '_hoveredFeature')
+    Input('map-demo', '_zoom')
 )
-def center_to_clicked_point(_hoveredFeature):
-
-    print(_hoveredFeature)
+def demo(_zoom):
 
     return dash.no_update
+
+
+@app.callback(
+    Output('map-action-demo', 'mapActionConfig'),
+    [Input('zoom-in-demo', 'n_clicks'),
+     Input('zoom-out-demo', 'n_clicks'),
+     Input('set-view-demo', 'n_clicks'),
+     Input('fly-to-demo', 'n_clicks'),
+     Input('fly-to-bounds-demo', 'n_clicks')]
+)
+def map_action_demo(*n_clicks):
+
+    print(dash.callback_context.triggered[0]['prop_id'])
+
+    if dash.callback_context.triggered[0]['prop_id'] == 'zoom-in-demo.n_clicks':
+        return {
+            'type': 'zoom-in',
+            'zoomInOffset': 3
+        }
+
+    elif dash.callback_context.triggered[0]['prop_id'] == 'zoom-out-demo.n_clicks':
+        return {
+            'type': 'zoom-out',
+            'zoomOutOffset': 3
+        }
+
+    elif dash.callback_context.triggered[0]['prop_id'] == 'set-view-demo.n_clicks':
+        return {
+            'type': 'set-view',
+            'center': {
+                'lat': 39.904989,
+                'lng': 116.405285
+            },
+            'zoom': 14
+        }
+
+    elif dash.callback_context.triggered[0]['prop_id'] == 'fly-to-demo.n_clicks':
+        return {
+            'type': 'fly-to',
+            'center': {
+                'lat': 39.904989,
+                'lng': 116.405285
+            },
+            'zoom': 14
+        }
+
+    elif dash.callback_context.triggered[0]['prop_id'] == 'fly-to-bounds-demo.n_clicks':
+        return {
+            'type': 'fly-to-bounds',
+            'bounds': {
+                'minx': 111.53,
+                'miny': 27.51,
+                'maxx': 114.15,
+                'maxy': 28.41
+            }
+        }
+
+    return None
 
 
 if __name__ == '__main__':
