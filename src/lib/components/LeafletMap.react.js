@@ -63,7 +63,7 @@ const extractDrawnShapes = (item, i) => {
 }
 
 // 定义不触发render()逻辑的props数组
-const preventUpdateProps = ['_center', '_zoom', '_clickedLatLng', '_drawnShapes'];
+const preventUpdateProps = ['_drawnShapes'];
 
 class LeafletMap extends Component {
     constructor(props) {
@@ -159,38 +159,6 @@ class LeafletMap extends Component {
                     map.pm.setGlobalOptions({
                         markerStyle: {
                             icon: defaultIcon
-                        }
-                    })
-
-                    // 初始化各项基础事件监听
-                    map.on('click zoomend moveend', (e) => {
-
-                        const currentBounds = map.getBounds()
-
-                        if (e.type === 'click') {
-
-                            setProps({
-                                _zoom: map.getZoom(),
-                                _center: map.getCenter(),
-                                _clickedLatLng: e.latlng,
-                                _bounds: {
-                                    minx: currentBounds._southWest.lng,
-                                    miny: currentBounds._southWest.lat,
-                                    maxx: currentBounds._northEast.lng,
-                                    maxy: currentBounds._northEast.lat
-                                }
-                            })
-                        } else {
-                            setProps({
-                                _zoom: map.getZoom(),
-                                _center: map.getCenter(),
-                                _bounds: {
-                                    minx: currentBounds._southWest.lng,
-                                    miny: currentBounds._southWest.lat,
-                                    maxx: currentBounds._northEast.lng,
-                                    maxy: currentBounds._northEast.lat
-                                }
-                            })
                         }
                     })
 
@@ -376,33 +344,6 @@ LeafletMap.propTypes = {
 
     // 事件监听类属性值
     _drawnShapes: PropTypes.any,
-
-    _center: PropTypes.exact({
-        // 经度
-        lng: PropTypes.number,
-
-        // 纬度
-        lat: PropTypes.number
-    }),
-
-    _zoom: PropTypes.number,
-
-    // 记录地图点击事件对应的经纬度坐标
-    _clickedLatLng: PropTypes.exact({
-        // 经度
-        lng: PropTypes.number,
-
-        // 纬度
-        lat: PropTypes.number
-    }),
-
-    // 获取当前地图矩形区域坐标范围信息
-    _bounds: PropTypes.exact({
-        minx: PropTypes.number,
-        miny: PropTypes.number,
-        maxx: PropTypes.number,
-        maxy: PropTypes.number
-    }),
 
     loading_state: PropTypes.shape({
         /**

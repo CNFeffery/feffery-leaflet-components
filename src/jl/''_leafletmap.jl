@@ -13,22 +13,7 @@ A LeafletMap component.
 Keyword arguments:
 - `children` (a list of or a singular dash component, string or number; optional)
 - `id` (String; optional)
-- `_bounds` (optional): . _bounds has the following type: lists containing elements 'minx', 'miny', 'maxx', 'maxy'.
-Those elements have the following types:
-  - `minx` (Real; optional)
-  - `miny` (Real; optional)
-  - `maxx` (Real; optional)
-  - `maxy` (Real; optional)
-- `_center` (optional): . _center has the following type: lists containing elements 'lng', 'lat'.
-Those elements have the following types:
-  - `lng` (Real; optional)
-  - `lat` (Real; optional)
-- `_clickedLatLng` (optional): . _clickedLatLng has the following type: lists containing elements 'lng', 'lat'.
-Those elements have the following types:
-  - `lng` (Real; optional)
-  - `lat` (Real; optional)
 - `_drawnShapes` (Bool | Real | String | Dict | Array; optional)
-- `_zoom` (Real; optional)
 - `center` (optional): . center has the following type: lists containing elements 'lng', 'lat'.
 Those elements have the following types:
   - `lng` (Real; optional)
@@ -71,7 +56,7 @@ Those elements have the following types:
 - `zoomDelta` (Real; optional)
 """
 function ''_leafletmap(; kwargs...)
-        available_props = Symbol[:children, :id, :_bounds, :_center, :_clickedLatLng, :_drawnShapes, :_zoom, :center, :className, :closePopupOnClick, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :loading_state, :maxDrawnShapes, :maxZoom, :minZoom, :scrollWheelZoom, :showMeasurements, :style, :useFlyTo, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
+        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :loading_state, :maxDrawnShapes, :maxZoom, :minZoom, :scrollWheelZoom, :showMeasurements, :style, :useFlyTo, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
         wild_props = Symbol[]
         return Component("''_leafletmap", "LeafletMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

@@ -17,7 +17,7 @@ Those elements have the following types:
   - `component_name` (String; optional): Holds the name of the component that is loading
 - `mapActionConfig` (optional): . mapActionConfig has the following type: lists containing elements 'type', 'center', 'zoom', 'zoomInOffset', 'zoomOutOffset', 'bounds'.
 Those elements have the following types:
-  - `type` (a value equal to: 'zoom-in', 'zoom-out', 'set-view', 'fly-to', 'fly-to-bounds'; optional)
+  - `type` (a value equal to: 'set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'fly-to', 'fly-to-bounds'; optional)
   - `center` (optional): . center has the following type: lists containing elements 'lng', 'lat'.
 Those elements have the following types:
   - `lng` (Real; optional)

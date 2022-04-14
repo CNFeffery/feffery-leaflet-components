@@ -25,16 +25,16 @@ app.layout = html.Div([
     html.Div(
         [
             html.Button(
-                '放大3单位level',
+                'set-zoom到10',
+                id='set-zoom-demo'
+            ),
+            html.Button(
+                '放大1单位level',
                 id='zoom-in-demo'
             ),
             html.Button(
-                '缩小3单位level',
+                '缩小1单位level',
                 id='zoom-out-demo'
-            ),
-            html.Button(
-                'set-view到北京市',
-                id='set-view-demo'
             ),
             html.Button(
                 'fly-to到北京市',
@@ -49,11 +49,15 @@ app.layout = html.Div([
 
     flc.LeafletMap(
         [
-            flc.LeafletAction(
+            flc.LeafletMapListener(
+
+            ),
+            flc.LeafletMapAction(
                 id='map-action-demo'
             ),
             flc.LeafletTileLayer(
-                url='http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
+                url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                # url='http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
             ),
             flc.LeafletGeoJSON(
                 id='geojson-demo',
@@ -117,7 +121,7 @@ app.layout = html.Div([
         #     'cutPolygon': True
         # },
         # useFlyTo=False,
-        # zoom=10,
+        zoom=7,
         # maxZoom=7,
         # minZoom=7,
         # zoomControl=False,
@@ -134,20 +138,11 @@ app.layout = html.Div([
 ])
 
 
-@app.callback(
-    Output('map-demo', 'center'),
-    Input('map-demo', '_zoom')
-)
-def demo(_zoom):
-
-    return dash.no_update
-
-
-@app.callback(
+@ app.callback(
     Output('map-action-demo', 'mapActionConfig'),
-    [Input('zoom-in-demo', 'n_clicks'),
+    [Input('set-zoom-demo', 'n_clicks'),
+     Input('zoom-in-demo', 'n_clicks'),
      Input('zoom-out-demo', 'n_clicks'),
-     Input('set-view-demo', 'n_clicks'),
      Input('fly-to-demo', 'n_clicks'),
      Input('fly-to-bounds-demo', 'n_clicks')]
 )
@@ -155,41 +150,39 @@ def map_action_demo(*n_clicks):
 
     print(dash.callback_context.triggered[0]['prop_id'])
 
-    if dash.callback_context.triggered[0]['prop_id'] == 'zoom-in-demo.n_clicks':
+    if dash.callback_context.triggered[0]['prop_id'] == 'set-zoom-demo.n_clicks':
+        return {
+            'type': 'set-zoom',
+            'zoom': 10
+        }
+
+    elif dash.callback_context.triggered[0]['prop_id'] == 'zoom-in-demo.n_clicks':
         return {
             'type': 'zoom-in',
-            'zoomInOffset': 3
+            'zoomInOffset': 1
         }
 
     elif dash.callback_context.triggered[0]['prop_id'] == 'zoom-out-demo.n_clicks':
         return {
             'type': 'zoom-out',
-            'zoomOutOffset': 3
-        }
-
-    elif dash.callback_context.triggered[0]['prop_id'] == 'set-view-demo.n_clicks':
-        return {
-            'type': 'set-view',
-            'center': {
-                'lat': 39.904989,
-                'lng': 116.405285
-            },
-            'zoom': 14
+            'zoomOutOffset': 1
         }
 
     elif dash.callback_context.triggered[0]['prop_id'] == 'fly-to-demo.n_clicks':
         return {
             'type': 'fly-to',
+            'flyToDuration': 'auto',
             'center': {
                 'lat': 39.904989,
                 'lng': 116.405285
             },
-            'zoom': 14
+            # 'zoom': 14
         }
 
     elif dash.callback_context.triggered[0]['prop_id'] == 'fly-to-bounds-demo.n_clicks':
         return {
             'type': 'fly-to-bounds',
+            'flyToDuration': 'slow',
             'bounds': {
                 'minx': 111.53,
                 'miny': 27.51,
@@ -198,7 +191,7 @@ def map_action_demo(*n_clicks):
             }
         }
 
-    return None
+    return dash.no_update
 
 
 if __name__ == '__main__':
