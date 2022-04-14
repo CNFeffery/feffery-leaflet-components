@@ -18,6 +18,9 @@ bins = [0] + mc.NaturalBreaks(county_mock_values, 5).bins.tolist()[:-1] + [1]
 county_features = json.load(open('./重庆市区县面要素.geojson', encoding='utf-8'))
 for i in range(38):
     county_features['features'][i]['properties']['value'] = county_mock_values[i]
+    county_features['features'][i]['properties']['tooltip'] = '<font style="font-weight:bold;">示例指标：</font>{}'.format(
+        round(county_features['features'][i]['properties']['value'], 2)
+    )
 
 app.layout = html.Div([
     # 地图动作测试
@@ -66,6 +69,7 @@ app.layout = html.Div([
                 selectMode='multiple',
                 fitBounds=True,
                 featureIdField='county',
+                showTooltip=False,
                 # selectedFeatureIds=['秀山县'],
                 selectedStyle={
                     'fillOpacity': 0.2,

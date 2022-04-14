@@ -86,6 +86,8 @@ export default class LeafletGeoJSON extends Component {
             selectMode,
             selectedFeatureIds,
             featureValueField,
+            featureTooltipField,
+            showTooltip,
             editable,
             hoverable,
             defaultStyle,
@@ -226,6 +228,15 @@ export default class LeafletGeoJSON extends Component {
                                         }
                                     }
                                 });
+
+                                // 为每个要素添加tooltip
+                                // 检查是否存在featureTooltipField指定的字段
+                                if (feature.properties[featureTooltipField] && showTooltip) {
+                                    layer.bindTooltip(feature.properties[featureTooltipField])
+                                } else {
+                                    layer.unbindTooltip();
+                                }
+
                             }}
                             eventHandlers={{
                                 // 鼠标移入事件
@@ -392,11 +403,17 @@ LeafletGeoJSON.propTypes = {
     // 设置作为要素数值的字段名，默认为'value'
     featureValueField: PropTypes.string,
 
+    // 设置作为要素鼠标悬浮tooltip信息的字段名，默认为'tooltip'
+    featureTooltipField: PropTypes.string,
+
     // 设置绘图模式，可选的有'default'、'selectable'（选择模式）以及'choropleth'（分层设色模式）
     mode: PropTypes.oneOf(['default', 'selectable', 'choropleth']),
 
     // 要素点击选择模式，可选的有'single'（单选模式）及'multiple'（多选模式），默认为null时不开启要素点击选择功能
     selectMode: PropTypes.oneOf(['single', 'multiple']),
+
+    // 设置是否允许tooltip渲染，默认为true
+    showTooltip: PropTypes.bool,
 
     // 记录&设置当前已选中要素id
     selectedFeatureIds: PropTypes.array,
@@ -450,7 +467,9 @@ LeafletGeoJSON.defaultProps = {
     fitBounds: true,
     featureIdField: 'id',
     featureValueField: 'value',
+    featureTooltipField: 'tooltip',
     selectedFeatureIds: [],
+    showTooltip: true,
     mode: 'default',
     selectMode: 'single',
     editable: false,

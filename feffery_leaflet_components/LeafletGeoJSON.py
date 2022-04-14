@@ -37,6 +37,8 @@ Keyword arguments:
 
     - styles (list; optional)
 
+- featureTooltipField (string; default 'tooltip')
+
 - featureValueField (string; default 'value')
 
 - fitBounds (boolean; default True)
@@ -66,14 +68,16 @@ Keyword arguments:
 
 - selectedStyle (optional)
 
+- showTooltip (boolean; default True)
+
 - style (dict | string; optional)"""
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, hoverable=Component.UNDEFINED, defaultStyle=Component.UNDEFINED, hoverStyle=Component.UNDEFINED, selectedStyle=Component.UNDEFINED, data=Component.UNDEFINED, fitBounds=Component.UNDEFINED, clickFeatureZoom=Component.UNDEFINED, featureIdField=Component.UNDEFINED, featureValueField=Component.UNDEFINED, mode=Component.UNDEFINED, selectMode=Component.UNDEFINED, selectedFeatureIds=Component.UNDEFINED, featureStyleParams=Component.UNDEFINED, editable=Component.UNDEFINED, _clickedFeature=Component.UNDEFINED, _hoveredFeature=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', '_clickedFeature', '_hoveredFeature', 'className', 'clickFeatureZoom', 'data', 'defaultStyle', 'editable', 'featureIdField', 'featureStyleParams', 'featureValueField', 'fitBounds', 'hoverStyle', 'hoverable', 'loading_state', 'mode', 'selectMode', 'selectedFeatureIds', 'selectedStyle', 'style']
+    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, hoverable=Component.UNDEFINED, defaultStyle=Component.UNDEFINED, hoverStyle=Component.UNDEFINED, selectedStyle=Component.UNDEFINED, data=Component.UNDEFINED, fitBounds=Component.UNDEFINED, clickFeatureZoom=Component.UNDEFINED, featureIdField=Component.UNDEFINED, featureValueField=Component.UNDEFINED, featureTooltipField=Component.UNDEFINED, mode=Component.UNDEFINED, selectMode=Component.UNDEFINED, showTooltip=Component.UNDEFINED, selectedFeatureIds=Component.UNDEFINED, featureStyleParams=Component.UNDEFINED, editable=Component.UNDEFINED, _clickedFeature=Component.UNDEFINED, _hoveredFeature=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', '_clickedFeature', '_hoveredFeature', 'className', 'clickFeatureZoom', 'data', 'defaultStyle', 'editable', 'featureIdField', 'featureStyleParams', 'featureTooltipField', 'featureValueField', 'fitBounds', 'hoverStyle', 'hoverable', 'loading_state', 'mode', 'selectMode', 'selectedFeatureIds', 'selectedStyle', 'showTooltip', 'style']
         self._type = 'LeafletGeoJSON'
         self._namespace = 'feffery_leaflet_components'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', '_clickedFeature', '_hoveredFeature', 'className', 'clickFeatureZoom', 'data', 'defaultStyle', 'editable', 'featureIdField', 'featureStyleParams', 'featureValueField', 'fitBounds', 'hoverStyle', 'hoverable', 'loading_state', 'mode', 'selectMode', 'selectedFeatureIds', 'selectedStyle', 'style']
+        self.available_properties = ['id', '_clickedFeature', '_hoveredFeature', 'className', 'clickFeatureZoom', 'data', 'defaultStyle', 'editable', 'featureIdField', 'featureStyleParams', 'featureTooltipField', 'featureValueField', 'fitBounds', 'hoverStyle', 'hoverable', 'loading_state', 'mode', 'selectMode', 'selectedFeatureIds', 'selectedStyle', 'showTooltip', 'style']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

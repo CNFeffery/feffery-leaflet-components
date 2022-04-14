@@ -119,6 +119,17 @@
           "computed": false
         }
       },
+      "featureTooltipField": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'tooltip'",
+          "computed": false
+        }
+      },
       "mode": {
         "type": {
           "name": "enum",
@@ -162,6 +173,17 @@
         "description": "",
         "defaultValue": {
           "value": "'single'",
+          "computed": false
+        }
+      },
+      "showTooltip": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "true",
           "computed": false
         }
       },
