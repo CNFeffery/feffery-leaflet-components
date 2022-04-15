@@ -11,16 +11,55 @@ app = dash.Dash(__name__, compress=True, suppress_callback_exceptions=True)
 
 addressPoints = json.load(open('heatmap-demo-points.json'))
 
-county_mock_values = np.random.rand(38)
 
-bins = [0] + mc.NaturalBreaks(county_mock_values, 5).bins.tolist()[:-1] + [1]
+def generate_mock_geojson(x):
 
-county_features = json.load(open('./重庆市区县面要素.geojson', encoding='utf-8'))
-for i in range(38):
-    county_features['features'][i]['properties']['value'] = county_mock_values[i]
-    county_features['features'][i]['properties']['tooltip'] = '<font style="font-weight:bold;">示例指标：</font>{}'.format(
-        round(county_features['features'][i]['properties']['value'], 2)
-    )
+    county_features = json.load(open('./重庆市区县面要素.geojson', encoding='utf-8'))
+
+    county_mock_values = np.random.rand(38)
+    bins = [0] + mc.NaturalBreaks(county_mock_values,
+                                  5).bins.tolist()[:-1] + [1]
+    for i in range(38):
+        county_features['features'][i]['properties']['value'] = county_mock_values[i]
+        county_features['features'][i]['properties']['tooltip'] = '<font style="font-weight:bold;">示例指标{}：</font>{}'.format(
+            x,
+            round(county_features['features'][i]['properties']['value'], 2)
+        )
+
+    return [
+        county_features,
+        {
+            'bins': [
+                [left, right]
+                for left, right in zip(bins[:-1], bins[1:])
+            ],
+            'styles': [
+                {
+                    'color': 'white',
+                    'fillColor': c,
+                    'fillOpacity': 1,
+                    'weight': 2
+                } for c in Reds_5.hex_colors
+            ],
+            'closed': 'left'
+        }
+    ]
+
+
+@app.callback(
+    [Output('geojson-demo', 'data'),
+     Output('geojson-demo', 'featureStyleParams')],
+    Input('update-geojson-data-demo', 'n_clicks')
+)
+def update_gejson_layer_data(n_clicks):
+    if n_clicks:
+
+        return generate_mock_geojson(n_clicks)
+
+    return dash.no_update
+
+
+data, featureStyleParams = generate_mock_geojson(-1)
 
 app.layout = html.Div([
     # 地图动作测试
@@ -46,7 +85,11 @@ app.layout = html.Div([
             html.Button(
                 'fly-to-bounds长沙市',
                 id='fly-to-bounds-demo'
-            )
+            ),
+            html.Button(
+                'geojson图层更新data',
+                id='update-geojson-data-demo'
+            ),
         ]
     ),
 
@@ -64,12 +107,12 @@ app.layout = html.Div([
             ),
             flc.LeafletGeoJSON(
                 id='geojson-demo',
-                data=county_features,
                 mode='choropleth',
+                data=data,
                 selectMode='multiple',
                 fitBounds=True,
                 featureIdField='county',
-                showTooltip=False,
+                showTooltip=True,
                 # selectedFeatureIds=['秀山县'],
                 selectedStyle={
                     'fillOpacity': 0.2,
@@ -77,22 +120,8 @@ app.layout = html.Div([
                 # hoverStyle={
                 #     'fillOpacity': 0.9
                 # },
-                featureStyleParams={
-                    'bins': [
-                        [left, right]
-                        for left, right in zip(bins[:-1], bins[1:])
-                    ],
-                    'styles': [
-                        {
-                            'color': 'white',
-                            'fillColor': c,
-                            'fillOpacity': 1,
-                            'weight': 2
-                        } for c in Reds_5.hex_colors
-                    ],
-                    'closed': 'left'
-                },
                 hoverable=True,
+                featureStyleParams=featureStyleParams,
                 # clickFeatureZoom=True
             ),
             flc.LeafletHeatMap(

@@ -53,6 +53,14 @@ export default class LeafletGeoJSON extends Component {
         // 计算发生变化的参数名
         const changedProps = Object.keys(difference(this.props, nextProps))
 
+        // 检查changedProps中是否包含data参数
+        if (changedProps.indexOf('data') !== -1) {
+            // 移除旧图层数据
+            this.geoJsonRef.current.clearLayers()
+            // 新增新图层数据
+            this.geoJsonRef.current.addData(nextProps.data)
+        }
+
         // 若无变化的props，则不触发重绘
         if (changedProps.length === 0) {
             return false;
