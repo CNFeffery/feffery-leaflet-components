@@ -59,6 +59,8 @@ export default class LeafletGeoJSON extends Component {
             this.geoJsonRef.current.clearLayers()
             // 新增新图层数据
             this.geoJsonRef.current.addData(nextProps.data)
+
+            return true;
         }
 
         // 若无变化的props，则不触发重绘
@@ -82,7 +84,7 @@ export default class LeafletGeoJSON extends Component {
 
     render() {
         // 取得必要属性或参数
-        var {
+        let {
             id,
             className,
             style,
@@ -94,6 +96,7 @@ export default class LeafletGeoJSON extends Component {
             selectMode,
             selectedFeatureIds,
             featureValueField,
+            featureCategoryField,
             featureTooltipField,
             showTooltip,
             editable,
@@ -101,7 +104,8 @@ export default class LeafletGeoJSON extends Component {
             defaultStyle,
             hoverStyle,
             selectedStyle,
-            featureStyleParams,
+            featureValueToStyles,
+            featureCategoryToStyles,
             setProps,
             loading_state
         } = this.props;
@@ -110,6 +114,70 @@ export default class LeafletGeoJSON extends Component {
         defaultStyle = { ..._defaultStyle, ...defaultStyle };
         hoverStyle = { ..._hoverStyle, ...hoverStyle };
         selectedStyle = { ..._selectedStyle, ...selectedStyle };
+
+        // 定义分层设色功能函数
+        const choroplethFunc = (feature) => {
+            // 取出当前要素的featureValueField属性值
+            let currentFeatureValue = feature.properties[featureValueField];
+
+            // 检查currentFeatureValue是否为空
+            if (isUndefined(currentFeatureValue)) {
+                // 若为空，则返回defaultStyle
+                return {
+                    ...defaultStyle,
+                    ...{
+                        pmIgnore: !editable,
+                    }
+                };
+            }
+
+            // 否则，基于featureValueToStyles参数进行分层样式渲染
+            for (let i = 0; i < featureValueToStyles.bins.length; i++) {
+                // 若区间开闭方式为“右闭”
+                if (featureValueToStyles.closed === 'right') {
+                    // 判断currentFeatureValue是否大于当前区间范围的左边界且小于等于当前区间范围的右边界
+                    if (currentFeatureValue > featureValueToStyles.bins[i][0] &&
+                        currentFeatureValue <= featureValueToStyles.bins[i][1]) {
+                        // 若匹配，则返回对应的styles参数样式
+                        return {
+                            ...featureValueToStyles.styles[i],
+                            ...{
+                                pmIgnore: !editable,
+                            }
+                        };
+                    }
+                } else {
+                    // 否则一律视作“左闭”
+                    if (currentFeatureValue >= featureValueToStyles.bins[i][0] &&
+                        currentFeatureValue < featureValueToStyles.bins[i][1]) {
+                        // 若匹配，则返回对应的styles参数样式
+                        return {
+                            ...featureValueToStyles.styles[i],
+                            ...{
+                                pmIgnore: !editable,
+                            }
+                        };
+                    }
+                }
+            }
+
+            // 否则，将defaultStyle作为缺省样式予以返回
+            return {
+                ...defaultStyle,
+                ...{
+                    pmIgnore: !editable,
+                }
+            };
+        }
+
+        const categoryFunc = (feature) => {
+            return {
+                ...featureCategoryToStyles[`${feature.properties[featureCategoryField]}`],
+                ...{
+                    pmIgnore: !editable,
+                }
+            };
+        }
 
         // 返回定制化的前端组件
         return (
@@ -148,8 +216,8 @@ export default class LeafletGeoJSON extends Component {
                                         };
                                     }
                                 } else if (mode === 'choropleth') {
-                                    // 若mode为'choropleth'，则基于featureStyleParams参数进行渲染
-                                    // 根据当前要素的featureValueField属性值，根据其在featureStyleParams.bins
+                                    // 若mode为'choropleth'，则基于featureValueToStyles参数进行渲染
+                                    // 根据当前要素的featureValueField属性值，根据其在featureValueToStyles.bins
                                     // 中的区间分布情况，返回对应的styles参数样式
 
                                     // 取出当前要素的featureValueField属性值
@@ -166,16 +234,16 @@ export default class LeafletGeoJSON extends Component {
                                         };
                                     }
 
-                                    // 否则，基于featureStyleParams参数进行分层样式渲染
-                                    for (let i = 0; i < featureStyleParams.bins.length; i++) {
+                                    // 否则，基于featureValueToStyles参数进行分层样式渲染
+                                    for (let i = 0; i < featureValueToStyles.bins.length; i++) {
                                         // 若区间开闭方式为“右闭”
-                                        if (featureStyleParams.closed === 'right') {
+                                        if (featureValueToStyles.closed === 'right') {
                                             // 判断currentFeatureValue是否大于当前区间范围的左边界且小于等于当前区间范围的右边界
-                                            if (currentFeatureValue > featureStyleParams.bins[i][0] &&
-                                                currentFeatureValue <= featureStyleParams.bins[i][1]) {
+                                            if (currentFeatureValue > featureValueToStyles.bins[i][0] &&
+                                                currentFeatureValue <= featureValueToStyles.bins[i][1]) {
                                                 // 若匹配，则返回对应的styles参数样式
                                                 return {
-                                                    ...featureStyleParams.styles[i],
+                                                    ...featureValueToStyles.styles[i],
                                                     ...{
                                                         pmIgnore: !editable,
                                                     }
@@ -183,11 +251,11 @@ export default class LeafletGeoJSON extends Component {
                                             }
                                         } else {
                                             // 否则一律视作“左闭”
-                                            if (currentFeatureValue >= featureStyleParams.bins[i][0] &&
-                                                currentFeatureValue < featureStyleParams.bins[i][1]) {
+                                            if (currentFeatureValue >= featureValueToStyles.bins[i][0] &&
+                                                currentFeatureValue < featureValueToStyles.bins[i][1]) {
                                                 // 若匹配，则返回对应的styles参数样式
                                                 return {
-                                                    ...featureStyleParams.styles[i],
+                                                    ...featureValueToStyles.styles[i],
                                                     ...{
                                                         pmIgnore: !editable,
                                                     }
@@ -195,6 +263,17 @@ export default class LeafletGeoJSON extends Component {
                                             }
                                         }
                                     }
+                                } else if (mode === 'category') {
+                                    // 若mode为'category'，则基于featureCategoryToStyles参数进行渲染
+                                    // console.log(featureCategoryToStyles)
+                                    // console.log(`${feature.properties[featureCategoryField]}`)
+                                    // console.log(featureCategoryToStyles[`${feature.properties[featureCategoryField]}`])
+                                    return {
+                                        ...featureCategoryToStyles[`${feature.properties[featureCategoryField]}`],
+                                        ...{
+                                            pmIgnore: !editable,
+                                        }
+                                    };
                                 }
                                 // 否则，将defaultStyle作为缺省样式予以返回
                                 return {
@@ -271,17 +350,27 @@ export default class LeafletGeoJSON extends Component {
                                 mouseout: (e) => {
                                     if (hoverable) {
 
-                                        // 若当前鼠标移出的要素未处于选中状态
-                                        if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
-                                            this.geoJsonRef.current.resetStyle(e.layer);
+                                        if (mode === 'selectable') {
+                                            // 若当前鼠标移出的要素未处于选中状态
+                                            if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
+                                                this.geoJsonRef.current.resetStyle(e.layer);
+                                            } else {
+                                                // 否则，更新要素的样式
+                                                e.layer.setStyle({
+                                                    ...e.layer.options,
+                                                    ...selectedStyle
+                                                });
+                                            }
+                                        } else if (mode === 'choropleth') {
+                                            e.layer.setStyle(choroplethFunc(e.layer.feature));
+                                        } else if (mode === 'category') {
+                                            console.log(e)
+                                            e.layer.setStyle(categoryFunc(e.layer.feature));
+                                            console.log(e)
+                                            console.log('====================================')
                                         } else {
-                                            // 否则，更新要素的样式
-                                            e.layer.setStyle({
-                                                ...e.layer.options,
-                                                ...selectedStyle
-                                            });
+                                            this.geoJsonRef.current.resetStyle(e.layer);
                                         }
-
                                     }
                                 },
                                 add: () => {
@@ -411,11 +500,14 @@ LeafletGeoJSON.propTypes = {
     // 设置作为要素数值的字段名，默认为'value'
     featureValueField: PropTypes.string,
 
+    // 设置作为要素类别的字段名，默认为'category'
+    featureCategoryField: PropTypes.string,
+
     // 设置作为要素鼠标悬浮tooltip信息的字段名，默认为'tooltip'
     featureTooltipField: PropTypes.string,
 
-    // 设置绘图模式，可选的有'default'、'selectable'（选择模式）以及'choropleth'（分层设色模式）
-    mode: PropTypes.oneOf(['default', 'selectable', 'choropleth']),
+    // 设置绘图模式，可选的有'default'、'selectable'（选择模式）、'choropleth'（分层设色模式）以及'category'（分类设色模式）
+    mode: PropTypes.oneOf(['default', 'selectable', 'choropleth', 'category']),
 
     // 要素点击选择模式，可选的有'single'（单选模式）及'multiple'（多选模式），默认为null时不开启要素点击选择功能
     selectMode: PropTypes.oneOf(['single', 'multiple']),
@@ -426,8 +518,8 @@ LeafletGeoJSON.propTypes = {
     // 记录&设置当前已选中要素id
     selectedFeatureIds: PropTypes.array,
 
-    // 配置色彩映射功能所需的分段区间数组及分段对应色彩值参数
-    featureStyleParams: PropTypes.exact({
+    // 配置分层设色模式所需的分段区间数组及分段对应色彩值参数
+    featureValueToStyles: PropTypes.exact({
         // 分段区间数组，每个元素格式为[左区间值, 右区间值]
         bins: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
 
@@ -437,6 +529,9 @@ LeafletGeoJSON.propTypes = {
         // 设置区间是左闭还是右闭，默认为'left'
         closed: PropTypes.oneOf(['left', 'right'])
     }),
+
+    // 配置分类设色模式所需的分类数组及分类对应色彩值参数
+    featureCategoryToStyles: PropTypes.objectOf(geoJsonStylePropType),
 
     // 设置当前GeoJSON矢量图层是否可编辑，默认为false
     editable: PropTypes.bool,
@@ -475,6 +570,7 @@ LeafletGeoJSON.defaultProps = {
     fitBounds: true,
     featureIdField: 'id',
     featureValueField: 'value',
+    featureCategoryField: 'category',
     featureTooltipField: 'tooltip',
     selectedFeatureIds: [],
     showTooltip: true,

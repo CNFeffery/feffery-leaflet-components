@@ -12,54 +12,81 @@ app = dash.Dash(__name__, compress=True, suppress_callback_exceptions=True)
 addressPoints = json.load(open('heatmap-demo-points.json'))
 
 
-def generate_mock_geojson(x):
+def generate_mock_geojson(x, mode='choropleth'):
 
-    county_features = json.load(open('./重庆市区县面要素.geojson', encoding='utf-8'))
+    if mode == 'choropleth':
 
-    county_mock_values = np.random.rand(38)
-    bins = [0] + mc.NaturalBreaks(county_mock_values,
-                                  5).bins.tolist()[:-1] + [1]
-    for i in range(38):
-        county_features['features'][i]['properties']['value'] = county_mock_values[i]
-        county_features['features'][i]['properties']['tooltip'] = '<font style="font-weight:bold;">示例指标{}：</font>{}'.format(
-            x,
-            round(county_features['features'][i]['properties']['value'], 2)
-        )
+        county_features = json.load(
+            open('./重庆市区县面要素.geojson', encoding='utf-8'))
 
-    return [
-        county_features,
-        {
-            'bins': [
-                [left, right]
-                for left, right in zip(bins[:-1], bins[1:])
-            ],
-            'styles': [
-                {
-                    'color': 'white',
-                    'fillColor': c,
-                    'fillOpacity': 1,
-                    'weight': 2
-                } for c in Reds_5.hex_colors
-            ],
-            'closed': 'left'
-        }
-    ]
+        county_mock_values = np.random.rand(38)
+        bins = [0] + mc.NaturalBreaks(county_mock_values,
+                                      5).bins.tolist()[:-1] + [1]
+        for i in range(38):
+            county_features['features'][i]['properties']['value'] = county_mock_values[i]
+            county_features['features'][i]['properties']['tooltip'] = '<font style="font-weight:bold;">示例指标{}：</font>{}'.format(
+                x,
+                round(county_features['features'][i]['properties']['value'], 2)
+            )
+
+        return [
+            county_features,
+            {
+                'bins': [
+                    [left, right]
+                    for left, right in zip(bins[:-1], bins[1:])
+                ],
+                'styles': [
+                    {
+                        'color': 'white',
+                        'fillColor': c,
+                        'fillOpacity': 1,
+                        'weight': 2
+                    } for c in Reds_5.hex_colors
+                ],
+                'closed': 'left'
+            }
+        ]
+
+    elif mode == 'category':
+
+        county_features = json.load(
+            open('./重庆市区县面要素.geojson', encoding='utf-8'))
+
+        for i in range(38):
+            county_features['features'][i]['properties']['category'] = str(x)
+            county_features['features'][i]['properties']['tooltip'] = '<font style="font-weight:bold;">示例指标{}：</font>{}'.format(
+                x,
+                county_features['features'][i]['properties']['category']
+            )
+
+        return [
+            county_features,
+            {
+                str(x): {
+                    'color': 'white' if x % 2 == 0 else 'black',
+                    'fillColor': 'white' if x % 2 == 0 else 'black',
+                    'fillOpacity': 0.8
+                }
+            }
+        ]
 
 
 @app.callback(
     [Output('geojson-demo', 'data'),
-     Output('geojson-demo', 'featureStyleParams')],
+     Output('geojson-demo', 'featureValueToStyles')],
     Input('update-geojson-data-demo', 'n_clicks')
 )
 def update_gejson_layer_data(n_clicks):
     if n_clicks:
 
-        return generate_mock_geojson(n_clicks)
+        return generate_mock_geojson(n_clicks, mode='choropleth')
 
     return dash.no_update
 
 
-data, featureStyleParams = generate_mock_geojson(-1)
+choropleth_data, featureValueToStyles = generate_mock_geojson(
+    -1, mode='choropleth')
 
 app.layout = html.Div([
     # 地图动作测试
@@ -108,7 +135,7 @@ app.layout = html.Div([
             flc.LeafletGeoJSON(
                 id='geojson-demo',
                 mode='choropleth',
-                data=data,
+                data=choropleth_data,
                 selectMode='multiple',
                 fitBounds=True,
                 featureIdField='county',
@@ -121,7 +148,8 @@ app.layout = html.Div([
                 #     'fillOpacity': 0.9
                 # },
                 hoverable=True,
-                featureStyleParams=featureStyleParams,
+                # featureCategoryToStyles=featureCategoryToStyles,
+                featureValueToStyles=featureValueToStyles,
                 # clickFeatureZoom=True
             ),
             flc.LeafletHeatMap(

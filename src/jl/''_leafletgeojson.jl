@@ -16,14 +16,16 @@ Keyword arguments:
 - `data` (Dict; optional)
 - `defaultStyle` (optional)
 - `editable` (Bool; optional)
+- `featureCategoryField` (String; optional)
+- `featureCategoryToStyles` (Dict with Strings as keys and values of type ; optional)
 - `featureIdField` (String; optional)
-- `featureStyleParams` (optional): . featureStyleParams has the following type: lists containing elements 'bins', 'styles', 'closed'.
+- `featureTooltipField` (String; optional)
+- `featureValueField` (String; optional)
+- `featureValueToStyles` (optional): . featureValueToStyles has the following type: lists containing elements 'bins', 'styles', 'closed'.
 Those elements have the following types:
   - `bins` (Array of Array of Realss; optional)
   - `styles` (Array; optional)
   - `closed` (a value equal to: 'left', 'right'; optional)
-- `featureTooltipField` (String; optional)
-- `featureValueField` (String; optional)
 - `fitBounds` (Bool; optional)
 - `hoverStyle` (optional)
 - `hoverable` (Bool; optional)
@@ -32,7 +34,7 @@ Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
-- `mode` (a value equal to: 'default', 'selectable', 'choropleth'; optional)
+- `mode` (a value equal to: 'default', 'selectable', 'choropleth', 'category'; optional)
 - `selectMode` (a value equal to: 'single', 'multiple'; optional)
 - `selectedFeatureIds` (Array; optional)
 - `selectedStyle` (optional)
@@ -40,7 +42,7 @@ Those elements have the following types:
 - `style` (Dict | String; optional)
 """
 function ''_leafletgeojson(; kwargs...)
-        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :className, :clickFeatureZoom, :data, :defaultStyle, :editable, :featureIdField, :featureStyleParams, :featureTooltipField, :featureValueField, :fitBounds, :hoverStyle, :hoverable, :loading_state, :mode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :style]
+        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :className, :clickFeatureZoom, :data, :defaultStyle, :editable, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :hoverStyle, :hoverable, :loading_state, :mode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :style]
         wild_props = Symbol[]
         return Component("''_leafletgeojson", "LeafletGeoJSON", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
