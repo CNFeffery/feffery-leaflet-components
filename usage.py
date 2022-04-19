@@ -173,14 +173,15 @@ app.layout = html.Div([
             )
         ],
         id='map-demo',
-        editToolbar=False,
+        editToolbar=True,
         # wheelPxPerZoomLevel=720,
         # zoomDelta=0.1,
         # maxDrawnShapes=3,
         # showMeasurements=True,
-        # editToolbarControlsOptions={
-        #     'cutPolygon': True
-        # },
+        editToolbarControlsOptions={
+            'cutPolygon': True,
+            'position': 'topright'
+        },
         # useFlyTo=False,
         zoom=7,
         # maxZoom=7,

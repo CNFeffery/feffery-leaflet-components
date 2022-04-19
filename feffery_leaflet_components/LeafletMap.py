@@ -55,9 +55,9 @@ Keyword arguments:
 
     - editMode (boolean; optional)
 
-    - editToolbarPosition (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
-
     - oneBlock (boolean; optional)
+
+    - position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
 
     - removalMode (boolean; optional)
 

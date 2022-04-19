@@ -647,7 +647,7 @@
         "type": {
           "name": "exact",
           "value": {
-            "editToolbarPosition": {
+            "position": {
               "name": "enum",
               "value": [
                 {

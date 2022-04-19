@@ -297,7 +297,7 @@ LeafletMap.propTypes = {
     editToolbarControlsOptions: PropTypes.exact({
         // 设置编辑模式工具栏的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
         // 默认为'topleft'
-        editToolbarPosition: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
+        position: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
 
         // 设置是否渲染“添加标记点”绘制按钮，默认为true
         drawMarker: PropTypes.bool,
