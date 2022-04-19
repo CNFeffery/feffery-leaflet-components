@@ -220,60 +220,10 @@ export default class LeafletGeoJSON extends Component {
                                     // 根据当前要素的featureValueField属性值，根据其在featureValueToStyles.bins
                                     // 中的区间分布情况，返回对应的styles参数样式
 
-                                    // 取出当前要素的featureValueField属性值
-                                    let currentFeatureValue = feature.properties[featureValueField];
-
-                                    // 检查currentFeatureValue是否为空
-                                    if (isUndefined(currentFeatureValue)) {
-                                        // 若为空，则返回defaultStyle
-                                        return {
-                                            ...defaultStyle,
-                                            ...{
-                                                pmIgnore: !editable,
-                                            }
-                                        };
-                                    }
-
-                                    // 否则，基于featureValueToStyles参数进行分层样式渲染
-                                    for (let i = 0; i < featureValueToStyles.bins.length; i++) {
-                                        // 若区间开闭方式为“右闭”
-                                        if (featureValueToStyles.closed === 'right') {
-                                            // 判断currentFeatureValue是否大于当前区间范围的左边界且小于等于当前区间范围的右边界
-                                            if (currentFeatureValue > featureValueToStyles.bins[i][0] &&
-                                                currentFeatureValue <= featureValueToStyles.bins[i][1]) {
-                                                // 若匹配，则返回对应的styles参数样式
-                                                return {
-                                                    ...featureValueToStyles.styles[i],
-                                                    ...{
-                                                        pmIgnore: !editable,
-                                                    }
-                                                };
-                                            }
-                                        } else {
-                                            // 否则一律视作“左闭”
-                                            if (currentFeatureValue >= featureValueToStyles.bins[i][0] &&
-                                                currentFeatureValue < featureValueToStyles.bins[i][1]) {
-                                                // 若匹配，则返回对应的styles参数样式
-                                                return {
-                                                    ...featureValueToStyles.styles[i],
-                                                    ...{
-                                                        pmIgnore: !editable,
-                                                    }
-                                                };
-                                            }
-                                        }
-                                    }
+                                    return choroplethFunc(feature);
                                 } else if (mode === 'category') {
                                     // 若mode为'category'，则基于featureCategoryToStyles参数进行渲染
-                                    // console.log(featureCategoryToStyles)
-                                    // console.log(`${feature.properties[featureCategoryField]}`)
-                                    // console.log(featureCategoryToStyles[`${feature.properties[featureCategoryField]}`])
-                                    return {
-                                        ...featureCategoryToStyles[`${feature.properties[featureCategoryField]}`],
-                                        ...{
-                                            pmIgnore: !editable,
-                                        }
-                                    };
+                                    return categoryFunc(feature);
                                 }
                                 // 否则，将defaultStyle作为缺省样式予以返回
                                 return {
@@ -364,10 +314,7 @@ export default class LeafletGeoJSON extends Component {
                                         } else if (mode === 'choropleth') {
                                             e.layer.setStyle(choroplethFunc(e.layer.feature));
                                         } else if (mode === 'category') {
-                                            console.log(e)
                                             e.layer.setStyle(categoryFunc(e.layer.feature));
-                                            console.log(e)
-                                            console.log('====================================')
                                         } else {
                                             this.geoJsonRef.current.resetStyle(e.layer);
                                         }
