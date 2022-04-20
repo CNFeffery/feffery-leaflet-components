@@ -34,8 +34,20 @@ const difference = (object, base) => {
 const extractDrawnShapes = (item, i) => {
 
     const drawnShape = {
-        id: item._uuid
+        id: item._uuid,
+        createdTimestamp: item._createdTimestamp
     };
+
+    // 若当前要素可以获取到bounds
+    if (item.pm._layer.getBounds) {
+        drawnShape.bounds = {
+            minx: item.pm._layer.getBounds()._southWest.lng,
+            miny: item.pm._layer.getBounds()._southWest.lat,
+            maxx: item.pm._layer.getBounds()._northEast.lng,
+            maxy: item.pm._layer.getBounds()._northEast.lat
+        }
+    }
+
     drawnShape.type = item.pm._shape;
 
     if (item.pm._shape === 'Marker' || item.pm._shape === 'CircleMarker') {
@@ -183,6 +195,7 @@ class LeafletMap extends Component {
                             // 若当前事件为pm:create，则为layer添加唯一uid信息
                             if (e.type === 'pm:create') {
                                 e.layer._uuid = uuidv4()
+                                e.layer._createdTimestamp = new Date().getTime()
                             }
 
                             if (showMeasurements && e.layer.showMeasurements) {
