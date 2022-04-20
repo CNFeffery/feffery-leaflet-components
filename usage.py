@@ -135,7 +135,7 @@ app.layout = html.Div([
             flc.LeafletGeoJSON(
                 id='geojson-demo',
                 mode='choropleth',
-                data=choropleth_data,
+                # data=choropleth_data,
                 selectMode='multiple',
                 fitBounds=True,
                 featureIdField='county',

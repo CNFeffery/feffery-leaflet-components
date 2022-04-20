@@ -110,6 +110,10 @@ export default class LeafletGeoJSON extends Component {
             loading_state
         } = this.props;
 
+        if (!data) {
+            return null;
+        }
+
         // 预处理defaultStyle、hoverStyle、selectedStyle
         defaultStyle = { ..._defaultStyle, ...defaultStyle };
         hoverStyle = { ..._hoverStyle, ...hoverStyle };
