@@ -227,6 +227,7 @@ class LeafletMap extends Component {
                             setProps({ _drawnShapes: drawnShapes })
 
                             e.layer.on('pm:edit', function (x) {
+                                console.log({ x })
                                 const drawnShapes = map.pm.getGeomanDrawLayers().map(
                                     (item, i) => {
                                         return extractDrawnShapes(item, i)
