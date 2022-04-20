@@ -17,6 +17,7 @@ import {
 } from './utils/exportImages.react';
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 import { transform, isEqual, isObject, intersection } from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
 // 计算两个对象之间的属性名差异数组
 const difference = (object, base) => {
@@ -31,7 +32,10 @@ const difference = (object, base) => {
 }
 
 const extractDrawnShapes = (item, i) => {
-    const drawnShape = {};
+
+    const drawnShape = {
+        id: item._uuid
+    };
     drawnShape.type = item.pm._shape;
 
     if (item.pm._shape === 'Marker' || item.pm._shape === 'CircleMarker') {
@@ -175,6 +179,12 @@ class LeafletMap extends Component {
                         map.pm.setLang('zh')
 
                         map.on('pm:create pm:cut pm:remove', function (e) {
+
+                            // 若当前事件为pm:create，则为layer添加唯一uid信息
+                            if (e.type === 'pm:create') {
+                                e.layer._uuid = uuidv4()
+                            }
+
                             if (showMeasurements && e.layer.showMeasurements) {
                                 e.layer.showMeasurements();
                             }
