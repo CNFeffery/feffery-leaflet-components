@@ -65,7 +65,6 @@ export default class LeafletGeoJSON extends Component {
             }
             return true;
         }
-
         // 若无变化的props，则不触发重绘
         if (changedProps.length === 0) {
             return false;
