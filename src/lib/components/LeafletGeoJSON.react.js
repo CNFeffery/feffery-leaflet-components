@@ -56,12 +56,13 @@ export default class LeafletGeoJSON extends Component {
         // 检查changedProps中是否包含data参数
         if (changedProps.indexOf('data') !== -1) {
             // 移除旧图层数据
-            this.geoJsonRef.current.clearLayers()
-            // 新增新图层数据
-            if (nextProps.data) {
-                this.geoJsonRef.current.addData(nextProps.data)
+            if (this.geoJsonRef.current) {
+                this.geoJsonRef.current.clearLayers()
+                // 新增新图层数据
+                if (nextProps.data) {
+                    this.geoJsonRef.current.addData(nextProps.data)
+                }
             }
-
             return true;
         }
 
