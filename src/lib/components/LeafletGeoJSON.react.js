@@ -58,7 +58,9 @@ export default class LeafletGeoJSON extends Component {
             // 移除旧图层数据
             this.geoJsonRef.current.clearLayers()
             // 新增新图层数据
-            this.geoJsonRef.current.addData(nextProps.data)
+            if (nextProps.data) {
+                this.geoJsonRef.current.addData(nextProps.data)
+            }
 
             return true;
         }

@@ -33,8 +33,6 @@ const difference = (object, base) => {
 
 const extractDrawnShapes = (item, i) => {
 
-    console.log({ item })
-
     const drawnShape = {
         id: item._leaflet_id,
         createdTimestamp: item._createdTimestamp || new Date().getTime()
