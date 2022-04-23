@@ -30,16 +30,27 @@ export default class LeafletHeatMap extends Component {
                     (loading_state && loading_state.is_loading) || undefined
                 } >
                 {(map) => {
+
+                    // 检查是否有已存在的_heatmapId对应图层，如果有则进行移除
+                    map.eachLayer(layer => {
+                        if (layer.options._heatmapId) {
+                            map.removeLayer(layer);
+                        }
+                    })
+
                     // 初始化热力图层
-                    L.heatLayer(points.map(item => {
+                    const heatmapLayer = L.heatLayer(points.map(item => {
                         return item.weight ? [item.lat, item.lng, item.weight] : [item.lat, item.lng];
                     }), {
                         minOpacity,
                         max,
                         radius,
                         blur,
-                        gradient
-                    }).addTo(map);
+                        gradient,
+                        _heatmapId: id
+                    })
+
+                    heatmapLayer.addTo(map);
 
                     return null;
                 }}

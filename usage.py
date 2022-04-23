@@ -88,6 +88,32 @@ def update_gejson_layer_data(n_clicks):
 choropleth_data, featureValueToStyles = generate_mock_geojson(
     -1, mode='choropleth')
 
+
+def generate_sample_heatmap():
+
+    return [
+        {
+            'lng': point[1],
+            'lat': point[0],
+            'weight': np.random.rand()
+        }
+        for point in addressPoints
+        if np.random.rand() <= 0.01
+    ]
+
+
+@app.callback(
+    Output('heatmap-demo', 'points'),
+    Input('update-heatmap-points-demo', 'n_clicks')
+)
+def update_heatmap_points(n_clicks):
+    if n_clicks:
+
+        return generate_sample_heatmap()
+
+    return dash.no_update
+
+
 app.layout = html.Div([
     # 地图动作测试
     html.H4('地图动作测试：'),
@@ -117,6 +143,10 @@ app.layout = html.Div([
                 'geojson图层更新data',
                 id='update-geojson-data-demo'
             ),
+            html.Button(
+                'heatmap图层更新points',
+                id='update-heatmap-points-demo'
+            ),
         ]
     ),
 
@@ -129,13 +159,13 @@ app.layout = html.Div([
                 id='map-action-demo'
             ),
             flc.LeafletTileLayer(
-                url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-                # url='http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
+                # url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                url='http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
             ),
             flc.LeafletGeoJSON(
                 id='geojson-demo',
                 mode='choropleth',
-                # data=choropleth_data,
+                data=choropleth_data,
                 selectMode='multiple',
                 fitBounds=True,
                 featureIdField='county',
@@ -153,14 +183,8 @@ app.layout = html.Div([
                 # clickFeatureZoom=True
             ),
             flc.LeafletHeatMap(
-                points=[
-                    {
-                        'lng': point[1],
-                        'lat': point[0],
-                        'weight': np.random.rand()
-                    }
-                    for point in addressPoints
-                ],
+                id='heatmap-demo',
+                points=generate_sample_heatmap(),
                 minOpacity=0,
                 max=1,
                 radius=25,
