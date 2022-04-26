@@ -96,6 +96,7 @@ export default class LeafletGeoJSON extends Component {
             clickFeatureZoom,
             featureIdField,
             selectMode,
+            disableClickSelect,
             selectedFeatureIds,
             featureValueField,
             featureCategoryField,
@@ -335,7 +336,7 @@ export default class LeafletGeoJSON extends Component {
                                 },
                                 click: (e) => {
                                     // 处理要素选择事件
-                                    if (mode === 'selectable') {
+                                    if (mode === 'selectable' && !disableClickSelect) {
                                         // 单选模式
                                         if (selectMode === 'single') {
                                             if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
@@ -465,6 +466,9 @@ LeafletGeoJSON.propTypes = {
     // 要素点击选择模式，可选的有'single'（单选模式）及'multiple'（多选模式），默认为null时不开启要素点击选择功能
     selectMode: PropTypes.oneOf(['single', 'multiple']),
 
+    // 设置是否禁用主动点击选择要素功能，默认为false
+    disableClickSelect: PropTypes.bool,
+
     // 设置是否允许tooltip渲染，默认为true
     showTooltip: PropTypes.bool,
 
@@ -531,5 +535,6 @@ LeafletGeoJSON.defaultProps = {
     selectMode: 'single',
     editable: false,
     hoverable: false,
-    clickFeatureZoom: false
+    clickFeatureZoom: false,
+    disableClickSelect: false
 }

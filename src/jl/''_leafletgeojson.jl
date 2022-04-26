@@ -15,6 +15,7 @@ Keyword arguments:
 - `clickFeatureZoom` (Bool; optional)
 - `data` (Dict; optional)
 - `defaultStyle` (optional)
+- `disableClickSelect` (Bool; optional)
 - `editable` (Bool; optional)
 - `featureCategoryField` (String; optional)
 - `featureCategoryToStyles` (Dict with Strings as keys and values of type ; optional)
@@ -42,7 +43,7 @@ Those elements have the following types:
 - `style` (Dict | String; optional)
 """
 function ''_leafletgeojson(; kwargs...)
-        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :className, :clickFeatureZoom, :data, :defaultStyle, :editable, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :hoverStyle, :hoverable, :loading_state, :mode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :style]
+        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :className, :clickFeatureZoom, :data, :defaultStyle, :disableClickSelect, :editable, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :hoverStyle, :hoverable, :loading_state, :mode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :style]
         wild_props = Symbol[]
         return Component("''_leafletgeojson", "LeafletGeoJSON", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

@@ -191,6 +191,17 @@
           "computed": false
         }
       },
+      "disableClickSelect": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
       "showTooltip": {
         "type": {
           "name": "bool"
