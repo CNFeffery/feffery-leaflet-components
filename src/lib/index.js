@@ -6,6 +6,13 @@ import LeafletHeatMap from './components/LeafletHeatMap.react';
 import LeafletMapAction from './components/LeafletMapAction.react copy';
 import LeafletMapListener from './components/LeafletMapListener.react';
 
+// 屏蔽所有warning信息
+window.console = (function () {
+    var c = {};
+    c.warn = function () { };
+    return c;
+})();
+
 export {
     LeafletMap,
     LeafletTileLayer,
