@@ -10,6 +10,7 @@ import 'leaflet/dist/leaflet.css';
 import "@geoman-io/leaflet-geoman-free";
 import "./utils/leaflet-measure-path";
 import "./utils/leaflet-measure-path.css";
+import "./styles.css";
 import {
     markerIcon,
     marker2xIcon,
