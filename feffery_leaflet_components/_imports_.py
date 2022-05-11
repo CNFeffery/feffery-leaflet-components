@@ -3,6 +3,7 @@ from .LeafletHeatMap import LeafletHeatMap
 from .LeafletMap import LeafletMap
 from .LeafletMapAction import LeafletMapAction
 from .LeafletMapListener import LeafletMapListener
+from .LeafletMigrationLayer import LeafletMigrationLayer
 from .LeafletTileLayer import LeafletTileLayer
 
 __all__ = [
@@ -11,5 +12,6 @@ __all__ = [
     "LeafletMap",
     "LeafletMapAction",
     "LeafletMapListener",
+    "LeafletMigrationLayer",
     "LeafletTileLayer"
 ]

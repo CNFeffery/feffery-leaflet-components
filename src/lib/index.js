@@ -5,13 +5,8 @@ import LeafletGeoJSON from './components/LeafletGeoJSON.react';
 import LeafletHeatMap from './components/LeafletHeatMap.react';
 import LeafletMapAction from './components/LeafletMapAction.react copy';
 import LeafletMapListener from './components/LeafletMapListener.react';
+import LeafletMigrationLayer from './components/LeafletMigrationLayer.react';
 
-// 屏蔽所有warning信息
-window.console = (function () {
-    var c = {};
-    c.warn = function () { };
-    return c;
-})();
 
 export {
     LeafletMap,
@@ -19,5 +14,6 @@ export {
     LeafletGeoJSON,
     LeafletHeatMap,
     LeafletMapAction,
-    LeafletMapListener
+    LeafletMapListener,
+    LeafletMigrationLayer
 };

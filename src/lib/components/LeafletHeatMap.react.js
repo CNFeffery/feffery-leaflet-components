@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undefined */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -33,7 +34,7 @@ export default class LeafletHeatMap extends Component {
 
                     // 检查是否有已存在的_heatmapId对应图层，如果有则进行移除
                     map.eachLayer(layer => {
-                        if (layer.options._heatmapId) {
+                        if (layer.options._heatmapId === id) {
                             map.removeLayer(layer);
                         }
                     })

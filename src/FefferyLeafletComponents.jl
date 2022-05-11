@@ -10,6 +10,7 @@ include("jl/''_leafletheatmap.jl")
 include("jl/''_leafletmap.jl")
 include("jl/''_leafletmapaction.jl")
 include("jl/''_leafletmaplistener.jl")
+include("jl/''_leafletmigrationlayer.jl")
 include("jl/''_leaflettilelayer.jl")
 
 function __init__()
