@@ -38,7 +38,6 @@ export default class LeafletMigrationLayer extends Component {
 
                     // 检查是否有已存在的_migrationLayerId对应图层，如果有则进行移除
                     map.eachLayer(layer => {
-                        console.log({ layer })
                         if (layer.options._migrationLayerId === id) {
                             map.removeLayer(layer);
                         }
