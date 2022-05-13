@@ -36,6 +36,14 @@ export default class LeafletMigrationLayer extends Component {
                 } >
                 {(map) => {
 
+                    // 检查是否有已存在的_migrationLayerId对应图层，如果有则进行移除
+                    map.eachLayer(layer => {
+                        console.log({ layer })
+                        if (layer.options._migrationLayerId === id) {
+                            map.removeLayer(layer);
+                        }
+                    })
+
                     // 将flowData加工为流线地图所需data格式
                     const data = flowData.map(item => {
                         return {
@@ -56,7 +64,7 @@ export default class LeafletMigrationLayer extends Component {
                         maxWidth: maxWidth,
                         arcLabel: arcLabel,
                         arcLabelFont: `${arcLabelFontSize} ${arcLabelFontFamily}`,
-                        _migrationId: id
+                        _migrationLayerId: id
                     });
                     migrationLayer.addTo(map);
 

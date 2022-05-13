@@ -1,3 +1,5 @@
+/* eslint-disable no-else-return */
+/* eslint-disable prefer-const */
 /* eslint-disable no-undefined */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -89,7 +91,6 @@ export default class LeafletGeoJSON extends Component {
         let {
             id,
             className,
-            style,
             data,
             mode,
             fitBounds,
