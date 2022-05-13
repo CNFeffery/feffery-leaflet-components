@@ -67,11 +67,11 @@
                 context.arc(0, 0, this.size, 0, Math.PI * 2, false);
             } else if (this.style === 'arrow') {
                 // 将箭头后退，让箭头的尖头指向终点
-                context.moveTo(-this.size * 2, -this.size);
-                context.lineTo(-this.size * 5 / 4, 0);
-                context.lineTo(-this.size * 2, this.size);
+                context.moveTo(-this.size*2, -this.size);
+                context.lineTo(-this.size*5/4, 0);
+                context.lineTo(-this.size*2, this.size);
                 context.lineTo(0, 0);
-                context.lineTo(-this.size * 2, -this.size);
+                context.lineTo(-this.size*2, -this.size);
             }
             context.closePath();
             context.stroke();
@@ -238,15 +238,15 @@
 
             this.animateBlur = true;
 
-            const size = options.size ? options.size / 2 : 1
+            const size = options.size? options.size/2:1
             this.marker = new Marker({
                 x: 50,
                 y: 80,
                 rotation: 50 * Math.PI / 180,
                 style: 'arrow',
                 color: 'rgb(255, 255, 255)',
-                size: size + 1,
-                borderWidth: size,
+                size: size+1,
+                borderWidth: size ,
                 borderColor: this.strokeStyle
             });
         };
@@ -379,7 +379,7 @@
                         rotation: arc.endAngle + Math.PI / 2,
                         style: 'arrow',
                         color: element.color,
-                        size: element.arcWidth || this.style.arc.width + 3,
+                        size: element.arcWidth || this.style.arc.width+3,
                         borderWidth: 0,
                         borderColor: element.color
                     });
@@ -438,7 +438,7 @@
         return M;
     })();
 
-    L.MigrationLayer = (L.Layer ? L.Layer : L.Class).extend({
+    L.MigrationLayer = L.Class.extend({
         options: {
             map: {},
             data: {},
@@ -449,6 +449,7 @@
             arcLabelFont: '15px sans-serif',
             Marker: {},
             Spark: {}
+
         },
         _setOptions: function (obj, options) {
             if (!obj.hasOwnProperty('options')) {
@@ -522,30 +523,30 @@
             let minValue
             if (this._data && bounds) {
                 arrayUtils.forEach(this._data, function (d) {
-                    if (d.value) {
-                        if (!maxValue) {
+                    if(d.value){
+                        if(!maxValue){
                             maxValue = d.value;
                             minValue = d.value;
                         }
-                        if (maxValue < d.value) {
+                        if(maxValue<d.value){
                             maxValue = d.value;
                         }
-                        if (minValue > d.value) {
+                        if(minValue>d.value){
                             minValue = d.value;
                         }
                     }
                 });
                 var maxWidth = this.options.maxWidth || 10;
                 var data = arrayUtils.map(this._data, function (d) {
-                    if (d.value) {
-                        if (!maxValue) {
+                    if(d.value){
+                        if(!maxValue){
                             maxValue = d.value;
                             minValue = d.value;
                         }
-                        if (maxValue < d.value) {
+                        if(maxValue<d.value){
                             maxValue = d.value;
                         }
-                        if (minValue > d.value) {
+                        if(minValue>d.value){
                             minValue = d.value;
                         }
                     }
@@ -558,11 +559,11 @@
                         labels: d.labels,
                         value: d.value,
                         color: d.color,
-                        arcWidth: d.value ? parseInt((d.value - minValue) * (maxWidth - 1) / (maxValue - minValue)) + 1 : this.options.arcWidth
+                        arcWidth: d.value? parseInt((d.value - minValue) * (maxWidth-1)/(maxValue - minValue)) + 1:this.options.arcWidth
                     }
                 }, this);
 
-
+                
 
 
                 return data;
@@ -603,7 +604,7 @@
             var topLeft = this._map.latLngToLayerPoint(bounds.getNorthWest());
             L.DomUtil.setPosition(this.container, topLeft);
         },
-        addTo: function (map) {
+        addTo: function () {
             this._bindMapEvents();
             var bounds = this._map.getBounds();
             if (bounds && this.migration.playAnimation) {
@@ -614,15 +615,6 @@
                 this.migration.updateData(data);
                 this.migration.start(this.canvas);
             }
-
-            map.addLayer(this);
-            return this;
-        },
-        onAdd: function (map) {
-            this._map = map;
-        },
-        onRemove: function () {
-            this.destroy();
         },
         setData: function (data) {
             this._data = data;
