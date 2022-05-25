@@ -4,7 +4,7 @@
 /* eslint-disable no-undefined */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { MapContainer, useMap } from 'react-leaflet';
+import { MapContainer } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import "@geoman-io/leaflet-geoman-free";

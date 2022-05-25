@@ -1,4 +1,188 @@
 {
+  "src/lib/components/LeafletFlowLayer.react.js": {
+    "description": "",
+    "displayName": "LeafletFlowLayer",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "flowData": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "exact",
+            "value": {
+              "from": {
+                "name": "exact",
+                "value": {
+                  "lng": {
+                    "name": "number",
+                    "required": false
+                  },
+                  "lat": {
+                    "name": "number",
+                    "required": false
+                  }
+                },
+                "required": false
+              },
+              "to": {
+                "name": "exact",
+                "value": {
+                  "lng": {
+                    "name": "number",
+                    "required": false
+                  },
+                  "lat": {
+                    "name": "number",
+                    "required": false
+                  }
+                },
+                "required": false
+              },
+              "labels": {
+                "name": "exact",
+                "value": {
+                  "from": {
+                    "name": "string",
+                    "required": false
+                  },
+                  "to": {
+                    "name": "string",
+                    "required": false
+                  }
+                },
+                "required": false
+              },
+              "color": {
+                "name": "string",
+                "required": false
+              },
+              "value": {
+                "name": "number",
+                "required": false
+              }
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "pulseRadius": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "30",
+          "computed": false
+        }
+      },
+      "pulseBorderWidth": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "3",
+          "computed": false
+        }
+      },
+      "arcWidth": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "1",
+          "computed": false
+        }
+      },
+      "maxWidth": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "10",
+          "computed": false
+        }
+      },
+      "arcLabel": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "arcLabelFontSize": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'10px'",
+          "computed": false
+        }
+      },
+      "arcLabelFontFamily": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'sans-serif'",
+          "computed": false
+        }
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
   "src/lib/components/LeafletGeoJSON.react.js": {
     "description": "",
     "displayName": "LeafletGeoJSON",
@@ -795,7 +979,7 @@
       }
     }
   },
-  "src/lib/components/LeafletMapAction.react copy.js": {
+  "src/lib/components/LeafletMapAction.react.js": {
     "description": "",
     "displayName": "LeafletMapAction",
     "methods": [],
@@ -1054,190 +1238,6 @@
         },
         "required": false,
         "description": ""
-      },
-      "loading_state": {
-        "type": {
-          "name": "shape",
-          "value": {
-            "is_loading": {
-              "name": "bool",
-              "description": "Determines if the component is loading or not",
-              "required": false
-            },
-            "prop_name": {
-              "name": "string",
-              "description": "Holds which property is loading",
-              "required": false
-            },
-            "component_name": {
-              "name": "string",
-              "description": "Holds the name of the component that is loading",
-              "required": false
-            }
-          }
-        },
-        "required": false,
-        "description": ""
-      },
-      "setProps": {
-        "type": {
-          "name": "func"
-        },
-        "required": false,
-        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
-      }
-    }
-  },
-  "src/lib/components/LeafletMigrationLayer.react.js": {
-    "description": "",
-    "displayName": "LeafletMigrationLayer",
-    "methods": [],
-    "props": {
-      "id": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": ""
-      },
-      "flowData": {
-        "type": {
-          "name": "arrayOf",
-          "value": {
-            "name": "exact",
-            "value": {
-              "from": {
-                "name": "exact",
-                "value": {
-                  "lng": {
-                    "name": "number",
-                    "required": false
-                  },
-                  "lat": {
-                    "name": "number",
-                    "required": false
-                  }
-                },
-                "required": false
-              },
-              "to": {
-                "name": "exact",
-                "value": {
-                  "lng": {
-                    "name": "number",
-                    "required": false
-                  },
-                  "lat": {
-                    "name": "number",
-                    "required": false
-                  }
-                },
-                "required": false
-              },
-              "labels": {
-                "name": "exact",
-                "value": {
-                  "from": {
-                    "name": "string",
-                    "required": false
-                  },
-                  "to": {
-                    "name": "string",
-                    "required": false
-                  }
-                },
-                "required": false
-              },
-              "color": {
-                "name": "string",
-                "required": false
-              },
-              "value": {
-                "name": "number",
-                "required": false
-              }
-            }
-          }
-        },
-        "required": false,
-        "description": ""
-      },
-      "pulseRadius": {
-        "type": {
-          "name": "number"
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "30",
-          "computed": false
-        }
-      },
-      "pulseBorderWidth": {
-        "type": {
-          "name": "number"
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "3",
-          "computed": false
-        }
-      },
-      "arcWidth": {
-        "type": {
-          "name": "number"
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "1",
-          "computed": false
-        }
-      },
-      "maxWidth": {
-        "type": {
-          "name": "number"
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "10",
-          "computed": false
-        }
-      },
-      "arcLabel": {
-        "type": {
-          "name": "bool"
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "true",
-          "computed": false
-        }
-      },
-      "arcLabelFontSize": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "'10px'",
-          "computed": false
-        }
-      },
-      "arcLabelFontFamily": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "'sans-serif'",
-          "computed": false
-        }
       },
       "loading_state": {
         "type": {

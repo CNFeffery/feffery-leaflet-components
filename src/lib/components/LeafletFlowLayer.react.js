@@ -1,74 +1,81 @@
-/* eslint-disable new-cap */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-magic-numbers */
-/* eslint-disable no-undefined */
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import L from "leaflet";
 import "./utils/leaflet.migrationLayer";
-import { MapConsumer } from 'react-leaflet';
+import { useMap } from 'react-leaflet';
 
-// 定义迁徙流图层组件LeafletMigrationLayer，api参数参考
-export default class LeafletMigrationLayer extends Component {
+// 定义流线图层组件LeafletMigrationLayer，api参数参考https://github.com/lit-forest/leaflet.migrationLayer
+const LeafletFlowLayer = (props) => {
 
-    render() {
-        // 取得必要属性或参数
-        const {
-            id,
-            flowData,
-            pulseRadius,
-            pulseBorderWidth,
-            arcWidth,
-            maxWidth,
-            arcLabel,
-            arcLabelFontSize,
-            arcLabelFontFamily,
-            setProps,
-            loading_state
-        } = this.props;
+    // 取得必要属性或参数
+    const {
+        id,
+        flowData,
+        pulseRadius,
+        pulseBorderWidth,
+        arcWidth,
+        maxWidth,
+        arcLabel,
+        arcLabelFontSize,
+        arcLabelFontFamily
+    } = props;
 
-        // 返回定制化的前端组件
-        return (
-            <MapConsumer
-                id={id}
-                data-dash-is-loading={
-                    (loading_state && loading_state.is_loading) || undefined
-                } >
-                {(map) => {
+    const map = useMap();
 
-                    // 将flowData加工为流线地图所需data格式
-                    const data = flowData.map(item => {
-                        return {
-                            from: [item.from.lng, item.from.lat],
-                            to: [item.to.lng, item.to.lat],
-                            labels: [item.labels.from, item.labels.to],
-                            color: item.color,
-                            value: item.value
-                        };
-                    })
+    // 存储流线图层状态
+    const [flowLayer, setFlowLayer] = useState(null);
 
-                    const migrationLayer = L.migrationLayer({
-                        map: map,
-                        data: data,
-                        pulseRadius: pulseRadius,
-                        pulseBorderWidth: pulseBorderWidth,
-                        arcWidth: arcWidth,
-                        maxWidth: maxWidth,
-                        arcLabel: arcLabel,
-                        arcLabelFont: `${arcLabelFontSize} ${arcLabelFontFamily}`,
-                        _migrationId: id
-                    });
-                    migrationLayer.addTo(map);
+    useEffect(() => {
 
-                    return null;
-                }}
-            </MapConsumer>
-        );
+        if (flowLayer) {
+            // 销毁先前绘制的图层
+            console.log('销毁！')
+            flowLayer.destroy();
+        }
+
+        // 将flowData加工为流线地图所需data格式
+        const data = flowData.map(item => {
+            return {
+                from: [item.from.lng, item.from.lat],
+                to: [item.to.lng, item.to.lat],
+                labels: [item.labels.from, item.labels.to],
+                color: item.color,
+                value: item.value
+            };
+        })
+
+        setFlowLayer(
+            L.migrationLayer({
+                map: map,
+                data: data,
+                pulseRadius: pulseRadius,
+                pulseBorderWidth: pulseBorderWidth,
+                arcWidth: arcWidth,
+                maxWidth: maxWidth,
+                arcLabel: arcLabel,
+                arcLabelFont: `${arcLabelFontSize} ${arcLabelFontFamily}`,
+                _migrationId: id
+            })
+        )
+    }, [flowData,
+        pulseRadius,
+        pulseBorderWidth,
+        arcWidth,
+        maxWidth,
+        arcLabel,
+        arcLabelFontSize,
+        arcLabelFontFamily])
+
+    if (flowLayer) {
+        flowLayer.addTo(map);
     }
+
+    // 返回定制化的前端组件
+    return <div id={id} />;
 }
 
 // 定义参数或属性
-LeafletMigrationLayer.propTypes = {
+LeafletFlowLayer.propTypes = {
     // 组件id
     id: PropTypes.string,
 
@@ -147,7 +154,7 @@ LeafletMigrationLayer.propTypes = {
 };
 
 // 设置默认参数
-LeafletMigrationLayer.defaultProps = {
+LeafletFlowLayer.defaultProps = {
     pulseRadius: 30,
     pulseBorderWidth: 3,
     arcWidth: 1,
@@ -156,3 +163,5 @@ LeafletMigrationLayer.defaultProps = {
     arcLabelFontSize: '10px',
     arcLabelFontFamily: 'sans-serif'
 }
+
+export default LeafletFlowLayer;

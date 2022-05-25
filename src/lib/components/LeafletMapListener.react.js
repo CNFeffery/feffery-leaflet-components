@@ -6,11 +6,8 @@ import { useMap } from 'react-leaflet';
 const LeafletMapListener = (props) => {
 
     // 取得必要属性或参数
-    let {
+    const {
         id,
-        className,
-        style,
-        loading_state,
         setProps
     } = props;
 

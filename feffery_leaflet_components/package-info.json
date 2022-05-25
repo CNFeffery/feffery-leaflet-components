@@ -27,7 +27,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.16.7",
     "@geoman-io/leaflet-geoman-free": "^2.11.4",
     "file-loader": "^6.2.0",
-    "leaflet": "^1.7.1",
+    "leaflet": "1.7.1",
     "leaflet-defaulticon-compatibility": "^0.1.1",
     "leaflet.heat": "^0.2.0",
     "lodash": "^4.17.21",
