@@ -27,12 +27,6 @@ const LeafletFlowLayer = (props) => {
 
     useEffect(() => {
 
-        if (flowLayer) {
-            // 销毁先前绘制的图层
-            console.log('销毁！')
-            flowLayer.destroy();
-        }
-
         // 将flowData加工为流线地图所需data格式
         const data = flowData.map(item => {
             return {
@@ -43,6 +37,11 @@ const LeafletFlowLayer = (props) => {
                 value: item.value
             };
         })
+
+        if (flowLayer) {
+            // 销毁先前绘制的图层
+            flowLayer.setData(data);
+        }
 
         setFlowLayer(
             L.migrationLayer({
@@ -57,14 +56,7 @@ const LeafletFlowLayer = (props) => {
                 _migrationId: id
             })
         )
-    }, [flowData,
-        pulseRadius,
-        pulseBorderWidth,
-        arcWidth,
-        maxWidth,
-        arcLabel,
-        arcLabelFontSize,
-        arcLabelFontFamily])
+    }, [flowData])
 
     if (flowLayer) {
         flowLayer.addTo(map);
