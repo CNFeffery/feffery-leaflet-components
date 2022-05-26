@@ -41,25 +41,25 @@ const LeafletFlowLayer = (props) => {
         if (flowLayer) {
             // 销毁先前绘制的图层
             flowLayer.setData(data);
+        } else {
+            setFlowLayer(
+                L.migrationLayer({
+                    map: map,
+                    data: data,
+                    pulseRadius: pulseRadius,
+                    pulseBorderWidth: pulseBorderWidth,
+                    arcWidth: arcWidth,
+                    maxWidth: maxWidth,
+                    arcLabel: arcLabel,
+                    arcLabelFont: `${arcLabelFontSize} ${arcLabelFontFamily}`,
+                    _migrationId: id
+                })
+            )
         }
-
-        setFlowLayer(
-            L.migrationLayer({
-                map: map,
-                data: data,
-                pulseRadius: pulseRadius,
-                pulseBorderWidth: pulseBorderWidth,
-                arcWidth: arcWidth,
-                maxWidth: maxWidth,
-                arcLabel: arcLabel,
-                arcLabelFont: `${arcLabelFontSize} ${arcLabelFontFamily}`,
-                _migrationId: id
-            })
-        )
     }, [flowData])
 
     if (flowLayer) {
-        flowLayer.addTo(map);
+        flowLayer.addTo(map)
     }
 
     // 返回定制化的前端组件
