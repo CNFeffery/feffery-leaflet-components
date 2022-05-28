@@ -1,10 +1,14 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+export(''LeafletCircle)
+export(''LeafletCircleMarker)
 export(''LeafletFlowLayer)
 export(''LeafletGeoJSON)
 export(''LeafletHeatMap)
 export(''LeafletMap)
 export(''LeafletMapAction)
 export(''LeafletMapListener)
+export(''LeafletPolygon)
+export(''LeafletPolyline)
+export(''LeafletRectangle)
 export(''LeafletTileLayer)
-export(LeafletMigrationLayer)

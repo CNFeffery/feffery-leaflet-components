@@ -1,4 +1,158 @@
 {
+  "src/lib/components/LeafletCircle.react.js": {
+    "description": "",
+    "displayName": "LeafletCircle",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "center": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "lng": {
+              "name": "number",
+              "required": false
+            },
+            "lat": {
+              "name": "number",
+              "required": false
+            }
+          }
+        },
+        "required": true,
+        "description": ""
+      },
+      "radius": {
+        "type": {
+          "name": "number"
+        },
+        "required": true,
+        "description": ""
+      },
+      "pathOptions": {
+        "type": {
+          "name": "custom",
+          "raw": "pathOptionsPropTypes"
+        },
+        "required": false,
+        "description": ""
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
+  "src/lib/components/LeafletCircleMarker.react.js": {
+    "description": "",
+    "displayName": "LeafletCircleMarker",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "center": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "lng": {
+              "name": "number",
+              "required": false
+            },
+            "lat": {
+              "name": "number",
+              "required": false
+            }
+          }
+        },
+        "required": true,
+        "description": ""
+      },
+      "radius": {
+        "type": {
+          "name": "number"
+        },
+        "required": true,
+        "description": ""
+      },
+      "pathOptions": {
+        "type": {
+          "name": "custom",
+          "raw": "pathOptionsPropTypes"
+        },
+        "required": false,
+        "description": ""
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
   "src/lib/components/LeafletFlowLayer.react.js": {
     "description": "",
     "displayName": "LeafletFlowLayer",
@@ -231,7 +385,7 @@
       "defaultStyle": {
         "type": {
           "name": "custom",
-          "raw": "geoJsonStylePropType"
+          "raw": "pathOptionsPropTypes"
         },
         "required": false,
         "description": ""
@@ -239,7 +393,7 @@
       "hoverStyle": {
         "type": {
           "name": "custom",
-          "raw": "geoJsonStylePropType"
+          "raw": "pathOptionsPropTypes"
         },
         "required": false,
         "description": ""
@@ -247,7 +401,7 @@
       "selectedStyle": {
         "type": {
           "name": "custom",
-          "raw": "geoJsonStylePropType"
+          "raw": "pathOptionsPropTypes"
         },
         "required": false,
         "description": ""
@@ -426,7 +580,7 @@
               "name": "arrayOf",
               "value": {
                 "name": "custom",
-                "raw": "geoJsonStylePropType"
+                "raw": "pathOptionsPropTypes"
               },
               "required": false
             },
@@ -454,7 +608,7 @@
           "name": "objectOf",
           "value": {
             "name": "custom",
-            "raw": "geoJsonStylePropType"
+            "raw": "pathOptionsPropTypes"
           }
         },
         "required": false,
@@ -1272,6 +1426,294 @@
       }
     }
   },
+  "src/lib/components/LeafletPolygon.react.js": {
+    "description": "",
+    "displayName": "LeafletPolygon",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "positions": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "union",
+            "value": [
+              {
+                "name": "exact",
+                "value": {
+                  "lng": {
+                    "name": "number",
+                    "required": false
+                  },
+                  "lat": {
+                    "name": "number",
+                    "required": false
+                  }
+                }
+              },
+              {
+                "name": "arrayOf",
+                "value": {
+                  "name": "exact",
+                  "value": {
+                    "lng": {
+                      "name": "number",
+                      "required": false
+                    },
+                    "lat": {
+                      "name": "number",
+                      "required": false
+                    }
+                  }
+                }
+              },
+              {
+                "name": "arrayOf",
+                "value": {
+                  "name": "arrayOf",
+                  "value": {
+                    "name": "exact",
+                    "value": {
+                      "lng": {
+                        "name": "number",
+                        "required": false
+                      },
+                      "lat": {
+                        "name": "number",
+                        "required": false
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "pathOptions": {
+        "type": {
+          "name": "custom",
+          "raw": "pathOptionsPropTypes"
+        },
+        "required": false,
+        "description": ""
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
+  "src/lib/components/LeafletPolyline.react.js": {
+    "description": "",
+    "displayName": "LeafletPolyline",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "positions": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "exact",
+                "value": {
+                  "lng": {
+                    "name": "number",
+                    "required": false
+                  },
+                  "lat": {
+                    "name": "number",
+                    "required": false
+                  }
+                }
+              }
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "arrayOf",
+                "value": {
+                  "name": "exact",
+                  "value": {
+                    "lng": {
+                      "name": "number",
+                      "required": false
+                    },
+                    "lat": {
+                      "name": "number",
+                      "required": false
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      },
+      "pathOptions": {
+        "type": {
+          "name": "custom",
+          "raw": "pathOptionsPropTypes"
+        },
+        "required": false,
+        "description": ""
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
+  "src/lib/components/LeafletRectangle.react.js": {
+    "description": "",
+    "displayName": "LeafletRectangle",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "bounds": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "minx": {
+              "name": "number",
+              "required": true
+            },
+            "miny": {
+              "name": "number",
+              "required": true
+            },
+            "maxx": {
+              "name": "number",
+              "required": true
+            },
+            "maxy": {
+              "name": "number",
+              "required": true
+            }
+          }
+        },
+        "required": true,
+        "description": ""
+      },
+      "pathOptions": {
+        "type": {
+          "name": "custom",
+          "raw": "pathOptionsPropTypes"
+        },
+        "required": false,
+        "description": ""
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
   "src/lib/components/LeafletTileLayer.react.js": {
     "description": "",
     "displayName": "LeafletTileLayer",
@@ -1333,6 +1775,13 @@
           "value": "1",
           "computed": false
         }
+      },
+      "zIndex": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
       },
       "loading_state": {
         "type": {

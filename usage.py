@@ -151,6 +151,104 @@ def demo(n_clicks):
 
 
 app.layout = html.Div([
+
+    flc.LeafletMap(
+        [
+            flc.LeafletRectangle(
+                bounds={
+                    'minx': 116,
+                    'miny': 29,
+                    'maxx': 118,
+                    'maxy': 31
+                }
+            ),
+            flc.LeafletPolygon(
+                positions=[
+                    [
+                        [
+                            {
+                                'lng': p[1],
+                                'lat': p[0]
+                            }
+                            for p in [[37, -109.05], [41, -109.03], [41, -102.05], [37, -102.04]]
+                        ],
+                        [
+                            {
+                                'lng': p[1],
+                                'lat': p[0]
+                            }
+                            for p in [[37.29, -108.58], [40.71, -108.58], [40.71, -102.50], [37.29, -102.50]]
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                'lng': p[1],
+                                'lat': p[0]
+                            }
+                            for p in [[41+5, -111.03], [45+5, -111.04], [45+5, -104.05], [41+5, -104.05]]
+                        ]
+                    ]
+
+                ]
+            ),
+            flc.LeafletPolyline(
+                positions=[
+                    [
+                        {
+                            'lng': 106,
+                            'lat': 29
+                        },
+                        {
+                            'lng': 107,
+                            'lat': 29
+                        },
+                        {
+                            'lng': 106,
+                            'lat': 30
+                        }
+                    ],
+                    [
+                        {
+                            'lng': 106 + 1,
+                            'lat': 29 + 1
+                        },
+                        {
+                            'lng': 107 + 1,
+                            'lat': 29 + 1
+                        },
+                        {
+                            'lng': 106 + 1,
+                            'lat': 30 + 1
+                        }
+                    ]
+                ]
+            ),
+            flc.LeafletCircleMarker(
+                pathOptions={
+                    'color': 'red'
+                },
+                center={
+                    'lng': 106,
+                    'lat': 29
+                },
+                radius=25
+            ),
+            flc.LeafletTileLayer(
+                url='http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
+            )
+        ],
+        zoom=4,
+        center={
+            'lng': 106,
+            'lat': 29
+        },
+        style={
+            'width': '800px',
+            'height': '600px'
+        }
+    ),
+
     html.H4('迁徙地图测试'),
     html.Button('刷新数据', id='button-demo'),
     flc.LeafletMap(

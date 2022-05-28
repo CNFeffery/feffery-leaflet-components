@@ -23,9 +23,10 @@ Those elements have the following types:
 - `opacity` (Real; optional)
 - `style` (Dict; optional)
 - `url` (String; optional)
+- `zIndex` (Real; optional)
 """
 function ''_leaflettilelayer(; kwargs...)
-        available_props = Symbol[:children, :id, :attribution, :className, :loading_state, :opacity, :style, :url]
+        available_props = Symbol[:children, :id, :attribution, :className, :loading_state, :opacity, :style, :url, :zIndex]
         wild_props = Symbol[]
         return Component("''_leaflettilelayer", "LeafletTileLayer", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

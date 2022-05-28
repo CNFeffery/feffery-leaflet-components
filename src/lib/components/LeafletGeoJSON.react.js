@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { GeoJSON, MapConsumer } from 'react-leaflet';
 import { transform, isEqual, isObject, intersection, isUndefined } from 'lodash';
+import { pathOptionsPropTypes } from './BasePropTypes.react';
 
 // 定义默认状态下的默认style样式
 const _defaultStyle = {
@@ -384,35 +385,6 @@ export default class LeafletGeoJSON extends Component {
     }
 }
 
-const geoJsonStylePropType = PropTypes.exact({
-    // 设置是否绘制多边形轮廓线，默认为true
-    stroke: PropTypes.bool,
-    // 设置多边形轮廓线颜色，默认为#3388ff
-    color: PropTypes.string,
-    // 设置多边形轮廓线像素宽度，默认为3
-    weight: PropTypes.number,
-    // 设置多边形轮廓线透明度，默认为1
-    opacity: PropTypes.number,
-    // 设置多边形轮廓线的line-cap属性，参考：https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-linecap
-    // 默认为'round'
-    lineCap: PropTypes.string,
-    // 设置多边形轮廓线的line-join属性，参考：https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-linejoin
-    // 默认为'round'
-    lineJoin: PropTypes.string,
-    // 设置多边形轮廓线的dash-array属性，参考：https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray
-    // 默认为null
-    dashArray: PropTypes.string,
-    // 设置多边形轮廓线的dash-offset属性，参考：https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dashoffset
-    // 默认为null
-    dashOffset: PropTypes.string,
-    // 设置是否绘制多边形填充颜色，默认为true
-    fill: PropTypes.bool,
-    // 设置多边形填充颜色，默认为#3388ff
-    fillColor: PropTypes.string,
-    // 设置多边形填充透明度，默认为0.2
-    fillOpacity: PropTypes.number
-});
-
 // 定义参数或属性
 LeafletGeoJSON.propTypes = {
     // 组件id
@@ -432,13 +404,13 @@ LeafletGeoJSON.propTypes = {
     hoverable: PropTypes.bool,
 
     // 定义要素默认样式
-    defaultStyle: geoJsonStylePropType,
+    defaultStyle: pathOptionsPropTypes,
 
     // 定义要素鼠标悬浮样式（需设置hoverable=true）
-    hoverStyle: geoJsonStylePropType,
+    hoverStyle: pathOptionsPropTypes,
 
     // 定义要素选中样式（需设置selectMode='single'或'multiple'）
-    selectedStyle: geoJsonStylePropType,
+    selectedStyle: pathOptionsPropTypes,
 
     data: PropTypes.object,
 
@@ -482,14 +454,14 @@ LeafletGeoJSON.propTypes = {
         bins: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
 
         // 设置与区间一一对应的样式对象数组
-        styles: PropTypes.arrayOf(geoJsonStylePropType),
+        styles: PropTypes.arrayOf(pathOptionsPropTypes),
 
         // 设置区间是左闭还是右闭，默认为'left'
         closed: PropTypes.oneOf(['left', 'right'])
     }),
 
     // 配置分类设色模式所需的分类数组及分类对应色彩值参数
-    featureCategoryToStyles: PropTypes.objectOf(geoJsonStylePropType),
+    featureCategoryToStyles: PropTypes.objectOf(pathOptionsPropTypes),
 
     // 设置当前GeoJSON矢量图层是否可编辑，默认为false
     editable: PropTypes.bool,

@@ -15,6 +15,7 @@ export default class LeafletTileLayer extends Component {
             url,
             attribution,
             opacity,
+            zIndex,
             loading_state
         } = this.props;
 
@@ -27,6 +28,7 @@ export default class LeafletTileLayer extends Component {
                 attribution={attribution}
                 url={url}
                 opacity={opacity}
+                zIndex={zIndex}
                 data-dash-is-loading={
                     (loading_state && loading_state.is_loading) || undefined
                 }
@@ -59,6 +61,9 @@ LeafletTileLayer.propTypes = {
 
     // 设置图层透明度，默认为1
     opacity: PropTypes.number,
+
+    // 设置z轴层级
+    zIndex: PropTypes.number,
 
     loading_state: PropTypes.shape({
         /**

@@ -3,19 +3,13 @@
 from dash.development.base_component import Component, _explicitize_args
 
 
-class LeafletTileLayer(Component):
-    """A LeafletTileLayer component.
+class LeafletPolygon(Component):
+    """A LeafletPolygon component.
 
 
 Keyword arguments:
 
-- children (a list of or a singular dash component, string or number; optional)
-
 - id (string; optional)
-
-- attribution (string; optional)
-
-- className (string; optional)
 
 - loading_state (dict; optional)
 
@@ -30,20 +24,30 @@ Keyword arguments:
     - prop_name (string; optional):
         Holds which property is loading.
 
-- opacity (number; default 1)
+- pathOptions (optional)
 
-- style (dict; optional)
+- positions (list of dicts; optional)
 
-- url (string; default "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+    `positions` is a list of dicts with keys:
 
-- zIndex (number; optional)"""
+    - lat (number; optional)
+
+    - lng (number; optional) | list of dicts with keys:
+
+    - lat (number; optional)
+
+    - lng (number; optional) | list of list of dicts with keys:
+
+    - lat (number; optional)
+
+    - lng (number; optional)s"""
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, url=Component.UNDEFINED, attribution=Component.UNDEFINED, opacity=Component.UNDEFINED, zIndex=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'attribution', 'className', 'loading_state', 'opacity', 'style', 'url', 'zIndex']
-        self._type = 'LeafletTileLayer'
+    def __init__(self, id=Component.UNDEFINED, positions=Component.UNDEFINED, pathOptions=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'loading_state', 'pathOptions', 'positions']
+        self._type = 'LeafletPolygon'
         self._namespace = 'feffery_leaflet_components'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'attribution', 'className', 'loading_state', 'opacity', 'style', 'url', 'zIndex']
+        self.available_properties = ['id', 'loading_state', 'pathOptions', 'positions']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
@@ -53,4 +57,4 @@ Keyword arguments:
             if k not in args:
                 raise TypeError(
                     'Required argument `' + k + '` was not specified.')
-        super(LeafletTileLayer, self).__init__(children=children, **args)
+        super(LeafletPolygon, self).__init__(**args)
