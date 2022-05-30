@@ -857,17 +857,6 @@
           "computed": false
         }
       },
-      "useFlyTo": {
-        "type": {
-          "name": "bool"
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "false",
-          "computed": false
-        }
-      },
       "doubleClickZoom": {
         "type": {
           "name": "bool"

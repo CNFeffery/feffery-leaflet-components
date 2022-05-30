@@ -121,7 +121,6 @@ class LeafletMap extends Component {
             children,
             center,
             zoom,
-            useFlyTo,
             doubleClickZoom,
             dragging,
             closePopupOnClick,
@@ -177,6 +176,11 @@ class LeafletMap extends Component {
                         markerStyle: {
                             icon: defaultIcon
                         }
+                    })
+
+                    // 设置地图监听resize事件从而自适应校正地图中心及缩放级别
+                    map.on('resize', () => {
+                        map.invalidateSize()
                     })
 
                     if (editToolbar) {
@@ -278,9 +282,6 @@ LeafletMap.propTypes = {
 
     // 设置地图的缩放级别，默认为1
     zoom: PropTypes.number,
-
-    // 设置center或zoom主动设置从而改变地图视角时是否启用'FlyTo'模式，默认为false
-    useFlyTo: PropTypes.bool,
 
     // 设置是否允许双击地图进行放大，默认为true
     doubleClickZoom: PropTypes.bool,
@@ -407,8 +408,7 @@ LeafletMap.defaultProps = {
     scrollWheelZoom: true,
     editToolbar: false,
     showMeasurements: true,
-    maxDrawnShapes: null,
-    useFlyTo: false
+    maxDrawnShapes: null
 }
 
 
