@@ -180,7 +180,7 @@ class LeafletMap extends Component {
 
                     // 设置地图监听resize事件从而自适应校正地图中心及缩放级别
                     map.on('resize', () => {
-                        map.invalidateSize()
+                        setTimeout(function () { map.invalidateSize() }, 400)
                     })
 
                     if (editToolbar) {
