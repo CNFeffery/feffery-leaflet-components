@@ -1174,6 +1174,10 @@
                 {
                   "value": "'fly-to-bounds'",
                   "computed": false
+                },
+                {
+                  "value": "'invalidate-size'",
+                  "computed": false
                 }
               ],
               "required": false

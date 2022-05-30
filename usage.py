@@ -150,102 +150,149 @@ def demo(n_clicks):
     return dash.no_update
 
 
+@app.callback(
+    Output('resize-demo-container', 'style'),
+    Input('resize-demo-trigger', 'n_clicks'),
+    State('resize-demo-container', 'style')
+)
+def resize_demo(n_clicks, style):
+
+    if n_clicks:
+        if style['width'] == '800px':
+            return {
+                **style,
+                'width': '400px'
+            }
+
+        else:
+            return {
+                **style,
+                'width': '800px'
+            }
+
+    return dash.no_update
+
+@app.callback(
+    Output('resize-demo-action', 'mapActionConfig'),
+    Input('resize-demo-container', 'style')
+)
+def resize_demo_action(style):
+
+    return {
+        'type': 'invalidate-size'
+    }
+
+
 app.layout = html.Div([
 
-    flc.LeafletMap(
-        [
-            flc.LeafletRectangle(
-                bounds={
-                    'minx': 116,
-                    'miny': 29,
-                    'maxx': 118,
-                    'maxy': 31
-                }
-            ),
-            flc.LeafletPolygon(
-                positions=[
-                    [
+    html.Button(
+        'resize',
+        id='resize-demo-trigger'
+    ),
+    html.Div(
+        flc.LeafletMap(
+            [
+                flc.LeafletMapAction(
+                    id='resize-demo-action'
+                ),
+                flc.LeafletRectangle(
+                    bounds={
+                        'minx': 116,
+                        'miny': 29,
+                        'maxx': 118,
+                        'maxy': 31
+                    }
+                ),
+                flc.LeafletPolygon(
+                    positions=[
+                        [
+                            [
+                                {
+                                    'lng': p[1],
+                                    'lat': p[0]
+                                }
+                                for p in [[37, -109.05], [41, -109.03], [41, -102.05], [37, -102.04]]
+                            ],
+                            [
+                                {
+                                    'lng': p[1],
+                                    'lat': p[0]
+                                }
+                                for p in [[37.29, -108.58], [40.71, -108.58], [40.71, -102.50], [37.29, -102.50]]
+                            ]
+                        ],
+                        [
+                            [
+                                {
+                                    'lng': p[1],
+                                    'lat': p[0]
+                                }
+                                for p in [[41+5, -111.03], [45+5, -111.04], [45+5, -104.05], [41+5, -104.05]]
+                            ]
+                        ]
+
+                    ]
+                ),
+                flc.LeafletPolyline(
+                    positions=[
                         [
                             {
-                                'lng': p[1],
-                                'lat': p[0]
+                                'lng': 106,
+                                'lat': 29
+                            },
+                            {
+                                'lng': 107,
+                                'lat': 29
+                            },
+                            {
+                                'lng': 106,
+                                'lat': 30
                             }
-                            for p in [[37, -109.05], [41, -109.03], [41, -102.05], [37, -102.04]]
                         ],
                         [
                             {
-                                'lng': p[1],
-                                'lat': p[0]
-                            }
-                            for p in [[37.29, -108.58], [40.71, -108.58], [40.71, -102.50], [37.29, -102.50]]
-                        ]
-                    ],
-                    [
-                        [
+                                'lng': 106 + 1,
+                                'lat': 29 + 1
+                            },
                             {
-                                'lng': p[1],
-                                'lat': p[0]
+                                'lng': 107 + 1,
+                                'lat': 29 + 1
+                            },
+                            {
+                                'lng': 106 + 1,
+                                'lat': 30 + 1
                             }
-                            for p in [[41+5, -111.03], [45+5, -111.04], [45+5, -104.05], [41+5, -104.05]]
                         ]
                     ]
-
-                ]
-            ),
-            flc.LeafletPolyline(
-                positions=[
-                    [
-                        {
-                            'lng': 106,
-                            'lat': 29
-                        },
-                        {
-                            'lng': 107,
-                            'lat': 29
-                        },
-                        {
-                            'lng': 106,
-                            'lat': 30
-                        }
-                    ],
-                    [
-                        {
-                            'lng': 106 + 1,
-                            'lat': 29 + 1
-                        },
-                        {
-                            'lng': 107 + 1,
-                            'lat': 29 + 1
-                        },
-                        {
-                            'lng': 106 + 1,
-                            'lat': 30 + 1
-                        }
-                    ]
-                ]
-            ),
-            flc.LeafletCircleMarker(
-                pathOptions={
-                    'color': 'red'
-                },
-                center={
-                    'lng': 106,
-                    'lat': 29
-                },
-                radius=25
-            ),
-            flc.LeafletTileLayer(
-                # url='http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
-            )
-        ],
-        zoom=4,
-        center={
-            'lng': 106,
-            'lat': 29
-        },
+                ),
+                flc.LeafletCircleMarker(
+                    pathOptions={
+                        'color': 'red'
+                    },
+                    center={
+                        'lng': 106,
+                        'lat': 29
+                    },
+                    radius=25
+                ),
+                flc.LeafletTileLayer(
+                    # url='http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
+                )
+            ],
+            zoom=4,
+            center={
+                'lng': 106,
+                'lat': 29
+            },
+            style={
+                'width': '100%',
+                'height': '100%'
+            }
+        ),
+        id='resize-demo-container',
         style={
-            'width': '50vw',
-            'height': '600px'
+            'width': '800px',
+            'height': '800px'
         }
     ),
 
