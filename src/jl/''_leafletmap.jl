@@ -23,7 +23,7 @@ Those elements have the following types:
 - `doubleClickZoom` (Bool; optional)
 - `dragging` (Bool; optional)
 - `editToolbar` (Bool; optional)
-- `editToolbarControlsOptions` (optional): . editToolbarControlsOptions has the following type: lists containing elements 'position', 'drawMarker', 'drawCircleMarker', 'drawPolyline', 'drawRectangle', 'drawPolygon', 'drawCircle', 'editMode', 'dragMode', 'cutPolygon', 'removalMode', 'rotateMode', 'oneBlock'.
+- `editToolbarControlsOptions` (optional): . editToolbarControlsOptions has the following type: lists containing elements 'position', 'drawMarker', 'drawCircleMarker', 'drawPolyline', 'drawRectangle', 'drawPolygon', 'drawCircle', 'drawText', 'editMode', 'dragMode', 'cutPolygon', 'removalMode', 'rotateMode', 'oneBlock'.
 Those elements have the following types:
   - `position` (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
   - `drawMarker` (Bool; optional)
@@ -32,6 +32,7 @@ Those elements have the following types:
   - `drawRectangle` (Bool; optional)
   - `drawPolygon` (Bool; optional)
   - `drawCircle` (Bool; optional)
+  - `drawText` (Bool; optional)
   - `editMode` (Bool; optional)
   - `dragMode` (Bool; optional)
   - `cutPolygon` (Bool; optional)

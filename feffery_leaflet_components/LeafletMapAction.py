@@ -11,8 +11,6 @@ Keyword arguments:
 
 - id (string; optional)
 
-- className (string; optional)
-
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -58,16 +56,14 @@ Keyword arguments:
 
     - zoomInOffset (number; optional)
 
-    - zoomOutOffset (number; optional)
-
-- style (dict; optional)"""
+    - zoomOutOffset (number; optional)"""
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, mapActionConfig=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'className', 'loading_state', 'mapActionConfig', 'style']
+    def __init__(self, id=Component.UNDEFINED, mapActionConfig=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'loading_state', 'mapActionConfig']
         self._type = 'LeafletMapAction'
         self._namespace = 'feffery_leaflet_components'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'className', 'loading_state', 'mapActionConfig', 'style']
+        self.available_properties = ['id', 'loading_state', 'mapActionConfig']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

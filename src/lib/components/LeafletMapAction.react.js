@@ -19,11 +19,7 @@ const LeafletMapAction = (props) => {
     // 取得必要属性或参数
     let {
         id,
-        className,
-        style,
-        mapActionConfig,
-        loading_state,
-        setProps
+        mapActionConfig
     } = props;
 
     const map = useMap();
@@ -80,12 +76,6 @@ const LeafletMapAction = (props) => {
 LeafletMapAction.propTypes = {
     // 组件id
     id: PropTypes.string,
-
-    // css类名
-    className: PropTypes.string,
-
-    // 自定义css字典
-    style: PropTypes.object,
 
     // 用于编排一次新的地图动作
     mapActionConfig: PropTypes.exact({

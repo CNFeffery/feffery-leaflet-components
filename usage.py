@@ -172,6 +172,7 @@ def resize_demo(n_clicks, style):
 
     return dash.no_update
 
+
 @app.callback(
     Output('resize-demo-action', 'mapActionConfig'),
     Input('resize-demo-container', 'style')

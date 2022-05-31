@@ -254,7 +254,7 @@ LeafletMap.propTypes = {
     // 组件id
     id: PropTypes.string,
 
-    // 内嵌文字的文本内容
+    // 定义当前地图容器下属所有图层元素
     children: PropTypes.node,
 
     // css类名
@@ -337,6 +337,9 @@ LeafletMap.propTypes = {
 
         // 设置是否渲染“圆形”绘制按钮，默认为true
         drawCircle: PropTypes.bool,
+
+        // 设置是否渲染“文字”绘制按钮，默认为true
+        drawText: PropTypes.bool,
 
         // 设置是否渲染“编辑要素”按钮，默认为true
         editMode: PropTypes.bool,

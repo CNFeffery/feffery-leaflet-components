@@ -53,6 +53,8 @@ Keyword arguments:
 
     - drawRectangle (boolean; optional)
 
+    - drawText (boolean; optional)
+
     - editMode (boolean; optional)
 
     - oneBlock (boolean; optional)

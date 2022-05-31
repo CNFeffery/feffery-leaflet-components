@@ -1031,6 +1031,10 @@
               "name": "bool",
               "required": false
             },
+            "drawText": {
+              "name": "bool",
+              "required": false
+            },
             "editMode": {
               "name": "bool",
               "required": false
@@ -1130,20 +1134,6 @@
       "id": {
         "type": {
           "name": "string"
-        },
-        "required": false,
-        "description": ""
-      },
-      "className": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": ""
-      },
-      "style": {
-        "type": {
-          "name": "object"
         },
         "required": false,
         "description": ""
