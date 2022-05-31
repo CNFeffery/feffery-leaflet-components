@@ -13,7 +13,7 @@ A LeafletMap component.
 Keyword arguments:
 - `children` (a list of or a singular dash component, string or number; optional)
 - `id` (String; optional)
-- `_drawnShapes` (Bool | Real | String | Dict | Array; optional)
+- `_drawnShapes` (Array; optional)
 - `center` (optional): . center has the following type: lists containing elements 'lng', 'lat'.
 Those elements have the following types:
   - `lng` (Real; optional)

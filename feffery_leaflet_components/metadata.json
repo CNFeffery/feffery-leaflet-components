@@ -1088,7 +1088,7 @@
       },
       "_drawnShapes": {
         "type": {
-          "name": "any"
+          "name": "array"
         },
         "required": false,
         "description": ""

@@ -49,6 +49,9 @@ const extractDrawnShapes = (item, i) => {
         }
     }
 
+    console.log(item.pm._shape)
+    console.log(item)
+
     drawnShape.type = item.pm._shape;
 
     if (item.pm._shape === 'Marker' || item.pm._shape === 'CircleMarker') {
@@ -182,7 +185,8 @@ class LeafletMap extends Component {
                         // 测试，添加可编辑要素功能
                         map.pm.addControls({
                             ...{
-                                cutPolygon: false
+                                cutPolygon: false,
+                                drawText: false
                             },
                             ...editToolbarControlsOptions
                         })
@@ -338,7 +342,7 @@ LeafletMap.propTypes = {
         // 设置是否渲染“圆形”绘制按钮，默认为true
         drawCircle: PropTypes.bool,
 
-        // 设置是否渲染“文字”绘制按钮，默认为true
+        // 设置是否渲染“文字”绘制按钮，默认为false
         drawText: PropTypes.bool,
 
         // 设置是否渲染“编辑要素”按钮，默认为true
@@ -367,7 +371,7 @@ LeafletMap.propTypes = {
     maxDrawnShapes: PropTypes.number,
 
     // 事件监听类属性值
-    _drawnShapes: PropTypes.any,
+    _drawnShapes: PropTypes.array,
 
     loading_state: PropTypes.shape({
         /**

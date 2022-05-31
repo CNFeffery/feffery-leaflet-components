@@ -13,7 +13,7 @@ Keyword arguments:
 
 - id (string; optional)
 
-- _drawnShapes (boolean | number | string | dict | list; optional)
+- _drawnShapes (list; optional)
 
 - center (dict; default { lng: 0, lat: 0 })
 
