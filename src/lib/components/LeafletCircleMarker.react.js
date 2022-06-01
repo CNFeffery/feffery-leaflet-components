@@ -18,11 +18,6 @@ const LeafletCircleMarker = (props) => {
         setProps
     } = props;
 
-    // const map = useMap();
-
-    // useEffect(() => {
-    // }, [])
-
     // 返回定制化的前端组件
     return (
         <CircleMarker id={id}
@@ -50,8 +45,8 @@ LeafletCircleMarker.propTypes = {
         lat: PropTypes.number
     }).isRequired,
 
-    // 设置半径，单位米，必填
-    radius: PropTypes.number.isRequired,
+    // 设置半径，单位像素，默认为10
+    radius: PropTypes.number,
 
     // 设置样式相关参数
     pathOptions: pathOptionsPropTypes,
@@ -80,6 +75,7 @@ LeafletCircleMarker.propTypes = {
 
 // 设置默认参数
 LeafletCircleMarker.defaultProps = {
+    radius: 10
 }
 
 export default LeafletCircleMarker;

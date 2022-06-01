@@ -109,8 +109,12 @@
         "type": {
           "name": "number"
         },
-        "required": true,
-        "description": ""
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "10",
+          "computed": false
+        }
       },
       "pathOptions": {
         "type": {

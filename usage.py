@@ -274,7 +274,7 @@ app.layout = html.Div([
                         'lng': 106,
                         'lat': 29
                     },
-                    radius=25
+                    # radius=25
                 ),
                 flc.LeafletTileLayer(
                     # url='http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'

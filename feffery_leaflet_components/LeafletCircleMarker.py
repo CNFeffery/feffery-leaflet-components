@@ -34,9 +34,9 @@ Keyword arguments:
 
 - pathOptions (optional)
 
-- radius (number; required)"""
+- radius (number; default 10)"""
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, center=Component.REQUIRED, radius=Component.REQUIRED, pathOptions=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+    def __init__(self, id=Component.UNDEFINED, center=Component.REQUIRED, radius=Component.UNDEFINED, pathOptions=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
         self._prop_names = ['id', 'center', 'loading_state', 'pathOptions', 'radius']
         self._type = 'LeafletCircleMarker'
         self._namespace = 'feffery_leaflet_components'
@@ -47,7 +47,7 @@ Keyword arguments:
         _locals = locals()
         _locals.update(kwargs)  # For wildcard attrs
         args = {k: _locals[k] for k in _explicit_args if k != 'children'}
-        for k in ['center', 'radius']:
+        for k in ['center']:
             if k not in args:
                 raise TypeError(
                     'Required argument `' + k + '` was not specified.')

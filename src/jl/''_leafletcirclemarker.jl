@@ -19,7 +19,7 @@ Those elements have the following types:
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
 - `pathOptions` (optional)
-- `radius` (Real; required)
+- `radius` (Real; optional)
 """
 function ''_leafletcirclemarker(; kwargs...)
         available_props = Symbol[:id, :center, :loading_state, :pathOptions, :radius]
