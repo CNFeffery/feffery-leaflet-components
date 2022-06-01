@@ -41,8 +41,6 @@ Keyword arguments:
 
 - _zoom (number; optional)
 
-- className (string; optional)
-
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -54,16 +52,14 @@ Keyword arguments:
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
-        Holds which property is loading.
-
-- style (dict; optional)"""
+        Holds which property is loading."""
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, _center=Component.UNDEFINED, _zoom=Component.UNDEFINED, _clickedLatLng=Component.UNDEFINED, _bounds=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', '_bounds', '_center', '_clickedLatLng', '_zoom', 'className', 'loading_state', 'style']
+    def __init__(self, id=Component.UNDEFINED, _center=Component.UNDEFINED, _zoom=Component.UNDEFINED, _clickedLatLng=Component.UNDEFINED, _bounds=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', '_bounds', '_center', '_clickedLatLng', '_zoom', 'loading_state']
         self._type = 'LeafletMapListener'
         self._namespace = 'feffery_leaflet_components'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', '_bounds', '_center', '_clickedLatLng', '_zoom', 'className', 'loading_state', 'style']
+        self.available_properties = ['id', '_bounds', '_center', '_clickedLatLng', '_zoom', 'loading_state']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

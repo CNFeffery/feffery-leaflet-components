@@ -1,57 +1,49 @@
 /* eslint-disable no-undefined */
-import React, { Component } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TileLayer } from 'react-leaflet';
 
 // 定义底图图层组件LeafletTileLayer，api参数参考https://react-leaflet.js.org/docs/api-components/#tilelayer
-export default class LeafletTileLayer extends Component {
-    render() {
-        // 取得必要属性或参数
-        const {
-            id,
-            children,
-            className,
-            style,
-            url,
-            attribution,
-            opacity,
-            zIndex,
-            loading_state
-        } = this.props;
+const LeafletTileLayer = (props) => {
 
-        // 返回定制化的前端组件
-        return (
-            <TileLayer
-                id={id}
-                className={className}
-                style={style}
-                attribution={attribution}
-                url={url}
-                opacity={opacity}
-                zIndex={zIndex}
-                data-dash-is-loading={
-                    (loading_state && loading_state.is_loading) || undefined
-                }
-            >
-                {children}
-            </TileLayer>
-        );
-    }
+    // 取得必要属性或参数
+    const {
+        id,
+        url,
+        attribution,
+        opacity,
+        zIndex,
+        loading_state
+    } = props;
+
+    const tileLayerRef = useRef(null);
+
+    useEffect(() => {
+        if (tileLayerRef.current) {
+            tileLayerRef.current.setUrl(url);
+        }
+    }, [url]);
+
+    // 返回定制化的前端组件
+    return (
+        <TileLayer
+            id={id}
+            attribution={attribution}
+            url={url}
+            opacity={opacity}
+            zIndex={zIndex}
+            ref={tileLayerRef}
+            data-dash-is-loading={
+                (loading_state && loading_state.is_loading) || undefined
+            }
+        />
+    );
 }
 
 // 定义参数或属性
 LeafletTileLayer.propTypes = {
     // 组件id
     id: PropTypes.string,
-
-    // 内嵌文字的文本内容
-    children: PropTypes.node,
-
-    // css类名
-    className: PropTypes.string,
-
-    // 自定义css字典
-    style: PropTypes.object,
 
     // 设置地图服务的url参数
     url: PropTypes.string,
@@ -92,3 +84,6 @@ LeafletTileLayer.defaultProps = {
     url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     opacity: 1
 }
+
+
+export default LeafletTileLayer;

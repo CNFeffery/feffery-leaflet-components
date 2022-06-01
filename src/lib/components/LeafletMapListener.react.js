@@ -67,12 +67,6 @@ LeafletMapListener.propTypes = {
     // 组件id
     id: PropTypes.string,
 
-    // css类名
-    className: PropTypes.string,
-
-    // 自定义css字典
-    style: PropTypes.object,
-
     _center: PropTypes.exact({
         // 经度
         lng: PropTypes.number,

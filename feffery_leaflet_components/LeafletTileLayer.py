@@ -9,13 +9,9 @@ class LeafletTileLayer(Component):
 
 Keyword arguments:
 
-- children (a list of or a singular dash component, string or number; optional)
-
 - id (string; optional)
 
 - attribution (string; optional)
-
-- className (string; optional)
 
 - loading_state (dict; optional)
 
@@ -32,18 +28,16 @@ Keyword arguments:
 
 - opacity (number; default 1)
 
-- style (dict; optional)
-
 - url (string; default "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
 
 - zIndex (number; optional)"""
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, url=Component.UNDEFINED, attribution=Component.UNDEFINED, opacity=Component.UNDEFINED, zIndex=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'attribution', 'className', 'loading_state', 'opacity', 'style', 'url', 'zIndex']
+    def __init__(self, id=Component.UNDEFINED, url=Component.UNDEFINED, attribution=Component.UNDEFINED, opacity=Component.UNDEFINED, zIndex=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'attribution', 'loading_state', 'opacity', 'url', 'zIndex']
         self._type = 'LeafletTileLayer'
         self._namespace = 'feffery_leaflet_components'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'attribution', 'className', 'loading_state', 'opacity', 'style', 'url', 'zIndex']
+        self.available_properties = ['id', 'attribution', 'loading_state', 'opacity', 'url', 'zIndex']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
@@ -53,4 +47,4 @@ Keyword arguments:
             if k not in args:
                 raise TypeError(
                     'Required argument `' + k + '` was not specified.')
-        super(LeafletTileLayer, self).__init__(children=children, **args)
+        super(LeafletTileLayer, self).__init__(**args)
