@@ -17,11 +17,6 @@ const LeafletPolyline = (props) => {
         setProps
     } = props;
 
-    // const map = useMap();
-
-    // useEffect(() => {
-    // }, [])
-
     // 返回定制化的前端组件
     return (
         <Polyline id={id}

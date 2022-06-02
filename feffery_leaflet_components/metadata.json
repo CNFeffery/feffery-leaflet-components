@@ -353,27 +353,41 @@
         "required": false,
         "description": ""
       },
-      "className": {
+      "data": {
         "type": {
-          "name": "string"
+          "name": "object"
         },
         "required": false,
         "description": ""
       },
-      "style": {
+      "mode": {
         "type": {
-          "name": "union",
+          "name": "enum",
           "value": [
             {
-              "name": "object"
+              "value": "'default'",
+              "computed": false
             },
             {
-              "name": "string"
+              "value": "'selectable'",
+              "computed": false
+            },
+            {
+              "value": "'choropleth'",
+              "computed": false
+            },
+            {
+              "value": "'category'",
+              "computed": false
             }
           ]
         },
         "required": false,
-        "description": ""
+        "description": "",
+        "defaultValue": {
+          "value": "'default'",
+          "computed": false
+        }
       },
       "hoverable": {
         "type": {
@@ -410,13 +424,6 @@
         "required": false,
         "description": ""
       },
-      "data": {
-        "type": {
-          "name": "object"
-        },
-        "required": false,
-        "description": ""
-      },
       "fitBounds": {
         "type": {
           "name": "bool"
@@ -436,6 +443,17 @@
         "description": "",
         "defaultValue": {
           "value": "false",
+          "computed": false
+        }
+      },
+      "showTooltip": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "true",
           "computed": false
         }
       },
@@ -483,35 +501,6 @@
           "computed": false
         }
       },
-      "mode": {
-        "type": {
-          "name": "enum",
-          "value": [
-            {
-              "value": "'default'",
-              "computed": false
-            },
-            {
-              "value": "'selectable'",
-              "computed": false
-            },
-            {
-              "value": "'choropleth'",
-              "computed": false
-            },
-            {
-              "value": "'category'",
-              "computed": false
-            }
-          ]
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "'default'",
-          "computed": false
-        }
-      },
       "selectMode": {
         "type": {
           "name": "enum",
@@ -541,17 +530,6 @@
         "description": "",
         "defaultValue": {
           "value": "false",
-          "computed": false
-        }
-      },
-      "showTooltip": {
-        "type": {
-          "name": "bool"
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "true",
           "computed": false
         }
       },

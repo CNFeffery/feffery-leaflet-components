@@ -91,7 +91,6 @@ export default class LeafletGeoJSON extends Component {
         // 取得必要属性或参数
         let {
             id,
-            className,
             data,
             mode,
             fitBounds,
@@ -195,7 +194,6 @@ export default class LeafletGeoJSON extends Component {
                     return (
                         <GeoJSON
                             id={id}
-                            className={className}
                             style={(feature) => {
                                 // 若mode为'default'，则渲染defaultStyle
                                 if (mode === 'default') {
@@ -390,15 +388,12 @@ LeafletGeoJSON.propTypes = {
     // 组件id
     id: PropTypes.string,
 
-    // css类名
-    className: PropTypes.string,
+    // 传入GeoJSON格式数据
+    data: PropTypes.object,
 
-    // 自定义样式映射规则，可传入统一的对象类型的样式表
-    // 亦可传入字符串格式的js函数体来灵活映射样式
-    style: PropTypes.oneOfType([
-        PropTypes.object,
-        PropTypes.string
-    ]),
+    /* 基础参数 */
+    // 设置绘图模式，可选的有'default'、'selectable'（选择模式）、'choropleth'（分层设色模式）以及'category'（分类设色模式）
+    mode: PropTypes.oneOf(['default', 'selectable', 'choropleth', 'category']),
 
     // 设置是否开启要素鼠标悬浮效果，默认为false
     hoverable: PropTypes.bool,
@@ -412,13 +407,14 @@ LeafletGeoJSON.propTypes = {
     // 定义要素选中样式（需设置selectMode='single'或'multiple'）
     selectedStyle: pathOptionsPropTypes,
 
-    data: PropTypes.object,
-
     // 设置是否fitBounds，默认为true
     fitBounds: PropTypes.bool,
 
     // 设置是否允许点击要素后将地图缩放以适应被点击的要素bounds范围，默认为false
     clickFeatureZoom: PropTypes.bool,
+
+    // 设置是否允许tooltip渲染，默认为false
+    showTooltip: PropTypes.bool,
 
     // 配置要素选择功能
     // 设置作为唯一识别id的字段名，默认为'id'
@@ -433,17 +429,11 @@ LeafletGeoJSON.propTypes = {
     // 设置作为要素鼠标悬浮tooltip信息的字段名，默认为'tooltip'
     featureTooltipField: PropTypes.string,
 
-    // 设置绘图模式，可选的有'default'、'selectable'（选择模式）、'choropleth'（分层设色模式）以及'category'（分类设色模式）
-    mode: PropTypes.oneOf(['default', 'selectable', 'choropleth', 'category']),
-
-    // 要素点击选择模式，可选的有'single'（单选模式）及'multiple'（多选模式），默认为null时不开启要素点击选择功能
+    // 要素点击选择模式，可选的有'single'（单选模式）及'multiple'（多选模式）
     selectMode: PropTypes.oneOf(['single', 'multiple']),
 
     // 设置是否禁用主动点击选择要素功能，默认为false
     disableClickSelect: PropTypes.bool,
-
-    // 设置是否允许tooltip渲染，默认为true
-    showTooltip: PropTypes.bool,
 
     // 记录&设置当前已选中要素id
     selectedFeatureIds: PropTypes.array,
