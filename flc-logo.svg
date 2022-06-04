@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="180px" viewBox="0 0 240 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>切片</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="5.90170132%" y1="0%" x2="94.0982987%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#AAD157" stop-opacity="0.4" offset="0%"></stop>
+            <stop stop-color="#8DBB42" stop-opacity="0.6" offset="52.4827955%"></stop>
+            <stop stop-color="#71A52C" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#97BB35" stop-opacity="0.4" offset="0%"></stop>
+            <stop stop-color="#9CBD36" stop-opacity="0.6" offset="50.7429369%"></stop>
+            <stop stop-color="#95BA35" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#D9E857" stop-opacity="0.4" offset="0%"></stop>
+            <stop stop-color="#D4E257" stop-opacity="0.6" offset="50.7429369%"></stop>
+            <stop stop-color="#CAD850" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="90.6268598%" y1="0%" x2="9.37314025%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#A9C53A" stop-opacity="0.4" offset="0%"></stop>
+            <stop stop-color="#A9C53A" stop-opacity="0.6" offset="48.0938487%"></stop>
+            <stop stop-color="#A4C138" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="flc-logo" transform="translate(10.099132, -39.000000)">
+            <path d="M108.900868,205.084686 C58.4917398,174.147886 22.4917398,135.814553 0.900867985,90.0846863" id="路径" stroke="url(#linearGradient-1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M2.84217094e-14,88.626027 L84.567,99.353027 L80.8297645,198.213476 L109.112,194.155027 L109.801736,206.373973 L5.90016998,193.19389 L2.84217094e-14,88.626027 Z" id="形状结合" fill="url(#linearGradient-2)"></path>
+            <g id="右叶" transform="translate(20.900868, 0.000000)">
+                <polygon id="多边形" fill="url(#linearGradient-3)" transform="translate(124.500000, 126.500000) rotate(42.000000) translate(-124.500000, -126.500000) " points="124.5 30 205 126.5 124.5 223 44 126.5"></polygon>
+                <path d="M59.9288965,198.213476 C111.479303,170.075805 154.145969,122.742472 187.928896,56.2134757" id="路径-2" stroke="url(#linearGradient-4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>
