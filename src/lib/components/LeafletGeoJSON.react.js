@@ -390,6 +390,9 @@ export default class LeafletGeoJSON extends Component {
                                         popupAnchor: [1, -34],
                                         shadowSize: [41, 41]
                                     })
+                                    if (feature.properties[featureTooltipField] && showTooltip) {
+                                        return L.marker(latlng, { icon: defaultIcon }).bindTooltip(feature.properties[featureTooltipField])
+                                    }
                                     return L.marker(latlng, { icon: defaultIcon })
                                 }
                             }
