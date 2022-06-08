@@ -133,6 +133,7 @@ class LeafletMap extends Component {
             zoomControl,
             wheelPxPerZoomLevel,
             scrollWheelZoom,
+            maxBounds,
             editToolbar,
             editToolbarControlsOptions,
             showMeasurements,
@@ -161,6 +162,12 @@ class LeafletMap extends Component {
                 wheelPxPerZoomLevel={wheelPxPerZoomLevel}
                 zoomControl={zoomControl}
                 scrollWheelZoom={scrollWheelZoom}
+                maxBounds={
+                    maxBounds ? L.latLngBounds(
+                        L.latLng(maxBounds.miny, maxBounds.minx),
+                        L.latLng(maxBounds.maxy, maxBounds.maxx)
+                    ) : undefined
+                }
                 whenCreated={map => {
                     // 绑定ref
                     this.mapRef.current = map
@@ -312,6 +319,14 @@ LeafletMap.propTypes = {
 
     // 设置鼠标滚轮滚动多少像素会触发一个单位zoomDelta的缩放，默认为60
     wheelPxPerZoomLevel: PropTypes.number,
+
+    // 设置地图可移动的bounds范围
+    maxBounds: PropTypes.exact({
+        minx: PropTypes.number,
+        miny: PropTypes.number,
+        maxx: PropTypes.number,
+        maxy: PropTypes.number
+    }),
 
     // 地图编辑模式配置类参数
 

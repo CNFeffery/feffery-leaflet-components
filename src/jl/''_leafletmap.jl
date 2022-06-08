@@ -44,6 +44,12 @@ Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
+- `maxBounds` (optional): . maxBounds has the following type: lists containing elements 'minx', 'miny', 'maxx', 'maxy'.
+Those elements have the following types:
+  - `minx` (Real; optional)
+  - `miny` (Real; optional)
+  - `maxx` (Real; optional)
+  - `maxy` (Real; optional)
 - `maxDrawnShapes` (Real; optional)
 - `maxZoom` (Real; optional)
 - `minZoom` (Real; optional)
@@ -56,7 +62,7 @@ Those elements have the following types:
 - `zoomDelta` (Real; optional)
 """
 function ''_leafletmap(; kwargs...)
-        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :loading_state, :maxDrawnShapes, :maxZoom, :minZoom, :scrollWheelZoom, :showMeasurements, :style, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
+        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :loading_state, :maxBounds, :maxDrawnShapes, :maxZoom, :minZoom, :scrollWheelZoom, :showMeasurements, :style, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
         wild_props = Symbol[]
         return Component("''_leafletmap", "LeafletMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

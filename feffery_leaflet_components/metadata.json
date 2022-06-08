@@ -952,6 +952,31 @@
           "computed": false
         }
       },
+      "maxBounds": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "minx": {
+              "name": "number",
+              "required": false
+            },
+            "miny": {
+              "name": "number",
+              "required": false
+            },
+            "maxx": {
+              "name": "number",
+              "required": false
+            },
+            "maxy": {
+              "name": "number",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
       "editToolbar": {
         "type": {
           "name": "bool"
