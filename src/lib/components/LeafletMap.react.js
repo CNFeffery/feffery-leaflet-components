@@ -172,6 +172,13 @@ class LeafletMap extends Component {
                     // 绑定ref
                     this.mapRef.current = map
 
+                    if (maxBounds) {
+                        map.fitBounds(L.latLngBounds(
+                            L.latLng(maxBounds.miny, maxBounds.minx),
+                            L.latLng(maxBounds.maxy, maxBounds.maxx)
+                        ))
+                    }
+
                     // 修正全局默认marker图标不显示的问题
                     const defaultIcon = L.icon({
                         iconUrl: markerIcon,
