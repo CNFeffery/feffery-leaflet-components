@@ -1,11 +1,18 @@
+/* eslint-disable no-magic-numbers */
 /* eslint-disable no-else-return */
 /* eslint-disable prefer-const */
 /* eslint-disable no-undefined */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import L from 'leaflet';
 import { GeoJSON, MapConsumer } from 'react-leaflet';
 import { transform, isEqual, isObject, intersection, isUndefined } from 'lodash';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
+import {
+    markerIcon,
+    marker2xIcon,
+    markerShadow
+} from './utils/exportImages.react';
 
 // 定义默认状态下的默认style样式
 const _defaultStyle = {
@@ -371,6 +378,21 @@ export default class LeafletGeoJSON extends Component {
                                     }
                                 }
                             }}
+                            pointToLayer={
+                                (feature, latlng) => {
+                                    // 修正全局默认marker图标不显示的问题
+                                    const defaultIcon = L.icon({
+                                        iconUrl: markerIcon,
+                                        iconRetinaUrl: marker2xIcon,
+                                        shadowUrl: markerShadow,
+                                        iconAnchor: [12, 41],
+                                        iconSize: [25, 41],
+                                        popupAnchor: [1, -34],
+                                        shadowSize: [41, 41]
+                                    })
+                                    return L.marker(latlng, { icon: defaultIcon })
+                                }
+                            }
                             ref={this.geoJsonRef}
                             data-dash-is-loading={
                                 (loading_state && loading_state.is_loading) || undefined

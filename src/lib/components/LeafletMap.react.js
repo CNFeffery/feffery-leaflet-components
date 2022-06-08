@@ -189,6 +189,7 @@ class LeafletMap extends Component {
                         popupAnchor: [1, -34],
                         shadowSize: [41, 41]
                     })
+
                     map.pm.setGlobalOptions({
                         markerStyle: {
                             icon: defaultIcon
