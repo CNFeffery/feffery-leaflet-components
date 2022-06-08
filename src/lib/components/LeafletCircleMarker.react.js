@@ -11,6 +11,7 @@ const LeafletCircleMarker = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        children,
         center,
         radius,
         pathOptions,
@@ -27,7 +28,7 @@ const LeafletCircleMarker = (props) => {
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
-        ></CircleMarker>
+        >{children}</CircleMarker>
     );
 }
 
@@ -35,6 +36,9 @@ const LeafletCircleMarker = (props) => {
 LeafletCircleMarker.propTypes = {
     // 组件id
     id: PropTypes.string,
+
+    // 传入内部tooltip、popup元素
+    children: PropTypes.node,
 
     // 设置圆心坐标，必填
     center: PropTypes.exact({

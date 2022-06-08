@@ -88,6 +88,13 @@
         "required": false,
         "description": ""
       },
+      "children": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": ""
+      },
       "center": {
         "type": {
           "name": "exact",

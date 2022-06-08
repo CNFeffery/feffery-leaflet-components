@@ -9,6 +9,8 @@ class LeafletCircleMarker(Component):
 
 Keyword arguments:
 
+- children (a list of or a singular dash component, string or number; optional)
+
 - id (string; optional)
 
 - center (dict; required)
@@ -36,12 +38,12 @@ Keyword arguments:
 
 - radius (number; default 10)"""
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, center=Component.REQUIRED, radius=Component.UNDEFINED, pathOptions=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'center', 'loading_state', 'pathOptions', 'radius']
+    def __init__(self, children=None, id=Component.UNDEFINED, center=Component.REQUIRED, radius=Component.UNDEFINED, pathOptions=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'center', 'loading_state', 'pathOptions', 'radius']
         self._type = 'LeafletCircleMarker'
         self._namespace = 'feffery_leaflet_components'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'center', 'loading_state', 'pathOptions', 'radius']
+        self.available_properties = ['children', 'id', 'center', 'loading_state', 'pathOptions', 'radius']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
@@ -51,4 +53,4 @@ Keyword arguments:
             if k not in args:
                 raise TypeError(
                     'Required argument `' + k + '` was not specified.')
-        super(LeafletCircleMarker, self).__init__(**args)
+        super(LeafletCircleMarker, self).__init__(children=children, **args)
