@@ -10,6 +10,7 @@ from .LeafletPolygon import LeafletPolygon
 from .LeafletPolyline import LeafletPolyline
 from .LeafletRectangle import LeafletRectangle
 from .LeafletTileLayer import LeafletTileLayer
+from .LeafletTooltip import LeafletTooltip
 
 __all__ = [
     "LeafletCircle",
@@ -23,5 +24,6 @@ __all__ = [
     "LeafletPolygon",
     "LeafletPolyline",
     "LeafletRectangle",
-    "LeafletTileLayer"
+    "LeafletTileLayer",
+    "LeafletTooltip"
 ]

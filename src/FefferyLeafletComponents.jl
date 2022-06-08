@@ -17,6 +17,7 @@ include("jl/''_leafletpolygon.jl")
 include("jl/''_leafletpolyline.jl")
 include("jl/''_leafletrectangle.jl")
 include("jl/''_leaflettilelayer.jl")
+include("jl/''_leaflettooltip.jl")
 
 function __init__()
     DashBase.register_package(

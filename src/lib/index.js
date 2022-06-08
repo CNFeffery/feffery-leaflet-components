@@ -11,6 +11,7 @@ import LeafletCircleMarker from './components/LeafletCircleMarker.react';
 import LeafletPolyline from './components/LeafletPolyline.react';
 import LeafletPolygon from './components/LeafletPolygon.react';
 import LeafletRectangle from './components/LeafletRectangle.react';
+import LeafletTooltip from './components/LeafletTooltip.react';
 
 export {
     LeafletMap,
@@ -24,5 +25,6 @@ export {
     LeafletCircleMarker,
     LeafletPolyline,
     LeafletPolygon,
-    LeafletRectangle
+    LeafletRectangle,
+    LeafletTooltip
 };
