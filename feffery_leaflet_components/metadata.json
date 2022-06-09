@@ -603,6 +603,13 @@
         "required": false,
         "description": ""
       },
+      "tooltipSticky": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
       "editable": {
         "type": {
           "name": "bool"

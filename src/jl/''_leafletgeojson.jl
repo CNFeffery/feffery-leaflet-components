@@ -39,9 +39,10 @@ Those elements have the following types:
 - `selectedFeatureIds` (Array; optional)
 - `selectedStyle` (optional)
 - `showTooltip` (Bool; optional)
+- `tooltipSticky` (Bool; optional)
 """
 function ''_leafletgeojson(; kwargs...)
-        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :clickFeatureZoom, :data, :defaultStyle, :disableClickSelect, :editable, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :hoverStyle, :hoverable, :loading_state, :mode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip]
+        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :clickFeatureZoom, :data, :defaultStyle, :disableClickSelect, :editable, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :hoverStyle, :hoverable, :loading_state, :mode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :tooltipSticky]
         wild_props = Symbol[]
         return Component("''_leafletgeojson", "LeafletGeoJSON", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

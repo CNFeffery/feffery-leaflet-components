@@ -117,6 +117,7 @@ export default class LeafletGeoJSON extends Component {
             selectedStyle,
             featureValueToStyles,
             featureCategoryToStyles,
+            tooltipSticky,
             setProps,
             loading_state
         } = this.props;
@@ -283,7 +284,10 @@ export default class LeafletGeoJSON extends Component {
                                 // 为每个要素添加tooltip
                                 // 检查是否存在featureTooltipField指定的字段
                                 if (feature.properties[featureTooltipField] && showTooltip) {
-                                    layer.bindTooltip(feature.properties[featureTooltipField])
+                                    layer.bindTooltip(
+                                        feature.properties[featureTooltipField],
+                                        sticky = tooltipSticky
+                                    )
                                 } else {
                                     layer.unbindTooltip();
                                 }
@@ -477,6 +481,9 @@ LeafletGeoJSON.propTypes = {
 
     // 配置分类设色模式所需的分类数组及分类对应色彩值参数
     featureCategoryToStyles: PropTypes.objectOf(pathOptionsPropTypes),
+
+    // 设置要素的tooltip是否跟随鼠标，默认为false
+    tooltipSticky: PropTypes.bool,
 
     // 设置当前GeoJSON矢量图层是否可编辑，默认为false
     editable: PropTypes.bool,
