@@ -286,7 +286,9 @@ export default class LeafletGeoJSON extends Component {
                                 if (feature.properties[featureTooltipField] && showTooltip) {
                                     layer.bindTooltip(
                                         feature.properties[featureTooltipField],
-                                        sticky = tooltipSticky
+                                        {
+                                            sticky: tooltipSticky
+                                        }
                                     )
                                 } else {
                                     layer.unbindTooltip();
