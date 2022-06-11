@@ -12,6 +12,10 @@ const LeafletTooltip = (props) => {
         id,
         children,
         position,
+        direction,
+        permanent,
+        bubblingMouseEvents,
+        interactive,
         loading_state,
         setProps
     } = props;
@@ -22,6 +26,10 @@ const LeafletTooltip = (props) => {
             id={id}
             children={children}
             position={position}
+            direction={direction}
+            permanent={permanent}
+            bubblingMouseEvents={bubblingMouseEvents}
+            interactive={interactive}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -45,6 +53,19 @@ LeafletTooltip.propTypes = {
         // 纬度
         lat: PropTypes.number
     }),
+
+    // 设置tooltip展开方位，可选的有'right'、'left'、'top'、'bottom'、'center'与'auto'
+    // 默认为'auto'
+    direction: PropTypes.oneOf(['right', 'left', 'top', 'bottom', 'center', 'auto']),
+
+    // 设置是否永久展开tooltip而无需鼠标悬浮触发，默认为false
+    permanent: PropTypes.bool,
+
+    // 设置tooltip内是否穿透底图事件，默认为true
+    bubblingMouseEvents: PropTypes.bool,
+
+    // 设置是否允许tooltip内的交互事件，默认为false
+    interactive: PropTypes.bool,
 
     loading_state: PropTypes.shape({
         /**

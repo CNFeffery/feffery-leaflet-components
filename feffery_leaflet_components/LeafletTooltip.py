@@ -13,6 +13,12 @@ Keyword arguments:
 
 - id (string; optional)
 
+- bubblingMouseEvents (boolean; optional)
+
+- direction (a value equal to: 'right', 'left', 'top', 'bottom', 'center', 'auto'; optional)
+
+- interactive (boolean; optional)
+
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -26,6 +32,8 @@ Keyword arguments:
     - prop_name (string; optional):
         Holds which property is loading.
 
+- permanent (boolean; optional)
+
 - position (dict; optional)
 
     `position` is a dict with keys:
@@ -34,12 +42,12 @@ Keyword arguments:
 
     - lng (number; optional)"""
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, position=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'loading_state', 'position']
+    def __init__(self, children=None, id=Component.UNDEFINED, position=Component.UNDEFINED, direction=Component.UNDEFINED, permanent=Component.UNDEFINED, bubblingMouseEvents=Component.UNDEFINED, interactive=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'bubblingMouseEvents', 'direction', 'interactive', 'loading_state', 'permanent', 'position']
         self._type = 'LeafletTooltip'
         self._namespace = 'feffery_leaflet_components'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'loading_state', 'position']
+        self.available_properties = ['children', 'id', 'bubblingMouseEvents', 'direction', 'interactive', 'loading_state', 'permanent', 'position']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

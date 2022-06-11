@@ -267,6 +267,28 @@ app.layout = html.Div([
                     ]
                 ),
                 flc.LeafletCircleMarker(
+                    flc.LeafletTooltip(
+                        html.Div(
+                            [
+                                flc.LeafletMap(
+                                    [
+                                        flc.LeafletTileLayer()
+                                    ],
+                                    id='circle-marker-tooltip-demo',
+                                    style={
+                                        'width': '100%',
+                                        'height': '100%'
+                                    }
+                                )
+                            ],
+                            style={
+                                'width': '300px',
+                                'height': '300px'
+                            }
+                        ),
+                        permanent=True,
+                        interactive=True
+                    ),
                     pathOptions={
                         'color': 'red'
                     },
