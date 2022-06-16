@@ -23,14 +23,10 @@ Those elements have the following types:
   - `component_name` (String; optional): Holds the name of the component that is loading
 - `opacity` (Real; optional)
 - `permanent` (Bool; optional)
-- `position` (optional): . position has the following type: lists containing elements 'lng', 'lat'.
-Those elements have the following types:
-  - `lng` (Real; optional)
-  - `lat` (Real; optional)
 - `sticky` (Bool; optional)
 """
 function ''_leaflettooltip(; kwargs...)
-        available_props = Symbol[:children, :id, :className, :direction, :interactive, :loading_state, :opacity, :permanent, :position, :sticky]
+        available_props = Symbol[:children, :id, :className, :direction, :interactive, :loading_state, :opacity, :permanent, :sticky]
         wild_props = Symbol[]
         return Component("''_leaflettooltip", "LeafletTooltip", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

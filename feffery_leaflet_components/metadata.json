@@ -1936,23 +1936,6 @@
         "required": false,
         "description": ""
       },
-      "position": {
-        "type": {
-          "name": "exact",
-          "value": {
-            "lng": {
-              "name": "number",
-              "required": false
-            },
-            "lat": {
-              "name": "number",
-              "required": false
-            }
-          }
-        },
-        "required": false,
-        "description": ""
-      },
       "direction": {
         "type": {
           "name": "enum",

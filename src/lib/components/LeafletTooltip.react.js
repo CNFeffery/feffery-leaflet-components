@@ -52,15 +52,6 @@ LeafletTooltip.propTypes = {
     // 设置tooltip内部的子元素
     children: PropTypes.node,
 
-    // 当需要独立展示tooltip时，设置tooltip的位置
-    position: PropTypes.exact({
-        // 经度
-        lng: PropTypes.number,
-
-        // 纬度
-        lat: PropTypes.number
-    }),
-
     // 设置tooltip展开方位，可选的有'right'、'left'、'top'、'bottom'、'center'与'auto'
     // 默认为'auto'，其中'auto'会自动根据方位在'left'与'right'之间进行切换
     direction: PropTypes.oneOf(['right', 'left', 'top', 'bottom', 'center', 'auto']),
