@@ -9,6 +9,8 @@ class LeafletCircle(Component):
 
 Keyword arguments:
 
+- children (a list of or a singular dash component, string or number; optional)
+
 - id (string; optional)
 
 - center (dict; required)
@@ -35,20 +37,22 @@ Keyword arguments:
 - pathOptions (optional)
 
 - radius (number; required)"""
+    _children_props = []
+    _base_nodes = ['children']
+    _namespace = 'feffery_leaflet_components'
+    _type = 'LeafletCircle'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, center=Component.REQUIRED, radius=Component.REQUIRED, pathOptions=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'center', 'loading_state', 'pathOptions', 'radius']
-        self._type = 'LeafletCircle'
-        self._namespace = 'feffery_leaflet_components'
+    def __init__(self, children=None, id=Component.UNDEFINED, center=Component.REQUIRED, radius=Component.REQUIRED, pathOptions=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'center', 'loading_state', 'pathOptions', 'radius']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'center', 'loading_state', 'pathOptions', 'radius']
+        self.available_properties = ['children', 'id', 'center', 'loading_state', 'pathOptions', 'radius']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
-        _locals.update(kwargs)  # For wildcard attrs
+        _locals.update(kwargs)  # For wildcard attrs and excess named props
         args = {k: _locals[k] for k in _explicit_args if k != 'children'}
         for k in ['center', 'radius']:
             if k not in args:
                 raise TypeError(
                     'Required argument `' + k + '` was not specified.')
-        super(LeafletCircle, self).__init__(**args)
+        super(LeafletCircle, self).__init__(children=children, **args)

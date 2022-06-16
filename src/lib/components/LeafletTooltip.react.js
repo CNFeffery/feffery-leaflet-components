@@ -10,10 +10,13 @@ const LeafletTooltip = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        className,
         children,
         position,
         direction,
         permanent,
+        sticky,
+        opacity,
         bubblingMouseEvents,
         interactive,
         loading_state,
@@ -24,10 +27,13 @@ const LeafletTooltip = (props) => {
     return (
         <Tooltip
             id={id}
+            className={className}
             children={children}
             position={position}
             direction={direction}
             permanent={permanent}
+            sticky={sticky}
+            opacity={opacity}
             bubblingMouseEvents={bubblingMouseEvents}
             interactive={interactive}
             data-dash-is-loading={
@@ -42,6 +48,9 @@ LeafletTooltip.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    // 为tooltip容器设置css类
+    className: PropTypes.string,
+
     // 设置tooltip内部的子元素
     children: PropTypes.node,
 
@@ -55,16 +64,24 @@ LeafletTooltip.propTypes = {
     }),
 
     // 设置tooltip展开方位，可选的有'right'、'left'、'top'、'bottom'、'center'与'auto'
-    // 默认为'auto'
+    // 默认为'auto'，其中'auto'会自动根据方位在'left'与'right'之间进行切换
     direction: PropTypes.oneOf(['right', 'left', 'top', 'bottom', 'center', 'auto']),
 
     // 设置是否永久展开tooltip而无需鼠标悬浮触发，默认为false
     permanent: PropTypes.bool,
 
-    // 设置tooltip内是否穿透底图事件，默认为true
+    // 设置是否开启tooltip鼠标跟随模式，默认为false
+    // 设置为true时，tooltip会跟随鼠标在要素内的移动自动改变位置
+    sticky: PropTypes.bool,
+
+    // 设置tooltip的容器透明度，默认为0.9
+    opacity: PropTypes.number,
+
+    // 设置为true时，tooltip内的鼠标事件同样会触发地图的同名事件
+    // 默认为true
     bubblingMouseEvents: PropTypes.bool,
 
-    // 设置是否允许tooltip内的交互事件，默认为false
+    // 设置是否允许tooltip监听内部元素的鼠标事件，默认为false
     interactive: PropTypes.bool,
 
     loading_state: PropTypes.shape({

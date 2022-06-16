@@ -12,16 +12,12 @@ const LeafletRectangle = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        children,
         bounds,
         pathOptions,
         loading_state,
         setProps
     } = props;
-
-    // const map = useMap();
-
-    // useEffect(() => {
-    // }, [])
 
     // 返回定制化的前端组件
     return (
@@ -30,11 +26,14 @@ const LeafletRectangle = (props) => {
                 L.latLng(bounds.miny, bounds.minx),
                 L.latLng(bounds.maxy, bounds.maxx)
             )}
-            pathOptions={pathOptions}
+            pathOptions={{
+                ...pathOptions,
+                pmIgnore: true
+            }}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
-        ></Rectangle>
+        >{children}</Rectangle>
     );
 }
 
@@ -42,6 +41,9 @@ const LeafletRectangle = (props) => {
 LeafletRectangle.propTypes = {
     // 组件id
     id: PropTypes.string,
+
+    // 传入tooltip、popup组件
+    children: PropTypes.node,
 
     // 设置矩形左下角、右上角坐标点，必填
     bounds: PropTypes.exact({

@@ -4,10 +4,14 @@ export ''_leafletpolygon
 
 """
     ''_leafletpolygon(;kwargs...)
+    ''_leafletpolygon(children::Any;kwargs...)
+    ''_leafletpolygon(children_maker::Function;kwargs...)
+
 
 A LeafletPolygon component.
 
 Keyword arguments:
+- `children` (a list of or a singular dash component, string or number; optional)
 - `id` (String; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
@@ -27,8 +31,11 @@ Those elements have the following types:
   - `lat` (Real; optional)sss
 """
 function ''_leafletpolygon(; kwargs...)
-        available_props = Symbol[:id, :loading_state, :pathOptions, :positions]
+        available_props = Symbol[:children, :id, :loading_state, :pathOptions, :positions]
         wild_props = Symbol[]
         return Component("''_leafletpolygon", "LeafletPolygon", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
+
+''_leafletpolygon(children::Any; kwargs...) = ''_leafletpolygon(;kwargs..., children = children)
+''_leafletpolygon(children_maker::Function; kwargs...) = ''_leafletpolygon(children_maker(); kwargs...)
 

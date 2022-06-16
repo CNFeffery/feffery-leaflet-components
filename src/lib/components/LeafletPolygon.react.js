@@ -11,6 +11,7 @@ const LeafletPolygon = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        children,
         positions,
         pathOptions,
         loading_state,
@@ -21,11 +22,14 @@ const LeafletPolygon = (props) => {
     return (
         <Polygon id={id}
             positions={positions}
-            pathOptions={pathOptions}
+            pathOptions={{
+                ...pathOptions,
+                pmIgnore: true
+            }}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
-        ></Polygon>
+        >{children}</Polygon>
     );
 }
 
@@ -33,6 +37,9 @@ const LeafletPolygon = (props) => {
 LeafletPolygon.propTypes = {
     // 组件id
     id: PropTypes.string,
+
+    // 传入tooltip、popup组件
+    children: PropTypes.node,
 
     // 设置多边形中折点坐标数组，必填
     positions: PropTypes.arrayOf(

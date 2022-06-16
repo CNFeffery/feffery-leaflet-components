@@ -11,6 +11,7 @@ const LeafletCircle = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        children,
         center,
         radius,
         pathOptions,
@@ -23,11 +24,14 @@ const LeafletCircle = (props) => {
         <Circle id={id}
             center={center}
             radius={radius}
-            pathOptions={pathOptions}
+            pathOptions={{
+                ...pathOptions,
+                pmIgnore: true
+            }}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
-        ></Circle>
+        >{children}</Circle>
     );
 }
 
@@ -35,6 +39,9 @@ const LeafletCircle = (props) => {
 LeafletCircle.propTypes = {
     // 组件id
     id: PropTypes.string,
+
+    // 传入tooltip、popup组件
+    children: PropTypes.node,
 
     // 设置圆心坐标，必填
     center: PropTypes.exact({

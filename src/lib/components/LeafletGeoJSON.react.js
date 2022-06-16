@@ -110,7 +110,6 @@ export default class LeafletGeoJSON extends Component {
             featureCategoryField,
             featureTooltipField,
             showTooltip,
-            editable,
             hoverable,
             defaultStyle,
             hoverStyle,
@@ -142,7 +141,7 @@ export default class LeafletGeoJSON extends Component {
                 return {
                     ...defaultStyle,
                     ...{
-                        pmIgnore: !editable,
+                        pmIgnore: false,
                     }
                 };
             }
@@ -158,7 +157,7 @@ export default class LeafletGeoJSON extends Component {
                         return {
                             ...featureValueToStyles.styles[i],
                             ...{
-                                pmIgnore: !editable,
+                                pmIgnore: false,
                             }
                         };
                     }
@@ -170,7 +169,7 @@ export default class LeafletGeoJSON extends Component {
                         return {
                             ...featureValueToStyles.styles[i],
                             ...{
-                                pmIgnore: !editable,
+                                pmIgnore: false,
                             }
                         };
                     }
@@ -181,7 +180,7 @@ export default class LeafletGeoJSON extends Component {
             return {
                 ...defaultStyle,
                 ...{
-                    pmIgnore: !editable,
+                    pmIgnore: false,
                 }
             };
         }
@@ -190,7 +189,7 @@ export default class LeafletGeoJSON extends Component {
             return {
                 ...featureCategoryToStyles[`${feature.properties[featureCategoryField]}`],
                 ...{
-                    pmIgnore: !editable,
+                    pmIgnore: false,
                 }
             };
         }
@@ -208,7 +207,7 @@ export default class LeafletGeoJSON extends Component {
                                     return {
                                         ...defaultStyle,
                                         ...{
-                                            pmIgnore: !editable,
+                                            pmIgnore: false,
                                         }
                                     };
                                 } else if (mode === 'selectable') {
@@ -219,14 +218,14 @@ export default class LeafletGeoJSON extends Component {
                                         return {
                                             ...defaultStyle,
                                             ...{
-                                                pmIgnore: !editable,
+                                                pmIgnore: false,
                                             }
                                         };
                                     } else {
                                         return {
                                             ...selectedStyle,
                                             ...{
-                                                pmIgnore: !editable,
+                                                pmIgnore: false,
                                             }
                                         };
                                     }
@@ -244,7 +243,7 @@ export default class LeafletGeoJSON extends Component {
                                 return {
                                     ...defaultStyle,
                                     ...{
-                                        pmIgnore: !editable,
+                                        pmIgnore: false,
                                     }
                                 };
                             }}
@@ -487,9 +486,6 @@ LeafletGeoJSON.propTypes = {
     // 设置要素的tooltip是否跟随鼠标，默认为false
     tooltipSticky: PropTypes.bool,
 
-    // 设置当前GeoJSON矢量图层是否可编辑，默认为false
-    editable: PropTypes.bool,
-
     // 要素常规事件记录
     // 要素点击事件
     _clickedFeature: PropTypes.object,
@@ -530,7 +526,6 @@ LeafletGeoJSON.defaultProps = {
     showTooltip: true,
     mode: 'default',
     selectMode: 'single',
-    editable: false,
     hoverable: false,
     clickFeatureZoom: false,
     disableClickSelect: false

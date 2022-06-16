@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import "@geoman-io/leaflet-geoman-free";
 import { useMap, CircleMarker } from 'react-leaflet';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 
@@ -24,7 +25,10 @@ const LeafletCircleMarker = (props) => {
         <CircleMarker id={id}
             center={center}
             radius={radius}
-            pathOptions={pathOptions}
+            pathOptions={{
+                ...pathOptions,
+                pmIgnore: true
+            }}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -37,7 +41,7 @@ LeafletCircleMarker.propTypes = {
     // 组件id
     id: PropTypes.string,
 
-    // 传入内部tooltip、popup元素
+    // 传入tooltip、popup组件
     children: PropTypes.node,
 
     // 设置圆心坐标，必填

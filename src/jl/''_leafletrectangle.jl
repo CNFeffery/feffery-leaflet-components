@@ -4,10 +4,14 @@ export ''_leafletrectangle
 
 """
     ''_leafletrectangle(;kwargs...)
+    ''_leafletrectangle(children::Any;kwargs...)
+    ''_leafletrectangle(children_maker::Function;kwargs...)
+
 
 A LeafletRectangle component.
 
 Keyword arguments:
+- `children` (a list of or a singular dash component, string or number; optional)
 - `id` (String; optional)
 - `bounds` (required): . bounds has the following type: lists containing elements 'minx', 'miny', 'maxx', 'maxy'.
 Those elements have the following types:
@@ -23,8 +27,11 @@ Those elements have the following types:
 - `pathOptions` (optional)
 """
 function ''_leafletrectangle(; kwargs...)
-        available_props = Symbol[:id, :bounds, :loading_state, :pathOptions]
+        available_props = Symbol[:children, :id, :bounds, :loading_state, :pathOptions]
         wild_props = Symbol[]
         return Component("''_leafletrectangle", "LeafletRectangle", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
+
+''_leafletrectangle(children::Any; kwargs...) = ''_leafletrectangle(;kwargs..., children = children)
+''_leafletrectangle(children_maker::Function; kwargs...) = ''_leafletrectangle(children_maker(); kwargs...)
 

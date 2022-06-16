@@ -8,6 +8,7 @@ from .LeafletMapAction import LeafletMapAction
 from .LeafletMapListener import LeafletMapListener
 from .LeafletPolygon import LeafletPolygon
 from .LeafletPolyline import LeafletPolyline
+from .LeafletPopup import LeafletPopup
 from .LeafletRectangle import LeafletRectangle
 from .LeafletTileLayer import LeafletTileLayer
 from .LeafletTooltip import LeafletTooltip
@@ -23,6 +24,7 @@ __all__ = [
     "LeafletMapListener",
     "LeafletPolygon",
     "LeafletPolyline",
+    "LeafletPopup",
     "LeafletRectangle",
     "LeafletTileLayer",
     "LeafletTooltip"

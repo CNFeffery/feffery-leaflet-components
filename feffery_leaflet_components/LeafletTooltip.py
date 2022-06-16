@@ -15,6 +15,8 @@ Keyword arguments:
 
 - bubblingMouseEvents (boolean; optional)
 
+- className (string; optional)
+
 - direction (a value equal to: 'right', 'left', 'top', 'bottom', 'center', 'auto'; optional)
 
 - interactive (boolean; optional)
@@ -32,6 +34,8 @@ Keyword arguments:
     - prop_name (string; optional):
         Holds which property is loading.
 
+- opacity (number; optional)
+
 - permanent (boolean; optional)
 
 - position (dict; optional)
@@ -40,18 +44,22 @@ Keyword arguments:
 
     - lat (number; optional)
 
-    - lng (number; optional)"""
+    - lng (number; optional)
+
+- sticky (boolean; optional)"""
+    _children_props = []
+    _base_nodes = ['children']
+    _namespace = 'feffery_leaflet_components'
+    _type = 'LeafletTooltip'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, position=Component.UNDEFINED, direction=Component.UNDEFINED, permanent=Component.UNDEFINED, bubblingMouseEvents=Component.UNDEFINED, interactive=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'bubblingMouseEvents', 'direction', 'interactive', 'loading_state', 'permanent', 'position']
-        self._type = 'LeafletTooltip'
-        self._namespace = 'feffery_leaflet_components'
+    def __init__(self, children=None, id=Component.UNDEFINED, className=Component.UNDEFINED, position=Component.UNDEFINED, direction=Component.UNDEFINED, permanent=Component.UNDEFINED, sticky=Component.UNDEFINED, opacity=Component.UNDEFINED, bubblingMouseEvents=Component.UNDEFINED, interactive=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'bubblingMouseEvents', 'className', 'direction', 'interactive', 'loading_state', 'opacity', 'permanent', 'position', 'sticky']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'bubblingMouseEvents', 'direction', 'interactive', 'loading_state', 'permanent', 'position']
+        self.available_properties = ['children', 'id', 'bubblingMouseEvents', 'className', 'direction', 'interactive', 'loading_state', 'opacity', 'permanent', 'position', 'sticky']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
-        _locals.update(kwargs)  # For wildcard attrs
+        _locals.update(kwargs)  # For wildcard attrs and excess named props
         args = {k: _locals[k] for k in _explicit_args if k != 'children'}
         for k in []:
             if k not in args:

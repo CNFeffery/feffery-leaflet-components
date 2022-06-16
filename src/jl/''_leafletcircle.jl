@@ -4,10 +4,14 @@ export ''_leafletcircle
 
 """
     ''_leafletcircle(;kwargs...)
+    ''_leafletcircle(children::Any;kwargs...)
+    ''_leafletcircle(children_maker::Function;kwargs...)
+
 
 A LeafletCircle component.
 
 Keyword arguments:
+- `children` (a list of or a singular dash component, string or number; optional)
 - `id` (String; optional)
 - `center` (required): . center has the following type: lists containing elements 'lng', 'lat'.
 Those elements have the following types:
@@ -22,8 +26,11 @@ Those elements have the following types:
 - `radius` (Real; required)
 """
 function ''_leafletcircle(; kwargs...)
-        available_props = Symbol[:id, :center, :loading_state, :pathOptions, :radius]
+        available_props = Symbol[:children, :id, :center, :loading_state, :pathOptions, :radius]
         wild_props = Symbol[]
         return Component("''_leafletcircle", "LeafletCircle", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
+
+''_leafletcircle(children::Any; kwargs...) = ''_leafletcircle(;kwargs..., children = children)
+''_leafletcircle(children_maker::Function; kwargs...) = ''_leafletcircle(children_maker(); kwargs...)
 

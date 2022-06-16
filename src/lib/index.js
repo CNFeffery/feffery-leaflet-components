@@ -12,6 +12,7 @@ import LeafletPolyline from './components/LeafletPolyline.react';
 import LeafletPolygon from './components/LeafletPolygon.react';
 import LeafletRectangle from './components/LeafletRectangle.react';
 import LeafletTooltip from './components/LeafletTooltip.react';
+import LeafletPopup from './components/LeafletPopup.react';
 
 export {
     LeafletMap,
@@ -26,5 +27,6 @@ export {
     LeafletPolyline,
     LeafletPolygon,
     LeafletRectangle,
-    LeafletTooltip
+    LeafletTooltip,
+    LeafletPopup
 };
