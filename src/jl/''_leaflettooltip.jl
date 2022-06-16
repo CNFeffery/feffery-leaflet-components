@@ -13,7 +13,6 @@ A LeafletTooltip component.
 Keyword arguments:
 - `children` (a list of or a singular dash component, string or number; optional)
 - `id` (String; optional)
-- `bubblingMouseEvents` (Bool; optional)
 - `className` (String; optional)
 - `direction` (a value equal to: 'right', 'left', 'top', 'bottom', 'center', 'auto'; optional)
 - `interactive` (Bool; optional)
@@ -31,7 +30,7 @@ Those elements have the following types:
 - `sticky` (Bool; optional)
 """
 function ''_leaflettooltip(; kwargs...)
-        available_props = Symbol[:children, :id, :bubblingMouseEvents, :className, :direction, :interactive, :loading_state, :opacity, :permanent, :position, :sticky]
+        available_props = Symbol[:children, :id, :className, :direction, :interactive, :loading_state, :opacity, :permanent, :position, :sticky]
         wild_props = Symbol[]
         return Component("''_leaflettooltip", "LeafletTooltip", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

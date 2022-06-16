@@ -17,7 +17,6 @@ const LeafletTooltip = (props) => {
         permanent,
         sticky,
         opacity,
-        bubblingMouseEvents,
         interactive,
         loading_state,
         setProps
@@ -34,7 +33,6 @@ const LeafletTooltip = (props) => {
             permanent={permanent}
             sticky={sticky}
             opacity={opacity}
-            bubblingMouseEvents={bubblingMouseEvents}
             interactive={interactive}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
@@ -76,10 +74,6 @@ LeafletTooltip.propTypes = {
 
     // 设置tooltip的容器透明度，默认为0.9
     opacity: PropTypes.number,
-
-    // 设置为true时，tooltip内的鼠标事件同样会触发地图的同名事件
-    // 默认为true
-    bubblingMouseEvents: PropTypes.bool,
 
     // 设置是否允许tooltip监听内部元素的鼠标事件，默认为false
     interactive: PropTypes.bool,

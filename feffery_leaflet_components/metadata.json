@@ -2007,13 +2007,6 @@
         "required": false,
         "description": ""
       },
-      "bubblingMouseEvents": {
-        "type": {
-          "name": "bool"
-        },
-        "required": false,
-        "description": ""
-      },
       "interactive": {
         "type": {
           "name": "bool"

@@ -13,8 +13,6 @@ Keyword arguments:
 
 - id (string; optional)
 
-- bubblingMouseEvents (boolean; optional)
-
 - className (string; optional)
 
 - direction (a value equal to: 'right', 'left', 'top', 'bottom', 'center', 'auto'; optional)
@@ -52,10 +50,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletTooltip'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, className=Component.UNDEFINED, position=Component.UNDEFINED, direction=Component.UNDEFINED, permanent=Component.UNDEFINED, sticky=Component.UNDEFINED, opacity=Component.UNDEFINED, bubblingMouseEvents=Component.UNDEFINED, interactive=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'bubblingMouseEvents', 'className', 'direction', 'interactive', 'loading_state', 'opacity', 'permanent', 'position', 'sticky']
+    def __init__(self, children=None, id=Component.UNDEFINED, className=Component.UNDEFINED, position=Component.UNDEFINED, direction=Component.UNDEFINED, permanent=Component.UNDEFINED, sticky=Component.UNDEFINED, opacity=Component.UNDEFINED, interactive=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'className', 'direction', 'interactive', 'loading_state', 'opacity', 'permanent', 'position', 'sticky']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'bubblingMouseEvents', 'className', 'direction', 'interactive', 'loading_state', 'opacity', 'permanent', 'position', 'sticky']
+        self.available_properties = ['children', 'id', 'className', 'direction', 'interactive', 'loading_state', 'opacity', 'permanent', 'position', 'sticky']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
