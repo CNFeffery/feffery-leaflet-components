@@ -34,6 +34,17 @@ const LeafletMapAction = (props) => {
             } else if (mapActionConfig.type === 'zoom-out') {
                 // zoom-out动作
                 map.zoomOut(mapActionConfig.zoomOutOffset);
+            } else if (mapActionConfig.type === 'set-view') {
+                // set-view动作
+                const lat = mapActionConfig.center.lat
+                const lng = mapActionConfig.center.lng
+                const zoom = mapActionConfig.zoom || map.getZoom()
+                map.setView([lat, lng], zoom);
+            } else if (mapActionConfig.type === 'pan-to') {
+                // set-view动作
+                const lat = mapActionConfig.center.lat
+                const lng = mapActionConfig.center.lng
+                map.panTo([lat, lng]);
             } else if (mapActionConfig.type === 'fly-to') {
                 // fly-to动作
                 const lat = mapActionConfig.center.lat
@@ -83,10 +94,12 @@ LeafletMapAction.propTypes = {
         // 'set-zoom'：改变地图缩放级别，受参数zoom控制
         // 'zoom-in'：在当前地图zoom基础上，放大设定的级别，受zoomInOffset参数控制
         // 'zoom-out'：在当前地图zoom基础上，缩小设定的级别，受zoomOutOffset参数控制
+        // 'set-view'：改变地图视角，受center参数控制目标中心坐标、受zoom参数设置目标缩放级别
+        // 'pan-to'：改变地图视角，受center参数控制目标中心坐标
         // 'fly-to'：强制以飞行模式改变地图视角，受center参数控制目标中心坐标、受zoom参数设置目标缩放级别
         // 'fly-to-bounds'：强制以飞行模式改变地图视角，受bounds参数控制目标视角范围
         // 'invalidate-size'：在地图容器尺寸变化后，用于重新校正地图尺寸
-        type: PropTypes.oneOf(['set-zoom', 'zoom-in', 'zoom-out', 'fly-to', 'fly-to-bounds', 'invalidate-size']),
+        type: PropTypes.oneOf(['set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'pan-to', 'fly-to', 'fly-to-bounds', 'invalidate-size']),
 
         // 设置地图视角切换对应的中心点坐标信息，若无，则使用地图当前中心点
         center: PropTypes.exact({

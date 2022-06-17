@@ -1175,6 +1175,14 @@
                   "computed": false
                 },
                 {
+                  "value": "'set-view'",
+                  "computed": false
+                },
+                {
+                  "value": "'pan-to'",
+                  "computed": false
+                },
+                {
                   "value": "'fly-to'",
                   "computed": false
                 },

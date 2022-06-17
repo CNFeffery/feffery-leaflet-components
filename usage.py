@@ -1,4 +1,5 @@
 import dash
+import random
 from dash import html
 import feffery_antd_components as fac
 import feffery_leaflet_components as flc
@@ -16,8 +17,20 @@ app.layout = html.Div(
             checked=True
         ),
 
+        fac.AntdButton(
+            'set-view',
+            id='action-set-view',
+            type='primary',
+            block=True,
+            size='small'
+        ),
+
         flc.LeafletMap(
             [
+                flc.LeafletMapAction(
+                    id='action-callback',
+                ),
+
                 flc.LeafletTileLayer(),
 
                 flc.LeafletMiniMap(
@@ -44,7 +57,7 @@ app.layout = html.Div(
                 ),
 
                 flc.LeafletCircleMarker(
-                    flc.LeafletPopup(
+                    flc.LeafletTooltip(
                         fac.AntdSpace(
                             [
                                 '测试'
@@ -54,7 +67,8 @@ app.layout = html.Div(
                                 'display': 'flex',
                                 'justifyContent': 'center'
                             }
-                        )
+                        ),
+                        permanent=True
                     ),
                     center={
                         'lng': -5,
@@ -90,6 +104,22 @@ app.layout = html.Div(
 def arrowheads_callback_test(checked):
 
     return checked
+
+
+@app.callback(
+    Output('action-callback', 'mapActionConfig'),
+    Input('action-set-view', 'nClicks'),
+    prevent_initiall_call=True
+)
+def action_callback(nClicks):
+    return {
+        'type': 'pan-to',
+        # 'zoom': random.randint(0, 18),
+        'center': {
+                'lng': random.uniform(-180, 180),
+                'lat': random.uniform(-90, 90)
+        }
+    }
 
 
 if __name__ == '__main__':
