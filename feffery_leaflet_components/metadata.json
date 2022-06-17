@@ -1815,8 +1815,70 @@
           "value": [
             {
               "name": "bool"
+            },
+            {
+              "name": "exact",
+              "value": {
+                "yawn": {
+                  "name": "number",
+                  "required": false
+                },
+                "fill": {
+                  "name": "bool",
+                  "required": false
+                },
+                "size": {
+                  "name": "union",
+                  "value": [
+                    {
+                      "name": "number"
+                    },
+                    {
+                      "name": "string"
+                    }
+                  ],
+                  "required": false
+                },
+                "frequency": {
+                  "name": "union",
+                  "value": [
+                    {
+                      "name": "enum",
+                      "value": [
+                        {
+                          "value": "'allvertices'",
+                          "computed": false
+                        },
+                        {
+                          "value": "'endonly'",
+                          "computed": false
+                        }
+                      ]
+                    },
+                    {
+                      "name": "number"
+                    },
+                    {
+                      "name": "string"
+                    }
+                  ],
+                  "required": false
+                },
+                "proportionalToTotal": {
+                  "name": "bool",
+                  "required": false
+                }
+              }
             }
           ]
+        },
+        "required": false,
+        "description": ""
+      },
+      "arrowheadsPathOptions": {
+        "type": {
+          "name": "custom",
+          "raw": "pathOptionsPropTypes"
         },
         "required": false,
         "description": ""

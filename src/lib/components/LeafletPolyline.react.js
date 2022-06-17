@@ -16,6 +16,7 @@ const LeafletPolyline = (props) => {
         positions,
         pathOptions,
         arrowheads,
+        arrowheadsPathOptions,
         loading_state,
         setProps
     } = props;
@@ -25,8 +26,19 @@ const LeafletPolyline = (props) => {
     useEffect(() => {
         if (polylineRef.current) {
             if (arrowheads) {
-                polylineRef.current.arrowheads()
-                polylineRef.current._update()
+                if (typeof arrowheads !== 'boolean') {
+                    // 装填参数
+                    polylineRef.current.arrowheads(
+                        {
+                            ...arrowheads,
+                            ...arrowheadsPathOptions
+                        }
+                    )
+                    polylineRef.current._update()
+                } else {
+                    polylineRef.current.arrowheads()
+                    polylineRef.current._update()
+                }
             } else {
                 polylineRef.current.deleteArrowheads()
             }
@@ -87,8 +99,44 @@ LeafletPolyline.propTypes = {
 
     // 设置arrowheads效果
     arrowheads: PropTypes.oneOfType([
-        PropTypes.bool
+        PropTypes.bool,
+        PropTypes.exact({
+            // 设置箭头开合角度，默认为60
+            yawn: PropTypes.number,
+
+            // 设置是否绘制实心箭头，默认为false
+            fill: PropTypes.bool,
+
+            // 设置箭头尺寸，默认为'15%'
+            size: PropTypes.oneOfType([
+                // 数值型输入表示米为单位
+                PropTypes.number,
+                // 字符型输入表示以附着polyline为主体的百分比尺寸
+                // 或css像素尺寸输入
+                PropTypes.string
+            ]),
+
+            // 设置箭头在线要素上的绘制频率，默认为'allvertices'
+            frequency: PropTypes.oneOfType([
+                // 策略名称，'allvertices'表示每个折点对应1个箭头
+                // 'endonly'表示只在线要素末端绘制1个箭头
+                PropTypes.oneOf(['allvertices', 'endonly']),
+                // 等间距绘制固定数量的箭头
+                PropTypes.number,
+                // 以'm'结尾定义间隔若干米绘制每个箭头，如'100m'
+                // 以'px'结尾定义间隔若干像素绘制每个箭头，如'100px'
+                PropTypes.string
+            ]),
+
+            // 当size设置为百分比时，用于设置针对多段线要素
+            // 的百分比分母从平均分段线长度变为所有线要素长度之和
+            // 默认为false
+            proportionalToTotal: PropTypes.bool,
+        })
     ]),
+
+    // 为箭头设置优先级更高的要素样式
+    arrowheadsPathOptions: pathOptionsPropTypes,
 
     loading_state: PropTypes.shape({
         /**

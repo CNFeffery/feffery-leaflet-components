@@ -34,6 +34,12 @@ app.layout = html.Div(
                     ],
                     pathOptions={
                         'dashArray': '5, 5'
+                    },
+                    arrowheads={
+                        'frequency': 'endonly',
+                    },
+                    arrowheadsPathOptions={
+                        'color': 'red'
                     }
                 ),
 
@@ -78,7 +84,8 @@ app.layout = html.Div(
 
 @app.callback(
     Output('arrowheads-test', 'arrowheads'),
-    Input('arrowheads-on', 'checked')
+    Input('arrowheads-on', 'checked'),
+    prevent_initial_call=True
 )
 def arrowheads_callback_test(checked):
 
