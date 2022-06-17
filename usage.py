@@ -11,21 +11,36 @@ app.layout = html.Div(
     [
         html.H3('测试其他图层与LeafletMap可编辑功能的冲突情况'),
 
+        fac.AntdSwitch(
+            id='arrowheads-on',
+            checked=True
+        ),
+
         flc.LeafletMap(
             [
                 flc.LeafletTileLayer(),
+
+                flc.LeafletMiniMap(),
+
+                flc.LeafletPolyline(
+                    id='arrowheads-test',
+                    positions=[
+                        {'lng': 0, 'lat': 0},
+                        {'lng': 1, 'lat': 0},
+                        {'lng': 1, 'lat': 1},
+                        {'lng': 2, 'lat': 1},
+                        {'lng': 2, 'lat': 2}
+                    ],
+                    pathOptions={
+                        'dashArray': '5, 5'
+                    }
+                ),
 
                 flc.LeafletCircleMarker(
                     flc.LeafletPopup(
                         fac.AntdSpace(
                             [
-                                fac.AntdButton(
-                                    '测试',
-                                    id='input-test',
-                                    type='primary',
-                                    block=True
-                                ),
-                                fac.AntdText(id='output-test')
+                                '测试'
                             ],
                             direction='vertical',
                             style={
@@ -35,12 +50,13 @@ app.layout = html.Div(
                         )
                     ),
                     center={
-                        'lng': 0,
-                        'lat': 0
+                        'lng': -5,
+                        'lat': -5
                     },
                     radius=25
                 )
             ],
+            editToolbar=True,
             style={
                 'height': '600px'
             }
@@ -60,12 +76,12 @@ app.layout = html.Div(
 
 
 @app.callback(
-    Output('output-test', 'children'),
-    Input('input-test', 'nClicks')
+    Output('arrowheads-test', 'arrowheads'),
+    Input('arrowheads-on', 'checked')
 )
-def popup_callback_test(nClicks):
+def arrowheads_callback_test(checked):
 
-    return str(nClicks)
+    return checked
 
 
 if __name__ == '__main__':

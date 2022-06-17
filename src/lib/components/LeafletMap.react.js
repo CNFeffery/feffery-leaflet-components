@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { MapContainer } from 'react-leaflet';
 import L from 'leaflet';
@@ -17,20 +17,7 @@ import {
     markerShadow
 } from './utils/exportImages.react';
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
-import { transform, isEqual, isObject, intersection } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
-
-// 计算两个对象之间的属性名差异数组
-const difference = (object, base) => {
-    const changes = (object, base) => {
-        return transform(object, function (result, value, key) {
-            if (!isEqual(value, base[key])) {
-                result[key] = (isObject(value) && isObject(base[key])) ? changes(value, base[key]) : value;
-            }
-        });
-    }
-    return changes(object, base);
-}
 
 const extractDrawnShapes = (item, i) => {
 
@@ -48,9 +35,6 @@ const extractDrawnShapes = (item, i) => {
             maxy: item.pm._layer.getBounds()._northEast.lat
         }
     }
-
-    console.log(item.pm._shape)
-    console.log(item)
 
     drawnShape.type = item.pm._shape;
 
@@ -82,191 +66,152 @@ const extractDrawnShapes = (item, i) => {
     return drawnShape;
 }
 
-// 定义不触发render()逻辑的props数组
-const preventUpdateProps = ['_drawnShapes'];
+const LeafletMap = (props) => {
+    const {
+        id,
+        style,
+        className,
+        children,
+        center,
+        zoom,
+        doubleClickZoom,
+        dragging,
+        closePopupOnClick,
+        minZoom,
+        maxZoom,
+        zoomDelta,
+        zoomControl,
+        wheelPxPerZoomLevel,
+        scrollWheelZoom,
+        maxBounds,
+        editToolbar,
+        editToolbarControlsOptions,
+        showMeasurements,
+        maxDrawnShapes,
+        setProps,
+        loading_state
+    } = props;
 
-class LeafletMap extends Component {
-    constructor(props) {
-        super(props);
-        this.mapRef = React.createRef();
-    }
-
-    shouldComponentUpdate(nextProps) {
-
-        // 计算发生变化的参数名
-        const changedProps = Object.keys(difference(this.props, nextProps))
-
-        // 若无变化的props，则不触发重绘
-        if (changedProps.length === 0) {
-            return false;
-        }
-
-        // 计算发生变化的参数名与需要阻止重绘的参数名数组的交集
-        const changedPreventUpdateProps = intersection(
-            changedProps,
-            preventUpdateProps
-        )
-
-        // 若有交集，则不触发重绘
-        if (changedPreventUpdateProps.length !== 0) {
-            return false;
-        }
-
-        return true;
-    }
-
-    render() {
-
-        const {
-            id,
-            style,
-            className,
-            children,
-            center,
-            zoom,
-            doubleClickZoom,
-            dragging,
-            closePopupOnClick,
-            minZoom,
-            maxZoom,
-            zoomDelta,
-            zoomControl,
-            wheelPxPerZoomLevel,
-            scrollWheelZoom,
-            maxBounds,
-            editToolbar,
-            editToolbarControlsOptions,
-            showMeasurements,
-            maxDrawnShapes,
-            setProps,
-            loading_state
-        } = this.props;
-
-        return (
-            <MapContainer
-                id={id}
-                style={style}
-                className={className}
-                data-dash-is-loading={
-                    (loading_state && loading_state.is_loading) || undefined
-                }
-                center={center}
-                zoom={zoom}
-                doubleClickZoom={doubleClickZoom}
-                dragging={dragging}
-                closePopupOnClick={closePopupOnClick}
-                minZoom={minZoom}
-                maxZoom={maxZoom}
-                zoomDelta={zoomDelta}
-                zoomSnap={zoomDelta}
-                wheelPxPerZoomLevel={wheelPxPerZoomLevel}
-                zoomControl={zoomControl}
-                scrollWheelZoom={scrollWheelZoom}
-                maxBounds={
-                    maxBounds ? L.latLngBounds(
+    return (
+        <MapContainer
+            id={id}
+            style={style}
+            className={className}
+            data-dash-is-loading={
+                (loading_state && loading_state.is_loading) || undefined
+            }
+            center={center}
+            zoom={zoom}
+            doubleClickZoom={doubleClickZoom}
+            dragging={dragging}
+            closePopupOnClick={closePopupOnClick}
+            minZoom={minZoom}
+            maxZoom={maxZoom}
+            zoomDelta={zoomDelta}
+            zoomSnap={zoomDelta}
+            wheelPxPerZoomLevel={wheelPxPerZoomLevel}
+            zoomControl={zoomControl}
+            scrollWheelZoom={scrollWheelZoom}
+            maxBounds={
+                maxBounds ? L.latLngBounds(
+                    L.latLng(maxBounds.miny, maxBounds.minx),
+                    L.latLng(maxBounds.maxy, maxBounds.maxx)
+                ) : undefined
+            }
+            whenCreated={map => {
+                if (maxBounds) {
+                    map.fitBounds(L.latLngBounds(
                         L.latLng(maxBounds.miny, maxBounds.minx),
                         L.latLng(maxBounds.maxy, maxBounds.maxx)
-                    ) : undefined
+                    ))
                 }
-                whenCreated={map => {
-                    // 绑定ref
-                    this.mapRef.current = map
 
-                    if (maxBounds) {
-                        map.fitBounds(L.latLngBounds(
-                            L.latLng(maxBounds.miny, maxBounds.minx),
-                            L.latLng(maxBounds.maxy, maxBounds.maxx)
-                        ))
+                // 修正全局默认marker图标不显示的问题
+                const defaultIcon = L.icon({
+                    iconUrl: markerIcon,
+                    iconRetinaUrl: marker2xIcon,
+                    shadowUrl: markerShadow,
+                    iconAnchor: [12, 41],
+                    iconSize: [25, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                })
+
+                map.pm.setGlobalOptions({
+                    markerStyle: {
+                        icon: defaultIcon
                     }
+                })
 
-                    // 修正全局默认marker图标不显示的问题
-                    const defaultIcon = L.icon({
-                        iconUrl: markerIcon,
-                        iconRetinaUrl: marker2xIcon,
-                        shadowUrl: markerShadow,
-                        iconAnchor: [12, 41],
-                        iconSize: [25, 41],
-                        popupAnchor: [1, -34],
-                        shadowSize: [41, 41]
+                if (editToolbar) {
+                    // 测试，添加可编辑要素功能
+                    map.pm.addControls({
+                        ...{
+                            cutPolygon: false,
+                            drawText: false
+                        },
+                        ...editToolbarControlsOptions
                     })
 
-                    map.pm.setGlobalOptions({
-                        markerStyle: {
-                            icon: defaultIcon
+                    // 设置显示文字语言为中文
+                    map.pm.setLang('zh')
+
+                    map.on('pm:create pm:cut pm:remove', function (e) {
+
+                        // 若当前事件为pm:create，则为layer添加唯一uid信息
+                        if (e.type === 'pm:create') {
+                            e.layer._uuid = uuidv4()
+                            e.layer._createdTimestamp = new Date().getTime()
                         }
-                    })
 
-                    if (editToolbar) {
-                        // 测试，添加可编辑要素功能
-                        map.pm.addControls({
-                            ...{
-                                cutPolygon: false,
-                                drawText: false
-                            },
-                            ...editToolbarControlsOptions
-                        })
+                        if (showMeasurements && e.layer.showMeasurements) {
+                            e.layer.showMeasurements();
+                        }
 
-                        // 设置显示文字语言为中文
-                        map.pm.setLang('zh')
-
-                        map.on('pm:create pm:cut pm:remove', function (e) {
-
-                            // 若当前事件为pm:create，则为layer添加唯一uid信息
-                            if (e.type === 'pm:create') {
-                                e.layer._uuid = uuidv4()
-                                e.layer._createdTimestamp = new Date().getTime()
-                            }
-
-                            if (showMeasurements && e.layer.showMeasurements) {
-                                e.layer.showMeasurements();
-                            }
-
-                            const drawnShapes = map.pm
-                                .getGeomanDrawLayers()
-                                .filter((item, i, arr) => {
-                                    if (maxDrawnShapes === null) {
-                                        return true
+                        const drawnShapes = map.pm
+                            .getGeomanDrawLayers()
+                            .filter((item, i, arr) => {
+                                if (maxDrawnShapes === null) {
+                                    return true
+                                }
+                                if (arr.length > maxDrawnShapes) {
+                                    if (i < arr.length - maxDrawnShapes) {
+                                        // 移除先前的图层
+                                        map.removeLayer(item)
+                                        return false;
                                     }
-                                    if (arr.length > maxDrawnShapes) {
-                                        if (i < arr.length - maxDrawnShapes) {
-                                            // 移除先前的图层
-                                            map.removeLayer(item)
-                                            return false;
-                                        }
-                                    }
-                                    return true;
-                                })
-                                .map(
-                                    (item, i) => {
-                                        return extractDrawnShapes(item, i)
-                                    }
+                                }
+                                return true;
+                            })
+                            .map(
+                                (item, i) => {
+                                    return extractDrawnShapes(item, i)
+                                }
 
-                                );
+                            );
+                        // 更新当前已绘制的所有矢量要素
+                        setProps({ _drawnShapes: drawnShapes })
+
+                        e.layer.on('pm:edit', function (x) {
+                            console.log({ x })
+                            const drawnShapes = map.pm.getGeomanDrawLayers().map(
+                                (item, i) => {
+                                    return extractDrawnShapes(item, i)
+                                }
+
+                            );
                             // 更新当前已绘制的所有矢量要素
                             setProps({ _drawnShapes: drawnShapes })
-
-                            e.layer.on('pm:edit', function (x) {
-                                console.log({ x })
-                                const drawnShapes = map.pm.getGeomanDrawLayers().map(
-                                    (item, i) => {
-                                        return extractDrawnShapes(item, i)
-                                    }
-
-                                );
-                                // 更新当前已绘制的所有矢量要素
-                                setProps({ _drawnShapes: drawnShapes })
-                            });
                         });
-                    };
-                }
-                }
-            >
-                {children}
-            </MapContainer>
-        );
-    }
+                    });
+                };
+            }
+            }
+        >
+            {children}
+        </MapContainer>
+    );
 }
-
 
 // 定义参数或属性
 LeafletMap.propTypes = {
@@ -436,5 +381,4 @@ LeafletMap.defaultProps = {
     maxDrawnShapes: null
 }
 
-
-export default LeafletMap;
+export default React.memo(LeafletMap);

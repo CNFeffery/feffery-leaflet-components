@@ -1,7 +1,8 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import 'leaflet-arrowheads';
 import { useMap, Polyline } from 'react-leaflet';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 
@@ -14,9 +15,24 @@ const LeafletPolyline = (props) => {
         children,
         positions,
         pathOptions,
+        arrowheads,
         loading_state,
         setProps
     } = props;
+
+    const polylineRef = useRef(null);
+
+    useEffect(() => {
+        if (polylineRef.current) {
+            if (arrowheads) {
+                polylineRef.current.arrowheads()
+                polylineRef.current._update()
+            } else {
+                polylineRef.current.deleteArrowheads()
+            }
+
+        }
+    }, [arrowheads])
 
     // 返回定制化的前端组件
     return (
@@ -26,6 +42,7 @@ const LeafletPolyline = (props) => {
                 ...pathOptions,
                 pmIgnore: true
             }}
+            ref={polylineRef}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -67,6 +84,11 @@ LeafletPolyline.propTypes = {
 
     // 设置样式相关参数
     pathOptions: pathOptionsPropTypes,
+
+    // 设置arrowheads效果
+    arrowheads: PropTypes.oneOfType([
+        PropTypes.bool
+    ]),
 
     loading_state: PropTypes.shape({
         /**

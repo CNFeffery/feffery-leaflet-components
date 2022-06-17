@@ -3,17 +3,13 @@
 from dash.development.base_component import Component, _explicitize_args
 
 
-class LeafletPolyline(Component):
-    """A LeafletPolyline component.
+class LeafletMiniMap(Component):
+    """A LeafletMiniMap component.
 
 
 Keyword arguments:
 
-- children (a list of or a singular dash component, string or number; optional)
-
 - id (string; optional)
-
-- arrowheads (boolean; optional)
 
 - loading_state (dict; optional)
 
@@ -26,30 +22,16 @@ Keyword arguments:
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
-        Holds which property is loading.
-
-- pathOptions (optional)
-
-- positions (list of dicts; optional)
-
-    `positions` is a list of dicts with keys:
-
-    - lat (number; optional)
-
-    - lng (number; optional) | list of list of dicts with keys:
-
-    - lat (number; optional)
-
-    - lng (number; optional)s"""
+        Holds which property is loading."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
-    _type = 'LeafletPolyline'
+    _type = 'LeafletMiniMap'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, positions=Component.UNDEFINED, pathOptions=Component.UNDEFINED, arrowheads=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'arrowheads', 'loading_state', 'pathOptions', 'positions']
+    def __init__(self, id=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'loading_state']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'arrowheads', 'loading_state', 'pathOptions', 'positions']
+        self.available_properties = ['id', 'loading_state']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
@@ -59,4 +41,4 @@ Keyword arguments:
             if k not in args:
                 raise TypeError(
                     'Required argument `' + k + '` was not specified.')
-        super(LeafletPolyline, self).__init__(children=children, **args)
+        super(LeafletMiniMap, self).__init__(**args)
