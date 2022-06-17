@@ -20,7 +20,8 @@ app.layout = html.Div(
             [
                 flc.LeafletTileLayer(),
 
-                flc.LeafletMiniMap(),
+                flc.LeafletMiniMap(
+                ),
 
                 flc.LeafletPolyline(
                     id='arrowheads-test',

@@ -1424,6 +1424,167 @@
         "required": false,
         "description": ""
       },
+      "url": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "\"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png\"",
+          "computed": false
+        }
+      },
+      "attribution": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "opacity": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "1",
+          "computed": false
+        }
+      },
+      "zIndex": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
+      "minZoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
+      "maxZoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
+      "position": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'topleft'",
+              "computed": false
+            },
+            {
+              "value": "'topright'",
+              "computed": false
+            },
+            {
+              "value": "'bottomleft'",
+              "computed": false
+            },
+            {
+              "value": "'bottomright'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      },
+      "width": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
+      "height": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
+      "collapsedWidth": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
+      "collapsedHeight": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
+      "zoomLevelOffset": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
+      "zoomLevelFixed": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
+      "zoomAnimation": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
+      "toggleDisplay": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
+      "autoToggleDisplay": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
+      "aimingRectOptions": {
+        "type": {
+          "name": "custom",
+          "raw": "pathOptionsPropTypes"
+        },
+        "required": false,
+        "description": ""
+      },
+      "shadowRectOptions": {
+        "type": {
+          "name": "custom",
+          "raw": "pathOptionsPropTypes"
+        },
+        "required": false,
+        "description": ""
+      },
+      "minimized": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
       "loading_state": {
         "type": {
           "name": "shape",
