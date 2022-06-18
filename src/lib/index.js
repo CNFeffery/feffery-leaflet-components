@@ -14,6 +14,8 @@ import LeafletRectangle from './components/LeafletRectangle.react';
 import LeafletTooltip from './components/LeafletTooltip.react';
 import LeafletPopup from './components/LeafletPopup.react';
 import LeafletMiniMap from './components/LeafletMiniMap.react';
+import LeafletAntPath from './components/LeafletAntPath.react';
+
 
 export {
     LeafletMap,
@@ -30,5 +32,6 @@ export {
     LeafletRectangle,
     LeafletTooltip,
     LeafletPopup,
-    LeafletMiniMap
+    LeafletMiniMap,
+    LeafletAntPath
 };

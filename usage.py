@@ -6,7 +6,25 @@ import feffery_leaflet_components as flc
 from dash.dependencies import Input, Output, State
 
 
-app = dash.Dash(__name__)
+app = dash.Dash(
+    __name__,
+    suppress_callback_exceptions=True
+)
+
+@app.callback(
+    Output('ant-path-test', 'positions'),
+    Input('map-listener', '_clickedLatLng'),
+    State('ant-path-test', 'positions'),
+    prevent_initial_call=True
+)
+def ant_path_test(_clickedLatLng, positions):
+
+    print(_clickedLatLng)
+
+    return[
+        *positions,
+        _clickedLatLng
+    ][1:]
 
 app.layout = html.Div(
     [
@@ -36,25 +54,40 @@ app.layout = html.Div(
                 flc.LeafletMiniMap(
                 ),
 
-                flc.LeafletPolyline(
-                    id='arrowheads-test',
+                flc.LeafletMapListener(
+                    id='map-listener'
+                ),
+
+                flc.LeafletAntPath(
+                    id='ant-path-test',
                     positions=[
                         {'lng': 0, 'lat': 0},
                         {'lng': 1, 'lat': 0},
                         {'lng': 1, 'lat': 1},
                         {'lng': 2, 'lat': 1},
                         {'lng': 2, 'lat': 2}
-                    ],
-                    pathOptions={
-                        'dashArray': '5, 5'
-                    },
-                    arrowheads={
-                        'frequency': 'endonly',
-                    },
-                    arrowheadsPathOptions={
-                        'color': 'red'
-                    }
+                    ]
                 ),
+
+                # flc.LeafletPolyline(
+                #     id='arrowheads-test',
+                #     positions=[
+                #         {'lng': 0, 'lat': 0},
+                #         {'lng': 1, 'lat': 0},
+                #         {'lng': 1, 'lat': 1},
+                #         {'lng': 2, 'lat': 1},
+                #         {'lng': 2, 'lat': 2}
+                #     ],
+                #     pathOptions={
+                #         'dashArray': '5, 5'
+                #     },
+                #     arrowheads={
+                #         'frequency': 'endonly',
+                #     },
+                #     arrowheadsPathOptions={
+                #         'color': 'red'
+                #     }
+                # ),
 
                 flc.LeafletCircleMarker(
                     flc.LeafletTooltip(
@@ -109,7 +142,7 @@ def arrowheads_callback_test(checked):
 @app.callback(
     Output('action-callback', 'mapActionConfig'),
     Input('action-set-view', 'nClicks'),
-    prevent_initiall_call=True
+    prevent_initial_call=True
 )
 def action_callback(nClicks):
     return {

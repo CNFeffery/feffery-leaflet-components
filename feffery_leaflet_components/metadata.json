@@ -1,4 +1,101 @@
 {
+  "src/lib/components/LeafletAntPath.react.js": {
+    "description": "",
+    "displayName": "LeafletAntPath",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "positions": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "exact",
+                "value": {
+                  "lng": {
+                    "name": "number",
+                    "required": false
+                  },
+                  "lat": {
+                    "name": "number",
+                    "required": false
+                  }
+                }
+              }
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "arrayOf",
+                "value": {
+                  "name": "exact",
+                  "value": {
+                    "lng": {
+                      "name": "number",
+                      "required": false
+                    },
+                    "lat": {
+                      "name": "number",
+                      "required": false
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      },
+      "pathOptions": {
+        "type": {
+          "name": "custom",
+          "raw": "pathOptionsPropTypes"
+        },
+        "required": false,
+        "description": ""
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
   "src/lib/components/LeafletCircle.react.js": {
     "description": "",
     "displayName": "LeafletCircle",

@@ -1,3 +1,4 @@
+from .LeafletAntPath import LeafletAntPath
 from .LeafletCircle import LeafletCircle
 from .LeafletCircleMarker import LeafletCircleMarker
 from .LeafletFlowLayer import LeafletFlowLayer
@@ -15,6 +16,7 @@ from .LeafletTileLayer import LeafletTileLayer
 from .LeafletTooltip import LeafletTooltip
 
 __all__ = [
+    "LeafletAntPath",
     "LeafletCircle",
     "LeafletCircleMarker",
     "LeafletFlowLayer",

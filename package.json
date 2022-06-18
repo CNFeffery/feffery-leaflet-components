@@ -31,6 +31,7 @@
     "leaflet-defaulticon-compatibility": "^0.1.1",
     "leaflet-minimap": "^3.6.1",
     "leaflet.heat": "^0.2.0",
+    "leaflet.motion": "^0.3.2",
     "lodash": "^4.17.21",
     "ramda": "^0.26.1",
     "react-leaflet": "^3.2.5",
