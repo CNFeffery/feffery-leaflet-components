@@ -63,6 +63,48 @@
         "required": false,
         "description": ""
       },
+      "paused": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
+      "reverse": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
+      "hardwareAccelerated": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
+      "pulseColor": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "delay": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
+      "dashArray": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
       "loading_state": {
         "type": {
           "name": "shape",

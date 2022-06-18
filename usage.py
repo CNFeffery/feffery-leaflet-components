@@ -66,7 +66,13 @@ app.layout = html.Div(
                         {'lng': 1, 'lat': 1},
                         {'lng': 2, 'lat': 1},
                         {'lng': 2, 'lat': 2}
-                    ]
+                    ],
+                    pulseColor='red',
+                    delay=1000,
+                    dashArray='50, 50',
+                    pathOptions={
+                        'color': 'red',
+                    }
                 ),
 
                 # flc.LeafletPolyline(

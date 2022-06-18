@@ -11,6 +11,12 @@ Keyword arguments:
 
 - id (string; optional)
 
+- dashArray (string; optional)
+
+- delay (number; optional)
+
+- hardwareAccelerated (boolean; optional)
+
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -26,6 +32,8 @@ Keyword arguments:
 
 - pathOptions (optional)
 
+- paused (boolean; optional)
+
 - positions (list of dicts; optional)
 
     `positions` is a list of dicts with keys:
@@ -36,16 +44,20 @@ Keyword arguments:
 
     - lat (number; optional)
 
-    - lng (number; optional)s"""
+    - lng (number; optional)s
+
+- pulseColor (string; optional)
+
+- reverse (boolean; optional)"""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletAntPath'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, positions=Component.UNDEFINED, pathOptions=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'loading_state', 'pathOptions', 'positions']
+    def __init__(self, id=Component.UNDEFINED, positions=Component.UNDEFINED, pathOptions=Component.UNDEFINED, paused=Component.UNDEFINED, reverse=Component.UNDEFINED, hardwareAccelerated=Component.UNDEFINED, pulseColor=Component.UNDEFINED, delay=Component.UNDEFINED, dashArray=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'dashArray', 'delay', 'hardwareAccelerated', 'loading_state', 'pathOptions', 'paused', 'positions', 'pulseColor', 'reverse']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'loading_state', 'pathOptions', 'positions']
+        self.available_properties = ['id', 'dashArray', 'delay', 'hardwareAccelerated', 'loading_state', 'pathOptions', 'paused', 'positions', 'pulseColor', 'reverse']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

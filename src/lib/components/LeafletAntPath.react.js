@@ -3,13 +3,21 @@ import PropTypes from 'prop-types';
 import { antPath } from 'leaflet-ant-path';
 import { useMap } from 'react-leaflet';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
+import { isUndefined, omitBy } from 'lodash';
 
 // 定义蚂蚁路径图层组件LeafletAntPath
 const LeafletAntPath = (props) => {
 
     // 取得必要属性或参数
     const {
-        positions
+        positions,
+        pathOptions,
+        paused,
+        reverse,
+        hardwareAccelerated,
+        pulseColor,
+        delay,
+        dashArray
     } = props;
 
     const map = useMap();
@@ -24,12 +32,28 @@ const LeafletAntPath = (props) => {
             }
             setAntPathLayer(
                 antPath(positions,
-                    {
-                        pmIgnore: true
-                    })
+                    omitBy(
+                        {
+                            ...pathOptions,
+                            pmIgnore: true,
+                            paused,
+                            reverse,
+                            hardwareAccelerated,
+                            pulseColor,
+                            delay,
+                            dashArray
+                        },
+                        isUndefined
+                    ))
             )
         }
-    }, [positions])
+    }, [positions,
+        paused,
+        reverse,
+        hardwareAccelerated,
+        pulseColor,
+        delay,
+        dashArray])
 
     useEffect(() => {
         if (antPathLayer) {
@@ -72,6 +96,23 @@ LeafletAntPath.propTypes = {
 
     // 设置样式相关参数
     pathOptions: pathOptionsPropTypes,
+
+    // 设置是否暂停蚂蚁路径，默认为false
+    paused: PropTypes.bool,
+
+    // 设置是否颠倒动画方向，默认为false
+    reverse: PropTypes.bool,
+
+    // 设置是否开启硬件加速，默认为false
+    hardwareAccelerated: PropTypes.bool,
+
+    // 设置线段分隔颜色，默认为'white'
+    pulseColor: PropTypes.string,
+
+    delay: PropTypes.number,
+
+    // 设置分段模式，默认为'10, 20'
+    dashArray: PropTypes.string,
 
     loading_state: PropTypes.shape({
         /**
