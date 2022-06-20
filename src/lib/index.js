@@ -15,6 +15,7 @@ import LeafletTooltip from './components/LeafletTooltip.react';
 import LeafletPopup from './components/LeafletPopup.react';
 import LeafletMiniMap from './components/LeafletMiniMap.react';
 import LeafletAntPath from './components/LeafletAntPath.react';
+import LeafletLayerGroup from './components/LeafletLayerGroup.react';
 
 
 export {
@@ -33,5 +34,6 @@ export {
     LeafletTooltip,
     LeafletPopup,
     LeafletMiniMap,
-    LeafletAntPath
+    LeafletAntPath,
+    LeafletLayerGroup
 };
