@@ -13,6 +13,7 @@ A LeafletPolygon component.
 Keyword arguments:
 - `children` (a list of or a singular dash component, string or number; optional)
 - `id` (String; optional)
+- `editable` (Bool; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
@@ -31,7 +32,7 @@ Those elements have the following types:
   - `lat` (Real; optional)sss
 """
 function ''_leafletpolygon(; kwargs...)
-        available_props = Symbol[:children, :id, :loading_state, :pathOptions, :positions]
+        available_props = Symbol[:children, :id, :editable, :loading_state, :pathOptions, :positions]
         wild_props = Symbol[]
         return Component("''_leafletpolygon", "LeafletPolygon", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

@@ -1,6 +1,6 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useMap, Polygon } from 'react-leaflet';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
@@ -14,9 +14,23 @@ const LeafletPolygon = (props) => {
         children,
         positions,
         pathOptions,
+        editable,
         loading_state,
         setProps
     } = props;
+
+    const polygonRef = useRef(null);
+
+    useEffect(() => {
+        if (polygonRef.current) {
+            polygonRef.current.on('pm:edit', function (e) {
+                // 更新多边形坐标集合
+                setProps({
+                    positions: e.layer._latlngs
+                })
+            });
+        }
+    })
 
     // 返回定制化的前端组件
     return (
@@ -24,8 +38,9 @@ const LeafletPolygon = (props) => {
             positions={positions}
             pathOptions={{
                 ...pathOptions,
-                pmIgnore: true
+                pmIgnore: !editable
             }}
+            ref={polygonRef}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -77,6 +92,9 @@ LeafletPolygon.propTypes = {
     // 设置样式相关参数
     pathOptions: pathOptionsPropTypes,
 
+    // 设置是否可编辑，默认为false
+    editable: PropTypes.bool,
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -101,6 +119,7 @@ LeafletPolygon.propTypes = {
 
 // 设置默认参数
 LeafletPolygon.defaultProps = {
+    editable: false
 }
 
 export default LeafletPolygon;

@@ -56,7 +56,7 @@ const extractDrawnShapes = (item, i) => {
                 latlngs: item._latlngs
             }
         }
-    } else {
+    } else if (item.pm._shape === 'Circle') {
         drawnShape.geometry = {
             latlng: item._latlng,
             radius: item._mRadius
@@ -193,7 +193,6 @@ const LeafletMap = (props) => {
                         setProps({ _drawnShapes: drawnShapes })
 
                         e.layer.on('pm:edit', function (x) {
-                            console.log({ x })
                             const drawnShapes = map.pm.getGeomanDrawLayers().map(
                                 (item, i) => {
                                     return extractDrawnShapes(item, i)

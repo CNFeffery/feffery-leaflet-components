@@ -17,6 +17,7 @@ const LeafletPolyline = (props) => {
         pathOptions,
         arrowheads,
         arrowheadsPathOptions,
+        editable,
         loading_state,
         setProps
     } = props;
@@ -46,13 +47,24 @@ const LeafletPolyline = (props) => {
         }
     }, [arrowheads])
 
+    useEffect(() => {
+        if (polylineRef.current) {
+            polylineRef.current.on('pm:edit', function (e) {
+                // 更新坐标集合
+                setProps({
+                    positions: e.layer._latlngs
+                })
+            });
+        }
+    })
+
     // 返回定制化的前端组件
     return (
         <Polyline id={id}
             positions={positions}
             pathOptions={{
                 ...pathOptions,
-                pmIgnore: true
+                pmIgnore: !editable
             }}
             ref={polylineRef}
             data-dash-is-loading={
@@ -138,6 +150,9 @@ LeafletPolyline.propTypes = {
     // 为箭头设置优先级更高的要素样式
     arrowheadsPathOptions: pathOptionsPropTypes,
 
+    // 设置是否可编辑，默认为false
+    editable: PropTypes.bool,
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -162,6 +177,7 @@ LeafletPolyline.propTypes = {
 
 // 设置默认参数
 LeafletPolyline.defaultProps = {
+    editable: false
 }
 
 export default LeafletPolyline;

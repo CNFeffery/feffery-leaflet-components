@@ -1,6 +1,6 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import "@geoman-io/leaflet-geoman-free";
 import { useMap, CircleMarker } from 'react-leaflet';
@@ -16,9 +16,23 @@ const LeafletCircleMarker = (props) => {
         center,
         radius,
         pathOptions,
+        editable,
         loading_state,
         setProps
     } = props;
+
+    const circleMarkerRef = useRef(null);
+
+    useEffect(() => {
+        if (circleMarkerRef.current) {
+            circleMarkerRef.current.on('pm:edit', function (e) {
+                // 更新坐标集合
+                setProps({
+                    center: e.layer._latlng
+                })
+            });
+        }
+    })
 
     // 返回定制化的前端组件
     return (
@@ -27,8 +41,9 @@ const LeafletCircleMarker = (props) => {
             radius={radius}
             pathOptions={{
                 ...pathOptions,
-                pmIgnore: true
+                pmIgnore: !editable
             }}
+            ref={circleMarkerRef}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -58,6 +73,9 @@ LeafletCircleMarker.propTypes = {
 
     // 设置样式相关参数
     pathOptions: pathOptionsPropTypes,
+
+    // 设置是否可编辑，默认为false
+    editable: PropTypes.bool,
 
     loading_state: PropTypes.shape({
         /**

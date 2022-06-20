@@ -1,6 +1,6 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useMap, Circle } from 'react-leaflet';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
@@ -15,9 +15,24 @@ const LeafletCircle = (props) => {
         center,
         radius,
         pathOptions,
+        editable,
         loading_state,
         setProps
     } = props;
+
+    const circleRef = useRef(null);
+
+    useEffect(() => {
+        if (circleRef.current) {
+            circleRef.current.on('pm:edit', function (e) {
+                // 更新坐标集合
+                setProps({
+                    center: e.layer._latlng,
+                    radius: e.layer._mRadius
+                })
+            });
+        }
+    })
 
     // 返回定制化的前端组件
     return (
@@ -26,8 +41,9 @@ const LeafletCircle = (props) => {
             radius={radius}
             pathOptions={{
                 ...pathOptions,
-                pmIgnore: true
+                pmIgnore: !editable
             }}
+            ref={circleRef}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -58,6 +74,9 @@ LeafletCircle.propTypes = {
     // 设置样式相关参数
     pathOptions: pathOptionsPropTypes,
 
+    // 设置是否可编辑，默认为false
+    editable: PropTypes.bool,
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -82,6 +101,7 @@ LeafletCircle.propTypes = {
 
 // 设置默认参数
 LeafletCircle.defaultProps = {
+    editable: false
 }
 
 export default LeafletCircle;

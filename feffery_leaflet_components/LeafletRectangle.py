@@ -25,6 +25,8 @@ Keyword arguments:
 
     - miny (number; required)
 
+- editable (boolean; default False)
+
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -44,10 +46,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletRectangle'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, bounds=Component.REQUIRED, pathOptions=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'bounds', 'loading_state', 'pathOptions']
+    def __init__(self, children=None, id=Component.UNDEFINED, bounds=Component.REQUIRED, pathOptions=Component.UNDEFINED, editable=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'bounds', 'editable', 'loading_state', 'pathOptions']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'bounds', 'loading_state', 'pathOptions']
+        self.available_properties = ['children', 'id', 'bounds', 'editable', 'loading_state', 'pathOptions']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

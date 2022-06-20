@@ -1,6 +1,6 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import L from "leaflet";
 import { useMap, Rectangle } from 'react-leaflet';
@@ -15,9 +15,29 @@ const LeafletRectangle = (props) => {
         children,
         bounds,
         pathOptions,
+        editable,
         loading_state,
         setProps
     } = props;
+
+    const rectangleRef = useRef(null);
+
+    useEffect(() => {
+        console.log('挂载矩形！')
+        if (rectangleRef.current) {
+            rectangleRef.current.on('pm:edit', function (e) {
+                // 更新坐标集合
+                setProps({
+                    bounds: {
+                        minx: e.layer._bounds._southWest.lng,
+                        miny: e.layer._bounds._southWest.lat,
+                        maxx: e.layer._bounds._northEast.lng,
+                        maxy: e.layer._bounds._northEast.lat
+                    }
+                })
+            });
+        }
+    })
 
     // 返回定制化的前端组件
     return (
@@ -28,8 +48,9 @@ const LeafletRectangle = (props) => {
             )}
             pathOptions={{
                 ...pathOptions,
-                pmIgnore: true
+                pmIgnore: !editable
             }}
+            ref={rectangleRef}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -60,6 +81,9 @@ LeafletRectangle.propTypes = {
     // 设置样式相关参数
     pathOptions: pathOptionsPropTypes,
 
+    // 设置是否可编辑，默认为false
+    editable: PropTypes.bool,
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -84,6 +108,7 @@ LeafletRectangle.propTypes = {
 
 // 设置默认参数
 LeafletRectangle.defaultProps = {
+    editable: false
 }
 
 export default LeafletRectangle;
