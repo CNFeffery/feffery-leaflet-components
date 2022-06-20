@@ -21,7 +21,7 @@ Keyword arguments:
 
     - lng (number; optional)
 
-- editable (boolean; optional)
+- editable (boolean; default False)
 
 - loading_state (dict; optional)
 

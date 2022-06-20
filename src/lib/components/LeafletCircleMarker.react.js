@@ -101,7 +101,8 @@ LeafletCircleMarker.propTypes = {
 
 // 设置默认参数
 LeafletCircleMarker.defaultProps = {
-    radius: 10
+    radius: 10,
+    editable: false
 }
 
 export default LeafletCircleMarker;
