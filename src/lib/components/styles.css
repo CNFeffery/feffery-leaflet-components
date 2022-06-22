@@ -2,3 +2,19 @@
     display: none !important;
 }
 
+.leaflet-div-icon {
+    background: none !important;
+    border: none !important;
+}
+
+.cluster-marker {
+    color: #fff;
+    background: #1978c8;
+    border-radius: 50%;
+    padding: 14px;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

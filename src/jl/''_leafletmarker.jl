@@ -16,7 +16,7 @@ Keyword arguments:
 - `autoPan` (Bool; optional)
 - `draggable` (Bool; optional)
 - `editable` (Bool; optional)
-- `icon` (optional): . icon has the following type: lists containing elements 'iconUrl', 'iconSize', 'iconAnchor', 'popupAnchor', 'tooltipAnchor', 'shadowUrl', 'shadowSize', 'shadowAnchor', 'className'.
+- `iconOptions` (optional): . iconOptions has the following type: lists containing elements 'iconUrl', 'iconSize', 'iconAnchor', 'popupAnchor', 'tooltipAnchor', 'shadowUrl', 'shadowSize', 'shadowAnchor', 'className'.
 Those elements have the following types:
   - `iconUrl` (String; optional)
   - `iconSize` (Array of Reals; optional)
@@ -41,7 +41,7 @@ Those elements have the following types:
 - `zIndexOffset` (Real; optional)
 """
 function ''_leafletmarker(; kwargs...)
-        available_props = Symbol[:children, :id, :autoPan, :draggable, :editable, :icon, :loading_state, :opacity, :position, :riseOnHover, :zIndexOffset]
+        available_props = Symbol[:children, :id, :autoPan, :draggable, :editable, :iconOptions, :loading_state, :opacity, :position, :riseOnHover, :zIndexOffset]
         wild_props = Symbol[]
         return Component("''_leafletmarker", "LeafletMarker", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

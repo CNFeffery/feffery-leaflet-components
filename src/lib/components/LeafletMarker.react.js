@@ -13,7 +13,7 @@ import {
 } from './utils/exportImages.react';
 
 // 修正全局默认marker图标不显示的问题
-const defaultIconParams = {
+const defaultIconOptions = {
     iconUrl: markerIcon,
     iconRetinaUrl: marker2xIcon,
     shadowUrl: markerShadow,
@@ -30,7 +30,7 @@ const LeafletMarker = (props) => {
     const {
         id,
         children,
-        icon,
+        iconOptions,
         position,
         draggable,
         opacity,
@@ -58,10 +58,7 @@ const LeafletMarker = (props) => {
     // 返回定制化的前端组件
     return (
         <Marker id={id}
-            icon={L.icon({
-                ...defaultIconParams,
-                ...icon
-            })}
+            icon={iconOptions ? L.icon(iconOptions) : L.icon(defaultIconOptions)}
             position={position}
             draggable={draggable}
             opacity={opacity}
@@ -98,7 +95,7 @@ LeafletMarker.propTypes = {
     draggable: PropTypes.bool,
 
     // 自定义图标参数
-    icon: PropTypes.exact({
+    iconOptions: PropTypes.exact({
         // 图标图片url
         iconUrl: PropTypes.string,
         // 设置图标图片主体尺寸

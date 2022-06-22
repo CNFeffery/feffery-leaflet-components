@@ -37,6 +37,7 @@
     "react-leaflet": "^3.2.5",
     "svg-url-loader": "^7.1.1",
     "url-loader": "^4.1.1",
+    "use-supercluster": "^0.4.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

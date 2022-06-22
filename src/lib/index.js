@@ -17,6 +17,7 @@ import LeafletMiniMap from './components/LeafletMiniMap.react';
 import LeafletAntPath from './components/LeafletAntPath.react';
 import LeafletLayerGroup from './components/LeafletLayerGroup.react';
 import LeafletMarker from './components/LeafletMarker.react';
+import LeafletSuperCluster from './components/LeafletSuperCluster.react';
 
 
 export {
@@ -37,5 +38,6 @@ export {
     LeafletMiniMap,
     LeafletAntPath,
     LeafletLayerGroup,
-    LeafletMarker
+    LeafletMarker,
+    LeafletSuperCluster
 };

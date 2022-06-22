@@ -15,6 +15,23 @@ const LeafletMapListener = (props) => {
     const map = useMap();
 
     useEffect(() => {
+
+        const currentBounds = map.getBounds()
+        const zoom = map.getZoom()
+        const center = map.getCenter()
+        setProps({
+            _zoom: zoom,
+            _center: center,
+            _bounds: {
+                minx: currentBounds._southWest.lng,
+                miny: currentBounds._southWest.lat,
+                maxx: currentBounds._northEast.lng,
+                maxy: currentBounds._northEast.lat
+            }
+        })
+    }, [])
+
+    useEffect(() => {
         map.on('click', (e) => {
 
             setProps({
@@ -22,7 +39,7 @@ const LeafletMapListener = (props) => {
             })
         })
 
-        map.on('zoomend', (e) => {
+        map.on('zoom', (e) => {
 
             const currentBounds = map.getBounds()
             const zoom = map.getZoom()
@@ -40,7 +57,7 @@ const LeafletMapListener = (props) => {
             })
         })
 
-        map.on('moveend', (e) => {
+        map.on('move', (e) => {
 
             const currentBounds = map.getBounds()
             const center = map.getCenter()

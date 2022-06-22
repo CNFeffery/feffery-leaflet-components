@@ -14,6 +14,7 @@ from .LeafletPolygon import LeafletPolygon
 from .LeafletPolyline import LeafletPolyline
 from .LeafletPopup import LeafletPopup
 from .LeafletRectangle import LeafletRectangle
+from .LeafletSuperCluster import LeafletSuperCluster
 from .LeafletTileLayer import LeafletTileLayer
 from .LeafletTooltip import LeafletTooltip
 
@@ -34,6 +35,7 @@ __all__ = [
     "LeafletPolyline",
     "LeafletPopup",
     "LeafletRectangle",
+    "LeafletSuperCluster",
     "LeafletTileLayer",
     "LeafletTooltip"
 ]
