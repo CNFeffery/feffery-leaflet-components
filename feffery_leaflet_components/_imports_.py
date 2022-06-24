@@ -16,6 +16,7 @@ from .LeafletPopup import LeafletPopup
 from .LeafletRectangle import LeafletRectangle
 from .LeafletSuperCluster import LeafletSuperCluster
 from .LeafletTileLayer import LeafletTileLayer
+from .LeafletTileSelect import LeafletTileSelect
 from .LeafletTooltip import LeafletTooltip
 
 __all__ = [
@@ -37,5 +38,6 @@ __all__ = [
     "LeafletRectangle",
     "LeafletSuperCluster",
     "LeafletTileLayer",
+    "LeafletTileSelect",
     "LeafletTooltip"
 ]

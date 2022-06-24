@@ -2836,6 +2836,121 @@
       }
     }
   },
+  "src/lib/components/LeafletTileSelect.react.js": {
+    "description": "",
+    "displayName": "LeafletTileSelect",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "urls": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "exact",
+            "value": {
+              "url": {
+                "name": "string",
+                "required": false
+              }
+            }
+          }
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "[\r\n    {\r\n        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'\r\n    }\r\n]",
+          "computed": false
+        }
+      },
+      "center": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "lng": {
+              "name": "number",
+              "required": false
+            },
+            "lat": {
+              "name": "number",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "{ lng: 0, lat: 0 }",
+          "computed": false
+        }
+      },
+      "zoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "3",
+          "computed": false
+        }
+      },
+      "selectedUrl": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "containerVisible": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
   "src/lib/components/LeafletTooltip.react.js": {
     "description": "",
     "displayName": "LeafletTooltip",

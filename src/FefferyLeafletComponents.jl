@@ -23,6 +23,7 @@ include("jl/''_leafletpopup.jl")
 include("jl/''_leafletrectangle.jl")
 include("jl/''_leafletsupercluster.jl")
 include("jl/''_leaflettilelayer.jl")
+include("jl/''_leaflettileselect.jl")
 include("jl/''_leaflettooltip.jl")
 
 function __init__()
