@@ -25,11 +25,17 @@ app.layout = html.Div(
                             "lat": random.normalvariate(0, 10),
                             "lng": random.normalvariate(0, 10)
                         }
-                        for i in range(999)
-                    ]
+                        for i in range(1000)
+                    ],
+                    radius=100,
+                    clusterTextSizeFactor=0.2,
+                    iconOptions=dict(
+                        iconUrl='http://flc.feffery.tech/assets/imgs/flc-logo.svg',
+                        iconSize=[32, 32]
+                    )
                 ),
 
-                flc.LeafletMapListener(id='map-listener'),
+                # flc.LeafletMapListener(id='map-listener'),
 
                 html.Div(
                     id='real-time-center-zoom',
