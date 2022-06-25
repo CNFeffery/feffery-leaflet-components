@@ -57,6 +57,7 @@
     cursor: pointer;
     border: 2px solid #e4e7ed;
     border-radius: 3px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 .leaflet-tile-select-container-item:hover {

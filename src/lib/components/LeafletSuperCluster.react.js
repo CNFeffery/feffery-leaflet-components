@@ -311,4 +311,4 @@ LeafletSuperCluster.defaultProps = {
     clusterTextSizeFactor: 0.4
 }
 
-export default LeafletSuperCluster;
+export default React.memo(LeafletSuperCluster);
