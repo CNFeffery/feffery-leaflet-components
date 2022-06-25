@@ -4,7 +4,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
-import { useMap, MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import tileSelectIcon from "./images/tile-select-icon.png";
 
 // 定义瓦片底图选择组件LeafletTileSelect
@@ -47,7 +47,7 @@ const LeafletTileSelect = (props) => {
         >
             {<div
                 style={{
-                    visibility: containerVisible ? 'visible' : 'hidden'
+                    display: containerVisible ? 'inherit' : 'none'
                 }}
                 className={'leaflet-tile-select-container'}>
                 {
