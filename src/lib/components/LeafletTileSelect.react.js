@@ -47,7 +47,7 @@ const LeafletTileSelect = (props) => {
         >
             {<div
                 style={{
-                    display: containerVisible ? 'inherit' : 'none'
+                    display: containerVisible ? 'flex' : 'none'
                 }}
                 className={'leaflet-tile-select-container'}>
                 {

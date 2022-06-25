@@ -48,6 +48,7 @@
     gap: 5px;
     flex-wrap: wrap;
     overflow: auto;
+    justify-content: center;
 }
 
 .leaflet-tile-select-container-item {
