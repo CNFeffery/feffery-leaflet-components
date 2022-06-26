@@ -37,6 +37,7 @@ app.layout = html.Div(
                     # )
                 ),
             ],
+            editToolbar=True,
             style={
                 'height': '100%',
                 'width': '100%',

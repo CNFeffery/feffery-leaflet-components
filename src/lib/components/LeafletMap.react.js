@@ -156,6 +156,25 @@ const LeafletMap = (props) => {
                     // 设置显示文字语言为中文
                     map.pm.setLang('zh')
 
+                    const getCircleDrawRadius = () => {
+                        if (map.pm.Draw.Circle._layer.getRadius() !== 0) {
+                            map.pm.Draw.Circle._hintMarker._tooltip.setContent(
+                                `单击完成圆形，当前半径：${map.pm.Draw.Circle._layer.getRadius().toFixed(1)}米`
+                            )
+                        }
+                    }
+
+                    map.on('pm:drawstart', (e) => {
+                        if (map.pm.Draw.Circle._hintMarker && e.shape === "Circle") {
+                            map.pm.Draw.Circle._hintMarker.on('move', getCircleDrawRadius);
+                        }
+                    })
+                    map.on('pm:drawend', (e) => {
+                        if (map.pm.Draw.Circle._hintMarker) {
+                            map.pm.Draw.Circle._hintMarker.off('move', getCircleDrawRadius)
+                        }
+                    })
+
                     map.on('pm:create pm:cut pm:remove', function (e) {
 
                         // 若当前事件为pm:create，则为layer添加唯一uid信息
