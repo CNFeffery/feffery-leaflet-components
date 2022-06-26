@@ -73,6 +73,7 @@ const LeafletSuperCluster = (props) => {
         extent,
         nodeSize,
         iconOptions,
+        tooltipSticky,
         loading_state,
         setProps
     } = props;
@@ -203,9 +204,14 @@ const LeafletSuperCluster = (props) => {
                         icon={iconOptions ? L.icon(iconOptions) : L.icon(defaultIconOptions)}
                     >{
                             cluster.properties.tooltip ?
-                                <Tooltip sticky={true}>{
-                                    cluster.properties.tooltip
-                                }</Tooltip> : null
+                                <Tooltip
+                                    sticky={tooltipSticky}
+                                    eventHandlers={{
+                                        add: (e) => {
+                                            e.sourceTarget.setContent(cluster.properties.tooltip)
+                                        }
+                                    }}
+                                /> : null
                         }</ Marker>
                 );
             })}
@@ -281,6 +287,9 @@ LeafletSuperCluster.propTypes = {
         // 设置标记图标css类
         className: PropTypes.string
     }),
+
+    // 设置tooltip是否开启粘性显示，默认为false
+    tooltipSticky: PropTypes.bool,
 
     loading_state: PropTypes.shape({
         /**

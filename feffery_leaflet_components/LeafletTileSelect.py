@@ -19,6 +19,16 @@ Keyword arguments:
 
     - lng (number; optional)
 
+- className (string; optional)
+
+- containerClassName (string; optional)
+
+- containerItemClassName (string; optional)
+
+- containerItemStyle (dict; optional)
+
+- containerStyle (dict; optional)
+
 - containerVisible (boolean; default False)
 
 - loading_state (dict; optional)
@@ -36,6 +46,8 @@ Keyword arguments:
 
 - selectedUrl (string; optional)
 
+- style (dict; optional)
+
 - urls (list of dicts; default [    {        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'    }])
 
     `urls` is a list of dicts with keys:
@@ -48,10 +60,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletTileSelect'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, urls=Component.UNDEFINED, center=Component.UNDEFINED, zoom=Component.UNDEFINED, selectedUrl=Component.UNDEFINED, containerVisible=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'center', 'containerVisible', 'loading_state', 'selectedUrl', 'urls', 'zoom']
+    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, containerClassName=Component.UNDEFINED, containerStyle=Component.UNDEFINED, containerItemClassName=Component.UNDEFINED, containerItemStyle=Component.UNDEFINED, urls=Component.UNDEFINED, center=Component.UNDEFINED, zoom=Component.UNDEFINED, selectedUrl=Component.UNDEFINED, containerVisible=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'center', 'className', 'containerClassName', 'containerItemClassName', 'containerItemStyle', 'containerStyle', 'containerVisible', 'loading_state', 'selectedUrl', 'style', 'urls', 'zoom']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'center', 'containerVisible', 'loading_state', 'selectedUrl', 'urls', 'zoom']
+        self.available_properties = ['id', 'center', 'className', 'containerClassName', 'containerItemClassName', 'containerItemStyle', 'containerStyle', 'containerVisible', 'loading_state', 'selectedUrl', 'style', 'urls', 'zoom']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

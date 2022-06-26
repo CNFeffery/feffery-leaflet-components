@@ -24,16 +24,17 @@ app.layout = html.Div(
                     positions=[
                         {
                             "lat": random.normalvariate(0, 10),
-                            "lng": random.normalvariate(0, 10)
+                            "lng": random.normalvariate(0, 10),
+                            "tooltip": '<font style="color: red;">测试</ font>'
                         }
                         for i in range(1000)
                     ],
                     radius=100,
                     clusterTextSizeFactor=0.2,
-                    iconOptions=dict(
-                        iconUrl='http://flc.feffery.tech/assets/imgs/flc-logo.svg',
-                        iconSize=[32, 32]
-                    )
+                    # iconOptions=dict(
+                    #     iconUrl='http://flc.feffery.tech/assets/imgs/flc-logo.svg',
+                    #     iconSize=[32, 32]
+                    # )
                 ),
             ],
             style={
@@ -85,8 +86,7 @@ app.layout = html.Div(
     ],
     style={
         'position': 'relative',
-        'height': '1000px',
-        'margin': '0 auto'
+        'height': '100vh'
     }
 )
 
@@ -101,4 +101,4 @@ def update_tile(selectedUrl):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8051)
+    app.run(debug=True, port=8050)

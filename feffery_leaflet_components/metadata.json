@@ -2722,6 +2722,13 @@
         "required": false,
         "description": ""
       },
+      "tooltipSticky": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
       "loading_state": {
         "type": {
           "name": "shape",
@@ -2844,6 +2851,48 @@
       "id": {
         "type": {
           "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "style": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": ""
+      },
+      "containerClassName": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "containerStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": ""
+      },
+      "containerItemClassName": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "containerItemStyle": {
+        "type": {
+          "name": "object"
         },
         "required": false,
         "description": ""

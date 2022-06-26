@@ -13,6 +13,12 @@ const LeafletTileSelect = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        className,
+        style,
+        containerClassName,
+        containerStyle,
+        containerItemClassName,
+        containerItemStyle,
         urls,
         center,
         zoom,
@@ -33,23 +39,20 @@ const LeafletTileSelect = (props) => {
     return (
         <div id={id}
             ref={divRef}
-            style={{
-                position: 'absolute',
-                top: 15,
-                right: 15,
-                zIndex: 999,
-                display: 'flex',
-                gap: 15
-            }}
+            style={{ ...style }}
+            className={className ? `leaflet-tile-select ${className}` : 'leaflet-tile-select'}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
         >
             {<div
                 style={{
+                    ...containerStyle,
                     display: containerVisible ? 'flex' : 'none'
                 }}
-                className={'leaflet-tile-select-container'}>
+                className={containerClassName ?
+                    `leaflet-tile-select-container ${containerClassName}` :
+                    'leaflet-tile-select-container'}>
                 {
                     urls ? (
                         urls.map(item =>
@@ -61,10 +64,21 @@ const LeafletTileSelect = (props) => {
                                         selectedUrl: item.url
                                     })
                                 }}
+                                style={{
+                                    ...containerItemStyle
+                                }}
                                 className={
                                     item.url === selectedUrl ?
-                                        'leaflet-tile-select-container-item'.concat(' leaflet-tile-select-container-item-selected')
-                                        : 'leaflet-tile-select-container-item'
+                                        (
+                                            containerItemClassName ?
+                                                `leaflet-tile-select-container-item ${containerItemClassName} leaflet-tile-select-container-item-selected` :
+                                                'leaflet-tile-select-container-item leaflet-tile-select-container-item-selected'
+                                        )
+                                        : (
+                                            containerItemClassName ?
+                                                `leaflet-tile-select-container-item ${containerItemClassName}` :
+                                                'leaflet-tile-select-container-item'
+                                        )
                                 }>
                                 <MapContainer
                                     style={{ height: '100%' }}
@@ -88,7 +102,8 @@ const LeafletTileSelect = (props) => {
                     ) : null
                 }
             </div>}
-            <button className={'leaflet-tile-select-btn'}
+            <button
+                className={'leaflet-tile-select-btn'}
                 onClick={() => {
                     setProps({
                         containerVisible: !containerVisible
@@ -105,6 +120,22 @@ const LeafletTileSelect = (props) => {
 LeafletTileSelect.propTypes = {
     // 组件id
     id: PropTypes.string,
+
+    // 设置各组成部分样式
+    // 整体容器
+    className: PropTypes.string,
+
+    style: PropTypes.object,
+
+    // 图层选择卡片容器
+    containerClassName: PropTypes.string,
+
+    containerStyle: PropTypes.object,
+
+    // 图层选择子项
+    containerItemClassName: PropTypes.string,
+
+    containerItemStyle: PropTypes.object,
 
     // 设置待选的瓦片地图服务url数组
     urls: PropTypes.arrayOf(
