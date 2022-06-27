@@ -164,7 +164,7 @@ const LeafletMap = (props) => {
                         }
                     }
 
-                    map.on('pm:drawstart', () => {
+                    map.on('pm:drawstart', (e) => {
                         if (map.pm.Draw.Circle._hintMarker && e.shape === "Circle") {
                             map.pm.Draw.Circle._hintMarker.on('move', getCircleDrawRadius);
                         }
