@@ -19,6 +19,16 @@ import {
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 import { v4 as uuidv4 } from 'uuid';
 
+const customTranslation = {
+    "tooltips": {
+        "placeText": "点击放置文字"
+    },
+    "buttonTitles": {
+        "rotateButton": "旋转图层",
+        "drawTextButton": "绘制文字"
+    }
+}
+
 const extractDrawnShapes = (item, i) => {
 
     const drawnShape = {
@@ -154,7 +164,7 @@ const LeafletMap = (props) => {
                     })
 
                     // 设置显示文字语言为中文
-                    map.pm.setLang('zh')
+                    map.pm.setLang('customWithZh', customTranslation, 'zh')
 
                     const getCircleDrawRadius = () => {
                         if (map.pm.Draw.Circle._layer.getRadius() !== 0) {
