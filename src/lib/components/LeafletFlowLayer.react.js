@@ -156,4 +156,4 @@ LeafletFlowLayer.defaultProps = {
     arcLabelFontFamily: 'sans-serif'
 }
 
-export default LeafletFlowLayer;
+export default React.memo(LeafletFlowLayer);

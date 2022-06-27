@@ -7,7 +7,7 @@ import "leaflet.heat";
 import { MapConsumer } from 'react-leaflet';
 
 // 定义热力图层组件LeafletHeatMap，api参数参考
-export default class LeafletHeatMap extends Component {
+class LeafletHeatMap extends Component {
 
     render() {
         // 取得必要属性或参数
@@ -119,3 +119,5 @@ LeafletHeatMap.defaultProps = {
     radius: 25,
     blur: 15
 }
+
+export default React.memo(LeafletHeatMap);

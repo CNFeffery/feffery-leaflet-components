@@ -19,6 +19,7 @@ import LeafletLayerGroup from './components/LeafletLayerGroup.react';
 import LeafletMarker from './components/LeafletMarker.react';
 import LeafletSuperCluster from './components/LeafletSuperCluster.react';
 import LeafletTileSelect from './components/LeafletTileSelect.react';
+import LeafletFullscreenControl from './components/LeafletFullscreenControl.react';
 
 
 export {
@@ -41,5 +42,6 @@ export {
     LeafletLayerGroup,
     LeafletMarker,
     LeafletSuperCluster,
-    LeafletTileSelect
+    LeafletTileSelect,
+    LeafletFullscreenControl
 };

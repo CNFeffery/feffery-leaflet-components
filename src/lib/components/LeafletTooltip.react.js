@@ -12,7 +12,6 @@ const LeafletTooltip = (props) => {
         id,
         className,
         children,
-        position,
         direction,
         permanent,
         sticky,
@@ -28,7 +27,6 @@ const LeafletTooltip = (props) => {
             id={id}
             className={className}
             children={children}
-            position={position}
             direction={direction}
             permanent={permanent}
             sticky={sticky}
@@ -95,4 +93,4 @@ LeafletTooltip.propTypes = {
 LeafletTooltip.defaultProps = {
 }
 
-export default LeafletTooltip;
+export default React.memo(LeafletTooltip);

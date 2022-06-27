@@ -137,4 +137,4 @@ LeafletMapListener.propTypes = {
 LeafletMapListener.defaultProps = {
 }
 
-export default LeafletMapListener;
+export default React.memo(LeafletMapListener);

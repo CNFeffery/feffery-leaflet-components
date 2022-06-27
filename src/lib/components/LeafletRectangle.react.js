@@ -111,4 +111,4 @@ LeafletRectangle.defaultProps = {
     editable: false
 }
 
-export default LeafletRectangle;
+export default React.memo(LeafletRectangle);

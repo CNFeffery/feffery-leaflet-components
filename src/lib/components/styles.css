@@ -85,3 +85,62 @@
 .leaflet-tile-select-container-item-selected {
     border: 2px solid #409eff;
 }
+
+body {
+    margin: 0 !important;
+}
+
+/* 全屏相关css样式 */
+.fullscreen-icon[title="全屏"] {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVpJREFUSEvtld9RwzAMxqUMwBtLwBL0Ym9AMwETsADtEjwxQRjByrVdokt0h4hTzu4Zt/GflKN5iF5t6ZdPcj4h3CnwTlxYwP/W+fm1Wim1uyJ/S0T7WFuu5RHRKswZVWwLvADA1kvaZ4A37j4ivjLzMxFdcFLgAwB8CJyIzgVTD6Gu66eqqlpmPgLAeipYONnwAPoJALtJYFGqlBK1At8Qkd/6X+J9KBE1SikZVTFYksDNVOAys77vm67rpIUXobX+YuYHgcqhBZ9r+AlFv5MoGoOm5p79qksLld4vUlxaPHZ/Af9lN6O15t9qaw7vxpi3MSla67WcGWO+U61LerU4V+hIMTAzt4jYCHyqc8laPEghZ/jOkWJqRLWDM/NpimUOYLvajjlQ90EBvC1eEoj4aFebbJkhMvbx4PE2t7U5xft4KOLFKgPM4SiKFKde5a3n8/+Pb1W4rMUfHrzLHxMmCqYAAAAASUVORK5CYII=);
+    background-size: 26px 26px;
+}
+
+.leaflet-retina .fullscreen-icon[title="全屏"] {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVpJREFUSEvtld9RwzAMxqUMwBtLwBL0Ym9AMwETsADtEjwxQRjByrVdokt0h4hTzu4Zt/GflKN5iF5t6ZdPcj4h3CnwTlxYwP/W+fm1Wim1uyJ/S0T7WFuu5RHRKswZVWwLvADA1kvaZ4A37j4ivjLzMxFdcFLgAwB8CJyIzgVTD6Gu66eqqlpmPgLAeipYONnwAPoJALtJYFGqlBK1At8Qkd/6X+J9KBE1SikZVTFYksDNVOAys77vm67rpIUXobX+YuYHgcqhBZ9r+AlFv5MoGoOm5p79qksLld4vUlxaPHZ/Af9lN6O15t9qaw7vxpi3MSla67WcGWO+U61LerU4V+hIMTAzt4jYCHyqc8laPEghZ/jOkWJqRLWDM/NpimUOYLvajjlQ90EBvC1eEoj4aFebbJkhMvbx4PE2t7U5xft4KOLFKgPM4SiKFKde5a3n8/+Pb1W4rMUfHrzLHxMmCqYAAAAASUVORK5CYII=);
+    background-size: 26px 26px;
+}
+
+.fullscreen-icon[title="取消全屏"] {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAV5JREFUSEvtlTFKxFAQhv9J5QH0EjZiJwi6kpeksBO0tVVPYCG4orWCoiALNi4I6xF2Hq6VN7C11yO45JcHicSQbPZZpNlNGWby8f4380XQ0iMtcTAH/Tvp2uiiKNodDofPvl9OkmRlPB5/W2vfi72VIAchORCRPQczxnQAdFS1WwYbY9y7kaqOoihaJ/lAsm+tPW8EuYIijOQXgFNV3aoAvQA4I7kQBEEvTdMra+1luW7i1JVgR3Ugkrcicg/gWFV7VXHXgrK4ICJLLsYsnroTrQHYB/DpIC7GqU+UZb9ZbJgQXbHsteou5wvru1a/9TMUXWtTl+8RyUUR6QN4mzDeHaerzCB+e+Ru0RizLSKPJA8AHNaBROSu6EYvM8RxvJGm6ROAEwAfTa7LDZKLeCozGGNWAQxI3lhrrz3s/cf6jfYOw3BZRHZU9cJ3cZyIXU/5XzZDe+QbWVN9a9H9ANzuyRspXZdDAAAAAElFTkSuQmCC);
+    background-size: 26px 26px;
+}
+
+.leaflet-retina .fullscreen-icon[title="取消全屏"] {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAV5JREFUSEvtlTFKxFAQhv9J5QH0EjZiJwi6kpeksBO0tVVPYCG4orWCoiALNi4I6xF2Hq6VN7C11yO45JcHicSQbPZZpNlNGWby8f4380XQ0iMtcTAH/Tvp2uiiKNodDofPvl9OkmRlPB5/W2vfi72VIAchORCRPQczxnQAdFS1WwYbY9y7kaqOoihaJ/lAsm+tPW8EuYIijOQXgFNV3aoAvQA4I7kQBEEvTdMra+1luW7i1JVgR3Ugkrcicg/gWFV7VXHXgrK4ICJLLsYsnroTrQHYB/DpIC7GqU+UZb9ZbJgQXbHsteou5wvru1a/9TMUXWtTl+8RyUUR6QN4mzDeHaerzCB+e+Ru0RizLSKPJA8AHNaBROSu6EYvM8RxvJGm6ROAEwAfTa7LDZKLeCozGGNWAQxI3lhrrz3s/cf6jfYOw3BZRHZU9cJ3cZyIXU/5XzZDe+QbWVN9a9H9ANzuyRspXZdDAAAAAElFTkSuQmCC);
+    background-size: 26px 26px;
+}
+
+/* one selector per rule as explained here : http://www.sitepoint.com/html5-full-screen-api/ */
+.leaflet-container:-webkit-full-screen {
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 99999;
+}
+
+.leaflet-container:-ms-fullscreen {
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 99999;
+}
+
+.leaflet-container:full-screen {
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 99999;
+}
+
+.leaflet-container:fullscreen {
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 99999;
+}
+
+.leaflet-pseudo-fullscreen {
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+    top: 0px !important;
+    left: 0px !important;
+    z-index: 99999;
+}

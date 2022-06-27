@@ -172,4 +172,4 @@ LeafletMiniMap.defaultProps = {
     opacity: 1
 }
 
-export default LeafletMiniMap;
+export default React.memo(LeafletMiniMap);

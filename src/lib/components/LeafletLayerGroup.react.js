@@ -59,4 +59,4 @@ LeafletLayerGroup.propTypes = {
 LeafletLayerGroup.defaultProps = {
 }
 
-export default LeafletLayerGroup;
+export default React.memo(LeafletLayerGroup);

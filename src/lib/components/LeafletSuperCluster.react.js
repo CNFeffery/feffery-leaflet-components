@@ -163,6 +163,7 @@ const LeafletSuperCluster = (props) => {
                 if (isCluster) {
                     return (
                         <Marker
+                            pmIgnore={true}
                             position={{
                                 lng: lng,
                                 lat: lat
@@ -197,6 +198,7 @@ const LeafletSuperCluster = (props) => {
                 // 若当前对象为单点，则绘制单标记
                 return (
                     <Marker
+                        pmIgnore={true}
                         position={{
                             lng: lng,
                             lat: lat

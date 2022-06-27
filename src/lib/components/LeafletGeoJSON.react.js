@@ -51,7 +51,7 @@ const difference = (object, base) => {
 const preventUpdateProps = ['_clickedFeature', '_hoveredFeature'];
 
 // 定义GeoJSON图层组件LeafletGeoJSON，api参数参考
-export default class LeafletGeoJSON extends Component {
+class LeafletGeoJSON extends Component {
 
     constructor(props) {
         super(props);
@@ -530,3 +530,5 @@ LeafletGeoJSON.defaultProps = {
     clickFeatureZoom: false,
     disableClickSelect: false
 }
+
+export default React.memo(LeafletGeoJSON);

@@ -35,6 +35,7 @@
     "lodash": "^4.17.21",
     "ramda": "^0.26.1",
     "react-leaflet": "^3.2.5",
+    "react-leaflet-fullscreen": "^2.0.2",
     "svg-url-loader": "^7.1.1",
     "url-loader": "^4.1.1",
     "use-supercluster": "^0.4.0",

@@ -180,4 +180,4 @@ LeafletPolyline.defaultProps = {
     editable: false
 }
 
-export default LeafletPolyline;
+export default React.memo(LeafletPolyline);

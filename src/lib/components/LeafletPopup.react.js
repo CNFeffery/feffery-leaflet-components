@@ -102,4 +102,4 @@ LeafletPopup.propTypes = {
 LeafletPopup.defaultProps = {
 }
 
-export default LeafletPopup;
+export default React.memo(LeafletPopup);

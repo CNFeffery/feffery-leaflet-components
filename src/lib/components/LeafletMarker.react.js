@@ -62,7 +62,7 @@ const LeafletMarker = (props) => {
             position={position}
             draggable={draggable}
             opacity={opacity}
-            editable={editable}
+            pmIgnore={!editable}
             zIndexOffset={zIndexOffset}
             riseOnHover={riseOnHover}
             autoPan={autoPan}
@@ -158,4 +158,4 @@ LeafletMarker.defaultProps = {
     editable: false
 }
 
-export default LeafletMarker;
+export default React.memo(LeafletMarker);

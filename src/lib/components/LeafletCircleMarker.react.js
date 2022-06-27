@@ -105,4 +105,4 @@ LeafletCircleMarker.defaultProps = {
     editable: false
 }
 
-export default LeafletCircleMarker;
+export default React.memo(LeafletCircleMarker);

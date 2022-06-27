@@ -3,8 +3,6 @@ import dash
 import json
 import random
 from dash import html
-import numpy as np
-import feffery_antd_components as fac
 import feffery_leaflet_components as flc
 from dash.dependencies import Input, Output, State, ALL
 
@@ -19,6 +17,9 @@ app.layout = html.Div(
         flc.LeafletMap(
             [
                 flc.LeafletTileLayer(id='tile-layer'),
+
+                flc.LeafletFullscreenControl(
+                ),
 
                 flc.LeafletSuperCluster(
                     positions=[
@@ -35,7 +36,7 @@ app.layout = html.Div(
                     #     iconUrl='http://flc.feffery.tech/assets/imgs/flc-logo.svg',
                     #     iconSize=[32, 32]
                     # )
-                ),
+                )
             ],
             editToolbar=True,
             style={

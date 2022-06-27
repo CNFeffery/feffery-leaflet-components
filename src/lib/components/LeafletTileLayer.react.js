@@ -86,4 +86,4 @@ LeafletTileLayer.defaultProps = {
 }
 
 
-export default LeafletTileLayer;
+export default React.memo(LeafletTileLayer);

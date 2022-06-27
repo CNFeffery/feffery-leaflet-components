@@ -156,4 +156,4 @@ LeafletMapAction.propTypes = {
 LeafletMapAction.defaultProps = {
 }
 
-export default LeafletMapAction;
+export default React.memo(LeafletMapAction);

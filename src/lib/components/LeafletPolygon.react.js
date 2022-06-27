@@ -122,4 +122,4 @@ LeafletPolygon.defaultProps = {
     editable: false
 }
 
-export default LeafletPolygon;
+export default React.memo(LeafletPolygon);
