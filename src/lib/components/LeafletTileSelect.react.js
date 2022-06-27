@@ -188,14 +188,9 @@ LeafletTileSelect.propTypes = {
 
 // 设置默认参数
 LeafletTileSelect.defaultProps = {
-    urls: [
-        {
-            url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-        }
-    ],
     center: { lng: 0, lat: 0 },
     zoom: 3,
-    containerVisible: false
+    containerVisible: true
 }
 
 export default React.memo(LeafletTileSelect);

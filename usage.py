@@ -82,8 +82,7 @@ app.layout = html.Div(
                 'lng': 121.4,
                 'lat': 31.2
             },
-            zoom=7,
-            containerVisible=True
+            zoom=7
         )
     ],
     style={

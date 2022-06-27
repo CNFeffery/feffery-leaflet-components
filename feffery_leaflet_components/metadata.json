@@ -2995,11 +2995,7 @@
           }
         },
         "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "[\r\n    {\r\n        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'\r\n    }\r\n]",
-          "computed": false
-        }
+        "description": ""
       },
       "center": {
         "type": {
@@ -3047,7 +3043,7 @@
         "required": false,
         "description": "",
         "defaultValue": {
-          "value": "false",
+          "value": "true",
           "computed": false
         }
       },

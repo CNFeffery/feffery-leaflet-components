@@ -29,7 +29,7 @@ Keyword arguments:
 
 - containerStyle (dict; optional)
 
-- containerVisible (boolean; default False)
+- containerVisible (boolean; default True)
 
 - loading_state (dict; optional)
 
@@ -48,7 +48,7 @@ Keyword arguments:
 
 - style (dict; optional)
 
-- urls (list of dicts; default [    {        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'    }])
+- urls (list of dicts; optional)
 
     `urls` is a list of dicts with keys:
 
