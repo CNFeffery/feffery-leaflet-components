@@ -13,7 +13,6 @@ const LeafletFullscreenControl = (props) => {
         id,
         position,
         forceSeparateButton,
-        forcePseudoFullscreen,
         loading_state,
         setProps
     } = props;
@@ -23,7 +22,6 @@ const LeafletFullscreenControl = (props) => {
         <FullscreenControl id={id}
             position={position || "topleft"}
             forceSeparateButton={forceSeparateButton}
-            forcePseudoFullscreen={forcePseudoFullscreen}
             title={"全屏"}
             titleCancel={"取消全屏"}
             data-dash-is-loading={
@@ -43,9 +41,6 @@ LeafletFullscreenControl.propTypes = {
 
     // 设置控件按钮是否强制脱离于放缩控件，默认为false
     forceSeparateButton: PropTypes.bool,
-
-    // 设置是否开启伪全屏模式，默认为false
-    forcePseudoFullscreen: PropTypes.bool,
 
     loading_state: PropTypes.shape({
         /**
@@ -71,8 +66,7 @@ LeafletFullscreenControl.propTypes = {
 
 // 设置默认参数
 LeafletFullscreenControl.LeafletFullscreenControl = {
-    forceSeparateButton: false,
-    forcePseudoFullscreen: false
+    forceSeparateButton: false
 }
 
 export default React.memo(LeafletFullscreenControl);

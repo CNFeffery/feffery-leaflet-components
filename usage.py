@@ -19,6 +19,7 @@ app.layout = html.Div(
                 flc.LeafletTileLayer(id='tile-layer'),
 
                 flc.LeafletFullscreenControl(
+                    forceSeparateButton=True
                 ),
 
                 flc.LeafletSuperCluster(
@@ -40,8 +41,8 @@ app.layout = html.Div(
             ],
             editToolbar=True,
             style={
-                'height': '100%',
-                'width': '100%',
+                'height': '80%',
+                'width': '80%',
                 'position': 'absolute',
             }
         ),
