@@ -18,6 +18,9 @@ import {
 } from './utils/exportImages.react';
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 import { v4 as uuidv4 } from 'uuid';
+import 'leaflet-measure/dist/leaflet-measure.cn';
+import { omitBy, isUndefined } from 'lodash';
+import 'leaflet-measure/dist/leaflet-measure.css';
 
 const customTranslation = {
     "tooltips": {
@@ -98,6 +101,8 @@ const LeafletMap = (props) => {
         editToolbarControlsOptions,
         showMeasurements,
         maxDrawnShapes,
+        measureControl,
+        measureControlOptions,
         setProps,
         loading_state
     } = props;
@@ -129,6 +134,35 @@ const LeafletMap = (props) => {
                 ) : undefined
             }
             whenCreated={map => {
+                if (measureControl) {
+                    const measureControl = L.control.measure(
+                        {
+                            ...{
+                                position: 'topleft',
+                                activeColor: '#f1c40f',
+                                completedColor: '#e74c3c'
+                            },
+                            ...omitBy(measureControlOptions, isUndefined),
+                            ...{
+                                units: {
+                                    sqkilometers: {
+                                        factor: 0.000001,
+                                        display: '平方千米',
+                                        decimals: 3
+                                    }
+                                },
+                                primaryLengthUnit: 'meters',
+                                secondaryLengthUnit: 'kilometers',
+                                primaryAreaUnit: 'sqmeters',
+                                secondaryAreaUnit: 'sqkilometers',
+                                thousandsSep: '',
+                            }
+                        }
+                    );
+                    measureControl.addTo(map);
+                }
+
+
                 if (maxBounds) {
                     map.fitBounds(L.latLngBounds(
                         L.latLng(maxBounds.miny, maxBounds.minx),
@@ -366,6 +400,22 @@ LeafletMap.propTypes = {
     // 设置最大同时存在的已绘制矢量要素，默认为null不限制
     maxDrawnShapes: PropTypes.number,
 
+    // 设置是否添加测量工具栏，默认为false
+    measureControl: PropTypes.bool,
+
+    // 配置测量工具相关参数
+    measureControlOptions: PropTypes.exact({
+        // 设置测量工具栏的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
+        // 默认为'topleft'
+        position: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
+
+        // 设置测量工具绘制时的要素颜色，默认为'#f1c40f'
+        activeColor: PropTypes.string,
+
+        // 设置测量工具绘制完成时的要素颜色，默认为'#e74c3c'
+        completedColor: PropTypes.string
+    }),
+
     // 事件监听类属性值
     _drawnShapes: PropTypes.array,
 
@@ -406,7 +456,8 @@ LeafletMap.defaultProps = {
     scrollWheelZoom: true,
     editToolbar: false,
     showMeasurements: true,
-    maxDrawnShapes: null
+    maxDrawnShapes: null,
+    measureControl: false
 }
 
 export default React.memo(LeafletMap);

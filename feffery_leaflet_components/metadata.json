@@ -1393,6 +1393,56 @@
           "computed": false
         }
       },
+      "measureControl": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "measureControlOptions": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "position": {
+              "name": "enum",
+              "value": [
+                {
+                  "value": "'topleft'",
+                  "computed": false
+                },
+                {
+                  "value": "'topright'",
+                  "computed": false
+                },
+                {
+                  "value": "'bottomleft'",
+                  "computed": false
+                },
+                {
+                  "value": "'bottomright'",
+                  "computed": false
+                }
+              ],
+              "required": false
+            },
+            "activeColor": {
+              "name": "string",
+              "required": false
+            },
+            "completedColor": {
+              "name": "string",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
       "_drawnShapes": {
         "type": {
           "name": "array"
@@ -2798,6 +2848,17 @@
         },
         "required": false,
         "description": ""
+      },
+      "tooltipField": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'tooltip'",
+          "computed": false
+        }
       },
       "tooltipSticky": {
         "type": {

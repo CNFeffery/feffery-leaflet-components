@@ -73,6 +73,7 @@ const LeafletSuperCluster = (props) => {
         extent,
         nodeSize,
         iconOptions,
+        tooltipField,
         tooltipSticky,
         loading_state,
         setProps
@@ -205,12 +206,12 @@ const LeafletSuperCluster = (props) => {
                         }}
                         icon={iconOptions ? L.icon(iconOptions) : L.icon(defaultIconOptions)}
                     >{
-                            cluster.properties.tooltip ?
+                            cluster.properties[tooltipField] ?
                                 <Tooltip
                                     sticky={tooltipSticky}
                                     eventHandlers={{
                                         add: (e) => {
-                                            e.sourceTarget.setContent(cluster.properties.tooltip)
+                                            e.sourceTarget.setContent(cluster.properties[tooltipField])
                                         }
                                     }}
                                 /> : null
@@ -290,6 +291,9 @@ LeafletSuperCluster.propTypes = {
         className: PropTypes.string
     }),
 
+    // 设置点对象中作为tooltip展示信息的字段名，默认为'tooltip'
+    tooltipField: PropTypes.string,
+
     // 设置tooltip是否开启粘性显示，默认为false
     tooltipSticky: PropTypes.bool,
 
@@ -319,7 +323,8 @@ LeafletSuperCluster.propTypes = {
 LeafletSuperCluster.defaultProps = {
     clusterIconBaseSize: 10,
     clusterIconExtraSizeFactor: 40,
-    clusterTextSizeFactor: 0.4
+    clusterTextSizeFactor: 0.4,
+    tooltipField: 'tooltip'
 }
 
 export default React.memo(LeafletSuperCluster);

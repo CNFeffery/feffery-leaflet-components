@@ -3,7 +3,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FullscreenControl } from "react-leaflet-fullscreen";
-import { omitby, isUndefined } from 'lodash';
 
 // 定义地图全屏化组件LeafletFullscreenControl
 const LeafletFullscreenControl = (props) => {

@@ -52,6 +52,12 @@ Those elements have the following types:
   - `maxy` (Real; optional)
 - `maxDrawnShapes` (Real; optional)
 - `maxZoom` (Real; optional)
+- `measureControl` (Bool; optional)
+- `measureControlOptions` (optional): . measureControlOptions has the following type: lists containing elements 'position', 'activeColor', 'completedColor'.
+Those elements have the following types:
+  - `position` (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
+  - `activeColor` (String; optional)
+  - `completedColor` (String; optional)
 - `minZoom` (Real; optional)
 - `scrollWheelZoom` (Bool | a value equal to: 'center'; optional)
 - `showMeasurements` (Bool; optional)
@@ -62,7 +68,7 @@ Those elements have the following types:
 - `zoomDelta` (Real; optional)
 """
 function ''_leafletmap(; kwargs...)
-        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :loading_state, :maxBounds, :maxDrawnShapes, :maxZoom, :minZoom, :scrollWheelZoom, :showMeasurements, :style, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
+        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :loading_state, :maxBounds, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scrollWheelZoom, :showMeasurements, :style, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
         wild_props = Symbol[]
         return Component("''_leafletmap", "LeafletMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

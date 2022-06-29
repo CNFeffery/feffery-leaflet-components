@@ -21,7 +21,6 @@ import LeafletSuperCluster from './components/LeafletSuperCluster.react';
 import LeafletTileSelect from './components/LeafletTileSelect.react';
 import LeafletFullscreenControl from './components/LeafletFullscreenControl.react';
 
-
 export {
     LeafletMap,
     LeafletTileLayer,

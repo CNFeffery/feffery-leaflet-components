@@ -16,6 +16,7 @@ app.layout = html.Div(
     [
         flc.LeafletMap(
             [
+
                 flc.LeafletTileLayer(id='tile-layer'),
 
                 flc.LeafletFullscreenControl(
@@ -27,68 +28,74 @@ app.layout = html.Div(
                         {
                             "lat": random.normalvariate(0, 10),
                             "lng": random.normalvariate(0, 10),
-                            "tooltip": '<font style="color: red;">测试</ font>'
+                            "tooltip_": '<font style="color: red;">测试</ font>'
                         }
                         for i in range(1000)
                     ],
+                    tooltipField='tooltip_',
                     radius=100,
                     clusterTextSizeFactor=0.2,
                     # iconOptions=dict(
                     #     iconUrl='http://flc.feffery.tech/assets/imgs/flc-logo.svg',
                     #     iconSize=[32, 32]
                     # )
-                )
-            ],
-            editToolbar=True,
-            style={
-                'height': '80%',
-                'width': '80%',
-                'position': 'absolute',
-            }
-        ),
+                ),
 
-        flc.LeafletTileSelect(
-            id='tile-select',
-            selectedUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            urls=[
+                flc.LeafletTileSelect(
+                    id='tile-select',
+                    selectedUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    urls=[
                         {
                             'url': 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                         },
-                {
+                        {
                             'url': 'http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
                         },
-                {
+                        {
                             'url': 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
                         },
-                {
+                        {
                             'url': 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg'
                         },
-                {
+                        {
                             'url': 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
                         },
-                {
+                        {
                             'url': 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png'
                         },
-                {
+                        {
                             'url': 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png'
                         },
-                {
+                        {
                             'url': 'https://stamen-tiles-a.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.png'
                         },
-                {
+                        {
                             'url': 'https://d.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'
                         }
+                    ],
+                    center={
+                        'lng': 121.4,
+                        'lat': 31.2
+                    },
+                    zoom=7
+                ),
+
+                flc.LeafletMiniMap()
             ],
-            center={
-                'lng': 121.4,
-                'lat': 31.2
-            },
-            zoom=7
+            editToolbar=True,
+            measureControl=True,
+            style={
+                'height': '100%',
+                'width': '100%',
+                'position': 'absolute',
+            }
         )
     ],
     style={
         'position': 'relative',
-        'height': '100vh'
+        'width': 'calc(100vw - 400px)',
+        'height': '100vh',
+        'margin': '0 auto'
     }
 )
 

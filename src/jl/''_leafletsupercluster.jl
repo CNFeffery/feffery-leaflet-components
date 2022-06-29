@@ -38,10 +38,11 @@ Those elements have the following types:
 - `nodeSize` (Real; optional)
 - `positions` (Array of Dicts; required)
 - `radius` (Real; optional)
+- `tooltipField` (String; optional)
 - `tooltipSticky` (Bool; optional)
 """
 function ''_leafletsupercluster(; kwargs...)
-        available_props = Symbol[:id, :clusterBackground, :clusterBorder, :clusterIconBaseSize, :clusterIconExtraSizeFactor, :clusterTextColor, :clusterTextSizeFactor, :extent, :iconOptions, :loading_state, :maxZoom, :minPoints, :minZoom, :nodeSize, :positions, :radius, :tooltipSticky]
+        available_props = Symbol[:id, :clusterBackground, :clusterBorder, :clusterIconBaseSize, :clusterIconExtraSizeFactor, :clusterTextColor, :clusterTextSizeFactor, :extent, :iconOptions, :loading_state, :maxZoom, :minPoints, :minZoom, :nodeSize, :positions, :radius, :tooltipField, :tooltipSticky]
         wild_props = Symbol[]
         return Component("''_leafletsupercluster", "LeafletSuperCluster", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

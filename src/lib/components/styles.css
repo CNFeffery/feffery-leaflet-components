@@ -23,8 +23,8 @@
 /* 图层选择器 */
 .leaflet-tile-select {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 10px;
+    right: 10px;
     z-index: 999;
     display: flex;
     gap: 15px;
