@@ -1,10 +1,8 @@
-
 from math import sin, cos, sqrt, fabs, atan2
 from math import pi as PI
 
 __all__ = ['Converter']
 
-# define ellipsoid
 a = 6378245.0
 f = 1 / 298.3
 b = a * (1 - f)
