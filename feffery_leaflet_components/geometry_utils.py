@@ -116,19 +116,20 @@ def bd2wgs(bdLon, bdLat):
     gcj = bd2gcj(bdLon, bdLat)
     return gcj2wgs(gcj[0], gcj[1])
 
+
 class Converter:
     """
     辅助工具类
     """
 
     @classmethod
-    def __recursion_parse(cls, obj, source_crs, target_crs):
+    def __recursion_parse_shape(cls, obj, source_crs, target_crs):
         """
-        递归解析矢量信息
+        递归解析shape型矢量数据
         """
 
         if isinstance(obj, list):
-            return [cls.__recursion_parse(item, source_crs, target_crs) for item in obj]
+            return [cls.__recursion_parse_shape(item, source_crs, target_crs) for item in obj]
 
         elif isinstance(obj, dict):
             if source_crs and target_crs:
@@ -203,6 +204,126 @@ class Converter:
         raise TypeError('输入对象应为列表或字典')
 
     @classmethod
+    def __recursion_parse_geojson(cls, obj, source_crs, target_crs):
+        """
+        递归解析geojson型矢量数据
+        """
+
+        if (
+            len(obj) == 2 and (
+                isinstance(obj[0], float) or isinstance(obj[0], int)
+            )
+            and (
+                isinstance(obj[1], float) or isinstance(obj[1], int)
+            )
+        ):
+            if source_crs and target_crs:
+                # wgs -> gcj
+                if source_crs == 'wgs' and target_crs == 'gcj':
+                    x, y = wgs2gcj(
+                        obj[0],
+                        obj[1]
+                    )
+                    return {
+                        'lng': round(x, 6),
+                        'lat': round(y, 6)
+                    }
+
+                # wgs -> bd
+                elif source_crs == 'wgs' and target_crs == 'bd':
+                    x, y = wgs2bd(
+                        obj[0],
+                        obj[1]
+                    )
+                    return {
+                        'lng': round(x, 6),
+                        'lat': round(y, 6)
+                    }
+
+                # gcj -> wgs
+                elif source_crs == 'gcj' and target_crs == 'wgs':
+                    x, y = gcj2wgs(
+                        obj[0],
+                        obj[1]
+                    )
+                    return {
+                        'lng': round(x, 6),
+                        'lat': round(y, 6)
+                    }
+
+                # gcj -> bd
+                elif source_crs == 'gcj' and target_crs == 'bd':
+                    x, y = gcj2bd(
+                        obj[0],
+                        obj[1]
+                    )
+                    return {
+                        'lng': round(x, 6),
+                        'lat': round(y, 6)
+                    }
+
+                # bd -> wgs
+                elif source_crs == 'bd' and target_crs == 'wgs':
+                    x, y = bd2wgs(
+                        obj[0],
+                        obj[1]
+                    )
+                    return {
+                        'lng': round(x, 6),
+                        'lat': round(y, 6)
+                    }
+
+                # bd -> gcj
+                elif source_crs == 'bd' and target_crs == 'gcj':
+                    x, y = bd2gcj(
+                        obj[0],
+                        obj[1]
+                    )
+                    return {
+                        'lng': round(x, 6),
+                        'lat': round(y, 6)
+                    }
+
+            return {
+                'lng': round(obj[0], 6),
+                'lat': round(obj[1], 6)
+            }
+
+        elif isinstance(obj, list) or isinstance(obj, tuple):
+            return [cls.__recursion_parse_geojson(item, source_crs, target_crs) for item in obj]
+
+        raise TypeError('输入对象格式错误')
+
+    @classmethod
+    def convert_geojson(cls,
+                        geojson: dict,
+                        source_crs=None,
+                        target_crs=None):
+        """接受GeoJSON中的单个feature对象，将坐标列表转换为经纬度对象格式
+
+        Args:
+            geojson (dict): GeoJSON中的单个feature对象
+            source_crs (_type_, optional): 当需要进行坐标转换时定义输入坐标系.
+            target_crs (_type_, optional): 当需要进行坐标转换时定义输出坐标系.
+
+        Returns:
+            _type_: 返回转换完成的对象格式矢量信息
+        """
+
+        # 检查输入输出坐标系是否合法
+        if source_crs and target_crs:
+            if source_crs not in ['wgs', 'gcj', 'bd']:
+                raise TypeError("输入坐标系非法")
+            if target_crs not in ['wgs', 'gcj', 'bd']:
+                raise TypeError("输出坐标系非法")
+
+        return cls.__recursion_parse_geojson(
+            geojson['geometry']['coordinates'],
+            source_crs,
+            target_crs
+        )
+
+    @classmethod
     def convert_drawn_shape(cls,
                             shape_object: dict,
                             source_crs=None,
@@ -233,7 +354,7 @@ class Converter:
 
         # Polygon类型
         if shape_object['type'] in ['Polygon', 'Rectangle', 'Line']:
-            _shape = cls.__recursion_parse(
+            _shape = cls.__recursion_parse_shape(
                 shape_object['geometry']['latlngs'],
                 source_crs,
                 target_crs
