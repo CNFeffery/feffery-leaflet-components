@@ -2,8 +2,8 @@ import dash
 import random
 from dash import html
 import feffery_leaflet_components as flc
-from feffery_leaflet_components.utils import Converter
-from dash.dependencies import Input, Output, State, ALL
+from feffery_leaflet_components.geometry_utils import Converter
+from dash.dependencies import Input, Output
 
 app = dash.Dash(
     __name__,
@@ -16,7 +16,6 @@ app.layout = html.Div(
             [
 
                 flc.LeafletTileLayer(id='tile-layer'),
-
                 flc.LeafletFullscreenControl(
                     forceSeparateButton=True
                 ),

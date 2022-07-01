@@ -145,6 +145,9 @@ class Converter(Transform):
 
     @classmethod
     def __recursion_parse(cls, obj, source_crs, target_crs):
+        """
+        递归解析矢量信息
+        """
 
         if isinstance(obj, list):
             return [cls.__recursion_parse(item, source_crs, target_crs) for item in obj]
@@ -226,13 +229,29 @@ class Converter(Transform):
                             shape_object: dict,
                             source_crs=None,
                             target_crs=None):
+        """接受LeafletMap中绘制捕获的_drawnShapes对象，并转换为多维数组格式
+
+        Args:
+            shape_object (dict): _drawnShapes中的单个矢量结果元素F
+            source_crs (_type_, optional): 当需要进行坐标转换时定义输入坐标系.
+            target_crs (_type_, optional): 当需要进行坐标转换时定义输出坐标系.
+
+        Returns:
+            _type_: 返回转换完成的数组格式矢量信息
+        """
 
         # 检查类型是否在可转换的类型中
-        if shape_object['type'] not in ['Polygon', 'Marker',
-                                        'CircleMarker', 'Line', 'Rectangle']:
+        if shape_object['type'] not in ['Polygon', 'Marker', 'CircleMarker', 'Line', 'Rectangle']:
             raise TypeError(
                 "不支持的矢量类型，请确保类型在Polygon、Marker、CircleMarker、Line、Rectangle之中"
             )
+
+        # 检查输入输出坐标系是否合法
+        if source_crs and target_crs:
+            if source_crs not in ['wgs', 'gcj', 'bd']:
+                raise TypeError("输入坐标系非法")
+            if target_crs not in ['wgs', 'gcj', 'bd']:
+                raise TypeError("输出坐标系非法")
 
         # Polygon类型
         if shape_object['type'] in ['Polygon', 'Rectangle', 'Line']:
@@ -313,6 +332,6 @@ class Converter(Transform):
                     ]
 
             return [
-                round(shape_object['geometry']['latlng']['lng']),
-                round(shape_object['geometry']['latlng']['lat'])
+                round(shape_object['geometry']['latlng']['lng'], 6),
+                round(shape_object['geometry']['latlng']['lat'], 6)
             ]
