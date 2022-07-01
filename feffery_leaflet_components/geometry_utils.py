@@ -116,29 +116,7 @@ def bd2wgs(bdLon, bdLat):
     gcj = bd2gcj(bdLon, bdLat)
     return gcj2wgs(gcj[0], gcj[1])
 
-
-class Transform:
-
-    def wgs2gcj(self, wgsLon, wgsLat):
-        return wgs2gcj(wgsLon, wgsLat)
-
-    def gcj2wgs(self, gcjLon, gcjLat):
-        return gcj2wgs(gcjLon, gcjLat)
-
-    def gcj2bd(self, gcjLon, gcjLat):
-        return gcj2bd(gcjLon, gcjLat)
-
-    def bd2gcj(self, bdLon, bdLat):
-        return bd2gcj(bdLon, bdLat)
-
-    def wgs2bd(self, wgsLon, wgsLat):
-        return wgs2bd(wgsLon, wgsLat)
-
-    def bd2wgs(self, bdLon, bdLat):
-        return bd2wgs(bdLon, bdLat)
-
-
-class Converter(Transform):
+class Converter:
     """
     辅助工具类
     """
@@ -156,7 +134,7 @@ class Converter(Transform):
             if source_crs and target_crs:
                 # wgs -> gcj
                 if source_crs == 'wgs' and target_crs == 'gcj':
-                    x, y = cls.wgs2gcj(
+                    x, y = wgs2gcj(
                         obj['lng'],
                         obj['lat']
                     )
@@ -167,7 +145,7 @@ class Converter(Transform):
 
                 # wgs -> bd
                 elif source_crs == 'wgs' and target_crs == 'bd':
-                    x, y = cls.wgs2bd(
+                    x, y = wgs2bd(
                         obj['lng'],
                         obj['lat']
                     )
@@ -178,7 +156,7 @@ class Converter(Transform):
 
                 # gcj -> wgs
                 elif source_crs == 'gcj' and target_crs == 'wgs':
-                    x, y = cls.gcj2wgs(
+                    x, y = gcj2wgs(
                         obj['lng'],
                         obj['lat']
                     )
@@ -189,7 +167,7 @@ class Converter(Transform):
 
                 # gcj -> bd
                 elif source_crs == 'gcj' and target_crs == 'bd':
-                    x, y = cls.gcj2bd(
+                    x, y = gcj2bd(
                         obj['lng'],
                         obj['lat']
                     )
@@ -200,7 +178,7 @@ class Converter(Transform):
 
                 # bd -> wgs
                 elif source_crs == 'bd' and target_crs == 'wgs':
-                    x, y = cls.bd2wgs(
+                    x, y = bd2wgs(
                         obj['lng'],
                         obj['lat']
                     )
@@ -211,7 +189,7 @@ class Converter(Transform):
 
                 # bd -> gcj
                 elif source_crs == 'bd' and target_crs == 'gcj':
-                    x, y = cls.bd2gcj(
+                    x, y = bd2gcj(
                         obj['lng'],
                         obj['lat']
                     )
@@ -267,7 +245,7 @@ class Converter(Transform):
             if source_crs and target_crs:
                 # wgs -> gcj
                 if source_crs == 'wgs' and target_crs == 'gcj':
-                    x, y = cls.wgs2gcj(
+                    x, y = wgs2gcj(
                         shape_object['geometry']['latlng']['lng'],
                         shape_object['geometry']['latlng']['lat']
                     )
@@ -278,7 +256,7 @@ class Converter(Transform):
 
                 # wgs -> bd
                 elif source_crs == 'wgs' and target_crs == 'bd':
-                    x, y = cls.wgs2bd(
+                    x, y = wgs2bd(
                         shape_object['geometry']['latlng']['lng'],
                         shape_object['geometry']['latlng']['lat']
                     )
@@ -289,7 +267,7 @@ class Converter(Transform):
 
                 # gcj -> wgs
                 elif source_crs == 'gcj' and target_crs == 'wgs':
-                    x, y = cls.gcj2wgs(
+                    x, y = gcj2wgs(
                         shape_object['geometry']['latlng']['lng'],
                         shape_object['geometry']['latlng']['lat']
                     )
@@ -300,7 +278,7 @@ class Converter(Transform):
 
                 # gcj -> bd
                 elif source_crs == 'gcj' and target_crs == 'bd':
-                    x, y = cls.gcj2bd(
+                    x, y = gcj2bd(
                         shape_object['geometry']['latlng']['lng'],
                         shape_object['geometry']['latlng']['lat']
                     )
@@ -311,7 +289,7 @@ class Converter(Transform):
 
                 # bd -> wgs
                 elif source_crs == 'bd' and target_crs == 'wgs':
-                    x, y = cls.bd2wgs(
+                    x, y = bd2wgs(
                         shape_object['geometry']['latlng']['lng'],
                         shape_object['geometry']['latlng']['lat']
                     )
@@ -322,7 +300,7 @@ class Converter(Transform):
 
                 # bd -> gcj
                 elif source_crs == 'bd' and target_crs == 'gcj':
-                    x, y = cls.bd2gcj(
+                    x, y = bd2gcj(
                         shape_object['geometry']['latlng']['lng'],
                         shape_object['geometry']['latlng']['lat']
                     )
