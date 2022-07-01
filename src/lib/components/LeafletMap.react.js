@@ -60,14 +60,8 @@ const extractDrawnShapes = (item, i) => {
             latlngs: item._latlngs
         }
     } else if (item.pm._shape === 'Polygon') {
-        if (Object.prototype.hasOwnProperty(item, 'feature')) {
-            drawnShape.geometry = {
-                feature: item.feature
-            }
-        } else {
-            drawnShape.geometry = {
-                latlngs: item._latlngs
-            }
+        drawnShape.geometry = {
+            latlngs: item._latlngs
         }
     } else if (item.pm._shape === 'Circle') {
         drawnShape.geometry = {

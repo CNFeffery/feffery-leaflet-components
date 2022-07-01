@@ -4,8 +4,8 @@ import json
 import random
 from dash import html
 import feffery_leaflet_components as flc
+from feffery_leaflet_components.utils import Converter
 from dash.dependencies import Input, Output, State, ALL
-
 
 app = dash.Dash(
     __name__,
@@ -82,6 +82,7 @@ app.layout = html.Div(
 
                 flc.LeafletMiniMap()
             ],
+            id='map-demo',
             editToolbar=True,
             measureControl=True,
             style={
@@ -107,6 +108,18 @@ app.layout = html.Div(
 def update_tile(selectedUrl):
 
     return selectedUrl
+
+
+@app.callback(
+    Output('map-demo', 'zoom'),
+    Input('map-demo', '_drawnShapes')
+)
+def convert_drawn_shapes_demo(_drawnShapes):
+
+    if _drawnShapes:
+        print([Converter.convert_drawn_shape(shape) for shape in _drawnShapes])
+
+    return dash.no_update
 
 
 if __name__ == '__main__':
