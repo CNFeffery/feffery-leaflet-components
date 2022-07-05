@@ -1,6 +1,6 @@
 {
   "name": "feffery_leaflet_components",
-  "version": "0.0.1-a2",
+  "version": "0.0.1-a3",
   "description": "Best implementation of Leaflet components in Plotly Dash.",
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "leaflet-defaulticon-compatibility": "^0.1.1",
     "leaflet-measure": "^3.1.0",
     "leaflet-minimap": "^3.6.1",
+    "leaflet-webgl-heatmap": "^0.2.7",
     "leaflet.heat": "^0.2.0",
     "leaflet.motion": "^0.3.2",
     "lodash": "^4.17.21",

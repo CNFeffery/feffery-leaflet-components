@@ -1,4 +1,5 @@
 import dash
+import json
 import random
 from dash import html
 import feffery_leaflet_components as flc
@@ -15,9 +16,33 @@ app.layout = html.Div(
         flc.LeafletMap(
             [
 
+                flc.LeafletMarker(
+                    position={
+                        'lng': 106.5,
+                        'lat': 29.5
+                    },
+                    iconOptions={
+                        'iconUrl': 'http://flc.feffery.tech/assets/imgs/flc-logo.svg',
+                        'iconSize': [50, 50]
+                    }
+                ),
+
                 flc.LeafletTileLayer(id='tile-layer'),
                 flc.LeafletFullscreenControl(
                     forceSeparateButton=True
+                ),
+
+                flc.LeafletStaticHeatMap(
+                    points=[
+                        {
+                            'lng': point[1],
+                            'lat': point[0],
+                            # 'weight': random.uniform(0, 1),
+                        }
+                        for point in json.load(open('./heatmap-demo-points.json'))
+                    ],
+                    size=100,
+                    opacity=0.75
                 ),
 
                 flc.LeafletSuperCluster(

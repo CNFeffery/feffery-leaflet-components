@@ -15,6 +15,7 @@ from .LeafletPolygon import LeafletPolygon
 from .LeafletPolyline import LeafletPolyline
 from .LeafletPopup import LeafletPopup
 from .LeafletRectangle import LeafletRectangle
+from .LeafletStaticHeatMap import LeafletStaticHeatMap
 from .LeafletSuperCluster import LeafletSuperCluster
 from .LeafletTileLayer import LeafletTileLayer
 from .LeafletTileSelect import LeafletTileSelect
@@ -38,6 +39,7 @@ __all__ = [
     "LeafletPolyline",
     "LeafletPopup",
     "LeafletRectangle",
+    "LeafletStaticHeatMap",
     "LeafletSuperCluster",
     "LeafletTileLayer",
     "LeafletTileSelect",

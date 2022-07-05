@@ -20,6 +20,7 @@ import LeafletMarker from './components/LeafletMarker.react';
 import LeafletSuperCluster from './components/LeafletSuperCluster.react';
 import LeafletTileSelect from './components/LeafletTileSelect.react';
 import LeafletFullscreenControl from './components/LeafletFullscreenControl.react';
+import LeafletStaticHeatMap from './components/LeafletStaticHeatMap.react';
 
 export {
     LeafletMap,
@@ -42,5 +43,6 @@ export {
     LeafletMarker,
     LeafletSuperCluster,
     LeafletTileSelect,
-    LeafletFullscreenControl
+    LeafletFullscreenControl,
+    LeafletStaticHeatMap
 };

@@ -1,7 +1,8 @@
 from math import sin, cos, sqrt, fabs, atan2
 from math import pi as PI
 
-__all__ = ['Converter']
+__all__ = ['Converter', 'wgs2gcj', 'gcj2wgs',
+           'gcj2bd', 'bd2gcj', 'wgs2bd', 'bd2wgs']
 
 a = 6378245.0
 f = 1 / 298.3
@@ -66,7 +67,7 @@ def wgs2gcj(wgsLon, wgsLat):
     dLon = (dLon * 180.0) / (a / sqrtMagic * cos(radLat) * PI)
     gcjLat = wgsLat + dLat
     gcjLon = wgsLon + dLon
-    return (gcjLon, gcjLat)
+    return (round(gcjLon, 6), round(gcjLat, 6))
 
 
 def gcj2wgs(gcjLon, gcjLat):
@@ -84,7 +85,7 @@ def gcj2wgs(gcjLon, gcjLat):
         w1 = tuple(map(lambda x: x[0]-(x[1]-x[2]), zip(w0, g1, g0)))
         # delta = w1 - w0
         delta = tuple(map(lambda x: x[0] - x[1], zip(w1, w0)))
-    return w1
+    return (round(w1[0], 6), round(w1[1], 6))
 
 
 def gcj2bd(gcjLon, gcjLat):
@@ -94,7 +95,7 @@ def gcj2bd(gcjLon, gcjLat):
         cos(gcjLon * PI * 3000.0 / 180.0)
     bdLon = z * cos(theta) + 0.0065
     bdLat = z * sin(theta) + 0.006
-    return (bdLon, bdLat)
+    return (round(bdLon, 6), round(bdLat, 6))
 
 
 def bd2gcj(bdLon, bdLat):
@@ -104,7 +105,7 @@ def bd2gcj(bdLon, bdLat):
     theta = atan2(y, x) - 0.000003 * cos(x * PI * 3000.0 / 180.0)
     gcjLon = z * cos(theta)
     gcjLat = z * sin(theta)
-    return (gcjLon, gcjLat)
+    return (round(gcjLon, 6), round(gcjLat, 6))
 
 
 def wgs2bd(wgsLon, wgsLat):
@@ -119,7 +120,7 @@ def bd2wgs(bdLon, bdLat):
 
 class Converter:
     """
-    辅助工具类
+    辅助数据格式转换工具类
     """
 
     @classmethod

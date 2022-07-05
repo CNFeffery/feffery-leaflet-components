@@ -32,7 +32,7 @@ const _selectedStyle = {
     color: '#f5222d',
     fillColor: '#f5222d',
     fillOpacity: 0.2,
-    opacity: 1,
+    opacity: 1
 }
 
 // 计算两个对象之间的属性名差异数组
