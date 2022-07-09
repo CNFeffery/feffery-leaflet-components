@@ -21,6 +21,7 @@ import LeafletSuperCluster from './components/LeafletSuperCluster.react';
 import LeafletTileSelect from './components/LeafletTileSelect.react';
 import LeafletFullscreenControl from './components/LeafletFullscreenControl.react';
 import LeafletStaticHeatMap from './components/LeafletStaticHeatMap.react';
+import LeafletExport from './components/LeafletExport.react';
 
 export {
     LeafletMap,
@@ -44,5 +45,6 @@ export {
     LeafletSuperCluster,
     LeafletTileSelect,
     LeafletFullscreenControl,
-    LeafletStaticHeatMap
+    LeafletStaticHeatMap,
+    LeafletExport
 };

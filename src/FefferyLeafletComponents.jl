@@ -8,6 +8,7 @@ const version = "0.0.1-a3"
 include("jl/''_leafletantpath.jl")
 include("jl/''_leafletcircle.jl")
 include("jl/''_leafletcirclemarker.jl")
+include("jl/''_leafletexport.jl")
 include("jl/''_leafletflowlayer.jl")
 include("jl/''_leafletfullscreencontrol.jl")
 include("jl/''_leafletgeojson.jl")

@@ -23,8 +23,6 @@ const LeafletPopup = (props) => {
         setProps
     } = props;
 
-    console.log('popup测试')
-
     // 返回定制化的前端组件
     return (
         <Popup

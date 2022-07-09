@@ -332,6 +332,156 @@
       }
     }
   },
+  "src/lib/components/LeafletExport.react.js": {
+    "description": "",
+    "displayName": "LeafletExport",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "position": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'topleft'",
+              "computed": false
+            },
+            {
+              "value": "'topright'",
+              "computed": false
+            },
+            {
+              "value": "'bottomleft'",
+              "computed": false
+            },
+            {
+              "value": "'bottomright'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      },
+      "sizeModes": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "enum",
+            "value": [
+              {
+                "value": "'A4Landscape'",
+                "computed": false
+              },
+              {
+                "value": "'A4Portrait'",
+                "computed": false
+              }
+            ]
+          }
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "['A4Landscape', 'A4Portrait']",
+          "computed": false
+        }
+      },
+      "tileWait": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
+      "filename": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'map'",
+          "computed": false
+        }
+      },
+      "hidden": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
+      "hideControlContainer": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
+      "customSizeTooltip": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "customSize": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "width": {
+              "name": "number",
+              "required": false
+            },
+            "height": {
+              "name": "number",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
   "src/lib/components/LeafletFlowLayer.react.js": {
     "description": "",
     "displayName": "LeafletFlowLayer",
@@ -1080,6 +1230,13 @@
     "methods": [],
     "props": {
       "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "key": {
         "type": {
           "name": "string"
         },

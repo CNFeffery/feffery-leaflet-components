@@ -76,6 +76,7 @@ const extractDrawnShapes = (item, i) => {
 const LeafletMap = (props) => {
     const {
         id,
+        key,
         style,
         className,
         children,
@@ -104,6 +105,7 @@ const LeafletMap = (props) => {
     return (
         <MapContainer
             id={id}
+            key={key}
             style={style}
             className={className}
             data-dash-is-loading={
@@ -273,6 +275,9 @@ const LeafletMap = (props) => {
 LeafletMap.propTypes = {
     // 组件id
     id: PropTypes.string,
+
+    // 辅助强制整体刷新
+    key: PropTypes.string,
 
     // 定义当前地图容器下属所有图层元素
     children: PropTypes.node,

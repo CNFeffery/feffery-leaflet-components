@@ -62,7 +62,7 @@ const LeafletAntPath = (props) => {
     }, [antPathLayer])
 
     // 返回定制化的前端组件
-    return <></>;
+    return <div />;
 }
 
 // 定义参数或属性

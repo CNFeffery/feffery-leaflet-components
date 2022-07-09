@@ -3,6 +3,7 @@
 export(''LeafletAntPath)
 export(''LeafletCircle)
 export(''LeafletCircleMarker)
+export(''LeafletExport)
 export(''LeafletFlowLayer)
 export(''LeafletFullscreenControl)
 export(''LeafletGeoJSON)

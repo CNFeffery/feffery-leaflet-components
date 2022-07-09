@@ -27,38 +27,47 @@ const LeafletFlowLayer = (props) => {
 
     useEffect(() => {
 
-        // 将flowData加工为流线地图所需data格式
-        const data = flowData.map(item => {
-            return {
-                from: [item.from.lng, item.from.lat],
-                to: [item.to.lng, item.to.lat],
-                labels: [item.labels.from, item.labels.to],
-                color: item.color || '#3498db',
-                value: item.value || 1
-            };
-        })
+        if (flowData) {
+            // 将flowData加工为流线地图所需data格式
+            const data = flowData.map(item => {
+                return {
+                    from: [item.from.lng, item.from.lat],
+                    to: [item.to.lng, item.to.lat],
+                    labels: [item.labels.from, item.labels.to],
+                    color: item.color || '#3498db',
+                    value: item.value || 1
+                };
+            })
 
-        if (flowLayer) {
-            // 销毁先前绘制的图层
-            flowLayer.setData(data);
+            if (flowLayer) {
+                // 更新当前流线图层实例的data
+                flowLayer.setData(data);
+            } else {
+                setFlowLayer(
+                    L.migrationLayer({
+                        map: map,
+                        data: data,
+                        pulseRadius: pulseRadius,
+                        pulseBorderWidth: pulseBorderWidth,
+                        arcWidth: arcWidth,
+                        maxWidth: maxWidth,
+                        arcLabel: arcLabel,
+                        arcLabelFont: `${arcLabelFontSize} ${arcLabelFontFamily}`,
+                        _migrationId: id
+                    })
+                )
+            }
         } else {
-            setFlowLayer(
-                L.migrationLayer({
-                    map: map,
-                    data: data,
-                    pulseRadius: pulseRadius,
-                    pulseBorderWidth: pulseBorderWidth,
-                    arcWidth: arcWidth,
-                    maxWidth: maxWidth,
-                    arcLabel: arcLabel,
-                    arcLabelFont: `${arcLabelFontSize} ${arcLabelFontFamily}`,
-                    _migrationId: id
-                })
-            )
+            setFlowLayer(null)
         }
-    }, [flowData])
+    }, [map, flowData])
 
-    if (flowLayer) {
+    // 在组件即将卸载前对flowLayer实例进行销毁
+    useEffect(() => {
+        return () => flowLayer && flowLayer.destroy()
+    })
+
+    if (map && flowLayer) {
         flowLayer.addTo(map)
     }
 

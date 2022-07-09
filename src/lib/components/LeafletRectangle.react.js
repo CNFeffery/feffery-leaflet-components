@@ -23,7 +23,6 @@ const LeafletRectangle = (props) => {
     const rectangleRef = useRef(null);
 
     useEffect(() => {
-        console.log('挂载矩形！')
         if (rectangleRef.current) {
             rectangleRef.current.on('pm:edit', function (e) {
                 // 更新坐标集合

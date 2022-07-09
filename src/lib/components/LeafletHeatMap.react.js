@@ -1,63 +1,47 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undefined */
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import L from "leaflet";
 import "leaflet.heat";
-import { MapConsumer } from 'react-leaflet';
+import { useMap } from 'react-leaflet';
 
-// 定义热力图层组件LeafletHeatMap，api参数参考
-class LeafletHeatMap extends Component {
+// 定义热力图层组件LeafletHeatMap
+const LeafletHeatMap = (props) => {
+    // 取得必要属性或参数
+    const {
+        id,
+        points,
+        minOpacity,
+        max,
+        radius,
+        blur,
+        gradient,
+        setProps,
+        loading_state
+    } = props;
 
-    render() {
-        // 取得必要属性或参数
-        const {
-            id,
-            points,
-            minOpacity,
-            max,
-            radius,
-            blur,
-            gradient,
-            setProps,
-            loading_state
-        } = this.props;
+    const map = useMap()
 
-        // 返回定制化的前端组件
-        return (
-            <MapConsumer
-                id={id}
-                data-dash-is-loading={
-                    (loading_state && loading_state.is_loading) || undefined
-                } >
-                {(map) => {
+    useEffect(() => {
+        if (map) {
+            // 初始化热力图层
+            const heatmapLayer = L.heatLayer(points.map(item => {
+                return item.weight ? [item.lat, item.lng, item.weight] : [item.lat, item.lng];
+            }), {
+                minOpacity,
+                max,
+                radius,
+                blur,
+                gradient,
+                // _heatmapId: id
+            })
 
-                    // 检查是否有已存在的_heatmapId对应图层，如果有则进行移除
-                    map.eachLayer(layer => {
-                        if (layer.options._heatmapId === id) {
-                            map.removeLayer(layer);
-                        }
-                    })
+            heatmapLayer.addTo(map);
+        }
+    }, [map])
 
-                    // 初始化热力图层
-                    const heatmapLayer = L.heatLayer(points.map(item => {
-                        return item.weight ? [item.lat, item.lng, item.weight] : [item.lat, item.lng];
-                    }), {
-                        minOpacity,
-                        max,
-                        radius,
-                        blur,
-                        gradient,
-                        _heatmapId: id
-                    })
-
-                    heatmapLayer.addTo(map);
-
-                    return null;
-                }}
-            </MapConsumer>
-        );
-    }
+    return <></>
 }
 
 // 定义参数或属性
