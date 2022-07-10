@@ -42,18 +42,16 @@ Keyword arguments:
 
 - position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
 
-- sizeModes (list of a value equal to: 'A4Landscape', 'A4Portrait's; default ['A4Landscape', 'A4Portrait'])
-
 - tileWait (number; optional)"""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletExport'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, position=Component.UNDEFINED, sizeModes=Component.UNDEFINED, tileWait=Component.UNDEFINED, filename=Component.UNDEFINED, hidden=Component.UNDEFINED, hideControlContainer=Component.UNDEFINED, customSizeTooltip=Component.UNDEFINED, customSize=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'customSize', 'customSizeTooltip', 'filename', 'hidden', 'hideControlContainer', 'loading_state', 'position', 'sizeModes', 'tileWait']
+    def __init__(self, id=Component.UNDEFINED, position=Component.UNDEFINED, tileWait=Component.UNDEFINED, filename=Component.UNDEFINED, hidden=Component.UNDEFINED, hideControlContainer=Component.UNDEFINED, customSizeTooltip=Component.UNDEFINED, customSize=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'customSize', 'customSizeTooltip', 'filename', 'hidden', 'hideControlContainer', 'loading_state', 'position', 'tileWait']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'customSize', 'customSizeTooltip', 'filename', 'hidden', 'hideControlContainer', 'loading_state', 'position', 'sizeModes', 'tileWait']
+        self.available_properties = ['id', 'customSize', 'customSizeTooltip', 'filename', 'hidden', 'hideControlContainer', 'loading_state', 'position', 'tileWait']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

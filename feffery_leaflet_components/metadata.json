@@ -369,30 +369,6 @@
         "required": false,
         "description": ""
       },
-      "sizeModes": {
-        "type": {
-          "name": "arrayOf",
-          "value": {
-            "name": "enum",
-            "value": [
-              {
-                "value": "'A4Landscape'",
-                "computed": false
-              },
-              {
-                "value": "'A4Portrait'",
-                "computed": false
-              }
-            ]
-          }
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "['A4Landscape', 'A4Portrait']",
-          "computed": false
-        }
-      },
       "tileWait": {
         "type": {
           "name": "number"
@@ -630,6 +606,17 @@
         "description": "",
         "defaultValue": {
           "value": "'sans-serif'",
+          "computed": false
+        }
+      },
+      "isStatic": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
           "computed": false
         }
       },
@@ -1685,10 +1672,6 @@
                 },
                 {
                   "value": "'fly-to-bounds'",
-                  "computed": false
-                },
-                {
-                  "value": "'invalidate-size'",
                   "computed": false
                 }
               ],

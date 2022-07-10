@@ -17,7 +17,8 @@ const LeafletFlowLayer = (props) => {
         maxWidth,
         arcLabel,
         arcLabelFontSize,
-        arcLabelFontFamily
+        arcLabelFontFamily,
+        isStatic
     } = props;
 
     const map = useMap();
@@ -69,6 +70,12 @@ const LeafletFlowLayer = (props) => {
 
     if (map && flowLayer) {
         flowLayer.addTo(map)
+        if (isStatic) {
+            map.on('zoomend moveend', () => {
+                flowLayer.pause()
+            })
+            flowLayer.pause()
+        }
     }
 
     // 返回定制化的前端组件
@@ -132,6 +139,9 @@ LeafletFlowLayer.propTypes = {
     // 设置起终点文字字体
     arcLabelFontFamily: PropTypes.string,
 
+    // 设置是否以静态形式进行渲染，默认为false
+    isStatic: PropTypes.bool,
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -162,7 +172,8 @@ LeafletFlowLayer.defaultProps = {
     maxWidth: 10,
     arcLabel: true,
     arcLabelFontSize: '10px',
-    arcLabelFontFamily: 'sans-serif'
+    arcLabelFontFamily: 'sans-serif',
+    isStatic: false
 }
 
 export default React.memo(LeafletFlowLayer);

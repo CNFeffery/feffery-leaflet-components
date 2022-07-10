@@ -130,6 +130,12 @@ const LeafletMap = (props) => {
                 ) : undefined
             }
             whenCreated={map => {
+                // 监听地图尺寸变化事件
+                map.on('resize', () => {
+                    // 更新校正视角
+                    map.invalidateSize()
+                })
+
                 if (measureControl) {
                     const measureControl = L.control.measure(
                         {

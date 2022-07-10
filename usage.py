@@ -41,8 +41,8 @@ def generate_mock_flowdata(limit: int = 10):
                 'lat': row.lat_to
             },
             'labels': {
-                'from': None if row.名称_from not in exists_labels else row.名称_from,
-                'to': None if row.名称_to not in exists_labels else row.名称_to
+                'from': None if row.名称_from in exists_labels else row.名称_from,
+                'to': None if row.名称_to in exists_labels else row.名称_to
             },
             'value': 1
         })
@@ -71,7 +71,7 @@ app.layout = html.Div(
                             'label': f'{i}个',
                             'value': i
                         }
-                        for i in range(10, 101)
+                        for i in range(10, 1000)
                     ],
                     defaultValue=10,
                     id='update-flow-limit',
@@ -84,8 +84,8 @@ app.layout = html.Div(
         html.Div(
             id='map-container',
             style={
-                'width': '800px',
-                'height': '800px',
+                'width': '900px',
+                'height': '80vh',
                 'position': 'relative'
             }
         )
@@ -130,10 +130,10 @@ def update_flow_layer(nClicks, limit):
                     'width': 800,
                     'height': 800
                 },
-                customSizeTooltip='自定义尺寸'
+                customSizeTooltip='800x800'
             ),
 
-            # flc.LeafletTileLayer(id='tile-layer'),
+            flc.LeafletTileLayer(id='tile-layer'),
             flc.LeafletFullscreenControl(),
 
             flc.LeafletHeatMap(
@@ -167,7 +167,10 @@ def update_flow_layer(nClicks, limit):
                 id='flow',
                 flowData=generate_mock_flowdata(limit=limit),
                 maxWidth=6,
-                arcLabelFontSize='18px'
+                arcLabelFontSize='18px',
+                pulseRadius=0,
+                pulseBorderWidth=0,
+                isStatic=True
             ),
 
             # flc.LeafletSuperCluster(

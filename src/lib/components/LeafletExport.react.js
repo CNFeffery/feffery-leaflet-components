@@ -26,9 +26,7 @@ const LeafletExport = (props) => {
         loading_state
     } = props;
 
-    let {
-        sizeModes
-    } = props;
+    let sizeModes;
 
     const map = useMap()
     const [initialFlag, setInitialFlag] = useState(false)
@@ -36,17 +34,33 @@ const LeafletExport = (props) => {
     useEffect(() => {
         // 若地图实例已初始化且当前地图导出插件未挂载
         if (map && !initialFlag) {
+            const customCurrentSizeMode = {
+                width: map.getSize().x,
+                height: map.getSize().y,
+                className: 'customCurrentSizeClass',
+                name: '当前尺寸'
+            }
+
             // 自定义尺寸规格
             if (customSize && customSize.width && customSize.height) {
                 const customSizeMode = {
                     width: customSize.width,
                     height: customSize.height,
                     className: 'customSizeClass',
-                    tooltip: customSizeTooltip || '标准尺寸'
+                    name: customSizeTooltip || '默认尺寸'
                 }
-                // 修复重复叠加自定义规格导出按钮的问题
-                sizeModes = sizeModes.slice(0, 2)
-                sizeModes.push(customSizeMode)
+                sizeModes = [
+                    customCurrentSizeMode,
+                    'A4Landscape',
+                    'A4Portrait',
+                    customSizeMode
+                ]
+            } else {
+                sizeModes = [
+                    customCurrentSizeMode,
+                    'A4Landscape',
+                    'A4Portrait'
+                ]
             }
 
             L.easyPrint({
@@ -84,9 +98,6 @@ LeafletExport.propTypes = {
     // 设置导出控件方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
     // 默认为'topleft'
     position: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
-
-    // 设置图片导出的尺寸规格，可选的有'A4Landscape'（横向A4）、'A4Portrait'（纵向A4）
-    sizeModes: PropTypes.arrayOf(PropTypes.oneOf(['A4Landscape', 'A4Portrait'])),
 
     // 设置底图瓦片文件渲染等待时长（单位：毫秒），默认为500
     tileWait: PropTypes.number,
@@ -135,7 +146,6 @@ LeafletExport.propTypes = {
 
 // 设置默认参数
 LeafletExport.defaultProps = {
-    sizeModes: ['A4Landscape', 'A4Portrait'],
     filename: 'map'
 }
 

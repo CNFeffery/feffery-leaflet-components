@@ -23,11 +23,10 @@ Those elements have the following types:
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
 - `position` (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
-- `sizeModes` (Array of a value equal to: 'A4Landscape', 'A4Portrait's; optional)
 - `tileWait` (Real; optional)
 """
 function ''_leafletexport(; kwargs...)
-        available_props = Symbol[:id, :customSize, :customSizeTooltip, :filename, :hidden, :hideControlContainer, :loading_state, :position, :sizeModes, :tileWait]
+        available_props = Symbol[:id, :customSize, :customSizeTooltip, :filename, :hidden, :hideControlContainer, :loading_state, :position, :tileWait]
         wild_props = Symbol[]
         return Component("''_leafletexport", "LeafletExport", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
