@@ -18,7 +18,6 @@ const LeafletExport = (props) => {
         position,
         tileWait,
         filename,
-        hidden,
         hideControlContainer,
         customSizeTooltip,
         customSize,
@@ -70,7 +69,6 @@ const LeafletExport = (props) => {
                         sizeModes,
                         tileWait,
                         filename,
-                        hidden,
                         hideControlContainer
                     },
                     isUndefined
@@ -104,9 +102,6 @@ LeafletExport.propTypes = {
 
     // 设置导出文件名称，默认为'map'
     filename: PropTypes.string,
-
-    // 设置是否隐藏默认导出按钮，适合在可控导出方式下使用，默认为false
-    hidden: PropTypes.bool,
 
     // 设置导出图片时是否隐藏地图上其其他控件，默认为true
     hideControlContainer: PropTypes.bool,

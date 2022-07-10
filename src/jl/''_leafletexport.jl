@@ -15,7 +15,6 @@ Those elements have the following types:
   - `height` (Real; optional)
 - `customSizeTooltip` (String; optional)
 - `filename` (String; optional)
-- `hidden` (Bool; optional)
 - `hideControlContainer` (Bool; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
@@ -26,7 +25,7 @@ Those elements have the following types:
 - `tileWait` (Real; optional)
 """
 function ''_leafletexport(; kwargs...)
-        available_props = Symbol[:id, :customSize, :customSizeTooltip, :filename, :hidden, :hideControlContainer, :loading_state, :position, :tileWait]
+        available_props = Symbol[:id, :customSize, :customSizeTooltip, :filename, :hideControlContainer, :loading_state, :position, :tileWait]
         wild_props = Symbol[]
         return Component("''_leafletexport", "LeafletExport", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

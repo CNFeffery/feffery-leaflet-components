@@ -387,13 +387,6 @@
           "computed": false
         }
       },
-      "hidden": {
-        "type": {
-          "name": "bool"
-        },
-        "required": false,
-        "description": ""
-      },
       "hideControlContainer": {
         "type": {
           "name": "bool"
