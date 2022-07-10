@@ -71,6 +71,9 @@ const LeafletMapAction = (props) => {
                             speedMap[mapActionConfig.flyToDuration] : speedMap['auto']
                     }
                 );
+            } else if (mapActionConfig.type === 'invalidate-size') {
+                // 执行invalidate-size动作
+                map.invalidateSize();
             }
         }
 
@@ -95,7 +98,8 @@ LeafletMapAction.propTypes = {
         // 'pan-to'：改变地图视角，受center参数控制目标中心坐标
         // 'fly-to'：强制以飞行模式改变地图视角，受center参数控制目标中心坐标、受zoom参数设置目标缩放级别
         // 'fly-to-bounds'：强制以飞行模式改变地图视角，受bounds参数控制目标视角范围
-        type: PropTypes.oneOf(['set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'pan-to', 'fly-to', 'fly-to-bounds']),
+        // 'invalidate-size'：在地图容器尺寸变化后，用于重新校正地图尺寸
+        type: PropTypes.oneOf(['set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'pan-to', 'fly-to', 'fly-to-bounds', 'invalidate-size']),
 
         // 设置地图视角切换对应的中心点坐标信息，若无，则使用地图当前中心点
         center: PropTypes.exact({

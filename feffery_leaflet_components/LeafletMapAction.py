@@ -50,7 +50,7 @@ Keyword arguments:
 
     - flyToDuration (a value equal to: 'instant', 'fast', 'normal', 'slow', 'auto'; optional)
 
-    - type (a value equal to: 'set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'pan-to', 'fly-to', 'fly-to-bounds'; optional)
+    - type (a value equal to: 'set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'pan-to', 'fly-to', 'fly-to-bounds', 'invalidate-size'; optional)
 
     - zoom (number; optional)
 
