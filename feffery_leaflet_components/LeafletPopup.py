@@ -23,6 +23,8 @@ Keyword arguments:
 
 - keepInView (boolean; optional)
 
+- key (string; optional)
+
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -46,10 +48,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletPopup'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, className=Component.UNDEFINED, minWidth=Component.UNDEFINED, maxWidth=Component.UNDEFINED, maxHeight=Component.UNDEFINED, keepInView=Component.UNDEFINED, closeButton=Component.UNDEFINED, closeOnEscapeKey=Component.UNDEFINED, closeOnClick=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'className', 'closeButton', 'closeOnClick', 'closeOnEscapeKey', 'keepInView', 'loading_state', 'maxHeight', 'maxWidth', 'minWidth']
+    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, className=Component.UNDEFINED, minWidth=Component.UNDEFINED, maxWidth=Component.UNDEFINED, maxHeight=Component.UNDEFINED, keepInView=Component.UNDEFINED, closeButton=Component.UNDEFINED, closeOnEscapeKey=Component.UNDEFINED, closeOnClick=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'className', 'closeButton', 'closeOnClick', 'closeOnEscapeKey', 'keepInView', 'key', 'loading_state', 'maxHeight', 'maxWidth', 'minWidth']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'className', 'closeButton', 'closeOnClick', 'closeOnEscapeKey', 'keepInView', 'loading_state', 'maxHeight', 'maxWidth', 'minWidth']
+        self.available_properties = ['children', 'id', 'className', 'closeButton', 'closeOnClick', 'closeOnEscapeKey', 'keepInView', 'key', 'loading_state', 'maxHeight', 'maxWidth', 'minWidth']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

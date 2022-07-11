@@ -9,6 +9,7 @@ A LeafletMapAction component.
 
 Keyword arguments:
 - `id` (String; optional)
+- `key` (String; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
@@ -33,7 +34,7 @@ Those elements have the following types:
   - `flyToDuration` (a value equal to: 'instant', 'fast', 'normal', 'slow', 'auto'; optional)
 """
 function ''_leafletmapaction(; kwargs...)
-        available_props = Symbol[:id, :loading_state, :mapActionConfig]
+        available_props = Symbol[:id, :key, :loading_state, :mapActionConfig]
         wild_props = Symbol[]
         return Component("''_leafletmapaction", "LeafletMapAction", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

@@ -79,6 +79,8 @@ LeafletMarker.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    key: PropTypes.string,
+
     // 传入tooltip、popup组件
     children: PropTypes.node,
 

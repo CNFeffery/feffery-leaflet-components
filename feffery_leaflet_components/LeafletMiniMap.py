@@ -23,6 +23,8 @@ Keyword arguments:
 
 - height (number; optional)
 
+- key (string; optional)
+
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -66,10 +68,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletMiniMap'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, url=Component.UNDEFINED, attribution=Component.UNDEFINED, opacity=Component.UNDEFINED, zIndex=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, position=Component.UNDEFINED, width=Component.UNDEFINED, height=Component.UNDEFINED, collapsedWidth=Component.UNDEFINED, collapsedHeight=Component.UNDEFINED, zoomLevelOffset=Component.UNDEFINED, zoomLevelFixed=Component.UNDEFINED, zoomAnimation=Component.UNDEFINED, toggleDisplay=Component.UNDEFINED, autoToggleDisplay=Component.UNDEFINED, aimingRectOptions=Component.UNDEFINED, shadowRectOptions=Component.UNDEFINED, minimized=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'aimingRectOptions', 'attribution', 'autoToggleDisplay', 'collapsedHeight', 'collapsedWidth', 'height', 'loading_state', 'maxZoom', 'minZoom', 'minimized', 'opacity', 'position', 'shadowRectOptions', 'toggleDisplay', 'url', 'width', 'zIndex', 'zoomAnimation', 'zoomLevelFixed', 'zoomLevelOffset']
+    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, url=Component.UNDEFINED, attribution=Component.UNDEFINED, opacity=Component.UNDEFINED, zIndex=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, position=Component.UNDEFINED, width=Component.UNDEFINED, height=Component.UNDEFINED, collapsedWidth=Component.UNDEFINED, collapsedHeight=Component.UNDEFINED, zoomLevelOffset=Component.UNDEFINED, zoomLevelFixed=Component.UNDEFINED, zoomAnimation=Component.UNDEFINED, toggleDisplay=Component.UNDEFINED, autoToggleDisplay=Component.UNDEFINED, aimingRectOptions=Component.UNDEFINED, shadowRectOptions=Component.UNDEFINED, minimized=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'aimingRectOptions', 'attribution', 'autoToggleDisplay', 'collapsedHeight', 'collapsedWidth', 'height', 'key', 'loading_state', 'maxZoom', 'minZoom', 'minimized', 'opacity', 'position', 'shadowRectOptions', 'toggleDisplay', 'url', 'width', 'zIndex', 'zoomAnimation', 'zoomLevelFixed', 'zoomLevelOffset']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'aimingRectOptions', 'attribution', 'autoToggleDisplay', 'collapsedHeight', 'collapsedWidth', 'height', 'loading_state', 'maxZoom', 'minZoom', 'minimized', 'opacity', 'position', 'shadowRectOptions', 'toggleDisplay', 'url', 'width', 'zIndex', 'zoomAnimation', 'zoomLevelFixed', 'zoomLevelOffset']
+        self.available_properties = ['id', 'aimingRectOptions', 'attribution', 'autoToggleDisplay', 'collapsedHeight', 'collapsedWidth', 'height', 'key', 'loading_state', 'maxZoom', 'minZoom', 'minimized', 'opacity', 'position', 'shadowRectOptions', 'toggleDisplay', 'url', 'width', 'zIndex', 'zoomAnimation', 'zoomLevelFixed', 'zoomLevelOffset']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

@@ -17,6 +17,8 @@ Keyword arguments:
 
 - hardwareAccelerated (boolean; optional)
 
+- key (string; optional)
+
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -54,10 +56,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletAntPath'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, positions=Component.UNDEFINED, pathOptions=Component.UNDEFINED, paused=Component.UNDEFINED, reverse=Component.UNDEFINED, hardwareAccelerated=Component.UNDEFINED, pulseColor=Component.UNDEFINED, delay=Component.UNDEFINED, dashArray=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'dashArray', 'delay', 'hardwareAccelerated', 'loading_state', 'pathOptions', 'paused', 'positions', 'pulseColor', 'reverse']
+    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, positions=Component.UNDEFINED, pathOptions=Component.UNDEFINED, paused=Component.UNDEFINED, reverse=Component.UNDEFINED, hardwareAccelerated=Component.UNDEFINED, pulseColor=Component.UNDEFINED, delay=Component.UNDEFINED, dashArray=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'dashArray', 'delay', 'hardwareAccelerated', 'key', 'loading_state', 'pathOptions', 'paused', 'positions', 'pulseColor', 'reverse']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'dashArray', 'delay', 'hardwareAccelerated', 'loading_state', 'pathOptions', 'paused', 'positions', 'pulseColor', 'reverse']
+        self.available_properties = ['id', 'dashArray', 'delay', 'hardwareAccelerated', 'key', 'loading_state', 'pathOptions', 'paused', 'positions', 'pulseColor', 'reverse']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

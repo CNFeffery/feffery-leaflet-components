@@ -4,8 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import L from "leaflet";
-// import "./utils/leaflet-easyprint"
-import "leaflet-easyprint";
+import "./utils/leaflet-easyprint"
 import { omitBy, isUndefined } from 'lodash';
 import { useMap } from 'react-leaflet';
 
@@ -62,7 +61,7 @@ const LeafletExport = (props) => {
                 ]
             }
 
-            L.easyPrint({
+            const printer = L.easyPrint({
                 ...omitBy(
                     {
                         position,
@@ -92,6 +91,8 @@ const LeafletExport = (props) => {
 LeafletExport.propTypes = {
     // 组件id
     id: PropTypes.string,
+
+    key: PropTypes.string,
 
     // 设置导出控件方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
     // 默认为'topleft'

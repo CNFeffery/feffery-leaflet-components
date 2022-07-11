@@ -16,6 +16,7 @@ Keyword arguments:
 - `className` (String; optional)
 - `direction` (a value equal to: 'right', 'left', 'top', 'bottom', 'center', 'auto'; optional)
 - `interactive` (Bool; optional)
+- `key` (String; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
@@ -26,7 +27,7 @@ Those elements have the following types:
 - `sticky` (Bool; optional)
 """
 function ''_leaflettooltip(; kwargs...)
-        available_props = Symbol[:children, :id, :className, :direction, :interactive, :loading_state, :opacity, :permanent, :sticky]
+        available_props = Symbol[:children, :id, :className, :direction, :interactive, :key, :loading_state, :opacity, :permanent, :sticky]
         wild_props = Symbol[]
         return Component("''_leaflettooltip", "LeafletTooltip", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

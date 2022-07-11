@@ -41,6 +41,8 @@ Keyword arguments:
 
     - tooltipAnchor (list of numbers; optional)
 
+- key (string; optional)
+
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -72,10 +74,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletMarker'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, position=Component.REQUIRED, draggable=Component.UNDEFINED, iconOptions=Component.UNDEFINED, opacity=Component.UNDEFINED, editable=Component.UNDEFINED, zIndexOffset=Component.UNDEFINED, riseOnHover=Component.UNDEFINED, autoPan=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'autoPan', 'draggable', 'editable', 'iconOptions', 'loading_state', 'opacity', 'position', 'riseOnHover', 'zIndexOffset']
+    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, position=Component.REQUIRED, draggable=Component.UNDEFINED, iconOptions=Component.UNDEFINED, opacity=Component.UNDEFINED, editable=Component.UNDEFINED, zIndexOffset=Component.UNDEFINED, riseOnHover=Component.UNDEFINED, autoPan=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'autoPan', 'draggable', 'editable', 'iconOptions', 'key', 'loading_state', 'opacity', 'position', 'riseOnHover', 'zIndexOffset']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'autoPan', 'draggable', 'editable', 'iconOptions', 'loading_state', 'opacity', 'position', 'riseOnHover', 'zIndexOffset']
+        self.available_properties = ['children', 'id', 'autoPan', 'draggable', 'editable', 'iconOptions', 'key', 'loading_state', 'opacity', 'position', 'riseOnHover', 'zIndexOffset']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

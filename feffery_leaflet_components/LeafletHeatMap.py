@@ -15,6 +15,8 @@ Keyword arguments:
 
 - gradient (dict; optional)
 
+- key (string; optional)
+
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -48,10 +50,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletHeatMap'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, points=Component.UNDEFINED, minOpacity=Component.UNDEFINED, max=Component.UNDEFINED, radius=Component.UNDEFINED, blur=Component.UNDEFINED, gradient=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'blur', 'gradient', 'loading_state', 'max', 'minOpacity', 'points', 'radius']
+    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, points=Component.UNDEFINED, minOpacity=Component.UNDEFINED, max=Component.UNDEFINED, radius=Component.UNDEFINED, blur=Component.UNDEFINED, gradient=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'blur', 'gradient', 'key', 'loading_state', 'max', 'minOpacity', 'points', 'radius']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'blur', 'gradient', 'loading_state', 'max', 'minOpacity', 'points', 'radius']
+        self.available_properties = ['id', 'blur', 'gradient', 'key', 'loading_state', 'max', 'minOpacity', 'points', 'radius']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

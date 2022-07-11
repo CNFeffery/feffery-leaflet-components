@@ -47,6 +47,8 @@ LeafletPopup.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    key: PropTypes.string,
+
     // 设置tooltip内部的子元素
     children: PropTypes.node,
 

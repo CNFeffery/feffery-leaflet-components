@@ -12,6 +12,7 @@ Keyword arguments:
 - `dashArray` (String; optional)
 - `delay` (Real; optional)
 - `hardwareAccelerated` (Bool; optional)
+- `key` (String; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
@@ -30,7 +31,7 @@ Those elements have the following types:
 - `reverse` (Bool; optional)
 """
 function ''_leafletantpath(; kwargs...)
-        available_props = Symbol[:id, :dashArray, :delay, :hardwareAccelerated, :loading_state, :pathOptions, :paused, :positions, :pulseColor, :reverse]
+        available_props = Symbol[:id, :dashArray, :delay, :hardwareAccelerated, :key, :loading_state, :pathOptions, :paused, :positions, :pulseColor, :reverse]
         wild_props = Symbol[]
         return Component("''_leafletantpath", "LeafletAntPath", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

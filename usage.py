@@ -82,6 +82,129 @@ app.layout = html.Div(
             ]
         ),
         html.Div(
+            flc.LeafletMap(
+                [
+
+                    flc.LeafletExport(
+                        customSize={
+                            'width': 800,
+                            'height': 800
+                        },
+                        customSizeTooltip='导出为800x800',
+                        tileWait=10000
+                    ),
+
+                    flc.LeafletTileLayer(
+                        id='tile-layer',
+                        url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png'
+                    ),
+                    flc.LeafletFullscreenControl(),
+
+                    flc.LeafletHeatMap(
+                        points=[
+                            {
+                                'lng': point['lng'],
+                                'lat': point['lat'],
+                                'weight': point['count'],
+                            }
+                            for point in json.load(open('./heatmap-demo2-points.json'))
+                        ],
+                        # 美观且直观的热力图需要手动调整各个参数
+                        max=15,
+                        radius=20
+                    ),
+
+                    flc.LeafletStaticHeatMap(
+                        points=[
+                            {
+                                'lng': point[1],
+                                'lat': point[0],
+                                # 'weight': random.uniform(0, 1),
+                            }
+                            for point in json.load(open('./heatmap-demo1-points.json'))
+                        ],
+                        size=100,
+                        opacity=0.75
+                    ),
+
+                    flc.LeafletLayerGroup(
+                        id='flow-layer'
+                    ),
+
+                    # flc.LeafletSuperCluster(
+                    #     positions=[
+                    #         {
+                    #             "lat": random.normalvariate(0, 10),
+                    #             "lng": random.normalvariate(0, 10),
+                    #             "tooltip_": '<font style="color: red;">测试</ font>'
+                    #         }
+                    #         for i in range(1000)
+                    #     ],
+                    #     tooltipField='tooltip_',
+                    #     radius=100,
+                    #     clusterTextSizeFactor=0.2,
+                    #     # iconOptions=dict(
+                    #     #     iconUrl='http://flc.feffery.tech/assets/imgs/flc-logo.svg',
+                    #     #     iconSize=[32, 32]
+                    #     # )
+                    # ),
+
+                    # flc.LeafletTileSelect(
+                    #     id='tile-select',
+                    #     selectedUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    #     urls=[
+                    #         {
+                    #             'url': 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                    #         },
+                    #         {
+                    #             'url': 'http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
+                    #         },
+                    #         {
+                    #             'url': 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+                    #         },
+                    #         {
+                    #             'url': 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg'
+                    #         },
+                    #         {
+                    #             'url': 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
+                    #         },
+                    #         {
+                    #             'url': 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png'
+                    #         },
+                    #         {
+                    #             'url': 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png'
+                    #         },
+                    #         {
+                    #             'url': 'https://stamen-tiles-a.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.png'
+                    #         },
+                    #         {
+                    #             'url': 'https://d.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'
+                    #         }
+                    #     ],
+                    #     center={
+                    #         'lng': 121.4,
+                    #         'lat': 31.2
+                    #     },
+                    #     zoom=7
+                    # ),
+
+                    # flc.LeafletMiniMap()
+                ],
+                id='map-demo',
+                key=str(uuid.uuid4()),
+                center={
+                    'lng': 106,
+                    'lat': 29
+                },
+                zoom=4,
+                # editToolbar=True,
+                # measureControl=True,
+                style={
+                    'height': '100%',
+                    'width': '100%',
+                    'position': 'absolute',
+                }
+            ),
             id='map-container',
             style={
                 'width': '900px',
@@ -115,137 +238,21 @@ def convert_drawn_shapes_demo(_drawnShapes):
 
 
 @app.callback(
-    Output('map-container', 'children'),
+    Output('flow-layer', 'children'),
     [Input('update-flow-trigger', 'nClicks'),
-     Input('update-flow-limit', 'value')],
-    prevent_initial_call=True
+     Input('update-flow-limit', 'value')]
 )
 def update_flow_layer(nClicks, limit):
 
-    return flc.LeafletMap(
-        [
-
-            flc.LeafletExport(
-                customSize={
-                    'width': 800,
-                    'height': 800
-                },
-                customSizeTooltip='800x800'
-            ),
-
-            flc.LeafletTileLayer(id='tile-layer'),
-            flc.LeafletFullscreenControl(),
-
-            flc.LeafletHeatMap(
-                points=[
-                    {
-                        'lng': point['lng'],
-                        'lat': point['lat'],
-                        'weight': point['count'],
-                    }
-                    for point in json.load(open('./heatmap-demo2-points.json'))
-                ],
-                # 美观且直观的热力图需要手动调整各个参数
-                max=15,
-                radius=20
-            ),
-
-            flc.LeafletStaticHeatMap(
-                points=[
-                    {
-                        'lng': point[1],
-                        'lat': point[0],
-                        # 'weight': random.uniform(0, 1),
-                    }
-                    for point in json.load(open('./heatmap-demo1-points.json'))
-                ],
-                size=100,
-                opacity=0.75
-            ),
-
-            flc.LeafletFlowLayer(
-                id='flow',
-                flowData=generate_mock_flowdata(limit=limit),
-                maxWidth=6,
-                arcLabelFontSize='18px',
-                pulseRadius=0,
-                pulseBorderWidth=0,
-                isStatic=True
-            ),
-
-            # flc.LeafletSuperCluster(
-            #     positions=[
-            #         {
-            #             "lat": random.normalvariate(0, 10),
-            #             "lng": random.normalvariate(0, 10),
-            #             "tooltip_": '<font style="color: red;">测试</ font>'
-            #         }
-            #         for i in range(1000)
-            #     ],
-            #     tooltipField='tooltip_',
-            #     radius=100,
-            #     clusterTextSizeFactor=0.2,
-            #     # iconOptions=dict(
-            #     #     iconUrl='http://flc.feffery.tech/assets/imgs/flc-logo.svg',
-            #     #     iconSize=[32, 32]
-            #     # )
-            # ),
-
-            # flc.LeafletTileSelect(
-            #     id='tile-select',
-            #     selectedUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            #     urls=[
-            #         {
-            #             'url': 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-            #         },
-            #         {
-            #             'url': 'http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
-            #         },
-            #         {
-            #             'url': 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
-            #         },
-            #         {
-            #             'url': 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg'
-            #         },
-            #         {
-            #             'url': 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
-            #         },
-            #         {
-            #             'url': 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png'
-            #         },
-            #         {
-            #             'url': 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png'
-            #         },
-            #         {
-            #             'url': 'https://stamen-tiles-a.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.png'
-            #         },
-            #         {
-            #             'url': 'https://d.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'
-            #         }
-            #     ],
-            #     center={
-            #         'lng': 121.4,
-            #         'lat': 31.2
-            #     },
-            #     zoom=7
-            # ),
-
-            # flc.LeafletMiniMap()
-        ],
-        id='map-demo',
+    return flc.LeafletFlowLayer(
+        id='flow',
         key=str(uuid.uuid4()),
-        center={
-            'lng': 106,
-            'lat': 29
-        },
-        zoom=4,
-        # editToolbar=True,
-        # measureControl=True,
-        style={
-            'height': '100%',
-            'width': '100%',
-            'position': 'absolute',
-        }
+        flowData=generate_mock_flowdata(limit=limit),
+        maxWidth=6,
+        arcLabelFontSize='18px',
+        pulseRadius=0,
+        pulseBorderWidth=0,
+        isStatic=True
     )
 
 

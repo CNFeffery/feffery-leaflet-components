@@ -13,6 +13,8 @@ Keyword arguments:
 
 - forceSeparateButton (boolean; optional)
 
+- key (string; optional)
+
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -32,10 +34,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletFullscreenControl'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, position=Component.UNDEFINED, forceSeparateButton=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'forceSeparateButton', 'loading_state', 'position']
+    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, position=Component.UNDEFINED, forceSeparateButton=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'forceSeparateButton', 'key', 'loading_state', 'position']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'forceSeparateButton', 'loading_state', 'position']
+        self.available_properties = ['id', 'forceSeparateButton', 'key', 'loading_state', 'position']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

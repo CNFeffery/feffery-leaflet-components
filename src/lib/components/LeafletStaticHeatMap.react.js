@@ -60,6 +60,8 @@ LeafletStaticHeatMap.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    key: PropTypes.string,
+
     // 设置热力图渲染所需点数据，格式为由{lng: xxx, lat: xxx, weight: xxx}
     // 所组成的数组，其中weight可选，表示权重
     points: PropTypes.arrayOf(

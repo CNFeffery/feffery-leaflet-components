@@ -87,6 +87,8 @@ LeafletFlowLayer.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    key: PropTypes.string,
+
     // 定义流数据结构
     flowData: PropTypes.arrayOf(
         PropTypes.exact({

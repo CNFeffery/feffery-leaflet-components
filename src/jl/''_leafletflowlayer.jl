@@ -30,6 +30,7 @@ Those elements have the following types:
   - `color` (String; optional)
   - `value` (Real; optional)s
 - `isStatic` (Bool; optional)
+- `key` (String; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
@@ -40,7 +41,7 @@ Those elements have the following types:
 - `pulseRadius` (Real; optional)
 """
 function ''_leafletflowlayer(; kwargs...)
-        available_props = Symbol[:id, :arcLabel, :arcLabelFontFamily, :arcLabelFontSize, :arcWidth, :flowData, :isStatic, :loading_state, :maxWidth, :pulseBorderWidth, :pulseRadius]
+        available_props = Symbol[:id, :arcLabel, :arcLabelFontFamily, :arcLabelFontSize, :arcWidth, :flowData, :isStatic, :key, :loading_state, :maxWidth, :pulseBorderWidth, :pulseRadius]
         wild_props = Symbol[]
         return Component("''_leafletflowlayer", "LeafletFlowLayer", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

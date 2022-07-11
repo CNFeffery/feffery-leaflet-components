@@ -70,6 +70,8 @@ LeafletAntPath.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    key: PropTypes.string,
+
     // 设置折线中折点坐标数组，必填
     positions: PropTypes.oneOfType([
         PropTypes.arrayOf(

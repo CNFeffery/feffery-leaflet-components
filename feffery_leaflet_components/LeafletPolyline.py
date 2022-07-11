@@ -31,6 +31,8 @@ Keyword arguments:
 
 - editable (boolean; default False)
 
+- key (string; optional)
+
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -62,10 +64,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletPolyline'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, positions=Component.UNDEFINED, pathOptions=Component.UNDEFINED, arrowheads=Component.UNDEFINED, arrowheadsPathOptions=Component.UNDEFINED, editable=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'arrowheads', 'arrowheadsPathOptions', 'editable', 'loading_state', 'pathOptions', 'positions']
+    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, positions=Component.UNDEFINED, pathOptions=Component.UNDEFINED, arrowheads=Component.UNDEFINED, arrowheadsPathOptions=Component.UNDEFINED, editable=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'arrowheads', 'arrowheadsPathOptions', 'editable', 'key', 'loading_state', 'pathOptions', 'positions']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'arrowheads', 'arrowheadsPathOptions', 'editable', 'loading_state', 'pathOptions', 'positions']
+        self.available_properties = ['children', 'id', 'arrowheads', 'arrowheadsPathOptions', 'editable', 'key', 'loading_state', 'pathOptions', 'positions']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

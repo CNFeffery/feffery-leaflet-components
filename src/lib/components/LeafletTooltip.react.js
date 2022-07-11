@@ -44,6 +44,8 @@ LeafletTooltip.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    key: PropTypes.string,
+
     // 为tooltip容器设置css类
     className: PropTypes.string,
 

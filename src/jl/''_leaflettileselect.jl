@@ -19,6 +19,7 @@ Those elements have the following types:
 - `containerItemStyle` (Dict; optional)
 - `containerStyle` (Dict; optional)
 - `containerVisible` (Bool; optional)
+- `key` (String; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
@@ -32,7 +33,7 @@ Those elements have the following types:
 - `zoom` (Real; optional)
 """
 function ''_leaflettileselect(; kwargs...)
-        available_props = Symbol[:id, :center, :className, :containerClassName, :containerItemClassName, :containerItemStyle, :containerStyle, :containerVisible, :loading_state, :selectedUrl, :style, :urls, :zoom]
+        available_props = Symbol[:id, :center, :className, :containerClassName, :containerItemClassName, :containerItemStyle, :containerStyle, :containerVisible, :key, :loading_state, :selectedUrl, :style, :urls, :zoom]
         wild_props = Symbol[]
         return Component("''_leaflettileselect", "LeafletTileSelect", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

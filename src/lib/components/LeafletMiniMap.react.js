@@ -85,6 +85,8 @@ LeafletMiniMap.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    key: PropTypes.string,
+
     // 设置地图服务的url参数
     url: PropTypes.string,
 

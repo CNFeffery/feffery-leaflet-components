@@ -88,6 +88,8 @@ LeafletMapAction.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    key: PropTypes.string,
+
     // 用于编排一次新的地图动作
     mapActionConfig: PropTypes.exact({
         // 设置地图视角切换动作类型，可选值：'set-zoom'/'zoom-in'/'zoom-out'/'fly-to'/'fly-to-bounds'

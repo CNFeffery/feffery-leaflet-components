@@ -15,6 +15,7 @@ Keyword arguments:
 - `collapsedHeight` (Real; optional)
 - `collapsedWidth` (Real; optional)
 - `height` (Real; optional)
+- `key` (String; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
@@ -35,7 +36,7 @@ Those elements have the following types:
 - `zoomLevelOffset` (Real; optional)
 """
 function ''_leafletminimap(; kwargs...)
-        available_props = Symbol[:id, :aimingRectOptions, :attribution, :autoToggleDisplay, :collapsedHeight, :collapsedWidth, :height, :loading_state, :maxZoom, :minZoom, :minimized, :opacity, :position, :shadowRectOptions, :toggleDisplay, :url, :width, :zIndex, :zoomAnimation, :zoomLevelFixed, :zoomLevelOffset]
+        available_props = Symbol[:id, :aimingRectOptions, :attribution, :autoToggleDisplay, :collapsedHeight, :collapsedWidth, :height, :key, :loading_state, :maxZoom, :minZoom, :minimized, :opacity, :position, :shadowRectOptions, :toggleDisplay, :url, :width, :zIndex, :zoomAnimation, :zoomLevelFixed, :zoomLevelOffset]
         wild_props = Symbol[]
         return Component("''_leafletminimap", "LeafletMiniMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

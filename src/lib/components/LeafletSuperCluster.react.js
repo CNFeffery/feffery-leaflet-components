@@ -227,6 +227,8 @@ LeafletSuperCluster.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    key: PropTypes.string,
+
     // 设置标记信息对象数组，必填
     positions: PropTypes.arrayOf(
         PropTypes.object

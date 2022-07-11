@@ -84,6 +84,8 @@ LeafletMapListener.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    key: PropTypes.string,
+
     _center: PropTypes.exact({
         // 经度
         lng: PropTypes.number,

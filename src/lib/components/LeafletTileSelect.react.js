@@ -121,6 +121,8 @@ LeafletTileSelect.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    key: PropTypes.string,
+
     // 设置各组成部分样式
     // 整体容器
     className: PropTypes.string,

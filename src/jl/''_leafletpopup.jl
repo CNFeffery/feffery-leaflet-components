@@ -18,6 +18,7 @@ Keyword arguments:
 - `closeOnClick` (Bool; optional)
 - `closeOnEscapeKey` (Bool; optional)
 - `keepInView` (Bool; optional)
+- `key` (String; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
@@ -28,7 +29,7 @@ Those elements have the following types:
 - `minWidth` (Real; optional)
 """
 function ''_leafletpopup(; kwargs...)
-        available_props = Symbol[:children, :id, :className, :closeButton, :closeOnClick, :closeOnEscapeKey, :keepInView, :loading_state, :maxHeight, :maxWidth, :minWidth]
+        available_props = Symbol[:children, :id, :className, :closeButton, :closeOnClick, :closeOnEscapeKey, :keepInView, :key, :loading_state, :maxHeight, :maxWidth, :minWidth]
         wild_props = Symbol[]
         return Component("''_leafletpopup", "LeafletPopup", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
