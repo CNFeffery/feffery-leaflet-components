@@ -1,8 +1,11 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FullscreenControl } from "react-leaflet-fullscreen";
+import "./utils/Control.FullScreen";
+import "./utils/Control.FullScreen.css";
+import { useMap } from 'react-leaflet';
+import L from 'leaflet';
 
 // 定义地图全屏化组件LeafletFullscreenControl
 const LeafletFullscreenControl = (props) => {
@@ -10,24 +13,28 @@ const LeafletFullscreenControl = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        key,
         position,
         forceSeparateButton,
         loading_state,
         setProps
     } = props;
 
+    const map = useMap()
+
+    useEffect(() => {
+        if (map) {
+            L.control.fullscreen({
+                position: position || "topleft",
+                title: '全屏',
+                titleCancel: '取消全屏',
+                forceSeparateButton: forceSeparateButton
+            }).addTo(map);
+        }
+    }, [map])
+
     // 返回定制化的前端组件
-    return (
-        <FullscreenControl id={id}
-            position={position || "topleft"}
-            forceSeparateButton={forceSeparateButton}
-            title={"全屏"}
-            titleCancel={"取消全屏"}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }
-        />
-    );
+    return < ></>
 }
 
 // 定义参数或属性

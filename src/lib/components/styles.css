@@ -90,62 +90,6 @@ body {
     margin: 0 !important;
 }
 
-/* 全屏相关css样式 */
-.fullscreen-icon[title="全屏"] {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAUVJREFUaEPtWEsSgyAMFY9TPE8P2fNIj6OdLDLjMAImeX6YxqWS5H0AA2Ho/Amd4x+cwN0OugPugFEBn0JGAc3h/+PANE1rTa55nlViWPMeLmotVCJvzasiEEJIy7K8U0pf8yTeJIgxvsZx/KzrGvl1y1kxAQJPBdAktuC5BpGAEyDwrBKKRA6e3KXcpxAgRfYKaqdTKRevDbgDnBBBopbjdAJkr4VEKxZOoLTbMBD6LtmZtHE5jsO7UG27JDD0XboOtHFbLBACyH+BNJcTkCqGHu8OoBWV5nMHpIqhx7sDaEWl+dwBbuq6bSW0TZk2Tt3M7bW3rZa41QDWTnbwdjpPaAHPxG470CDAt0ic5kD3h/rur1XIetR1Sr7IL7nYKu0sreuPR10t7oF5PAFpj3LVeO+FrlK6VMcdcAeMCvgUMgpoDv8B1tyYQCE8dXwAAAAASUVORK5CYII=);
-    background-size: 26px 26px;
-}
-
-.leaflet-retina .fullscreen-icon[title="全屏"] {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAUVJREFUaEPtWEsSgyAMFY9TPE8P2fNIj6OdLDLjMAImeX6YxqWS5H0AA2Ho/Amd4x+cwN0OugPugFEBn0JGAc3h/+PANE1rTa55nlViWPMeLmotVCJvzasiEEJIy7K8U0pf8yTeJIgxvsZx/KzrGvl1y1kxAQJPBdAktuC5BpGAEyDwrBKKRA6e3KXcpxAgRfYKaqdTKRevDbgDnBBBopbjdAJkr4VEKxZOoLTbMBD6LtmZtHE5jsO7UG27JDD0XboOtHFbLBACyH+BNJcTkCqGHu8OoBWV5nMHpIqhx7sDaEWl+dwBbuq6bSW0TZk2Tt3M7bW3rZa41QDWTnbwdjpPaAHPxG470CDAt0ic5kD3h/rur1XIetR1Sr7IL7nYKu0sreuPR10t7oF5PAFpj3LVeO+FrlK6VMcdcAeMCvgUMgpoDv8B1tyYQCE8dXwAAAAASUVORK5CYII=);
-    background-size: 26px 26px;
-}
-
-.fullscreen-icon[title="取消全屏"] {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAVZJREFUaEPtmG0OwjAIhtcdR4+xncFDeobtGHqc1WBs0ph2ewGpqeJPw4CHl37QMHT+C53nPzjAtxV0BVwBZQW8hZQFVH/OUmCaptO6rnd1VMABGgsGIIfjOF63bbtYQ3BiQQDJYYzxHEK4WUJwY0EApPiR43meI9ktywL5LNkfxSh1HhQsfbgXQAsgSZ7yYgHsKaEBkCYvAqhB0NqQtBCtK9ocpOuLrUCtnSgBCQCBS5MXK1CCSP9xF/EzCcXOxlYg9XrtLJIAlHyhfv4PALgFNDVhK9A0OyCYAwBFMjVxBUzLCzh3BYAimZq4AqblBZyzFfC70KuqnyoEW4Fc1XyS6uY6/RMDTWmG7WakrA3gXQz1XT+rHD19aBRA3p1qRwK0Cx0lD5w3sAk3FgSQvwVZvou+K4HEggEShPXLdA6BxGIBwH3Q0NABGha7GMoVcAWUFei+hR7/4chA5GbtrQAAAABJRU5ErkJggg==);
-    background-size: 26px 26px;
-}
-
-.leaflet-retina .fullscreen-icon[title="取消全屏"] {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAVZJREFUaEPtmG0OwjAIhtcdR4+xncFDeobtGHqc1WBs0ph2ewGpqeJPw4CHl37QMHT+C53nPzjAtxV0BVwBZQW8hZQFVH/OUmCaptO6rnd1VMABGgsGIIfjOF63bbtYQ3BiQQDJYYzxHEK4WUJwY0EApPiR43meI9ktywL5LNkfxSh1HhQsfbgXQAsgSZ7yYgHsKaEBkCYvAqhB0NqQtBCtK9ocpOuLrUCtnSgBCQCBS5MXK1CCSP9xF/EzCcXOxlYg9XrtLJIAlHyhfv4PALgFNDVhK9A0OyCYAwBFMjVxBUzLCzh3BYAimZq4AqblBZyzFfC70KuqnyoEW4Fc1XyS6uY6/RMDTWmG7WakrA3gXQz1XT+rHD19aBRA3p1qRwK0Cx0lD5w3sAk3FgSQvwVZvou+K4HEggEShPXLdA6BxGIBwH3Q0NABGha7GMoVcAWUFei+hR7/4chA5GbtrQAAAABJRU5ErkJggg==);
-    background-size: 26px 26px;
-}
-
-/* one selector per rule as explained here : http://www.sitepoint.com/html5-full-screen-api/ */
-.leaflet-container:-webkit-full-screen {
-    width: 100% !important;
-    height: 100% !important;
-    z-index: 99999;
-}
-
-.leaflet-container:-ms-fullscreen {
-    width: 100% !important;
-    height: 100% !important;
-    z-index: 99999;
-}
-
-.leaflet-container:full-screen {
-    width: 100% !important;
-    height: 100% !important;
-    z-index: 99999;
-}
-
-.leaflet-container:fullscreen {
-    width: 100% !important;
-    height: 100% !important;
-    z-index: 99999;
-}
-
-.leaflet-pseudo-fullscreen {
-    position: fixed !important;
-    width: 100% !important;
-    height: 100% !important;
-    top: 0px !important;
-    left: 0px !important;
-    z-index: 99999;
-}
-
-
 #leafletEasyPrint {
     border-bottom: none;
 }

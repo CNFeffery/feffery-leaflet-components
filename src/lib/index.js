@@ -22,6 +22,7 @@ import LeafletTileSelect from './components/LeafletTileSelect.react';
 import LeafletFullscreenControl from './components/LeafletFullscreenControl.react';
 import LeafletStaticHeatMap from './components/LeafletStaticHeatMap.react';
 import LeafletExport from './components/LeafletExport.react';
+import LeafletFeatureGroup from './components/LeafletFeatureGroup.react';
 
 export {
     LeafletMap,
@@ -46,5 +47,6 @@ export {
     LeafletTileSelect,
     LeafletFullscreenControl,
     LeafletStaticHeatMap,
-    LeafletExport
+    LeafletExport,
+    LeafletFeatureGroup
 };

@@ -62,7 +62,6 @@ class LeafletGeoJSON extends Component {
 
         // 计算发生变化的参数名
         const changedProps = Object.keys(difference(this.props, nextProps))
-
         // 检查changedProps中是否包含data参数
         if (changedProps.indexOf('data') !== -1) {
             // 移除旧图层数据

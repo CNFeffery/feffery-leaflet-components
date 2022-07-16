@@ -2,6 +2,7 @@ from .LeafletAntPath import LeafletAntPath
 from .LeafletCircle import LeafletCircle
 from .LeafletCircleMarker import LeafletCircleMarker
 from .LeafletExport import LeafletExport
+from .LeafletFeatureGroup import LeafletFeatureGroup
 from .LeafletFlowLayer import LeafletFlowLayer
 from .LeafletFullscreenControl import LeafletFullscreenControl
 from .LeafletGeoJSON import LeafletGeoJSON
@@ -27,6 +28,7 @@ __all__ = [
     "LeafletCircle",
     "LeafletCircleMarker",
     "LeafletExport",
+    "LeafletFeatureGroup",
     "LeafletFlowLayer",
     "LeafletFullscreenControl",
     "LeafletGeoJSON",
