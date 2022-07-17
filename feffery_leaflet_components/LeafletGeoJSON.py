@@ -51,6 +51,14 @@ Keyword arguments:
 
 - key (string; optional)
 
+- lassoButtonPosition (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; default 'topleft')
+
+- lassoResetSelectedFeatureIds (boolean; default False)
+
+- lassoSelect (boolean; default False)
+
+- lassoType (a value equal to: 'contain', 'intersect'; default 'intersect')
+
 - loading_state (dict; optional)
 
     `loading_state` is a dict with keys:
@@ -80,10 +88,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletGeoJSON'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, data=Component.UNDEFINED, mode=Component.UNDEFINED, hoverable=Component.UNDEFINED, defaultStyle=Component.UNDEFINED, hoverStyle=Component.UNDEFINED, selectedStyle=Component.UNDEFINED, fitBounds=Component.UNDEFINED, clickFeatureZoom=Component.UNDEFINED, showTooltip=Component.UNDEFINED, featureIdField=Component.UNDEFINED, featureValueField=Component.UNDEFINED, featureCategoryField=Component.UNDEFINED, featureTooltipField=Component.UNDEFINED, selectMode=Component.UNDEFINED, disableClickSelect=Component.UNDEFINED, selectedFeatureIds=Component.UNDEFINED, featureValueToStyles=Component.UNDEFINED, featureCategoryToStyles=Component.UNDEFINED, tooltipSticky=Component.UNDEFINED, _clickedFeature=Component.UNDEFINED, _hoveredFeature=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', '_clickedFeature', '_hoveredFeature', 'clickFeatureZoom', 'data', 'defaultStyle', 'disableClickSelect', 'featureCategoryField', 'featureCategoryToStyles', 'featureIdField', 'featureTooltipField', 'featureValueField', 'featureValueToStyles', 'fitBounds', 'hoverStyle', 'hoverable', 'key', 'loading_state', 'mode', 'selectMode', 'selectedFeatureIds', 'selectedStyle', 'showTooltip', 'tooltipSticky']
+    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, data=Component.UNDEFINED, mode=Component.UNDEFINED, hoverable=Component.UNDEFINED, defaultStyle=Component.UNDEFINED, hoverStyle=Component.UNDEFINED, selectedStyle=Component.UNDEFINED, fitBounds=Component.UNDEFINED, clickFeatureZoom=Component.UNDEFINED, showTooltip=Component.UNDEFINED, featureIdField=Component.UNDEFINED, featureValueField=Component.UNDEFINED, featureCategoryField=Component.UNDEFINED, featureTooltipField=Component.UNDEFINED, selectMode=Component.UNDEFINED, disableClickSelect=Component.UNDEFINED, selectedFeatureIds=Component.UNDEFINED, featureValueToStyles=Component.UNDEFINED, featureCategoryToStyles=Component.UNDEFINED, tooltipSticky=Component.UNDEFINED, _clickedFeature=Component.UNDEFINED, _hoveredFeature=Component.UNDEFINED, lassoSelect=Component.UNDEFINED, lassoType=Component.UNDEFINED, lassoResetSelectedFeatureIds=Component.UNDEFINED, lassoButtonPosition=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', '_clickedFeature', '_hoveredFeature', 'clickFeatureZoom', 'data', 'defaultStyle', 'disableClickSelect', 'featureCategoryField', 'featureCategoryToStyles', 'featureIdField', 'featureTooltipField', 'featureValueField', 'featureValueToStyles', 'fitBounds', 'hoverStyle', 'hoverable', 'key', 'lassoButtonPosition', 'lassoResetSelectedFeatureIds', 'lassoSelect', 'lassoType', 'loading_state', 'mode', 'selectMode', 'selectedFeatureIds', 'selectedStyle', 'showTooltip', 'tooltipSticky']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', '_clickedFeature', '_hoveredFeature', 'clickFeatureZoom', 'data', 'defaultStyle', 'disableClickSelect', 'featureCategoryField', 'featureCategoryToStyles', 'featureIdField', 'featureTooltipField', 'featureValueField', 'featureValueToStyles', 'fitBounds', 'hoverStyle', 'hoverable', 'key', 'loading_state', 'mode', 'selectMode', 'selectedFeatureIds', 'selectedStyle', 'showTooltip', 'tooltipSticky']
+        self.available_properties = ['id', '_clickedFeature', '_hoveredFeature', 'clickFeatureZoom', 'data', 'defaultStyle', 'disableClickSelect', 'featureCategoryField', 'featureCategoryToStyles', 'featureIdField', 'featureTooltipField', 'featureValueField', 'featureValueToStyles', 'fitBounds', 'hoverStyle', 'hoverable', 'key', 'lassoButtonPosition', 'lassoResetSelectedFeatureIds', 'lassoSelect', 'lassoType', 'loading_state', 'mode', 'selectMode', 'selectedFeatureIds', 'selectedStyle', 'showTooltip', 'tooltipSticky']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

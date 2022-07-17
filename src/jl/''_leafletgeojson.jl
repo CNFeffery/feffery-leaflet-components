@@ -29,6 +29,10 @@ Those elements have the following types:
 - `hoverStyle` (optional)
 - `hoverable` (Bool; optional)
 - `key` (String; optional)
+- `lassoButtonPosition` (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
+- `lassoResetSelectedFeatureIds` (Bool; optional)
+- `lassoSelect` (Bool; optional)
+- `lassoType` (a value equal to: 'contain', 'intersect'; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
@@ -42,7 +46,7 @@ Those elements have the following types:
 - `tooltipSticky` (Bool; optional)
 """
 function ''_leafletgeojson(; kwargs...)
-        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :clickFeatureZoom, :data, :defaultStyle, :disableClickSelect, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :hoverStyle, :hoverable, :key, :loading_state, :mode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :tooltipSticky]
+        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :clickFeatureZoom, :data, :defaultStyle, :disableClickSelect, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :hoverStyle, :hoverable, :key, :lassoButtonPosition, :lassoResetSelectedFeatureIds, :lassoSelect, :lassoType, :loading_state, :mode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :tooltipSticky]
         wild_props = Symbol[]
         return Component("''_leafletgeojson", "LeafletGeoJSON", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

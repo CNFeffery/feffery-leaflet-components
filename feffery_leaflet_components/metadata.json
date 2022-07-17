@@ -1107,6 +1107,78 @@
         "required": false,
         "description": ""
       },
+      "lassoSelect": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "lassoType": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'contain'",
+              "computed": false
+            },
+            {
+              "value": "'intersect'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'intersect'",
+          "computed": false
+        }
+      },
+      "lassoResetSelectedFeatureIds": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "lassoButtonPosition": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'topleft'",
+              "computed": false
+            },
+            {
+              "value": "'topright'",
+              "computed": false
+            },
+            {
+              "value": "'bottomleft'",
+              "computed": false
+            },
+            {
+              "value": "'bottomright'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'topleft'",
+          "computed": false
+        }
+      },
       "loading_state": {
         "type": {
           "name": "shape",

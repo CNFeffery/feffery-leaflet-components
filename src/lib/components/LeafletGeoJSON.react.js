@@ -2,11 +2,12 @@
 /* eslint-disable no-else-return */
 /* eslint-disable prefer-const */
 /* eslint-disable no-undefined */
-import React, { Component } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
-import { GeoJSON, MapConsumer } from 'react-leaflet';
-import { transform, isEqual, isObject, intersection, isUndefined } from 'lodash';
+import "leaflet-lasso";
+import { GeoJSON, useMap } from 'react-leaflet';
+import { isUndefined } from 'lodash';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 import {
     markerIcon,
@@ -35,147 +36,59 @@ const _selectedStyle = {
     opacity: 1
 }
 
-// 计算两个对象之间的属性名差异数组
-const difference = (object, base) => {
-    const changes = (object, base) => {
-        return transform(object, function (result, value, key) {
-            if (!isEqual(value, base[key])) {
-                result[key] = (isObject(value) && isObject(base[key])) ? changes(value, base[key]) : value;
-            }
-        });
-    }
-    return changes(object, base);
-}
-
-// 定义不触发render()逻辑的props数组
-const preventUpdateProps = ['_clickedFeature', '_hoveredFeature'];
-
 // 定义GeoJSON图层组件LeafletGeoJSON，api参数参考
-class LeafletGeoJSON extends Component {
+const LeafletGeoJSON = (props) => {
+    // 取得必要属性或参数
+    let {
+        id,
+        data,
+        mode,
+        fitBounds,
+        clickFeatureZoom,
+        featureIdField,
+        selectMode,
+        disableClickSelect,
+        selectedFeatureIds,
+        featureValueField,
+        featureCategoryField,
+        featureTooltipField,
+        showTooltip,
+        hoverable,
+        defaultStyle,
+        hoverStyle,
+        selectedStyle,
+        featureValueToStyles,
+        featureCategoryToStyles,
+        tooltipSticky,
+        lassoSelect,
+        lassoType,
+        lassoResetSelectedFeatureIds,
+        lassoButtonPosition,
+        setProps,
+        loading_state
+    } = props;
 
-    constructor(props) {
-        super(props);
-        this.geoJsonRef = React.createRef();
+    const geoJsonRef = useRef(null);
+    const [initialized, setInitialized] = useState(false);
+    const map = useMap();
+
+    if (!data) {
+        return null;
     }
 
-    shouldComponentUpdate(nextProps) {
+    // 预处理defaultStyle、hoverStyle、selectedStyle
+    defaultStyle = { ..._defaultStyle, ...defaultStyle };
+    hoverStyle = { ..._hoverStyle, ...hoverStyle };
+    selectedStyle = { ..._selectedStyle, ...selectedStyle };
 
-        // 计算发生变化的参数名
-        const changedProps = Object.keys(difference(this.props, nextProps))
-        // 检查changedProps中是否包含data参数
-        if (changedProps.indexOf('data') !== -1) {
-            // 移除旧图层数据
-            if (this.geoJsonRef.current) {
-                this.geoJsonRef.current.clearLayers()
-                // 新增新图层数据
-                if (nextProps.data) {
-                    this.geoJsonRef.current.addData(nextProps.data)
-                }
-            }
-            return true;
-        }
-        // 若无变化的props，则不触发重绘
-        if (changedProps.length === 0) {
-            return false;
-        }
+    // 定义分层设色功能函数
+    const choroplethFunc = (feature) => {
+        // 取出当前要素的featureValueField属性值
+        let currentFeatureValue = feature.properties[featureValueField];
 
-        // 计算发生变化的参数名与需要阻止重绘的参数名数组的交集
-        const changedPreventUpdateProps = intersection(
-            changedProps,
-            preventUpdateProps
-        )
-
-        // 若有交集，则不触发重绘
-        if (changedPreventUpdateProps.length !== 0) {
-            return false;
-        }
-
-        return true;
-    }
-
-    render() {
-        // 取得必要属性或参数
-        let {
-            id,
-            data,
-            mode,
-            fitBounds,
-            clickFeatureZoom,
-            featureIdField,
-            selectMode,
-            disableClickSelect,
-            selectedFeatureIds,
-            featureValueField,
-            featureCategoryField,
-            featureTooltipField,
-            showTooltip,
-            hoverable,
-            defaultStyle,
-            hoverStyle,
-            selectedStyle,
-            featureValueToStyles,
-            featureCategoryToStyles,
-            tooltipSticky,
-            setProps,
-            loading_state
-        } = this.props;
-
-        if (!data) {
-            return null;
-        }
-
-        // 预处理defaultStyle、hoverStyle、selectedStyle
-        defaultStyle = { ..._defaultStyle, ...defaultStyle };
-        hoverStyle = { ..._hoverStyle, ...hoverStyle };
-        selectedStyle = { ..._selectedStyle, ...selectedStyle };
-
-        // 定义分层设色功能函数
-        const choroplethFunc = (feature) => {
-            // 取出当前要素的featureValueField属性值
-            let currentFeatureValue = feature.properties[featureValueField];
-
-            // 检查currentFeatureValue是否为空
-            if (isUndefined(currentFeatureValue)) {
-                // 若为空，则返回defaultStyle
-                return {
-                    ...defaultStyle,
-                    ...{
-                        pmIgnore: false,
-                    }
-                };
-            }
-
-            // 否则，基于featureValueToStyles参数进行分层样式渲染
-            for (let i = 0; i < featureValueToStyles.bins.length; i++) {
-                // 若区间开闭方式为“右闭”
-                if (featureValueToStyles.closed === 'right') {
-                    // 判断currentFeatureValue是否大于当前区间范围的左边界且小于等于当前区间范围的右边界
-                    if (currentFeatureValue > featureValueToStyles.bins[i][0] &&
-                        currentFeatureValue <= featureValueToStyles.bins[i][1]) {
-                        // 若匹配，则返回对应的styles参数样式
-                        return {
-                            ...featureValueToStyles.styles[i],
-                            ...{
-                                pmIgnore: false,
-                            }
-                        };
-                    }
-                } else {
-                    // 否则一律视作“左闭”
-                    if (currentFeatureValue >= featureValueToStyles.bins[i][0] &&
-                        currentFeatureValue < featureValueToStyles.bins[i][1]) {
-                        // 若匹配，则返回对应的styles参数样式
-                        return {
-                            ...featureValueToStyles.styles[i],
-                            ...{
-                                pmIgnore: false,
-                            }
-                        };
-                    }
-                }
-            }
-
-            // 否则，将defaultStyle作为缺省样式予以返回
+        // 检查currentFeatureValue是否为空
+        if (isUndefined(currentFeatureValue)) {
+            // 若为空，则返回defaultStyle
             return {
                 ...defaultStyle,
                 ...{
@@ -184,232 +97,300 @@ class LeafletGeoJSON extends Component {
             };
         }
 
-        const categoryFunc = (feature) => {
-            return {
-                ...featureCategoryToStyles[`${feature.properties[featureCategoryField]}`],
-                ...{
-                    pmIgnore: false,
+        // 否则，基于featureValueToStyles参数进行分层样式渲染
+        for (let i = 0; i < featureValueToStyles.bins.length; i++) {
+            // 若区间开闭方式为“右闭”
+            if (featureValueToStyles.closed === 'right') {
+                // 判断currentFeatureValue是否大于当前区间范围的左边界且小于等于当前区间范围的右边界
+                if (currentFeatureValue > featureValueToStyles.bins[i][0] &&
+                    currentFeatureValue <= featureValueToStyles.bins[i][1]) {
+                    // 若匹配，则返回对应的styles参数样式
+                    return {
+                        ...featureValueToStyles.styles[i],
+                        ...{
+                            pmIgnore: false,
+                        }
+                    };
                 }
-            };
+            } else {
+                // 否则一律视作“左闭”
+                if (currentFeatureValue >= featureValueToStyles.bins[i][0] &&
+                    currentFeatureValue < featureValueToStyles.bins[i][1]) {
+                    // 若匹配，则返回对应的styles参数样式
+                    return {
+                        ...featureValueToStyles.styles[i],
+                        ...{
+                            pmIgnore: false,
+                        }
+                    };
+                }
+            }
         }
 
-        // 返回定制化的前端组件
-        return (
-            <MapConsumer >
-                {(map) => {
-                    return (
-                        <GeoJSON
-                            id={id}
-                            style={(feature) => {
-                                // 若mode为'default'，则渲染defaultStyle
-                                if (mode === 'default') {
-                                    return {
-                                        ...defaultStyle,
-                                        ...{
-                                            pmIgnore: false,
-                                        }
-                                    };
-                                } else if (mode === 'selectable') {
-                                    // 若mode为'selectable'，则迎合要素点击渲染模式
-                                    // 根据当前selectedFeatureIds中已选的要素id
-                                    // 控制不同要素返回defaultStyle或selectedStyle
-                                    if (selectedFeatureIds.indexOf(feature.properties[featureIdField]) === -1) {
-                                        return {
-                                            ...defaultStyle,
-                                            ...{
-                                                pmIgnore: false,
-                                            }
-                                        };
-                                    } else {
-                                        return {
-                                            ...selectedStyle,
-                                            ...{
-                                                pmIgnore: false,
-                                            }
-                                        };
-                                    }
-                                } else if (mode === 'choropleth') {
-                                    // 若mode为'choropleth'，则基于featureValueToStyles参数进行渲染
-                                    // 根据当前要素的featureValueField属性值，根据其在featureValueToStyles.bins
-                                    // 中的区间分布情况，返回对应的styles参数样式
-
-                                    return choroplethFunc(feature);
-                                } else if (mode === 'category') {
-                                    // 若mode为'category'，则基于featureCategoryToStyles参数进行渲染
-                                    return categoryFunc(feature);
-                                }
-                                // 否则，将defaultStyle作为缺省样式予以返回
-                                return {
-                                    ...defaultStyle,
-                                    ...{
-                                        pmIgnore: false,
-                                    }
-                                };
-                            }}
-                            data={data}
-                            onEachFeature={(feature, layer) => {
-                                // 绑定各监听事件
-                                layer.on({
-
-                                    // 鼠标点击事件
-                                    click: (e) => {
-                                        // 若clickFeatureZoom为true，则点击要素时进行聚焦缩放
-                                        if (clickFeatureZoom) {
-                                            map.fitBounds(e.target.getBounds());
-                                        }
-
-                                        // 图层置顶
-                                        e.target.bringToFront();
-
-                                        // 更新_clickedFeature信息
-                                        setProps({
-                                            _clickedFeature: {
-                                                featureId: e.target.feature.properties[featureIdField],
-                                            }
-                                        })
-                                    },
-
-                                    add: (e) => {
-                                        // 将处于选择状态的要素置顶
-                                        if (selectedFeatureIds.indexOf(e.target.feature.properties[featureIdField]) !== -1) {
-                                            e.target.bringToFront();
-                                        } else {
-                                            e.target.bringToBack();
-                                        }
-                                    }
-                                });
-
-                                // 为每个要素添加tooltip
-                                // 检查是否存在featureTooltipField指定的字段
-                                if (feature.properties[featureTooltipField] && showTooltip) {
-                                    layer.bindTooltip(
-                                        feature.properties[featureTooltipField],
-                                        {
-                                            sticky: tooltipSticky
-                                        }
-                                    )
-                                } else {
-                                    layer.unbindTooltip();
-                                }
-
-                            }}
-                            eventHandlers={{
-                                // 鼠标移入事件
-                                mouseover: (e) => {
-                                    // 若开启要素悬浮模式
-                                    if (hoverable) {
-                                        // 则更新要素的样式
-                                        e.layer.setStyle({
-                                            ...e.layer.options,
-                                            ...hoverStyle
-                                        });
-
-                                        // 图层置顶
-                                        e.layer.bringToFront();
-
-                                        // 更新_hoveredFeature信息
-                                        setProps({
-                                            _hoveredFeature: {
-                                                featureId: e.layer.feature.properties[featureIdField],
-                                            }
-                                        })
-                                    }
-                                },
-                                mouseout: (e) => {
-                                    if (hoverable) {
-
-                                        if (mode === 'selectable') {
-                                            // 若当前鼠标移出的要素未处于选中状态
-                                            if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
-                                                this.geoJsonRef.current.resetStyle(e.layer);
-                                            } else {
-                                                // 否则，更新要素的样式
-                                                e.layer.setStyle({
-                                                    ...e.layer.options,
-                                                    ...selectedStyle
-                                                });
-                                            }
-                                        } else if (mode === 'choropleth') {
-                                            e.layer.setStyle(choroplethFunc(e.layer.feature));
-                                        } else if (mode === 'category') {
-                                            e.layer.setStyle(categoryFunc(e.layer.feature));
-                                        } else {
-                                            this.geoJsonRef.current.resetStyle(e.layer);
-                                        }
-                                    }
-                                },
-                                add: () => {
-
-                                    // 处理是否对当前的GeoJSON层进行fitBounds操作
-                                    if (fitBounds) {
-                                        map.fitBounds(this.geoJsonRef.current.getBounds());
-                                    }
-                                },
-                                click: (e) => {
-                                    // 处理要素选择事件
-                                    if (mode === 'selectable' && !disableClickSelect) {
-                                        // 单选模式
-                                        if (selectMode === 'single') {
-                                            if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
-                                                // 更新选中的单个要素为当前要素
-                                                setProps({
-                                                    selectedFeatureIds: [e.layer.feature.properties[featureIdField]]
-                                                })
-                                            } else {
-                                                // 否则视作反选操作
-                                                // 清空selectedFeatureIds
-                                                setProps({
-                                                    selectedFeatureIds: []
-                                                })
-                                            }
-                                        } else {
-                                            // 多选模式
-                                            if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
-                                                // 将当前要素添加到selectedFeatureIds中
-                                                setProps({
-                                                    selectedFeatureIds: selectedFeatureIds.concat([e.layer.feature.properties[featureIdField]])
-                                                })
-                                            } else {
-                                                // 否则从现有selectedFeatureIds中移除当前要素id
-
-                                                setProps({
-                                                    selectedFeatureIds: selectedFeatureIds.filter(
-                                                        (id) => id !== e.layer.feature.properties[featureIdField]
-                                                    )
-                                                })
-                                            }
-                                        }
-                                    }
-                                }
-                            }}
-                            pointToLayer={
-                                (feature, latlng) => {
-                                    // 修正全局默认marker图标不显示的问题
-                                    const defaultIcon = L.icon({
-                                        iconUrl: markerIcon,
-                                        iconRetinaUrl: marker2xIcon,
-                                        shadowUrl: markerShadow,
-                                        iconAnchor: [12, 41],
-                                        iconSize: [25, 41],
-                                        popupAnchor: [1, -34],
-                                        shadowSize: [41, 41]
-                                    })
-                                    if (feature.properties[featureTooltipField] && showTooltip) {
-                                        return L.marker(latlng, { icon: defaultIcon }).bindTooltip(feature.properties[featureTooltipField])
-                                    }
-                                    return L.marker(latlng, { icon: defaultIcon })
-                                }
-                            }
-                            ref={this.geoJsonRef}
-                            data-dash-is-loading={
-                                (loading_state && loading_state.is_loading) || undefined
-                            }
-                        />
-                    );
-                }}
-            </MapConsumer>
-        );
+        // 否则，将defaultStyle作为缺省样式予以返回
+        return {
+            ...defaultStyle,
+            ...{
+                pmIgnore: false,
+            }
+        };
     }
+
+    const categoryFunc = (feature) => {
+        return {
+            ...featureCategoryToStyles[`${feature.properties[featureCategoryField]}`],
+            ...{
+                pmIgnore: false,
+            }
+        };
+    }
+
+    useEffect(() => {
+        if (map && mode === 'selectable' && selectMode === 'multiple' && lassoSelect) {
+            if (!initialized) {
+                L.control.lasso({
+                    position: lassoButtonPosition,
+                    intersect: lassoType === 'intersect',
+                    contain: lassoType === 'contain',
+                    title: '套圈选择'
+                }).addTo(map)
+                setInitialized(true);
+            }
+            map.off('lasso.finished')
+            map.off('lasso.enabled')
+            map.on('lasso.finished', (e) => {
+                // 将已选要素置于顶层
+                e.layers.forEach(layer => layer.bringToFront())
+
+                // 将当前套中的要素添加到selectedFeatureIds中
+                setProps({
+                    selectedFeatureIds: Array.from(
+                        new Set(
+                            selectedFeatureIds.concat(e.layers.map(layer => layer.feature.properties[featureIdField]))
+                        )
+                    )
+                })
+            })
+            if (lassoResetSelectedFeatureIds) {
+                map.on('lasso.enabled', () => {
+                    // 新的套索开启前，将selectedFeatureIds清空
+                    setProps({
+                        selectedFeatureIds: []
+                    })
+                })
+            }
+        }
+    }, [map, selectedFeatureIds, initialized])
+
+    return (
+        <GeoJSON
+            id={id}
+            style={(feature) => {
+                // 若mode为'default'，则渲染defaultStyle
+                if (mode === 'default') {
+                    return {
+                        ...defaultStyle,
+                        ...{
+                            pmIgnore: false,
+                        }
+                    };
+                } else if (mode === 'selectable') {
+                    // 若mode为'selectable'，则迎合要素点击渲染模式
+                    // 根据当前selectedFeatureIds中已选的要素id
+                    // 控制不同要素返回defaultStyle或selectedStyle
+                    if (selectedFeatureIds.indexOf(feature.properties[featureIdField]) === -1) {
+                        return {
+                            ...defaultStyle,
+                            ...{
+                                pmIgnore: false,
+                            }
+                        };
+                    } else {
+                        return {
+                            ...selectedStyle,
+                            ...{
+                                pmIgnore: false,
+                            }
+                        };
+                    }
+                } else if (mode === 'choropleth') {
+                    // 若mode为'choropleth'，则基于featureValueToStyles参数进行渲染
+                    // 根据当前要素的featureValueField属性值，根据其在featureValueToStyles.bins
+                    // 中的区间分布情况，返回对应的styles参数样式
+
+                    return choroplethFunc(feature);
+                } else if (mode === 'category') {
+                    // 若mode为'category'，则基于featureCategoryToStyles参数进行渲染
+                    return categoryFunc(feature);
+                }
+                // 否则，将defaultStyle作为缺省样式予以返回
+                return {
+                    ...defaultStyle,
+                    ...{
+                        pmIgnore: false,
+                    }
+                };
+            }}
+            data={data}
+            onEachFeature={(feature, layer) => {
+                // 绑定各监听事件
+                layer.on({
+
+                    // 鼠标点击事件
+                    click: (e) => {
+                        // 若clickFeatureZoom为true，则点击要素时进行聚焦缩放
+                        if (clickFeatureZoom) {
+                            map.fitBounds(e.target.getBounds());
+                        }
+
+                        // 图层置顶
+                        e.target.bringToFront();
+
+                        // 更新_clickedFeature信息
+                        setProps({
+                            _clickedFeature: {
+                                featureId: e.target.feature.properties[featureIdField],
+                            }
+                        })
+                    },
+
+                    add: (e) => {
+                        // 将处于选择状态的要素置顶
+                        if (selectedFeatureIds.indexOf(e.target.feature.properties[featureIdField]) !== -1) {
+                            e.target.bringToFront();
+                        } else {
+                            e.target.bringToBack();
+                        }
+                    }
+                });
+
+                // 为每个要素添加tooltip
+                // 检查是否存在featureTooltipField指定的字段
+                if (feature.properties[featureTooltipField] && showTooltip) {
+                    layer.bindTooltip(
+                        feature.properties[featureTooltipField],
+                        {
+                            sticky: tooltipSticky
+                        }
+                    )
+                } else {
+                    layer.unbindTooltip();
+                }
+
+            }}
+            eventHandlers={{
+                // 鼠标移入事件
+                mouseover: (e) => {
+                    // 若开启要素悬浮模式
+                    if (hoverable) {
+                        // 则更新要素的样式
+                        e.layer.setStyle({
+                            ...e.layer.options,
+                            ...hoverStyle
+                        });
+
+                        // 图层置顶
+                        e.layer.bringToFront();
+
+                        // 更新_hoveredFeature信息
+                        setProps({
+                            _hoveredFeature: {
+                                featureId: e.layer.feature.properties[featureIdField],
+                            }
+                        })
+                    }
+                },
+                mouseout: (e) => {
+                    if (hoverable) {
+
+                        if (mode === 'selectable') {
+                            // 若当前鼠标移出的要素未处于选中状态
+                            if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
+                                geoJsonRef.current.resetStyle(e.layer);
+                            } else {
+                                // 否则，更新要素的样式
+                                e.layer.setStyle({
+                                    ...e.layer.options,
+                                    ...selectedStyle
+                                });
+                            }
+                        } else if (mode === 'choropleth') {
+                            e.layer.setStyle(choroplethFunc(e.layer.feature));
+                        } else if (mode === 'category') {
+                            e.layer.setStyle(categoryFunc(e.layer.feature));
+                        } else {
+                            geoJsonRef.current.resetStyle(e.layer);
+                        }
+                    }
+                },
+                add: () => {
+
+                    // 处理是否对当前的GeoJSON层进行fitBounds操作
+                    if (fitBounds) {
+                        map.fitBounds(geoJsonRef.current.getBounds());
+                    }
+                },
+                click: (e) => {
+                    // 处理要素选择事件
+                    if (mode === 'selectable' && !disableClickSelect) {
+                        // 单选模式
+                        if (selectMode === 'single') {
+                            if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
+                                // 更新选中的单个要素为当前要素
+                                setProps({
+                                    selectedFeatureIds: [e.layer.feature.properties[featureIdField]]
+                                })
+                            } else {
+                                // 否则视作反选操作
+                                // 清空selectedFeatureIds
+                                setProps({
+                                    selectedFeatureIds: []
+                                })
+                            }
+                        } else {
+                            // 多选模式
+                            if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
+                                // 将当前要素添加到selectedFeatureIds中
+                                setProps({
+                                    selectedFeatureIds: selectedFeatureIds.concat([e.layer.feature.properties[featureIdField]])
+                                })
+                            } else {
+                                // 否则从现有selectedFeatureIds中移除当前要素id
+
+                                setProps({
+                                    selectedFeatureIds: selectedFeatureIds.filter(
+                                        (id) => id !== e.layer.feature.properties[featureIdField]
+                                    )
+                                })
+                            }
+                        }
+                    }
+                }
+            }}
+            pointToLayer={
+                (feature, latlng) => {
+                    // 修正全局默认marker图标不显示的问题
+                    const defaultIcon = L.icon({
+                        iconUrl: markerIcon,
+                        iconRetinaUrl: marker2xIcon,
+                        shadowUrl: markerShadow,
+                        iconAnchor: [12, 41],
+                        iconSize: [25, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    })
+                    if (feature.properties[featureTooltipField] && showTooltip) {
+                        return L.marker(latlng, { icon: defaultIcon }).bindTooltip(feature.properties[featureTooltipField])
+                    }
+                    return L.marker(latlng, { icon: defaultIcon })
+                }
+            }
+            ref={geoJsonRef}
+            data-dash-is-loading={
+                (loading_state && loading_state.is_loading) || undefined
+            }
+        />
+    );
 }
 
 // 定义参数或属性
@@ -494,6 +475,19 @@ LeafletGeoJSON.propTypes = {
     // 要素鼠标悬浮事件
     _hoveredFeature: PropTypes.object,
 
+    // 多选模式下设置是否开启lasso套圈选择功能，默认为false
+    lassoSelect: PropTypes.bool,
+
+    // 定义lasso套圈功能的拓扑检查方式，可选的有'contain'（包含检查）及'intersect'（相交检查）
+    // 默认为'intersect'
+    lassoType: PropTypes.oneOf(['contain', 'intersect']),
+
+    // 当套圈选择开启时，每次新点击套索按钮时是否重置selectedFeatureIds，默认为false
+    lassoResetSelectedFeatureIds: PropTypes.bool,
+
+    // 设置套圈选择触发按钮的位置，默认为'topleft'，可选的有'topleft'，'topright'，'bottomleft'，'bottomright'
+    lassoButtonPosition: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -529,7 +523,11 @@ LeafletGeoJSON.defaultProps = {
     selectMode: 'single',
     hoverable: false,
     clickFeatureZoom: false,
-    disableClickSelect: false
+    disableClickSelect: false,
+    lassoSelect: false,
+    lassoType: 'intersect',
+    lassoResetSelectedFeatureIds: false,
+    lassoButtonPosition: 'topleft'
 }
 
 export default React.memo(LeafletGeoJSON);
