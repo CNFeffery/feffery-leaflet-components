@@ -182,6 +182,19 @@ const LeafletGeoJSON = (props) => {
         }
     }, [map, selectedFeatureIds, initialized])
 
+
+    // data刷新时，重新渲染图层
+    useEffect(() => {
+        // 移除旧图层数据
+        if (geoJsonRef.current) {
+            geoJsonRef.current.clearLayers()
+            // 刷新图层数据
+            if (data) {
+                geoJsonRef.current.addData(data)
+            }
+        }
+    }, [geoJsonRef, data])
+
     return (
         <GeoJSON
             id={id}
