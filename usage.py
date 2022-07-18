@@ -84,18 +84,10 @@ app.layout = html.Div(
         ),
 
         html.Div(
-            [
-                html.Div(
-                    id='map-container',
-                    style={
-                        'flex': 1,
-                        'height': '80vh',
-                        'position': 'relative'
-                    }
-                )
-            ],
+            id='map-container',
             style={
-                'display': 'flex'
+                'height': '80vh',
+                'position': 'relative'
             }
         )
     ]
@@ -186,7 +178,10 @@ def update_flow_layer(nClicks, limit):
                 lassoSelect=True,
                 featureIdField='name',
                 lassoType='contain',
-                lassoResetSelectedFeatureIds=True
+                lassoResetSelectedFeatureIds=True,
+                lassoStyle={
+                    'color': 'green'
+                }
             ),
 
             # flc.LeafletFlowLayer(

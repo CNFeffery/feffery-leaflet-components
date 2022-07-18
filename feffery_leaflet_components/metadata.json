@@ -1179,6 +1179,14 @@
           "computed": false
         }
       },
+      "lassoStyle": {
+        "type": {
+          "name": "custom",
+          "raw": "pathOptionsPropTypes"
+        },
+        "required": false,
+        "description": ""
+      },
       "loading_state": {
         "type": {
           "name": "shape",

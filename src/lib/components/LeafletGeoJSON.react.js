@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import L from 'leaflet';
 import "leaflet-lasso";
 import { GeoJSON, useMap } from 'react-leaflet';
-import { isUndefined } from 'lodash';
+import { isUndefined, omitBy } from 'lodash';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 import {
     markerIcon,
@@ -64,6 +64,7 @@ const LeafletGeoJSON = (props) => {
         lassoType,
         lassoResetSelectedFeatureIds,
         lassoButtonPosition,
+        lassoStyle,
         setProps,
         loading_state
     } = props;
@@ -148,12 +149,18 @@ const LeafletGeoJSON = (props) => {
     useEffect(() => {
         if (map && mode === 'selectable' && selectMode === 'multiple' && lassoSelect) {
             if (!initialized) {
-                L.control.lasso({
-                    position: lassoButtonPosition,
-                    intersect: lassoType === 'intersect',
-                    contain: lassoType === 'contain',
-                    title: '套圈选择'
-                }).addTo(map)
+                L.control.lasso(
+                    omitBy(
+                        {
+                            position: lassoButtonPosition,
+                            intersect: lassoType === 'intersect',
+                            contain: lassoType === 'contain',
+                            title: '套圈选择',
+                            polygon: lassoStyle
+                        },
+                        isUndefined
+                    )
+                ).addTo(map)
                 setInitialized(true);
             }
             map.off('lasso.finished')
@@ -487,6 +494,9 @@ LeafletGeoJSON.propTypes = {
 
     // 设置套圈选择触发按钮的位置，默认为'topleft'，可选的有'topleft'，'topright'，'bottomleft'，'bottomright'
     lassoButtonPosition: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
+
+    // 设置套圈的矢量样式
+    lassoStyle: pathOptionsPropTypes,
 
     loading_state: PropTypes.shape({
         /**
