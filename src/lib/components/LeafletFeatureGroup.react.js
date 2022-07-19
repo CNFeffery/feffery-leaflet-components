@@ -18,12 +18,19 @@ const LeafletFeatureGroup = (props) => {
     const featureGroupRef = useRef(null);
 
     useEffect(() => {
-        if (featureGroupRef) {
-            featureGroupRef.on('layeradd layerremove', (e) => {
-                console.log(e)
+        const currentBounds = featureGroupRef.current.getBounds()
+        if (currentBounds._southWest && currentBounds._northEast) {
+
+            setProps({
+                _bounds: {
+                    minx: currentBounds._southWest.lng,
+                    miny: currentBounds._southWest.lat,
+                    maxx: currentBounds._northEast.lng,
+                    maxy: currentBounds._northEast.lat
+                }
             })
         }
-    }, [featureGroupRef])
+    }, [children])
 
     // 返回定制化的前端组件
     return (
@@ -45,6 +52,14 @@ LeafletFeatureGroup.propTypes = {
 
     // 传入tooltip、popup组件
     children: PropTypes.node,
+
+    // 监听当前要素组的整体bounds
+    _bounds: PropTypes.exact({
+        minx: PropTypes.number,
+        miny: PropTypes.number,
+        maxx: PropTypes.number,
+        maxy: PropTypes.number
+    }),
 
     loading_state: PropTypes.shape({
         /**

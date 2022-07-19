@@ -13,6 +13,12 @@ A LeafletFeatureGroup component.
 Keyword arguments:
 - `children` (a list of or a singular dash component, string or number; optional)
 - `id` (String; optional)
+- `_bounds` (optional): . _bounds has the following type: lists containing elements 'minx', 'miny', 'maxx', 'maxy'.
+Those elements have the following types:
+  - `minx` (Real; optional)
+  - `miny` (Real; optional)
+  - `maxx` (Real; optional)
+  - `maxy` (Real; optional)
 - `key` (String; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
@@ -21,7 +27,7 @@ Those elements have the following types:
   - `component_name` (String; optional): Holds the name of the component that is loading
 """
 function ''_leafletfeaturegroup(; kwargs...)
-        available_props = Symbol[:children, :id, :key, :loading_state]
+        available_props = Symbol[:children, :id, :_bounds, :key, :loading_state]
         wild_props = Symbol[]
         return Component("''_leafletfeaturegroup", "LeafletFeatureGroup", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

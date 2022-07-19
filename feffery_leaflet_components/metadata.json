@@ -505,6 +505,31 @@
         "required": false,
         "description": ""
       },
+      "_bounds": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "minx": {
+              "name": "number",
+              "required": false
+            },
+            "miny": {
+              "name": "number",
+              "required": false
+            },
+            "maxx": {
+              "name": "number",
+              "required": false
+            },
+            "maxy": {
+              "name": "number",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
       "loading_state": {
         "type": {
           "name": "shape",
