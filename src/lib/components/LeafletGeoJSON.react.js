@@ -15,6 +15,17 @@ import {
     markerShadow
 } from './utils/exportImages.react';
 
+// 修正全局默认marker图标不显示的问题
+const defaultIcon = L.icon({
+    iconUrl: markerIcon,
+    iconRetinaUrl: marker2xIcon,
+    shadowUrl: markerShadow,
+    iconAnchor: [12, 41],
+    iconSize: [25, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+})
+
 // 定义默认状态下的默认style样式
 const _defaultStyle = {
     color: '#3388ff',
@@ -60,11 +71,14 @@ const LeafletGeoJSON = (props) => {
         featureValueToStyles,
         featureCategoryToStyles,
         tooltipSticky,
+        tooltipClassName,
         lassoSelect,
         lassoType,
         lassoResetSelectedFeatureIds,
         lassoButtonPosition,
         lassoStyle,
+        pointRenderMode,
+        circleMarkerRadius,
         setProps,
         loading_state
     } = props;
@@ -167,7 +181,7 @@ const LeafletGeoJSON = (props) => {
             map.off('lasso.enabled')
             map.on('lasso.finished', (e) => {
                 // 将已选要素置于顶层
-                e.layers.forEach(layer => layer.bringToFront())
+                e.layers.forEach(layer => layer.bringToFront && layer.bringToFront())
 
                 // 将当前套中的要素添加到selectedFeatureIds中
                 setProps({
@@ -264,9 +278,14 @@ const LeafletGeoJSON = (props) => {
                     add: (e) => {
                         // 将处于选择状态的要素置顶
                         if (selectedFeatureIds.indexOf(e.target.feature.properties[featureIdField]) !== -1) {
-                            e.target.bringToFront();
+                            if (e.target.bringToFront) {
+                                e.target.bringToFront();
+                            }
+
                         } else {
-                            e.target.bringToBack();
+                            if (e.target.bringToBack) {
+                                e.target.bringToBack();
+                            }
                         }
                     }
                 });
@@ -277,7 +296,8 @@ const LeafletGeoJSON = (props) => {
                     layer.bindTooltip(
                         feature.properties[featureTooltipField],
                         {
-                            sticky: tooltipSticky
+                            sticky: tooltipSticky,
+                            className: tooltipClassName
                         }
                     )
                 } else {
@@ -297,7 +317,9 @@ const LeafletGeoJSON = (props) => {
                         });
 
                         // 图层置顶
-                        e.layer.bringToFront();
+                        if (e.layer.bringToFront) {
+                            e.layer.bringToFront()
+                        }
 
                         // 更新_hoveredFeature信息
                         setProps({
@@ -376,20 +398,30 @@ const LeafletGeoJSON = (props) => {
             }}
             pointToLayer={
                 (feature, latlng) => {
-                    // 修正全局默认marker图标不显示的问题
-                    const defaultIcon = L.icon({
-                        iconUrl: markerIcon,
-                        iconRetinaUrl: marker2xIcon,
-                        shadowUrl: markerShadow,
-                        iconAnchor: [12, 41],
-                        iconSize: [25, 41],
-                        popupAnchor: [1, -34],
-                        shadowSize: [41, 41]
-                    })
-                    if (feature.properties[featureTooltipField] && showTooltip) {
-                        return L.marker(latlng, { icon: defaultIcon }).bindTooltip(feature.properties[featureTooltipField])
+                    // 若pointRenderMode为marker模式
+                    if (pointRenderMode === 'marker') {
+                        if (feature.properties[featureTooltipField] && showTooltip) {
+                            return L.marker(latlng, { icon: defaultIcon }).bindTooltip(
+                                feature.properties[featureTooltipField],
+                                {
+                                    sticky: tooltipSticky,
+                                    className: tooltipClassName
+                                }
+                            )
+                        }
+                        return L.marker(latlng, { icon: defaultIcon })
                     }
-                    return L.marker(latlng, { icon: defaultIcon })
+                    // 否则均视为circle-marker模式
+                    if (feature.properties[featureTooltipField] && showTooltip) {
+                        return L.circleMarker(latlng, { radius: circleMarkerRadius }).bindTooltip(
+                            feature.properties[featureTooltipField],
+                            {
+                                sticky: tooltipSticky,
+                                className: tooltipClassName
+                            }
+                        )
+                    }
+                    return L.circleMarker(latlng, { radius: circleMarkerRadius })
                 }
             }
             ref={geoJsonRef}
@@ -475,6 +507,9 @@ LeafletGeoJSON.propTypes = {
     // 设置要素的tooltip是否跟随鼠标，默认为false
     tooltipSticky: PropTypes.bool,
 
+    // 设置要素的tooltip对应的css类
+    tooltipClassName: PropTypes.string,
+
     // 要素常规事件记录
     // 要素点击事件
     _clickedFeature: PropTypes.object,
@@ -497,6 +532,12 @@ LeafletGeoJSON.propTypes = {
 
     // 设置套圈的矢量样式
     lassoStyle: pathOptionsPropTypes,
+
+    // 用于设置针对点要素的渲染策略，可选的有'marker'、'circle-marker'，默认为'circle-marker'
+    pointRenderMode: PropTypes.oneOf(['marker', 'circle-marker']),
+
+    // 针对circle-marker模式，设置像素半径，默认为10
+    circleMarkerRadius: PropTypes.number,
 
     loading_state: PropTypes.shape({
         /**
@@ -537,7 +578,9 @@ LeafletGeoJSON.defaultProps = {
     lassoSelect: false,
     lassoType: 'intersect',
     lassoResetSelectedFeatureIds: false,
-    lassoButtonPosition: 'topleft'
+    lassoButtonPosition: 'topleft',
+    pointRenderMode: 'circle-marker',
+    circleMarkerRadius: 10
 }
 
 export default React.memo(LeafletGeoJSON);

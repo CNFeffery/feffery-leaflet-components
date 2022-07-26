@@ -1118,6 +1118,13 @@
         "required": false,
         "description": ""
       },
+      "tooltipClassName": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
       "_clickedFeature": {
         "type": {
           "name": "object"
@@ -1211,6 +1218,38 @@
         },
         "required": false,
         "description": ""
+      },
+      "pointRenderMode": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'marker'",
+              "computed": false
+            },
+            {
+              "value": "'circle-marker'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'circle-marker'",
+          "computed": false
+        }
+      },
+      "circleMarkerRadius": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "10",
+          "computed": false
+        }
       },
       "loading_state": {
         "type": {

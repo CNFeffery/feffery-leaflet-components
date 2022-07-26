@@ -11,6 +11,7 @@ Keyword arguments:
 - `id` (String; optional)
 - `_clickedFeature` (Dict; optional)
 - `_hoveredFeature` (Dict; optional)
+- `circleMarkerRadius` (Real; optional)
 - `clickFeatureZoom` (Bool; optional)
 - `data` (Dict; optional)
 - `defaultStyle` (optional)
@@ -40,14 +41,16 @@ Those elements have the following types:
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
 - `mode` (a value equal to: 'default', 'selectable', 'choropleth', 'category'; optional)
+- `pointRenderMode` (a value equal to: 'marker', 'circle-marker'; optional)
 - `selectMode` (a value equal to: 'single', 'multiple'; optional)
 - `selectedFeatureIds` (Array; optional)
 - `selectedStyle` (optional)
 - `showTooltip` (Bool; optional)
+- `tooltipClassName` (String; optional)
 - `tooltipSticky` (Bool; optional)
 """
 function ''_leafletgeojson(; kwargs...)
-        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :clickFeatureZoom, :data, :defaultStyle, :disableClickSelect, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :hoverStyle, :hoverable, :key, :lassoButtonPosition, :lassoResetSelectedFeatureIds, :lassoSelect, :lassoStyle, :lassoType, :loading_state, :mode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :tooltipSticky]
+        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :circleMarkerRadius, :clickFeatureZoom, :data, :defaultStyle, :disableClickSelect, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :hoverStyle, :hoverable, :key, :lassoButtonPosition, :lassoResetSelectedFeatureIds, :lassoSelect, :lassoStyle, :lassoType, :loading_state, :mode, :pointRenderMode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :tooltipClassName, :tooltipSticky]
         wild_props = Symbol[]
         return Component("''_leafletgeojson", "LeafletGeoJSON", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

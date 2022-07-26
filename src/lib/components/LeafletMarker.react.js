@@ -4,7 +4,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import "@geoman-io/leaflet-geoman-free";
-import { useMap, Marker } from 'react-leaflet';
+import { Marker } from 'react-leaflet';
 import L, { icon } from 'leaflet';
 import {
     markerIcon,
