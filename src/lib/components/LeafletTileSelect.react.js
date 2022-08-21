@@ -48,7 +48,9 @@ const LeafletTileSelect = (props) => {
             {<div
                 style={{
                     ...containerStyle,
-                    display: containerVisible ? 'flex' : 'none'
+                    display: 'flex',
+                    transition: 'transform 0.25s ease-in-out',
+                    transform: containerVisible ? 'none' : 'translateY(calc(-100% - 15px))'
                 }}
                 className={containerClassName ?
                     `leaflet-tile-select-container ${containerClassName}` :

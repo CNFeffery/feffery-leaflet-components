@@ -2,6 +2,15 @@
     display: none !important;
 }
 
+.leaflet-bar {
+    border: none !important;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 40%) !important;
+}
+
+.leaflet-pm-actions-container {
+    box-shadow: 0 1px 5px rgb(0 0 0 / 40%) !important;
+}
+
 .leaflet-div-icon {
     background: none !important;
     border: none !important;
@@ -36,13 +45,14 @@
     width: 32px;
     height: 32px;
     background: white;
-    border-radius: 4px;
-    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
     outline: none;
     cursor: pointer;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 40%);
+    border: none;
 }
 
 /* 图层选择器按钮悬浮 */
@@ -54,8 +64,8 @@
 .leaflet-tile-select-container {
     background: rgba(255, 255, 255, 0.9);
     width: 480px;
-    box-shadow: 0 0 4px 2px hsl(0deg 0% 69% / 50%);
-    border-radius: 4px;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 40%);
+    border-radius: 2px;
     margin-top: 1px;
     padding: 10px;
     display: flex;
@@ -78,7 +88,7 @@
 
 /* 图层选择器子项悬浮 */
 .leaflet-tile-select-container-item:hover {
-    box-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
 }
 
 /* 图层选择器选择状态 */
