@@ -38,10 +38,12 @@
     display: flex;
     gap: 15px;
     justify-content: center;
+    pointer-events: none;
 }
 
 /* 图层选择器按钮 */
 .leaflet-tile-select-btn {
+    pointer-events: all;
     width: 32px;
     height: 32px;
     background: white;
@@ -62,6 +64,7 @@
 
 /* 图层选择器容器 */
 .leaflet-tile-select-container {
+    pointer-events: all;
     background: rgba(255, 255, 255, 0.9);
     width: 480px;
     box-shadow: 0 1px 5px rgb(0 0 0 / 40%);
