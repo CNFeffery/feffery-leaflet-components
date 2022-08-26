@@ -108,6 +108,11 @@ def show_all_palette_paths():
     return tree.flatten(__get_paths(all_palettes))
 
 
+class ColorPathsInvalidError(BaseException):
+
+    pass
+
+
 def get_colors(paths: str):
     '''
     根据传入的色彩方案路径返回对应的十六进制色彩字符数组
@@ -123,14 +128,14 @@ def get_colors(paths: str):
         try:
             colors = colors.get(path)
         except:
-            raise 'Paths invalid!'
+            raise ColorPathsInvalidError('Paths invalid!')
 
         # 当遍历到最后一个path
         if i == len(paths) - 2:
             # 检查是否到达色彩列表层
             if isinstance(colors, list):
                 return colors
-            raise 'Paths invalid!'
+            raise ColorPathsInvalidError('Paths invalid!')
 
 
 class SegmentedColoring:
