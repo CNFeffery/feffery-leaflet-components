@@ -147,7 +147,7 @@ class SegmentedColoring:
         构建数据分箱模型并进行计算
         '''
 
-        if not min_value:
+        if not min_value and min_value != 0:
             min_value = min(x)
 
         self.min_value = min_value
@@ -169,7 +169,8 @@ class SegmentedColoring:
             colors = get_colors(colors)
 
         if isinstance(colors, list):
-            assert len(colors) >= self.model.k, 'Length of colors can not less than k!'
+            assert len(
+                colors) >= self.model.k, 'Length of colors can not less than k!'
 
         return [
             colors[i] for i in self.model.yb
