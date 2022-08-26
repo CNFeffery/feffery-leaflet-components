@@ -83,6 +83,10 @@ const LeafletGeoJSON = (props) => {
         loading_state
     } = props;
 
+    if (!data) {
+        return null;
+    }
+
     const geoJsonRef = useRef(null);
     const [initialized, setInitialized] = useState(false);
     const map = useMap();
@@ -440,7 +444,7 @@ LeafletGeoJSON.propTypes = {
     key: PropTypes.string,
 
     // 传入GeoJSON格式数据
-    data: PropTypes.object,
+    data: PropTypes.object.isRequired,
 
     /* 基础参数 */
     // 设置绘图模式，可选的有'default'、'selectable'（选择模式）、'choropleth'（分层设色模式）以及'category'（分类设色模式）

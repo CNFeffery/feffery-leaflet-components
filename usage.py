@@ -1,88 +1,70 @@
 import dash
+import json
+import random
 from dash import html
+import feffery_antd_components as fac
 import feffery_leaflet_components as flc
 from dash.dependencies import Input, Output, State
 
-# 着色工具函数测试
-from feffery_leaflet_components import coloring_utils
-
 app = dash.Dash(__name__)
+
+raw_geojson = json.loads(open('./100000_full.json', encoding='utf-8').read())
 
 app.layout = html.Div(
     [
-        html.Button(
-            '切换permanent',
-            id='switch'
+        fac.AntdRadioGroup(
+            id='switch-data',
+            options=[
+                {
+                    'label': f'选项{i}',
+                    'value': f'选项{i}'
+                }
+                for i in range(3)
+            ],
+            optionType='button',
+            buttonStyle='solid',
+            defaultValue='选项0'
         ),
-        flc.LeafletMap(
+        html.Div(
             [
-                flc.LeafletMarker(
-                    flc.LeafletTooltip(
-                        '测试',
-                        id='tooltip',
-                        permanent=True
-                    ),
-                    position={
-                        'lng': 0,
-                        'lat': 0
+                flc.LeafletMap(
+                    [
+                        flc.LeafletTileLayer(),
+
+                        flc.LeafletGeoJSON(
+                            id='geojson',
+                            data=None
+                        )
+                    ],
+                    style={
+                        'height': '100%'
                     }
-                ),
-
-                flc.LeafletTileLayer(),
-
-                flc.LeafletTileSelect(
-                    urls=[
-                        {
-                            'url': 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                        },
-                        {
-                            'url': 'http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
-                        },
-                        {
-                            'url': 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
-                        },
-                        {
-                            'url': 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg'
-                        },
-                        {
-                            'url': 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png'
-                        },
-                        {
-                            'url': 'https://stamen-tiles-a.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.png'
-                        },
-                        {
-                            'url': 'https://d.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'
-                        },
-                        {
-                            'url': 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-                        },
-                        {
-                            'url': 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png'
-                        }
-                    ]
                 )
             ],
-            editToolbar=True,
             style={
-                'height': '800px'
+                'height': '600px'
             }
         )
     ],
     style={
-        'width': '1000px',
+        'width': '800px',
         'margin': '0 auto'
     }
 )
 
 
 @app.callback(
-    Output('tooltip', 'permanent'),
-    Input('switch', 'n_clicks'),
-    State('tooltip', 'permanent')
+    Output('geojson', 'data'),
+    Input('switch-data', 'value'),
+    prevent_initial_call=True
 )
-def demo(n_clicks, permanent):
+def switch_geojson_data(value):
 
-    return not permanent
+    geojson = raw_geojson.copy()
+
+    geojson['features'] = [random.choice(geojson['features'])]
+
+    return geojson
 
 
 if __name__ == '__main__':

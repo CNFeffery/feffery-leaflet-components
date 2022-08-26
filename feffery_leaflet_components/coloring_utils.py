@@ -3,7 +3,7 @@ import tree
 import importlib
 from typing import Union, List, Dict
 
-__all__ = ['show_all_palette_paths', 'get_colors', 'SegmentedColoring']
+__all__ = ['all_palettes', 'SegmentedColoring']
 
 # 尝试导入着色工具所需的第三方依赖库
 try:
@@ -21,7 +21,7 @@ except ImportError:
     )
 
 
-all_palettes = {
+all_palettes_dict = {
     category: {
         color_type: {
             palette: eval(
@@ -40,8 +40,8 @@ all_palettes = {
 }
 
 # 补充matplotlib调色方案
-all_palettes = {
-    **all_palettes,
+all_palettes_dict = {
+    **all_palettes_dict,
     'matplotlib': {
         palette: eval(f'palettable.matplotlib.{palette}.hex_colors')
         for palette in dir(palettable.matplotlib)
@@ -51,8 +51,8 @@ all_palettes = {
 }
 
 # 补充MyCarta调色方案
-all_palettes = {
-    **all_palettes,
+all_palettes_dict = {
+    **all_palettes_dict,
     'mycarta': {
         palette: eval(f'palettable.mycarta.{palette}.hex_colors')
         for palette in dir(palettable.mycarta)
@@ -62,8 +62,8 @@ all_palettes = {
 }
 
 # 补充tableau调色方案
-all_palettes = {
-    **all_palettes,
+all_palettes_dict = {
+    **all_palettes_dict,
     'tableau': {
         palette: eval(f'palettable.tableau.{palette}.hex_colors')
         for palette in dir(palettable.tableau)
@@ -73,8 +73,8 @@ all_palettes = {
 }
 
 # 补充Wes Anderson调色方案
-all_palettes = {
-    **all_palettes,
+all_palettes_dict = {
+    **all_palettes_dict,
     'wesanderson': {
         palette: eval(f'palettable.wesanderson.{palette}.hex_colors')
         for palette in dir(palettable.wesanderson)
@@ -105,15 +105,15 @@ def show_all_palette_paths():
             return current_paths
 
     # 展平后返回
-    return tree.flatten(__get_paths(all_palettes))
+    return tree.flatten(__get_paths(all_palettes_dict))
 
 
-class ColorPathsInvalidError(BaseException):
+class PalettePathInvalidError(BaseException):
 
     pass
 
 
-def get_colors(paths: str):
+def get_palette(paths: str):
     '''
     根据传入的色彩方案路径返回对应的十六进制色彩字符数组
     '''
@@ -122,20 +122,28 @@ def get_colors(paths: str):
 
     assert len(paths) > 1
 
-    colors = all_palettes.get(paths[0])
+    colors = all_palettes_dict.get(paths[0])
     for i, path in enumerate(paths[1:]):
 
         try:
             colors = colors.get(path)
         except:
-            raise ColorPathsInvalidError('Paths invalid!')
+            raise PalettePathInvalidError('Paths invalid!')
 
         # 当遍历到最后一个path
         if i == len(paths) - 2:
             # 检查是否到达色彩列表层
             if isinstance(colors, list):
                 return colors
-            raise ColorPathsInvalidError('Paths invalid!')
+            raise PalettePathInvalidError('Paths invalid!')
+
+
+all_palette_paths = show_all_palette_paths()
+
+all_palettes = [
+    (palette_path, get_palette(palette_path), len(get_palette(palette_path)))
+    for palette_path in all_palette_paths
+]
 
 
 class SegmentedColoring:
@@ -171,7 +179,7 @@ class SegmentedColoring:
         '''
 
         if isinstance(colors, str):
-            colors = get_colors(colors)
+            colors = get_palette(colors)
 
         if isinstance(colors, list):
             assert len(

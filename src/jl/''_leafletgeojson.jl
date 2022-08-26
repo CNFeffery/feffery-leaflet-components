@@ -13,7 +13,7 @@ Keyword arguments:
 - `_hoveredFeature` (Dict; optional)
 - `circleMarkerRadius` (Real; optional)
 - `clickFeatureZoom` (Bool; optional)
-- `data` (Dict; optional)
+- `data` (Dict; required)
 - `defaultStyle` (optional)
 - `disableClickSelect` (Bool; optional)
 - `featureCategoryField` (String; optional)

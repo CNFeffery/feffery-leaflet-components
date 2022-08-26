@@ -872,7 +872,7 @@
         "type": {
           "name": "object"
         },
-        "required": false,
+        "required": true,
         "description": ""
       },
       "mode": {
