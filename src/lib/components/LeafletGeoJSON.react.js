@@ -91,10 +91,6 @@ const LeafletGeoJSON = (props) => {
     const [initialized, setInitialized] = useState(false);
     const map = useMap();
 
-    if (!data) {
-        return null;
-    }
-
     // 预处理defaultStyle、hoverStyle、selectedStyle
     defaultStyle = { ..._defaultStyle, ...defaultStyle };
     hoverStyle = { ..._hoverStyle, ...hoverStyle };
@@ -163,6 +159,16 @@ const LeafletGeoJSON = (props) => {
             }
         };
     }
+
+    useEffect(() => {
+        if (geoJsonRef.current) {
+            // 更新图层数据
+            geoJsonRef.current.clearLayers().addData(data)
+            if (fitBounds) {
+                map.fitBounds(geoJsonRef.current.getBounds())
+            }
+        }
+    }, [data])
 
     useEffect(() => {
         if (map && mode === 'selectable' && selectMode === 'multiple' && lassoSelect) {

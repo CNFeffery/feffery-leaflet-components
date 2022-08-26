@@ -23,7 +23,7 @@ app.layout = html.Div(
             ],
             optionType='button',
             buttonStyle='solid',
-            defaultValue='选项0'
+            # defaultValue='选项0'
         ),
         html.Div(
             [
