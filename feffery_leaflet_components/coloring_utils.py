@@ -155,7 +155,7 @@ class SegmentedColoring:
         assert method in [
             'NaturalBreaks', 'EqualInterval', 'Quantiles'
         ], 'Invalid method!'
-        assert len(x) <= k, 'Length of x can not less than k!'
+        assert len(x) >= k, 'Length of x can not less than k!'
 
         # 取得相应的数据分箱模型并执行分箱计算
         self.model = getattr(mc, method)(x, k=k)
@@ -169,8 +169,7 @@ class SegmentedColoring:
             colors = get_colors(colors)
 
         if isinstance(colors, list):
-            assert len(
-                colors) >= self.model.k, 'Length of colors can not less than k!'
+            assert len(colors) >= self.model.k, 'Length of colors can not less than k!'
 
         return [
             colors[i] for i in self.model.yb
