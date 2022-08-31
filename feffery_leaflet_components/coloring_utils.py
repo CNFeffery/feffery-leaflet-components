@@ -3,7 +3,7 @@ import tree
 import importlib
 from typing import Union, List, Dict
 
-__all__ = ['all_palettes', 'SegmentedColoring']
+__all__ = ['all_palettes', 'get_palette', 'SegmentedColoring']
 
 # 尝试导入着色工具所需的第三方依赖库
 try:
@@ -21,7 +21,7 @@ except ImportError:
     )
 
 
-all_palettes_dict = {
+__all_palettes_dict = {
     category: {
         color_type: {
             palette: eval(
@@ -40,8 +40,8 @@ all_palettes_dict = {
 }
 
 # 补充matplotlib调色方案
-all_palettes_dict = {
-    **all_palettes_dict,
+__all_palettes_dict = {
+    **__all_palettes_dict,
     'matplotlib': {
         palette: eval(f'palettable.matplotlib.{palette}.hex_colors')
         for palette in dir(palettable.matplotlib)
@@ -51,8 +51,8 @@ all_palettes_dict = {
 }
 
 # 补充MyCarta调色方案
-all_palettes_dict = {
-    **all_palettes_dict,
+__all_palettes_dict = {
+    **__all_palettes_dict,
     'mycarta': {
         palette: eval(f'palettable.mycarta.{palette}.hex_colors')
         for palette in dir(palettable.mycarta)
@@ -62,8 +62,8 @@ all_palettes_dict = {
 }
 
 # 补充tableau调色方案
-all_palettes_dict = {
-    **all_palettes_dict,
+__all_palettes_dict = {
+    **__all_palettes_dict,
     'tableau': {
         palette: eval(f'palettable.tableau.{palette}.hex_colors')
         for palette in dir(palettable.tableau)
@@ -73,8 +73,8 @@ all_palettes_dict = {
 }
 
 # 补充Wes Anderson调色方案
-all_palettes_dict = {
-    **all_palettes_dict,
+__all_palettes_dict = {
+    **__all_palettes_dict,
     'wesanderson': {
         palette: eval(f'palettable.wesanderson.{palette}.hex_colors')
         for palette in dir(palettable.wesanderson)
@@ -105,10 +105,13 @@ def show_all_palette_paths():
             return current_paths
 
     # 展平后返回
-    return tree.flatten(__get_paths(all_palettes_dict))
+    return tree.flatten(__get_paths(__all_palettes_dict))
 
 
 class PalettePathInvalidError(BaseException):
+    '''
+    自定义非法调色方案路径错误
+    '''
 
     pass
 
@@ -120,26 +123,28 @@ def get_palette(paths: str):
 
     paths = paths.split('.')
 
-    assert len(paths) > 1
+    if len(paths) <= 1:
+        raise PalettePathInvalidError('Path invalid!')
 
-    colors = all_palettes_dict.get(paths[0])
+    colors = __all_palettes_dict.get(paths[0])
     for i, path in enumerate(paths[1:]):
 
         try:
-            colors = colors.get(path)
+            # 尝试获取下一层路径色彩参数
+            colors = colors[path]
         except:
-            raise PalettePathInvalidError('Paths invalid!')
+            raise PalettePathInvalidError('Path invalid!')
 
         # 当遍历到最后一个path
         if i == len(paths) - 2:
-            # 检查是否到达色彩列表层
+            # 检查是否到达调色方案列表层
             if isinstance(colors, list):
                 return colors
-            raise PalettePathInvalidError('Paths invalid!')
+            raise PalettePathInvalidError('Path invalid!')
 
 
+# 获取全部调色方案信息元组列表
 all_palette_paths = show_all_palette_paths()
-
 all_palettes = [
     (palette_path, get_palette(palette_path), len(get_palette(palette_path)))
     for palette_path in all_palette_paths
@@ -152,44 +157,76 @@ class SegmentedColoring:
     '''
 
     def __init__(self,
-                 method: str = 'NaturalBreaks',
                  x: Union[List[int], List[float]] = [],
                  k: int = 5,
-                 min_value: Union[int, float] = None):
+                 method: str = 'NaturalBreaks',
+                 right: bool = True,
+                 min_value: Union[int, float] = None) -> None:
         '''
         构建数据分箱模型并进行计算
         '''
 
+        # 设置区间是否右闭
+        self.right = right
+
+        # 记录输入的数组值
+        self.x = x
+
+        # 当min_value未定义时
         if not min_value and min_value != 0:
+            # 将输入数组中最小值作为min_value缺省值
             min_value = min(x)
 
         self.min_value = min_value
 
+        # 检验算法合法性
         assert method in [
             'NaturalBreaks', 'EqualInterval', 'Quantiles'
-        ], 'Invalid method!'
+        ], 'Invalid method! method should within "NaturalBreaks", "EqualInterval" and "Quantiles"'
+
+        # 检验输入数组记录数量是否大于等于目标分段数量
         assert len(x) >= k, 'Length of x can not less than k!'
 
-        # 取得相应的数据分箱模型并执行分箱计算
+        # 取得相应的数据分箱模型类并执行分箱计算
         self.model = getattr(mc, method)(x, k=k)
 
-    def get_colors(self, colors: Union[List, str]):
+    def get_colors(self, colors: Union[List[str], str]) -> List[str]:
         '''
         根据设置的色彩方案取得每个实例的对应色彩值
         '''
 
+        # 若输入色彩参数为字符串，则视作内置调色方案路径进行颜色提取
         if isinstance(colors, str):
             colors = get_palette(colors)
 
+            # 检查取得的调色方案数组长度是否满足分箱数量
+            assert len(
+                colors
+            ) >= self.model.k, 'Length of colors can not less than k!'
+
+        # 若输入色彩参数为列表，则
         if isinstance(colors, list):
             assert len(
-                colors) >= self.model.k, 'Length of colors can not less than k!'
+                colors
+            ) >= self.model.k, 'Length of colors can not less than k!'
 
-        return [
-            colors[i] for i in self.model.yb
-        ]
+        # 基于数据分箱标签及合法的色彩数组计算每个样本对应的区间色彩
+        label_colors = []
+        for x_ in self.x:
+            for i, (bin_right, bin_color) in enumerate(zip(self.model.bins, colors)):
+                # 若右闭
+                if self.right:
+                    if x_ <= bin_right:
+                        label_colors.append(bin_color)
+                        break
+                else:
+                    if x_ < bin_right or i == len(self.model.bins):
+                        label_colors.append(bin_color)
+                        break
 
-    def get_bins(self):
+        return label_colors
+
+    def get_bins(self) -> List[Union[List[int], List[float]]]:
         '''
         获取LeafletGeoJSON适用的分段区间结果
         '''
@@ -197,3 +234,11 @@ class SegmentedColoring:
         bins = [self.min_value, *self.model.bins]
 
         return [[left, right] for left, right in zip(bins[:-1], bins[1:])]
+
+
+if __name__ == '__main__':
+    # tests
+
+    segmented_coloring = SegmentedColoring(x=range(10), k=3, right=False)
+    segmented_coloring.get_colors('wesanderson.Royal1_4_r')
+    get_palette('wesanderson.Royal1_4_r')
