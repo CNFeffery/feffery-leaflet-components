@@ -235,6 +235,13 @@ class SegmentedColoring:
 
         return [[left, right] for left, right in zip(bins[:-1], bins[1:])]
 
+    def get_breakpoints(self) -> List[Union[int, float]]:
+        '''
+        获取数据分箱结果断点数组（含补充的最小值）
+        '''
+
+        return [self.min_value, *self.model.bins]
+
 
 if __name__ == '__main__':
     # tests
