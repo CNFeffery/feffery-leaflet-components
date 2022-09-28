@@ -1,11 +1,10 @@
+> 本项目当前处于早期测试阶段，API可能会经常变更，且文档内容远远落后于最新开发版本的功能内容，请暂时不要在生产项目中重度使用！
+
 <p align="center">
 	<img src="./flc-logo.svg" height=200></img>
 </p>
 <h1 align="center">feffery-leaflet-components</h1>
 <div align="center">
-
-
-
 
 
 [![GitHub](https://img.shields.io/github/license/plotly/dash.svg?color=dark-green)](https://github.com/plotly/dash/blob/master/LICENSE)
