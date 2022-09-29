@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useMap, FeatureGroup } from 'react-leaflet';
+import { FeatureGroup } from 'react-leaflet';
 
 // 定义要素分组组件LeafletFeatureGroup
 const LeafletFeatureGroup = (props) => {
@@ -11,6 +11,7 @@ const LeafletFeatureGroup = (props) => {
     const {
         id,
         children,
+        bringToFront,
         loading_state,
         setProps
     } = props;
@@ -32,6 +33,16 @@ const LeafletFeatureGroup = (props) => {
         }
     }, [children])
 
+    useEffect(() => {
+        if (bringToFront && featureGroupRef.current) {
+            featureGroupRef.current.bringToFront()
+            // 还原bringToFront为false
+            setProps({
+                bringToFront: false
+            })
+        }
+    }, [bringToFront])
+
     // 返回定制化的前端组件
     return (
         <FeatureGroup id={id}
@@ -52,6 +63,9 @@ LeafletFeatureGroup.propTypes = {
 
     // 传入tooltip、popup组件
     children: PropTypes.node,
+
+    // 设置是否将当前图层置于顶层
+    bringToFront: PropTypes.bool,
 
     // 监听当前要素组的整体bounds
     _bounds: PropTypes.exact({

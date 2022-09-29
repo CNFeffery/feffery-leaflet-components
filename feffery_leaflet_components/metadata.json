@@ -505,6 +505,13 @@
         "required": false,
         "description": ""
       },
+      "bringToFront": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
       "_bounds": {
         "type": {
           "name": "exact",

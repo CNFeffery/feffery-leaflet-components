@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useMap, LayerGroup } from 'react-leaflet';
+import { LayerGroup } from 'react-leaflet';
 
 // 定义图层分组组件LeafletLayerGroup
 const LeafletLayerGroup = (props) => {
@@ -15,9 +15,12 @@ const LeafletLayerGroup = (props) => {
         setProps
     } = props;
 
+    const layerGroupRef = useRef(null);
+
     // 返回定制化的前端组件
     return (
         <LayerGroup id={id}
+            ref={layerGroupRef}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
