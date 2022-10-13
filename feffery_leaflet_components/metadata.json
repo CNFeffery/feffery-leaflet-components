@@ -59,7 +59,7 @@
             }
           ]
         },
-        "required": false,
+        "required": true,
         "description": ""
       },
       "pathOptions": {
@@ -214,6 +214,28 @@
           "computed": false
         }
       },
+      "nClicks": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "mouseOverCount": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
       "loading_state": {
         "type": {
           "name": "shape",
@@ -317,6 +339,28 @@
         "description": "",
         "defaultValue": {
           "value": "false",
+          "computed": false
+        }
+      },
+      "nClicks": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "mouseOverCount": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
           "computed": false
         }
       },
@@ -2336,6 +2380,28 @@
         "required": false,
         "description": ""
       },
+      "nClicks": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "mouseOverCount": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
       "loading_state": {
         "type": {
           "name": "shape",
@@ -2665,7 +2731,7 @@
             ]
           }
         },
-        "required": false,
+        "required": true,
         "description": ""
       },
       "pathOptions": {
@@ -2684,6 +2750,28 @@
         "description": "",
         "defaultValue": {
           "value": "false",
+          "computed": false
+        }
+      },
+      "nClicks": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "mouseOverCount": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
           "computed": false
         }
       },
@@ -2787,7 +2875,7 @@
             }
           ]
         },
-        "required": false,
+        "required": true,
         "description": ""
       },
       "pathOptions": {
@@ -2880,6 +2968,28 @@
         "description": "",
         "defaultValue": {
           "value": "false",
+          "computed": false
+        }
+      },
+      "nClicks": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "mouseOverCount": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
           "computed": false
         }
       },
@@ -3098,6 +3208,28 @@
         "description": "",
         "defaultValue": {
           "value": "false",
+          "computed": false
+        }
+      },
+      "nClicks": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "mouseOverCount": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "0",
           "computed": false
         }
       },

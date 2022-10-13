@@ -46,9 +46,13 @@ Keyword arguments:
     - prop_name (string; optional):
         Holds which property is loading.
 
+- mouseOverCount (number; default 0)
+
+- nClicks (number; default 0)
+
 - pathOptions (optional)
 
-- positions (list of dicts; optional)
+- positions (list of dicts; required)
 
     `positions` is a list of dicts with keys:
 
@@ -64,14 +68,19 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletPolyline'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, positions=Component.UNDEFINED, pathOptions=Component.UNDEFINED, arrowheads=Component.UNDEFINED, arrowheadsPathOptions=Component.UNDEFINED, editable=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'arrowheads', 'arrowheadsPathOptions', 'editable', 'key', 'loading_state', 'pathOptions', 'positions']
+    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, positions=Component.REQUIRED, pathOptions=Component.UNDEFINED, arrowheads=Component.UNDEFINED, arrowheadsPathOptions=Component.UNDEFINED, editable=Component.UNDEFINED, nClicks=Component.UNDEFINED, mouseOverCount=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'arrowheads', 'arrowheadsPathOptions', 'editable', 'key', 'loading_state', 'mouseOverCount', 'nClicks', 'pathOptions', 'positions']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'arrowheads', 'arrowheadsPathOptions', 'editable', 'key', 'loading_state', 'pathOptions', 'positions']
+        self.available_properties = ['children', 'id', 'arrowheads', 'arrowheadsPathOptions', 'editable', 'key', 'loading_state', 'mouseOverCount', 'nClicks', 'pathOptions', 'positions']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
         _locals.update(kwargs)  # For wildcard attrs and excess named props
         args = {k: _locals[k] for k in _explicit_args if k != 'children'}
+
+        for k in ['positions']:
+            if k not in args:
+                raise TypeError(
+                    'Required argument `' + k + '` was not specified.')
 
         super(LeafletPolyline, self).__init__(children=children, **args)

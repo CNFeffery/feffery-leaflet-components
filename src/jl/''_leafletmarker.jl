@@ -33,6 +33,8 @@ Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
+- `mouseOverCount` (Real; optional)
+- `nClicks` (Real; optional)
 - `opacity` (Real; optional)
 - `position` (required): . position has the following type: lists containing elements 'lng', 'lat'.
 Those elements have the following types:
@@ -42,7 +44,7 @@ Those elements have the following types:
 - `zIndexOffset` (Real; optional)
 """
 function ''_leafletmarker(; kwargs...)
-        available_props = Symbol[:children, :id, :autoPan, :draggable, :editable, :iconOptions, :key, :loading_state, :opacity, :position, :riseOnHover, :zIndexOffset]
+        available_props = Symbol[:children, :id, :autoPan, :draggable, :editable, :iconOptions, :key, :loading_state, :mouseOverCount, :nClicks, :opacity, :position, :riseOnHover, :zIndexOffset]
         wild_props = Symbol[]
         return Component("''_leafletmarker", "LeafletMarker", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

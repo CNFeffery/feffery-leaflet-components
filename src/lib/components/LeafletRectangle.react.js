@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import L from "leaflet";
-import { useMap, Rectangle } from 'react-leaflet';
+import { Rectangle } from 'react-leaflet';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 
 // 定义矩形图层组件LeafletRectangle
@@ -12,10 +12,13 @@ const LeafletRectangle = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        key,
         children,
         bounds,
         pathOptions,
         editable,
+        nClicks,
+        mouseOverCount,
         loading_state,
         setProps
     } = props;
@@ -24,8 +27,9 @@ const LeafletRectangle = (props) => {
 
     useEffect(() => {
         if (rectangleRef.current) {
+            // 支持geoman可编辑特性
             rectangleRef.current.on('pm:edit', function (e) {
-                // 更新坐标集合
+                // 更新矩形左下角、右上角坐标
                 setProps({
                     bounds: {
                         minx: e.layer._bounds._southWest.lng,
@@ -38,9 +42,9 @@ const LeafletRectangle = (props) => {
         }
     })
 
-    // 返回定制化的前端组件
     return (
         <Rectangle id={id}
+            key={key}
             bounds={L.latLngBounds(
                 L.latLng(bounds.miny, bounds.minx),
                 L.latLng(bounds.maxy, bounds.maxx)
@@ -50,6 +54,16 @@ const LeafletRectangle = (props) => {
                 pmIgnore: !editable
             }}
             ref={rectangleRef}
+            eventHandlers={{
+                // 监听点击事件
+                click: () => {
+                    setProps({ nClicks: nClicks + 1 })
+                },
+                // 监听鼠标移入事件
+                mouseover: () => {
+                    setProps({ mouseOverCount: mouseOverCount + 1 })
+                }
+            }}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -62,6 +76,7 @@ LeafletRectangle.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    // 强制刷新用
     key: PropTypes.string,
 
     // 传入tooltip、popup组件
@@ -84,6 +99,12 @@ LeafletRectangle.propTypes = {
 
     // 设置是否可编辑，默认为false
     editable: PropTypes.bool,
+
+    // 监听当前圆圈标志的被点击次数，默认为0
+    nClicks: PropTypes.number,
+
+    // 监听当前圆圈标志发生鼠标移入事件次数，默认为0
+    mouseOverCount: PropTypes.number,
 
     loading_state: PropTypes.shape({
         /**
@@ -109,7 +130,9 @@ LeafletRectangle.propTypes = {
 
 // 设置默认参数
 LeafletRectangle.defaultProps = {
-    editable: false
+    editable: false,
+    nClicks: 0,
+    mouseOverCount: 0
 }
 
 export default React.memo(LeafletRectangle);

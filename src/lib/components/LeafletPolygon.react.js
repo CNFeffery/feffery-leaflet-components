@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useMap, Polygon } from 'react-leaflet';
+import { Polygon } from 'react-leaflet';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 
 // 定义多边形图层组件LeafletPolygon
@@ -11,10 +11,13 @@ const LeafletPolygon = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        key,
         children,
         positions,
         pathOptions,
         editable,
+        nClicks,
+        mouseOverCount,
         loading_state,
         setProps
     } = props;
@@ -23,8 +26,9 @@ const LeafletPolygon = (props) => {
 
     useEffect(() => {
         if (polygonRef.current) {
+            // 支持geoman可编辑特性
             polygonRef.current.on('pm:edit', function (e) {
-                // 更新多边形坐标集合
+                // 更新多边形坐标数组
                 setProps({
                     positions: e.layer._latlngs
                 })
@@ -32,15 +36,25 @@ const LeafletPolygon = (props) => {
         }
     })
 
-    // 返回定制化的前端组件
     return (
         <Polygon id={id}
+            key={key}
             positions={positions}
             pathOptions={{
                 ...pathOptions,
                 pmIgnore: !editable
             }}
             ref={polygonRef}
+            eventHandlers={{
+                // 监听点击事件
+                click: () => {
+                    setProps({ nClicks: nClicks + 1 })
+                },
+                // 监听鼠标移入事件
+                mouseover: () => {
+                    setProps({ mouseOverCount: mouseOverCount + 1 })
+                }
+            }}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -53,6 +67,7 @@ LeafletPolygon.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    // 强制刷新用
     key: PropTypes.string,
 
     // 传入tooltip、popup组件
@@ -89,13 +104,19 @@ LeafletPolygon.propTypes = {
                 )
             )
         ])
-    ),
+    ).isRequired,
 
     // 设置样式相关参数
     pathOptions: pathOptionsPropTypes,
 
     // 设置是否可编辑，默认为false
     editable: PropTypes.bool,
+
+    // 监听当前圆圈标志的被点击次数，默认为0
+    nClicks: PropTypes.number,
+
+    // 监听当前圆圈标志发生鼠标移入事件次数，默认为0
+    mouseOverCount: PropTypes.number,
 
     loading_state: PropTypes.shape({
         /**
@@ -121,7 +142,9 @@ LeafletPolygon.propTypes = {
 
 // 设置默认参数
 LeafletPolygon.defaultProps = {
-    editable: false
+    editable: false,
+    nClicks: 0,
+    mouseOverCount: 0
 }
 
 export default React.memo(LeafletPolygon);

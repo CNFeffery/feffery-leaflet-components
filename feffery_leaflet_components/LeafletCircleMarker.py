@@ -38,6 +38,10 @@ Keyword arguments:
     - prop_name (string; optional):
         Holds which property is loading.
 
+- mouseOverCount (number; default 0)
+
+- nClicks (number; default 0)
+
 - pathOptions (optional)
 
 - radius (number; default 10)"""
@@ -46,10 +50,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletCircleMarker'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, center=Component.REQUIRED, radius=Component.UNDEFINED, pathOptions=Component.UNDEFINED, editable=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'center', 'editable', 'key', 'loading_state', 'pathOptions', 'radius']
+    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, center=Component.REQUIRED, radius=Component.UNDEFINED, pathOptions=Component.UNDEFINED, editable=Component.UNDEFINED, nClicks=Component.UNDEFINED, mouseOverCount=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'center', 'editable', 'key', 'loading_state', 'mouseOverCount', 'nClicks', 'pathOptions', 'radius']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'center', 'editable', 'key', 'loading_state', 'pathOptions', 'radius']
+        self.available_properties = ['children', 'id', 'center', 'editable', 'key', 'loading_state', 'mouseOverCount', 'nClicks', 'pathOptions', 'radius']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

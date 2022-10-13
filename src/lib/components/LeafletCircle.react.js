@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useMap, Circle } from 'react-leaflet';
+import { Circle } from 'react-leaflet';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 
 // 定义圆圈图层组件LeafletCircle
@@ -11,11 +11,14 @@ const LeafletCircle = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        key,
         children,
         center,
         radius,
         pathOptions,
         editable,
+        nClicks,
+        mouseOverCount,
         loading_state,
         setProps
     } = props;
@@ -24,8 +27,9 @@ const LeafletCircle = (props) => {
 
     useEffect(() => {
         if (circleRef.current) {
+            // 支持geoman可编辑特性
             circleRef.current.on('pm:edit', function (e) {
-                // 更新坐标集合
+                // 更新圆心坐标、半径属性
                 setProps({
                     center: e.layer._latlng,
                     radius: e.layer._mRadius
@@ -34,9 +38,9 @@ const LeafletCircle = (props) => {
         }
     })
 
-    // 返回定制化的前端组件
     return (
         <Circle id={id}
+            key={key}
             center={center}
             radius={radius}
             pathOptions={{
@@ -44,6 +48,16 @@ const LeafletCircle = (props) => {
                 pmIgnore: !editable
             }}
             ref={circleRef}
+            eventHandlers={{
+                // 监听点击事件
+                click: () => {
+                    setProps({ nClicks: nClicks + 1 })
+                },
+                // 监听鼠标移入事件
+                mouseover: () => {
+                    setProps({ mouseOverCount: mouseOverCount + 1 })
+                }
+            }}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -56,6 +70,7 @@ LeafletCircle.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    // 强制刷新用
     key: PropTypes.string,
 
     // 传入tooltip、popup组件
@@ -78,6 +93,12 @@ LeafletCircle.propTypes = {
 
     // 设置是否可编辑，默认为false
     editable: PropTypes.bool,
+
+    // 监听当前圆的被点击次数，默认为0
+    nClicks: PropTypes.number,
+
+    // 监听当前圆发生鼠标移入事件次数，默认为0
+    mouseOverCount: PropTypes.number,
 
     loading_state: PropTypes.shape({
         /**
@@ -103,7 +124,9 @@ LeafletCircle.propTypes = {
 
 // 设置默认参数
 LeafletCircle.defaultProps = {
-    editable: false
+    editable: false,
+    nClicks: 0,
+    mouseOverCount: 0
 }
 
 export default React.memo(LeafletCircle);

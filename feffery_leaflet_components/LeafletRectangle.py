@@ -42,16 +42,20 @@ Keyword arguments:
     - prop_name (string; optional):
         Holds which property is loading.
 
+- mouseOverCount (number; default 0)
+
+- nClicks (number; default 0)
+
 - pathOptions (optional)"""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletRectangle'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, bounds=Component.REQUIRED, pathOptions=Component.UNDEFINED, editable=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'bounds', 'editable', 'key', 'loading_state', 'pathOptions']
+    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, bounds=Component.REQUIRED, pathOptions=Component.UNDEFINED, editable=Component.UNDEFINED, nClicks=Component.UNDEFINED, mouseOverCount=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'bounds', 'editable', 'key', 'loading_state', 'mouseOverCount', 'nClicks', 'pathOptions']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'bounds', 'editable', 'key', 'loading_state', 'pathOptions']
+        self.available_properties = ['children', 'id', 'bounds', 'editable', 'key', 'loading_state', 'mouseOverCount', 'nClicks', 'pathOptions']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

@@ -20,7 +20,7 @@ Those elements have the following types:
   - `component_name` (String; optional): Holds the name of the component that is loading
 - `pathOptions` (optional)
 - `paused` (Bool; optional)
-- `positions` (optional): . positions has the following type: Array of lists containing elements 'lng', 'lat'.
+- `positions` (required): . positions has the following type: Array of lists containing elements 'lng', 'lat'.
 Those elements have the following types:
   - `lng` (Real; optional)
   - `lat` (Real; optional)s | Array of Array of lists containing elements 'lng', 'lat'.

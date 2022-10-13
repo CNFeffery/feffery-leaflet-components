@@ -26,10 +26,12 @@ Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
+- `mouseOverCount` (Real; optional)
+- `nClicks` (Real; optional)
 - `pathOptions` (optional)
 """
 function ''_leafletrectangle(; kwargs...)
-        available_props = Symbol[:children, :id, :bounds, :editable, :key, :loading_state, :pathOptions]
+        available_props = Symbol[:children, :id, :bounds, :editable, :key, :loading_state, :mouseOverCount, :nClicks, :pathOptions]
         wild_props = Symbol[]
         return Component("''_leafletrectangle", "LeafletRectangle", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

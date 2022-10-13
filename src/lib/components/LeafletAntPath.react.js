@@ -27,6 +27,7 @@ const LeafletAntPath = (props) => {
 
     useEffect(() => {
         if (map) {
+            // 清除先前的图层
             if (antPathLayer) {
                 antPathLayer.remove()
             }
@@ -61,8 +62,7 @@ const LeafletAntPath = (props) => {
         }
     }, [antPathLayer])
 
-    // 返回定制化的前端组件
-    return <div />;
+    return <></>;
 }
 
 // 定义参数或属性
@@ -70,10 +70,12 @@ LeafletAntPath.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    // 强制刷新用
     key: PropTypes.string,
 
     // 设置折线中折点坐标数组，必填
     positions: PropTypes.oneOfType([
+        // 单折线
         PropTypes.arrayOf(
             PropTypes.exact({
                 // 经度
@@ -83,6 +85,7 @@ LeafletAntPath.propTypes = {
                 lat: PropTypes.number
             })
         ),
+        // 多折线
         PropTypes.arrayOf(
             PropTypes.arrayOf(
                 PropTypes.exact({
@@ -94,7 +97,7 @@ LeafletAntPath.propTypes = {
                 })
             )
         )
-    ]),
+    ]).isRequired,
 
     // 设置样式相关参数
     pathOptions: pathOptionsPropTypes,
@@ -111,6 +114,7 @@ LeafletAntPath.propTypes = {
     // 设置线段分隔颜色，默认为'white'
     pulseColor: PropTypes.string,
 
+    // 动画延迟，单位：毫秒
     delay: PropTypes.number,
 
     // 设置分段模式，默认为'10, 20'

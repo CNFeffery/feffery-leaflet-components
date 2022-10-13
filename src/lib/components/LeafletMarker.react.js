@@ -3,9 +3,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import "@geoman-io/leaflet-geoman-free";
 import { Marker } from 'react-leaflet';
-import L, { icon } from 'leaflet';
+import L from 'leaflet';
 import {
     markerIcon,
     marker2xIcon,
@@ -29,6 +28,7 @@ const LeafletMarker = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        key,
         children,
         iconOptions,
         position,
@@ -38,6 +38,8 @@ const LeafletMarker = (props) => {
         zIndexOffset,
         riseOnHover,
         autoPan,
+        nClicks,
+        mouseOverCount,
         loading_state,
         setProps
     } = props;
@@ -46,8 +48,9 @@ const LeafletMarker = (props) => {
 
     useEffect(() => {
         if (markerRef.current) {
+            // 支持geoman可编辑特性
             markerRef.current.on('pm:edit', function (e) {
-                // 更新坐标集合
+                // 更新点坐标
                 setProps({
                     position: e.layer._latlng
                 })
@@ -55,9 +58,9 @@ const LeafletMarker = (props) => {
         }
     })
 
-    // 返回定制化的前端组件
     return (
         <Marker id={id}
+            key={key}
             icon={iconOptions ? L.icon(iconOptions) : L.icon(defaultIconOptions)}
             position={position}
             draggable={draggable}
@@ -67,6 +70,16 @@ const LeafletMarker = (props) => {
             riseOnHover={riseOnHover}
             autoPan={autoPan}
             ref={markerRef}
+            eventHandlers={{
+                // 监听点击事件
+                click: () => {
+                    setProps({ nClicks: nClicks + 1 })
+                },
+                // 监听鼠标移入事件
+                mouseover: () => {
+                    setProps({ mouseOverCount: mouseOverCount + 1 })
+                }
+            }}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -79,6 +92,7 @@ LeafletMarker.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    // 强制刷新用
     key: PropTypes.string,
 
     // 传入tooltip、popup组件
@@ -133,6 +147,12 @@ LeafletMarker.propTypes = {
     // 当拖拽标记至地图边缘时，设置是否允许地图自动移动以适应边缘，默认为false
     autoPan: PropTypes.bool,
 
+    // 监听当前圆圈标志的被点击次数，默认为0
+    nClicks: PropTypes.number,
+
+    // 监听当前圆圈标志发生鼠标移入事件次数，默认为0
+    mouseOverCount: PropTypes.number,
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -157,7 +177,9 @@ LeafletMarker.propTypes = {
 
 // 设置默认参数
 LeafletMarker.defaultProps = {
-    editable: false
+    editable: false,
+    nClicks: 0,
+    mouseOverCount: 0
 }
 
 export default React.memo(LeafletMarker);

@@ -36,7 +36,7 @@ Keyword arguments:
 
 - paused (boolean; optional)
 
-- positions (list of dicts; optional)
+- positions (list of dicts; required)
 
     `positions` is a list of dicts with keys:
 
@@ -56,7 +56,7 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletAntPath'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, positions=Component.UNDEFINED, pathOptions=Component.UNDEFINED, paused=Component.UNDEFINED, reverse=Component.UNDEFINED, hardwareAccelerated=Component.UNDEFINED, pulseColor=Component.UNDEFINED, delay=Component.UNDEFINED, dashArray=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, positions=Component.REQUIRED, pathOptions=Component.UNDEFINED, paused=Component.UNDEFINED, reverse=Component.UNDEFINED, hardwareAccelerated=Component.UNDEFINED, pulseColor=Component.UNDEFINED, delay=Component.UNDEFINED, dashArray=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
         self._prop_names = ['id', 'dashArray', 'delay', 'hardwareAccelerated', 'key', 'loading_state', 'pathOptions', 'paused', 'positions', 'pulseColor', 'reverse']
         self._valid_wildcard_attributes =            []
         self.available_properties = ['id', 'dashArray', 'delay', 'hardwareAccelerated', 'key', 'loading_state', 'pathOptions', 'paused', 'positions', 'pulseColor', 'reverse']
@@ -65,5 +65,10 @@ Keyword arguments:
         _locals = locals()
         _locals.update(kwargs)  # For wildcard attrs and excess named props
         args = {k: _locals[k] for k in _explicit_args}
+
+        for k in ['positions']:
+            if k not in args:
+                raise TypeError(
+                    'Required argument `' + k + '` was not specified.')
 
         super(LeafletAntPath, self).__init__(**args)

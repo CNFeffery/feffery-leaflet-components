@@ -3,7 +3,8 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import 'leaflet-arrowheads';
-import { useMap, Polyline } from 'react-leaflet';
+import { Polyline } from 'react-leaflet';
+import { isBoolean } from 'lodash';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 
 // 定义折线图层组件LeafletPolyline
@@ -12,12 +13,15 @@ const LeafletPolyline = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        key,
         children,
         positions,
         pathOptions,
         arrowheads,
         arrowheadsPathOptions,
         editable,
+        nClicks,
+        mouseOverCount,
         loading_state,
         setProps
     } = props;
@@ -26,8 +30,9 @@ const LeafletPolyline = (props) => {
 
     useEffect(() => {
         if (polylineRef.current) {
+            // 若开启箭头效果
             if (arrowheads) {
-                if (typeof arrowheads !== 'boolean') {
+                if (!isBoolean(arrowheads)) {
                     // 装填参数
                     polylineRef.current.arrowheads(
                         {
@@ -35,22 +40,23 @@ const LeafletPolyline = (props) => {
                             ...arrowheadsPathOptions
                         }
                     )
-                    polylineRef.current._update()
                 } else {
                     polylineRef.current.arrowheads()
-                    polylineRef.current._update()
                 }
+                // 更新箭头折线图层
+                polylineRef.current._update()
             } else {
+                // 否则移除先前的箭头图层
                 polylineRef.current.deleteArrowheads()
             }
-
         }
     }, [arrowheads])
 
     useEffect(() => {
         if (polylineRef.current) {
+            // 支持geoman可编辑特性
             polylineRef.current.on('pm:edit', function (e) {
-                // 更新坐标集合
+                // 更新折线坐标数组
                 setProps({
                     positions: e.layer._latlngs
                 })
@@ -58,15 +64,25 @@ const LeafletPolyline = (props) => {
         }
     })
 
-    // 返回定制化的前端组件
     return (
         <Polyline id={id}
+            key={key}
             positions={positions}
             pathOptions={{
                 ...pathOptions,
                 pmIgnore: !editable
             }}
             ref={polylineRef}
+            eventHandlers={{
+                // 监听点击事件
+                click: () => {
+                    setProps({ nClicks: nClicks + 1 })
+                },
+                // 监听鼠标移入事件
+                mouseover: () => {
+                    setProps({ mouseOverCount: mouseOverCount + 1 })
+                }
+            }}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -79,6 +95,7 @@ LeafletPolyline.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    // 强制刷新用
     key: PropTypes.string,
 
     // 传入tooltip、popup组件
@@ -106,7 +123,7 @@ LeafletPolyline.propTypes = {
                 })
             )
         )
-    ]),
+    ]).isRequired,
 
     // 设置样式相关参数
     pathOptions: pathOptionsPropTypes,
@@ -155,6 +172,12 @@ LeafletPolyline.propTypes = {
     // 设置是否可编辑，默认为false
     editable: PropTypes.bool,
 
+    // 监听当前圆圈标志的被点击次数，默认为0
+    nClicks: PropTypes.number,
+
+    // 监听当前圆圈标志发生鼠标移入事件次数，默认为0
+    mouseOverCount: PropTypes.number,
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -179,7 +202,9 @@ LeafletPolyline.propTypes = {
 
 // 设置默认参数
 LeafletPolyline.defaultProps = {
-    editable: false
+    editable: false,
+    nClicks: 0,
+    mouseOverCount: 0
 }
 
 export default React.memo(LeafletPolyline);
