@@ -70,6 +70,8 @@ const LeafletGeoJSON = (props) => {
         selectedStyle,
         featureValueToStyles,
         featureCategoryToStyles,
+        tooltipDirection,
+        tooltipPermanent,
         tooltipSticky,
         tooltipClassName,
         lassoSelect,
@@ -306,6 +308,8 @@ const LeafletGeoJSON = (props) => {
                     layer.bindTooltip(
                         feature.properties[featureTooltipField],
                         {
+                            direction: tooltipDirection,
+                            permanent: tooltipPermanent,
                             sticky: tooltipSticky,
                             className: tooltipClassName
                         }
@@ -414,6 +418,8 @@ const LeafletGeoJSON = (props) => {
                             return L.marker(latlng, { icon: defaultIcon }).bindTooltip(
                                 feature.properties[featureTooltipField],
                                 {
+                                    direction: tooltipDirection,
+                                    permanent: tooltipPermanent,
                                     sticky: tooltipSticky,
                                     className: tooltipClassName
                                 }
@@ -426,6 +432,8 @@ const LeafletGeoJSON = (props) => {
                         return L.circleMarker(latlng, { radius: circleMarkerRadius }).bindTooltip(
                             feature.properties[featureTooltipField],
                             {
+                                direction: tooltipDirection,
+                                permanent: tooltipPermanent,
                                 sticky: tooltipSticky,
                                 className: tooltipClassName
                             }
@@ -514,6 +522,13 @@ LeafletGeoJSON.propTypes = {
     // 配置分类设色模式所需的分类数组及分类对应色彩值参数
     featureCategoryToStyles: PropTypes.objectOf(pathOptionsPropTypes),
 
+    // 设置要素的tooltip展开方位，可选的有'right'、'left'、'top'、'bottom'、'center'与'auto'
+    // 默认为'auto'，其中'auto'会自动根据方位在'left'与'right'之间进行切换
+    tooltipDirection: PropTypes.oneOf(['right', 'left', 'top', 'bottom', 'center', 'auto']),
+
+    // 设置是否永久展开要素的tooltip而无需鼠标悬浮触发，默认为false
+    tooltipPermanent: PropTypes.bool,
+
     // 设置要素的tooltip是否跟随鼠标，默认为false
     tooltipSticky: PropTypes.bool,
 
@@ -590,7 +605,9 @@ LeafletGeoJSON.defaultProps = {
     lassoResetSelectedFeatureIds: false,
     lassoButtonPosition: 'topleft',
     pointRenderMode: 'circle-marker',
-    circleMarkerRadius: 10
+    circleMarkerRadius: 10,
+    tooltipDirection: 'auto',
+    tooltipPermanent: false
 }
 
 export default React.memo(LeafletGeoJSON);

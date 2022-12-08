@@ -1,8 +1,8 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useMap, Tooltip } from 'react-leaflet';
+import { Tooltip } from 'react-leaflet';
 
 // 定义提示框组件LeafletTooltip
 const LeafletTooltip = (props) => {
