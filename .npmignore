@@ -23,3 +23,16 @@ config
 .travis.yml
 CHANGELOG.md
 README.md
+
+# other directories
+/.build_cache
+/assets
+/deps
+/inst
+/man
+/R
+/tests
+
+# other files
+*.csv
+*.json

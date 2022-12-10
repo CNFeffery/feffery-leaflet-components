@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { MapContainer } from 'react-leaflet';
 import L from 'leaflet';
@@ -21,6 +21,8 @@ import { v4 as uuidv4 } from 'uuid';
 import 'leaflet-measure/dist/leaflet-measure.cn';
 import { omitBy, isUndefined } from 'lodash';
 import 'leaflet-measure/dist/leaflet-measure.css';
+import { AutoViewCorrection } from './utils/UtilsComponents';
+import { useSize } from 'ahooks';
 
 const customTranslation = {
     "tooltips": {
@@ -98,176 +100,186 @@ const LeafletMap = (props) => {
         maxDrawnShapes,
         measureControl,
         measureControlOptions,
+        viewAutoCorrection,
         setProps,
         loading_state
     } = props;
 
+    const divRef = useRef(null);
+    const size = useSize(divRef);
+
     return (
-        <MapContainer
-            id={id}
+        <div id={id}
             key={key}
             style={style}
             className={className}
+            ref={divRef}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
-            }
-            center={center}
-            zoom={zoom}
-            doubleClickZoom={doubleClickZoom}
-            dragging={dragging}
-            closePopupOnClick={closePopupOnClick}
-            minZoom={minZoom}
-            maxZoom={maxZoom}
-            zoomDelta={zoomDelta}
-            zoomSnap={zoomDelta}
-            wheelPxPerZoomLevel={wheelPxPerZoomLevel}
-            zoomControl={zoomControl}
-            scrollWheelZoom={scrollWheelZoom}
-            maxBounds={
-                maxBounds ? L.latLngBounds(
-                    L.latLng(maxBounds.miny, maxBounds.minx),
-                    L.latLng(maxBounds.maxy, maxBounds.maxx)
-                ) : undefined
-            }
-            whenCreated={map => {
-                if (measureControl) {
-                    const measureControl = L.control.measure(
-                        {
-                            ...{
-                                position: 'topleft',
-                                activeColor: '#f1c40f',
-                                completedColor: '#e74c3c'
-                            },
-                            ...omitBy(measureControlOptions, isUndefined),
-                            ...{
-                                units: {
-                                    sqkilometers: {
-                                        factor: 0.000001,
-                                        display: '平方千米',
-                                        decimals: 3
-                                    }
-                                },
-                                primaryLengthUnit: 'meters',
-                                secondaryLengthUnit: 'kilometers',
-                                primaryAreaUnit: 'sqmeters',
-                                secondaryAreaUnit: 'sqkilometers',
-                                thousandsSep: '',
-                            }
-                        }
-                    );
-                    measureControl.addTo(map);
-                }
-
-
-                if (maxBounds) {
-                    map.fitBounds(L.latLngBounds(
+            }>
+            <MapContainer
+                style={{
+                    height: '100%'
+                }}
+                center={center}
+                zoom={zoom}
+                doubleClickZoom={doubleClickZoom}
+                dragging={dragging}
+                closePopupOnClick={closePopupOnClick}
+                minZoom={minZoom}
+                maxZoom={maxZoom}
+                zoomDelta={zoomDelta}
+                zoomSnap={zoomDelta}
+                wheelPxPerZoomLevel={wheelPxPerZoomLevel}
+                zoomControl={zoomControl}
+                scrollWheelZoom={scrollWheelZoom}
+                maxBounds={
+                    maxBounds ? L.latLngBounds(
                         L.latLng(maxBounds.miny, maxBounds.minx),
                         L.latLng(maxBounds.maxy, maxBounds.maxx)
-                    ))
+                    ) : undefined
                 }
-
-                // 修正全局默认marker图标不显示的问题
-                const defaultIcon = L.icon({
-                    iconUrl: markerIcon,
-                    iconRetinaUrl: marker2xIcon,
-                    shadowUrl: markerShadow,
-                    iconAnchor: [12, 41],
-                    iconSize: [25, 41],
-                    popupAnchor: [1, -34],
-                    shadowSize: [41, 41]
-                })
-
-                map.pm.setGlobalOptions({
-                    markerStyle: {
-                        icon: defaultIcon
-                    }
-                })
-
-                if (editToolbar) {
-                    // 测试，添加可编辑要素功能
-                    map.pm.addControls({
-                        ...{
-                            cutPolygon: false,
-                            drawText: false
-                        },
-                        ...editToolbarControlsOptions
-                    })
-
-                    // 设置显示文字语言为中文
-                    map.pm.setLang('customWithZh', customTranslation, 'zh')
-
-                    const getCircleDrawRadius = () => {
-                        if (map.pm.Draw.Circle._layer.getRadius() !== 0) {
-                            map.pm.Draw.Circle._hintMarker._tooltip.setContent(
-                                `单击完成圆形，当前半径：${map.pm.Draw.Circle._layer.getRadius().toFixed(1)}米`
-                            )
-                        }
-                    }
-
-                    map.on('pm:drawstart', (e) => {
-                        if (map.pm.Draw.Circle._hintMarker && e.shape === "Circle") {
-                            map.pm.Draw.Circle._hintMarker.on('move', getCircleDrawRadius);
-                        }
-                    })
-                    map.on('pm:drawend', () => {
-                        if (map.pm.Draw.Circle._hintMarker) {
-                            map.pm.Draw.Circle._hintMarker.off('move', getCircleDrawRadius)
-                        }
-                    })
-
-                    map.on('pm:create pm:cut pm:remove', function (e) {
-
-                        // 若当前事件为pm:create，则为layer添加唯一uid信息
-                        if (e.type === 'pm:create') {
-                            e.layer._uuid = uuidv4()
-                            e.layer._createdTimestamp = new Date().getTime()
-                        }
-
-                        if (showMeasurements && e.layer.showMeasurements) {
-                            e.layer.showMeasurements();
-                        }
-
-                        const drawnShapes = map.pm
-                            .getGeomanDrawLayers()
-                            .filter((item, i, arr) => {
-                                if (maxDrawnShapes === null) {
-                                    return true
+                whenCreated={map => {
+                    if (measureControl) {
+                        const measureControl = L.control.measure(
+                            {
+                                ...{
+                                    position: 'topleft',
+                                    activeColor: '#f1c40f',
+                                    completedColor: '#e74c3c'
+                                },
+                                ...omitBy(measureControlOptions, isUndefined),
+                                ...{
+                                    units: {
+                                        sqkilometers: {
+                                            factor: 0.000001,
+                                            display: '平方千米',
+                                            decimals: 3
+                                        }
+                                    },
+                                    primaryLengthUnit: 'meters',
+                                    secondaryLengthUnit: 'kilometers',
+                                    primaryAreaUnit: 'sqmeters',
+                                    secondaryAreaUnit: 'sqkilometers',
+                                    thousandsSep: '',
                                 }
-                                if (arr.length > maxDrawnShapes) {
-                                    if (i < arr.length - maxDrawnShapes) {
-                                        // 移除先前的图层
-                                        map.removeLayer(item)
-                                        return false;
+                            }
+                        );
+                        measureControl.addTo(map);
+                    }
+
+
+                    if (maxBounds) {
+                        map.fitBounds(L.latLngBounds(
+                            L.latLng(maxBounds.miny, maxBounds.minx),
+                            L.latLng(maxBounds.maxy, maxBounds.maxx)
+                        ))
+                    }
+
+                    // 修正全局默认marker图标不显示的问题
+                    const defaultIcon = L.icon({
+                        iconUrl: markerIcon,
+                        iconRetinaUrl: marker2xIcon,
+                        shadowUrl: markerShadow,
+                        iconAnchor: [12, 41],
+                        iconSize: [25, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    })
+
+                    map.pm.setGlobalOptions({
+                        markerStyle: {
+                            icon: defaultIcon
+                        }
+                    })
+
+                    if (editToolbar) {
+                        // 测试，添加可编辑要素功能
+                        map.pm.addControls({
+                            ...{
+                                cutPolygon: false,
+                                drawText: false
+                            },
+                            ...editToolbarControlsOptions
+                        })
+
+                        // 设置显示文字语言为中文
+                        map.pm.setLang('customWithZh', customTranslation, 'zh')
+
+                        const getCircleDrawRadius = () => {
+                            if (map.pm.Draw.Circle._layer.getRadius() !== 0) {
+                                map.pm.Draw.Circle._hintMarker._tooltip.setContent(
+                                    `单击完成圆形，当前半径：${map.pm.Draw.Circle._layer.getRadius().toFixed(1)}米`
+                                )
+                            }
+                        }
+
+                        map.on('pm:drawstart', (e) => {
+                            if (map.pm.Draw.Circle._hintMarker && e.shape === "Circle") {
+                                map.pm.Draw.Circle._hintMarker.on('move', getCircleDrawRadius);
+                            }
+                        })
+                        map.on('pm:drawend', () => {
+                            if (map.pm.Draw.Circle._hintMarker) {
+                                map.pm.Draw.Circle._hintMarker.off('move', getCircleDrawRadius)
+                            }
+                        })
+
+                        map.on('pm:create pm:cut pm:remove', function (e) {
+
+                            // 若当前事件为pm:create，则为layer添加唯一uid信息
+                            if (e.type === 'pm:create') {
+                                e.layer._uuid = uuidv4()
+                                e.layer._createdTimestamp = new Date().getTime()
+                            }
+
+                            if (showMeasurements && e.layer.showMeasurements) {
+                                e.layer.showMeasurements();
+                            }
+
+                            const drawnShapes = map.pm
+                                .getGeomanDrawLayers()
+                                .filter((item, i, arr) => {
+                                    if (maxDrawnShapes === null) {
+                                        return true
                                     }
-                                }
-                                return true;
-                            })
-                            .map(
-                                (item, i) => {
-                                    return extractDrawnShapes(item, i)
-                                }
+                                    if (arr.length > maxDrawnShapes) {
+                                        if (i < arr.length - maxDrawnShapes) {
+                                            // 移除先前的图层
+                                            map.removeLayer(item)
+                                            return false;
+                                        }
+                                    }
+                                    return true;
+                                })
+                                .map(
+                                    (item, i) => {
+                                        return extractDrawnShapes(item, i)
+                                    }
 
-                            );
-                        // 更新当前已绘制的所有矢量要素
-                        setProps({ _drawnShapes: drawnShapes })
-
-                        e.layer.on('pm:edit', function (x) {
-                            const drawnShapes = map.pm.getGeomanDrawLayers().map(
-                                (item, i) => {
-                                    return extractDrawnShapes(item, i)
-                                }
-
-                            );
+                                );
                             // 更新当前已绘制的所有矢量要素
                             setProps({ _drawnShapes: drawnShapes })
+
+                            e.layer.on('pm:edit', function (x) {
+                                const drawnShapes = map.pm.getGeomanDrawLayers().map(
+                                    (item, i) => {
+                                        return extractDrawnShapes(item, i)
+                                    }
+
+                                );
+                                // 更新当前已绘制的所有矢量要素
+                                setProps({ _drawnShapes: drawnShapes })
+                            });
                         });
-                    });
-                };
-            }
-            }
-        >
-            {children}
-        </MapContainer>
+                    };
+                }
+                }
+            >
+                {children}
+                {viewAutoCorrection ? <AutoViewCorrection size={size} /> : null}
+            </MapContainer>
+        </div>
     );
 }
 
@@ -401,6 +413,9 @@ LeafletMap.propTypes = {
     // 设置是否添加测量工具栏，默认为false
     measureControl: PropTypes.bool,
 
+    // 设置是否启用自动视角校正，会带来性能上的一些压力，默认为false
+    viewAutoCorrection: PropTypes.bool,
+
     // 配置测量工具相关参数
     measureControlOptions: PropTypes.exact({
         // 设置测量工具栏的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
@@ -455,7 +470,8 @@ LeafletMap.defaultProps = {
     editToolbar: false,
     showMeasurements: true,
     maxDrawnShapes: null,
-    measureControl: false
+    measureControl: false,
+    viewAutoCorrection: false
 }
 
 export default React.memo(LeafletMap);

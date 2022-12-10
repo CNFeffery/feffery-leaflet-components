@@ -63,13 +63,14 @@ Those elements have the following types:
 - `scrollWheelZoom` (Bool | a value equal to: 'center'; optional)
 - `showMeasurements` (Bool; optional)
 - `style` (Dict; optional)
+- `viewAutoCorrection` (Bool; optional)
 - `wheelPxPerZoomLevel` (Real; optional)
 - `zoom` (Real; optional)
 - `zoomControl` (Bool; optional)
 - `zoomDelta` (Real; optional)
 """
 function ''_leafletmap(; kwargs...)
-        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :key, :loading_state, :maxBounds, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scrollWheelZoom, :showMeasurements, :style, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
+        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :key, :loading_state, :maxBounds, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scrollWheelZoom, :showMeasurements, :style, :viewAutoCorrection, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
         wild_props = Symbol[]
         return Component("''_leafletmap", "LeafletMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

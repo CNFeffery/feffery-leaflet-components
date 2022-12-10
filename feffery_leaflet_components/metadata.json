@@ -1906,6 +1906,17 @@
           "computed": false
         }
       },
+      "viewAutoCorrection": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
       "measureControlOptions": {
         "type": {
           "name": "exact",
