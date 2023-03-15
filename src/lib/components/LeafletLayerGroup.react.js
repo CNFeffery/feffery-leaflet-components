@@ -2,7 +2,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { LayerGroup } from 'react-leaflet';
+import { LayerGroup, useMap } from 'react-leaflet';
+import { isUndefined } from 'lodash';
 
 // 定义图层分组组件LeafletLayerGroup
 const LeafletLayerGroup = (props) => {
@@ -11,11 +12,23 @@ const LeafletLayerGroup = (props) => {
     const {
         id,
         children,
+        hidden,
         loading_state,
         setProps
     } = props;
 
+    const map = useMap();
     const layerGroupRef = useRef(null);
+
+    useEffect(() => {
+        if (layerGroupRef && map && !isUndefined(hidden)) {
+            if (hidden) {
+                map.removeLayer(layerGroupRef.current)
+            } else {
+                map.addLayer(layerGroupRef.current)
+            }
+        }
+    }, [hidden])
 
     // 返回定制化的前端组件
     return (
@@ -37,6 +50,9 @@ LeafletLayerGroup.propTypes = {
 
     // 传入tooltip、popup组件
     children: PropTypes.node,
+
+    // 控制是否隐藏当前图层组，默认为false
+    hidden: PropTypes.bool,
 
     loading_state: PropTypes.shape({
         /**

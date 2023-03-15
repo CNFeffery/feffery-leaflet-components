@@ -1536,6 +1536,13 @@
         "required": false,
         "description": ""
       },
+      "hidden": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
       "loading_state": {
         "type": {
           "name": "shape",

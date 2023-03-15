@@ -1,6 +1,6 @@
 {
     "name": "feffery_leaflet_components",
-    "version": "0.0.1-a8",
+    "version": "0.0.1-a9",
     "description": "Best implementation of Leaflet in Plotly Dash.",
     "repository": {
         "type": "git",

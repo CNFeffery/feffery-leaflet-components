@@ -1,64 +1,57 @@
 import dash
 from dash import html
 import feffery_leaflet_components as flc
+from dash.dependencies import Input, Output, State
 
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
     [
+        html.Button(
+            '显隐切换',
+            id='toggle-hide-visible'
+        ),
         flc.LeafletMap(
             [
                 flc.LeafletTileLayer(),
-
-                flc.LeafletTileSelect(
-                    urls=[
-                        {
-                            'url': 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                        },
-                        {
-                            'url': 'http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
-                        },
-                        {
-                            'url': 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
-                        },
-                        {
-                            'url': 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg'
-                        },
-                        {
-                            'url': 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
-                        },
-                        {
-                            'url': 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png'
-                        },
-                        {
-                            'url': 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png'
-                        },
-                        {
-                            'url': 'https://stamen-tiles-a.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.png'
-                        },
-                        {
-                            'url': 'https://d.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'
-                        },
-                        {
-                            'url': 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-                        },
-                        {
-                            'url': 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png'
-                        }
-                    ]
+                flc.LeafletLayerGroup(
+                    [
+                        flc.LeafletCircleMarker(
+                            center={
+                                'lng': 0,
+                                'lat': 0
+                            },
+                            radius=10
+                        )
+                    ],
+                    id='demo-layer',
+                    hidden=True
                 )
             ],
             style={
-                'height': '100%'
+                'height': '500px'
             }
         )
     ],
-    id='map-demo',
     style={
-        'width': '100vw',
-        'height': '100vh'
+        'padding': 50
     }
 )
+
+
+@app.callback(
+    Output('demo-layer', 'hidden'),
+    Input('toggle-hide-visible', 'n_clicks'),
+    State('demo-layer', 'hidden'),
+    prevent_initial_call=True
+)
+def toggle_layer_group_visible(n_clicks, hidden):
+
+    if n_clicks:
+        print(not hidden)
+        return not hidden
+
+    return dash.no_update
 
 
 if __name__ == '__main__':
