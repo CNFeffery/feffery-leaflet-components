@@ -13,6 +13,7 @@ const LeafletTileLayer = (props) => {
         attribution,
         opacity,
         zIndex,
+        tileSize,
         loading_state
     } = props;
 
@@ -32,6 +33,7 @@ const LeafletTileLayer = (props) => {
             url={url}
             opacity={opacity}
             zIndex={zIndex}
+            tileSize={tileSize}
             ref={tileLayerRef}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
@@ -59,6 +61,9 @@ LeafletTileLayer.propTypes = {
     // 设置z轴层级
     zIndex: PropTypes.number,
 
+    // 设置瓦片地图像素边长，默认为256
+    tileSize: PropTypes.number,
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -84,7 +89,8 @@ LeafletTileLayer.propTypes = {
 // 设置默认参数
 LeafletTileLayer.defaultProps = {
     url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    opacity: 1
+    opacity: 1,
+    tileSize: 256
 }
 
 
