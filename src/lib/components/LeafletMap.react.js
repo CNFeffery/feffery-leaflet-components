@@ -22,6 +22,7 @@ import 'leaflet-measure/dist/leaflet-measure.cn';
 import { omitBy, isUndefined } from 'lodash';
 import 'leaflet-measure/dist/leaflet-measure.css';
 import { AutoViewCorrection } from './utils/UtilsComponents';
+import './utils/SmoothWheelZoom';
 import { useSize } from 'ahooks';
 
 const customTranslation = {
@@ -93,6 +94,7 @@ const LeafletMap = (props) => {
         zoomControl,
         wheelPxPerZoomLevel,
         scrollWheelZoom,
+        smoothWheelZoom,
         maxBounds,
         editToolbar,
         editToolbarControlsOptions,
@@ -132,7 +134,9 @@ const LeafletMap = (props) => {
                 zoomSnap={zoomDelta}
                 wheelPxPerZoomLevel={wheelPxPerZoomLevel}
                 zoomControl={zoomControl}
-                scrollWheelZoom={scrollWheelZoom}
+                // smoothWheelZoom=true时强制关闭自带的滚轮放大功能
+                scrollWheelZoom={smoothWheelZoom ? false : scrollWheelZoom}
+                smoothWheelZoom={smoothWheelZoom}
                 maxBounds={
                     maxBounds ? L.latLngBounds(
                         L.latLng(maxBounds.miny, maxBounds.minx),
@@ -345,6 +349,13 @@ LeafletMap.propTypes = {
     // 设置鼠标滚轮滚动多少像素会触发一个单位zoomDelta的缩放，默认为60
     wheelPxPerZoomLevel: PropTypes.number,
 
+    // 设置是否开启丝滑滑轮放缩效果，默认为false
+    // 亦可传入'center'使得地图无视鼠标实际位置，仅以地图当前中心作为丝滑缩放依据的中心
+    smoothWheelZoom: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.oneOf(['center'])
+    ]),
+
     // 设置地图可移动的bounds范围
     maxBounds: PropTypes.exact({
         minx: PropTypes.number,
@@ -471,7 +482,8 @@ LeafletMap.defaultProps = {
     showMeasurements: true,
     maxDrawnShapes: null,
     measureControl: false,
-    viewAutoCorrection: false
+    viewAutoCorrection: false,
+    smoothWheelZoom: false
 }
 
 export default React.memo(LeafletMap);

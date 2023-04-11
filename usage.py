@@ -13,7 +13,9 @@ app.layout = html.Div(
         ),
         flc.LeafletMap(
             [
-                flc.LeafletTileLayer(),
+                flc.LeafletTileLayer(
+                    # url="http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}"
+                ),
                 flc.LeafletLayerGroup(
                     [
                         flc.LeafletCircleMarker(
@@ -28,8 +30,9 @@ app.layout = html.Div(
                     hidden=True
                 )
             ],
+            smoothWheelZoom=True,
             style={
-                'height': '500px'
+                'height': '700px'
             }
         )
     ],
