@@ -88,10 +88,9 @@ LeafletTileLayer.propTypes = {
 
 // 设置默认参数
 LeafletTileLayer.defaultProps = {
-    url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
     opacity: 1,
     tileSize: 256
 }
-
 
 export default React.memo(LeafletTileLayer);

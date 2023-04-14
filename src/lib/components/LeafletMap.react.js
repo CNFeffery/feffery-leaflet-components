@@ -305,8 +305,8 @@ LeafletMap.propTypes = {
 
     // 地图通用控制类参数
 
-    // 设置地图中心坐标，格式：[纬度, 经度]
-    // 默认为[0, 0]
+    // 设置地图中心坐标，格式：{lng: xxx, lat: xxx}
+    // 默认为{lng: 0, lat: 0}
     center: PropTypes.exact({
         // 经度
         lng: PropTypes.number,
@@ -315,7 +315,7 @@ LeafletMap.propTypes = {
         lat: PropTypes.number
     }),
 
-    // 设置地图的缩放级别，默认为1
+    // 设置地图的缩放级别，默认为3
     zoom: PropTypes.number,
 
     // 设置是否允许双击地图进行放大，默认为true
@@ -415,17 +415,14 @@ LeafletMap.propTypes = {
         oneBlock: PropTypes.bool
     }),
 
-    // 设置是否为编辑模式下创建的矢量要素添加长度、面积标注，默认为true
+    // 设置是否为编辑模式下创建的矢量要素添加长度、面积标注，默认为false
     showMeasurements: PropTypes.bool,
 
-    // 设置最大同时存在的已绘制矢量要素，默认为null不限制
+    // 设置最大同时存在的已绘制矢量要素，默认不限制
     maxDrawnShapes: PropTypes.number,
 
     // 设置是否添加测量工具栏，默认为false
     measureControl: PropTypes.bool,
-
-    // 设置是否启用自动视角校正，会带来性能上的一些压力，默认为false
-    viewAutoCorrection: PropTypes.bool,
 
     // 配置测量工具相关参数
     measureControlOptions: PropTypes.exact({
@@ -439,6 +436,9 @@ LeafletMap.propTypes = {
         // 设置测量工具绘制完成时的要素颜色，默认为'#e74c3c'
         completedColor: PropTypes.string
     }),
+
+    // 设置是否启用自动视角校正，会带来性能上的一些压力，默认为false
+    viewAutoCorrection: PropTypes.bool,
 
     // 事件监听类属性值
     _drawnShapes: PropTypes.array,
@@ -479,11 +479,11 @@ LeafletMap.defaultProps = {
     zoomControl: true,
     scrollWheelZoom: true,
     editToolbar: false,
-    showMeasurements: true,
+    showMeasurements: false,
     maxDrawnShapes: null,
     measureControl: false,
     viewAutoCorrection: false,
     smoothWheelZoom: false
 }
 
-export default React.memo(LeafletMap);
+export default LeafletMap;
