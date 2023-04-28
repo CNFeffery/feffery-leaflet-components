@@ -53,7 +53,7 @@ const LeafletPolyline = (props) => {
     }, [arrowheads])
 
     useEffect(() => {
-        if (polylineRef.current) {
+        if (polylineRef.current && editable) {
             // 支持geoman可编辑特性
             polylineRef.current.on('pm:edit', function (e) {
                 // 更新折线坐标数组
@@ -62,7 +62,7 @@ const LeafletPolyline = (props) => {
                 })
             });
         }
-    })
+    }, [editable])
 
     return (
         <Polyline id={id}
@@ -128,7 +128,7 @@ LeafletPolyline.propTypes = {
     // 设置样式相关参数
     pathOptions: pathOptionsPropTypes,
 
-    // 设置arrowheads效果
+    // 设置arrowheads效果，默认为false
     arrowheads: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.exact({
@@ -172,10 +172,10 @@ LeafletPolyline.propTypes = {
     // 设置是否可编辑，默认为false
     editable: PropTypes.bool,
 
-    // 监听当前圆圈标志的被点击次数，默认为0
+    // 监听当前折线的被点击次数，默认为0
     nClicks: PropTypes.number,
 
-    // 监听当前圆圈标志发生鼠标移入事件次数，默认为0
+    // 监听当前折线发生鼠标移入事件次数，默认为0
     mouseOverCount: PropTypes.number,
 
     loading_state: PropTypes.shape({
@@ -202,9 +202,10 @@ LeafletPolyline.propTypes = {
 
 // 设置默认参数
 LeafletPolyline.defaultProps = {
+    arrowheads: false,
     editable: false,
     nClicks: 0,
     mouseOverCount: 0
 }
 
-export default React.memo(LeafletPolyline);
+export default LeafletPolyline;

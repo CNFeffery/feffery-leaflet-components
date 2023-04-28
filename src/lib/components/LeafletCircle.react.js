@@ -26,7 +26,7 @@ const LeafletCircle = (props) => {
     const circleRef = useRef(null);
 
     useEffect(() => {
-        if (circleRef.current) {
+        if (circleRef.current && editable) {
             // 支持geoman可编辑特性
             circleRef.current.on('pm:edit', function (e) {
                 // 更新圆心坐标、半径属性
@@ -36,7 +36,7 @@ const LeafletCircle = (props) => {
                 })
             });
         }
-    })
+    }, [editable])
 
     return (
         <Circle id={id}
@@ -129,4 +129,4 @@ LeafletCircle.defaultProps = {
     mouseOverCount: 0
 }
 
-export default React.memo(LeafletCircle);
+export default LeafletCircle;

@@ -47,7 +47,7 @@ const LeafletMarker = (props) => {
     const markerRef = useRef(null);
 
     useEffect(() => {
-        if (markerRef.current) {
+        if (markerRef.current && editable) {
             // 支持geoman可编辑特性
             markerRef.current.on('pm:edit', function (e) {
                 // 更新点坐标
@@ -56,7 +56,22 @@ const LeafletMarker = (props) => {
                 })
             });
         }
-    })
+    }, [editable])
+
+    useEffect(() => {
+        if (markerRef.current && draggable) {
+            // 监听可拖拽事件
+            markerRef.current.on('dragend', function (e) {
+                // 更新点坐标
+                setProps({
+                    position: {
+                        lng: e.target._latlng.lng,
+                        lat: e.target._latlng.lat
+                    }
+                })
+            });
+        }
+    }, [draggable])
 
     return (
         <Marker id={id}
@@ -102,7 +117,6 @@ LeafletMarker.propTypes = {
     position: PropTypes.exact({
         // 经度
         lng: PropTypes.number,
-
         // 纬度
         lat: PropTypes.number
     }).isRequired,
@@ -182,4 +196,4 @@ LeafletMarker.defaultProps = {
     mouseOverCount: 0
 }
 
-export default React.memo(LeafletMarker);
+export default LeafletMarker;

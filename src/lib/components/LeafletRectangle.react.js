@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import L from "leaflet";
+import { useRequest } from 'ahooks';
 import { Rectangle } from 'react-leaflet';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 
@@ -25,22 +26,32 @@ const LeafletRectangle = (props) => {
 
     const rectangleRef = useRef(null);
 
+    const { run: onDebounceChange } = useRequest(
+        (e) => {
+            // 更新矩形左下角、右上角坐标
+            setProps({
+                bounds: {
+                    minx: e.layer._bounds._southWest.lng,
+                    miny: e.layer._bounds._southWest.lat,
+                    maxx: e.layer._bounds._northEast.lng,
+                    maxy: e.layer._bounds._northEast.lat
+                }
+            })
+        },
+        {
+            throttleWait: 0,
+            manual: true
+        }
+    )
+
     useEffect(() => {
-        if (rectangleRef.current) {
+        if (rectangleRef.current && editable) {
             // 支持geoman可编辑特性
-            rectangleRef.current.on('pm:edit', function (e) {
-                // 更新矩形左下角、右上角坐标
-                setProps({
-                    bounds: {
-                        minx: e.layer._bounds._southWest.lng,
-                        miny: e.layer._bounds._southWest.lat,
-                        maxx: e.layer._bounds._northEast.lng,
-                        maxy: e.layer._bounds._northEast.lat
-                    }
-                })
+            rectangleRef.current.on('pm:change', function (e) {
+                onDebounceChange(e)
             });
         }
-    })
+    }, [editable])
 
     return (
         <Rectangle id={id}
@@ -135,4 +146,4 @@ LeafletRectangle.defaultProps = {
     mouseOverCount: 0
 }
 
-export default React.memo(LeafletRectangle);
+export default LeafletRectangle;
