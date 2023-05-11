@@ -25,7 +25,7 @@ const LeafletPolygon = (props) => {
     const polygonRef = useRef(null);
 
     useEffect(() => {
-        if (polygonRef.current) {
+        if (polygonRef.current && editable) {
             // 支持geoman可编辑特性
             polygonRef.current.on('pm:edit', function (e) {
                 // 更新多边形坐标数组
@@ -147,4 +147,4 @@ LeafletPolygon.defaultProps = {
     mouseOverCount: 0
 }
 
-export default React.memo(LeafletPolygon);
+export default LeafletPolygon;

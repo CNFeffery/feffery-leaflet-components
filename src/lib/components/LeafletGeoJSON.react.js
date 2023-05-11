@@ -283,7 +283,8 @@ const LeafletGeoJSON = (props) => {
                         setProps({
                             _clickedFeature: {
                                 featureId: e.target.feature.properties[featureIdField],
-                            }
+                            },
+                            timestamp: Date.now()
                         })
                     },
 
@@ -339,6 +340,7 @@ const LeafletGeoJSON = (props) => {
                         setProps({
                             _hoveredFeature: {
                                 featureId: e.layer.feature.properties[featureIdField],
+                                timestamp: Date.now()
                             }
                         })
                     }
@@ -461,7 +463,7 @@ LeafletGeoJSON.propTypes = {
     data: PropTypes.object.isRequired,
 
     /* 基础参数 */
-    // 设置绘图模式，可选的有'default'、'selectable'（选择模式）、'choropleth'（分层设色模式）以及'category'（分类设色模式）
+    // 设置功能模式，可选的有'default'、'selectable'（选择模式）、'choropleth'（分层设色模式）以及'category'（分类设色模式）
     mode: PropTypes.oneOf(['default', 'selectable', 'choropleth', 'category']),
 
     // 设置是否开启要素鼠标悬浮效果，默认为false
@@ -499,6 +501,7 @@ LeafletGeoJSON.propTypes = {
     featureTooltipField: PropTypes.string,
 
     // 要素点击选择模式，可选的有'single'（单选模式）及'multiple'（多选模式）
+    // 默认为'single'
     selectMode: PropTypes.oneOf(['single', 'multiple']),
 
     // 设置是否禁用主动点击选择要素功能，默认为false
@@ -510,7 +513,9 @@ LeafletGeoJSON.propTypes = {
     // 配置分层设色模式所需的分段区间数组及分段对应色彩值参数
     featureValueToStyles: PropTypes.exact({
         // 分段区间数组，每个元素格式为[左区间值, 右区间值]
-        bins: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+        bins: PropTypes.arrayOf(
+            PropTypes.arrayOf(PropTypes.number)
+        ),
 
         // 设置与区间一一对应的样式对象数组
         styles: PropTypes.arrayOf(pathOptionsPropTypes),
@@ -520,7 +525,9 @@ LeafletGeoJSON.propTypes = {
     }),
 
     // 配置分类设色模式所需的分类数组及分类对应色彩值参数
-    featureCategoryToStyles: PropTypes.objectOf(pathOptionsPropTypes),
+    featureCategoryToStyles: PropTypes.objectOf(
+        pathOptionsPropTypes
+    ),
 
     // 设置要素的tooltip展开方位，可选的有'right'、'left'、'top'、'bottom'、'center'与'auto'
     // 默认为'auto'，其中'auto'会自动根据方位在'left'与'right'之间进行切换
@@ -534,13 +541,6 @@ LeafletGeoJSON.propTypes = {
 
     // 设置要素的tooltip对应的css类
     tooltipClassName: PropTypes.string,
-
-    // 要素常规事件记录
-    // 要素点击事件
-    _clickedFeature: PropTypes.object,
-
-    // 要素鼠标悬浮事件
-    _hoveredFeature: PropTypes.object,
 
     // 多选模式下设置是否开启lasso套圈选择功能，默认为false
     lassoSelect: PropTypes.bool,
@@ -563,6 +563,13 @@ LeafletGeoJSON.propTypes = {
 
     // 针对circle-marker模式，设置像素半径，默认为10
     circleMarkerRadius: PropTypes.number,
+
+    // 要素常规事件记录
+    // 要素点击事件
+    _clickedFeature: PropTypes.object,
+
+    // 要素鼠标悬浮事件
+    _hoveredFeature: PropTypes.object,
 
     loading_state: PropTypes.shape({
         /**
