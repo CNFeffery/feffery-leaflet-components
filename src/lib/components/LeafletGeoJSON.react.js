@@ -283,8 +283,9 @@ const LeafletGeoJSON = (props) => {
                         setProps({
                             _clickedFeature: {
                                 featureId: e.target.feature.properties[featureIdField],
-                            },
-                            timestamp: Date.now()
+                                feature: e.target.feature.properties,
+                                timestamp: Date.now()
+                            }
                         })
                     },
 
@@ -340,6 +341,7 @@ const LeafletGeoJSON = (props) => {
                         setProps({
                             _hoveredFeature: {
                                 featureId: e.layer.feature.properties[featureIdField],
+                                feature: e.layer.feature.properties,
                                 timestamp: Date.now()
                             }
                         })
