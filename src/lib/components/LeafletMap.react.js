@@ -486,4 +486,4 @@ LeafletMap.defaultProps = {
     smoothWheelZoom: false
 }
 
-export default LeafletMap;
+export default React.memo(LeafletMap);

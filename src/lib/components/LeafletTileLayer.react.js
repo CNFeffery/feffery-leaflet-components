@@ -93,4 +93,4 @@ LeafletTileLayer.defaultProps = {
     tileSize: 256
 }
 
-export default LeafletTileLayer;
+export default React.memo(LeafletTileLayer);

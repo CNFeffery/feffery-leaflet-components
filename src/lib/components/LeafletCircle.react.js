@@ -129,4 +129,4 @@ LeafletCircle.defaultProps = {
     mouseOverCount: 0
 }
 
-export default LeafletCircle;
+export default React.memo(LeafletCircle);

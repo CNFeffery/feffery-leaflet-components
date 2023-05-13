@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import L from 'leaflet';
 import "leaflet-lasso";
 import { GeoJSON, useMap } from 'react-leaflet';
-import { isUndefined, omitBy } from 'lodash';
+import { isUndefined, omitBy, isEqual } from 'lodash';
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 import {
     markerIcon,
@@ -268,7 +268,6 @@ const LeafletGeoJSON = (props) => {
             onEachFeature={(feature, layer) => {
                 // 绑定各监听事件
                 layer.on({
-
                     // 鼠标点击事件
                     click: (e) => {
                         // 若clickFeatureZoom为true，则点击要素时进行聚焦缩放
@@ -288,14 +287,12 @@ const LeafletGeoJSON = (props) => {
                             }
                         })
                     },
-
                     add: (e) => {
                         // 将处于选择状态的要素置顶
                         if (selectedFeatureIds.indexOf(e.target.feature.properties[featureIdField]) !== -1) {
                             if (e.target.bringToFront) {
                                 e.target.bringToFront();
                             }
-
                         } else {
                             if (e.target.bringToBack) {
                                 e.target.bringToBack();
@@ -303,7 +300,6 @@ const LeafletGeoJSON = (props) => {
                         }
                     }
                 });
-
                 // 为每个要素添加tooltip
                 // 检查是否存在featureTooltipField指定的字段
                 if (feature.properties[featureTooltipField] && showTooltip) {
@@ -349,7 +345,6 @@ const LeafletGeoJSON = (props) => {
                 },
                 mouseout: (e) => {
                     if (hoverable) {
-
                         if (mode === 'selectable') {
                             // 若当前鼠标移出的要素未处于选中状态
                             if (selectedFeatureIds.indexOf(e.layer.feature.properties[featureIdField]) === -1) {
@@ -619,4 +614,13 @@ LeafletGeoJSON.defaultProps = {
     tooltipPermanent: false
 }
 
-export default React.memo(LeafletGeoJSON);
+const preventUpdateProps = ['_clickedFeature', '_hoveredFeature'];
+
+export default React.memo(LeafletGeoJSON, (prevProps, nextProps) => {
+    // 计算发生变化的参数名
+    const changedProps = Object.keys(nextProps).filter(key => !isEqual(prevProps[key], nextProps[key]))
+
+    // changedProps中全部变化的prop都在preventUpdateProps中声明时
+    // 阻止本次重绘
+    return changedProps.every(propName => preventUpdateProps.includes(propName));
+});

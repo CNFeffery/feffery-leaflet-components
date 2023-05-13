@@ -196,4 +196,4 @@ LeafletMarker.defaultProps = {
     mouseOverCount: 0
 }
 
-export default LeafletMarker;
+export default React.memo(LeafletMarker);

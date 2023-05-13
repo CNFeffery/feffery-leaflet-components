@@ -208,4 +208,4 @@ LeafletPolyline.defaultProps = {
     mouseOverCount: 0
 }
 
-export default LeafletPolyline;
+export default React.memo(LeafletPolyline);

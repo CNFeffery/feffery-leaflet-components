@@ -146,4 +146,4 @@ LeafletRectangle.defaultProps = {
     mouseOverCount: 0
 }
 
-export default LeafletRectangle;
+export default React.memo(LeafletRectangle);

@@ -1,40 +1,40 @@
+import json
 import dash
+import requests
 from dash import html
 import feffery_leaflet_components as flc
 from dash.dependencies import Input, Output, State
 
 app = dash.Dash(__name__)
 
+basic_geojson = (
+    requests
+    .get('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
+    .json()
+)
+
 app.layout = html.Div(
     [
-        html.Button(
-            '显隐切换',
-            id='toggle-hide-visible'
-        ),
         flc.LeafletMap(
             [
-                flc.LeafletTileLayer(
-                    # url="http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}"
-                ),
-                flc.LeafletLayerGroup(
-                    [
-                        flc.LeafletCircleMarker(
-                            center={
-                                'lng': 0,
-                                'lat': 0
-                            },
-                            radius=10
-                        )
-                    ],
-                    id='demo-layer',
-                    hidden=True
+                flc.LeafletTileLayer(),
+                flc.LeafletGeoJSON(
+                    id='input',
+                    data=basic_geojson,
+                    hoverable=True,
+                    featureIdField='adcode',
+                    defaultStyle={
+                        'fillOpacity': 1
+                    }
                 )
             ],
-            smoothWheelZoom=True,
+            zoom=6,
             style={
-                'height': '700px'
+                'height': 500
             }
-        )
+        ),
+
+        html.Pre(id='output')
     ],
     style={
         'padding': 50
@@ -43,18 +43,16 @@ app.layout = html.Div(
 
 
 @app.callback(
-    Output('demo-layer', 'hidden'),
-    Input('toggle-hide-visible', 'n_clicks'),
-    State('demo-layer', 'hidden'),
-    prevent_initial_call=True
+    Output('output', 'children'),
+    Input('input', '_hoveredFeature')
 )
-def toggle_layer_group_visible(n_clicks, hidden):
+def demo(_hoveredFeature):
 
-    if n_clicks:
-        print(not hidden)
-        return not hidden
-
-    return dash.no_update
+    return json.dumps(
+        _hoveredFeature,
+        indent=4,
+        ensure_ascii=False
+    )
 
 
 if __name__ == '__main__':

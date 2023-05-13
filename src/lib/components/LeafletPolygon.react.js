@@ -147,4 +147,4 @@ LeafletPolygon.defaultProps = {
     mouseOverCount: 0
 }
 
-export default LeafletPolygon;
+export default React.memo(LeafletPolygon);
