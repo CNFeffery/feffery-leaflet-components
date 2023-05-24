@@ -29,6 +29,7 @@ include("jl/''_leafletsupercluster.jl")
 include("jl/''_leaflettilelayer.jl")
 include("jl/''_leaflettileselect.jl")
 include("jl/''_leaflettooltip.jl")
+include("jl/''_leafletvectortile.jl")
 
 function __init__()
     DashBase.register_package(
