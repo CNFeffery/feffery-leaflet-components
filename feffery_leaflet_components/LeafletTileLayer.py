@@ -32,7 +32,7 @@ Keyword arguments:
 
 - tileSize (number; default 256)
 
-- url (string; default "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png")
+- url (string; default "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}")
 
 - zIndex (number; optional)"""
     _children_props = []

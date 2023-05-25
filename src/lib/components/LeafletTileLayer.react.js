@@ -88,7 +88,7 @@ LeafletTileLayer.propTypes = {
 
 // 设置默认参数
 LeafletTileLayer.defaultProps = {
-    url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+    url: "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
     opacity: 1,
     tileSize: 256
 }
