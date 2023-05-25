@@ -22,6 +22,7 @@ from .LeafletSuperCluster import LeafletSuperCluster
 from .LeafletTileLayer import LeafletTileLayer
 from .LeafletTileSelect import LeafletTileSelect
 from .LeafletTooltip import LeafletTooltip
+from .LeafletVectorTile import LeafletVectorTile
 
 __all__ = [
     "LeafletAntPath",
@@ -47,5 +48,6 @@ __all__ = [
     "LeafletSuperCluster",
     "LeafletTileLayer",
     "LeafletTileSelect",
-    "LeafletTooltip"
+    "LeafletTooltip",
+    "LeafletVectorTile"
 ]

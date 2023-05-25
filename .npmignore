@@ -32,6 +32,7 @@ README.md
 /man
 /R
 /tests
+/dist
 
 # other files
 *.csv

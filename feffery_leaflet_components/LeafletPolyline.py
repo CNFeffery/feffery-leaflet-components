@@ -13,7 +13,7 @@ Keyword arguments:
 
 - id (string; optional)
 
-- arrowheads (dict; optional)
+- arrowheads (dict; default False)
 
     `arrowheads` is a boolean | dict with keys:
 

@@ -29,5 +29,6 @@ __pycache__
 index.html
 
 feffery_leaflet_components.min.js.map
+feffery_leaflet_components.min.js
 
 package-lock.json

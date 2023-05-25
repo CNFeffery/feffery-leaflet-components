@@ -1224,20 +1224,6 @@
         "required": false,
         "description": ""
       },
-      "_clickedFeature": {
-        "type": {
-          "name": "object"
-        },
-        "required": false,
-        "description": ""
-      },
-      "_hoveredFeature": {
-        "type": {
-          "name": "object"
-        },
-        "required": false,
-        "description": ""
-      },
       "lassoSelect": {
         "type": {
           "name": "bool"
@@ -1349,6 +1335,20 @@
           "value": "10",
           "computed": false
         }
+      },
+      "_clickedFeature": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": ""
+      },
+      "_hoveredFeature": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": ""
       },
       "loading_state": {
         "type": {
@@ -1761,6 +1761,31 @@
           "computed": false
         }
       },
+      "smoothWheelZoom": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "bool"
+            },
+            {
+              "name": "enum",
+              "value": [
+                {
+                  "value": "'center'",
+                  "computed": false
+                }
+              ]
+            }
+          ]
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
       "maxBounds": {
         "type": {
           "name": "exact",
@@ -1887,7 +1912,7 @@
         "required": false,
         "description": "",
         "defaultValue": {
-          "value": "true",
+          "value": "false",
           "computed": false
         }
       },
@@ -1903,17 +1928,6 @@
         }
       },
       "measureControl": {
-        "type": {
-          "name": "bool"
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "false",
-          "computed": false
-        }
-      },
-      "viewAutoCorrection": {
         "type": {
           "name": "bool"
         },
@@ -1962,6 +1976,17 @@
         },
         "required": false,
         "description": ""
+      },
+      "viewAutoCorrection": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       },
       "_drawnShapes": {
         "type": {
@@ -3016,7 +3041,11 @@
           ]
         },
         "required": false,
-        "description": ""
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       },
       "arrowheadsPathOptions": {
         "type": {
@@ -3701,7 +3730,7 @@
         "required": false,
         "description": "",
         "defaultValue": {
-          "value": "\"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png\"",
+          "value": "\"https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png\"",
           "computed": false
         }
       },
@@ -3729,6 +3758,17 @@
         },
         "required": false,
         "description": ""
+      },
+      "tileSize": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "256",
+          "computed": false
+        }
       },
       "loading_state": {
         "type": {
@@ -4013,6 +4053,178 @@
       "interactive": {
         "type": {
           "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
+  "src/lib/components/LeafletVectorTile.react.js": {
+    "description": "",
+    "displayName": "LeafletVectorTile",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "key": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "url": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "minZoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "1",
+          "computed": false
+        }
+      },
+      "maxZoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "18",
+          "computed": false
+        }
+      },
+      "interactive": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "featureIdField": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'id'",
+          "computed": false
+        }
+      },
+      "vectorTileLayerStyles": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "objectOf",
+              "value": {
+                "name": "string"
+              }
+            },
+            {
+              "name": "objectOf",
+              "value": {
+                "name": "exact",
+                "value": {
+                  "func": {
+                    "name": "string",
+                    "required": false
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      },
+      "extraProps": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": ""
+      },
+      "renderer": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'svg'",
+              "computed": false
+            },
+            {
+              "value": "'canvas'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'svg'",
+          "computed": false
+        }
+      },
+      "_layerNames": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": ""
+      },
+      "_clickedFeature": {
+        "type": {
+          "name": "object"
         },
         "required": false,
         "description": ""

@@ -45,7 +45,7 @@ app.layout = html.Div(
             ],
             zoom=6,
             style={
-                'height': 500
+                'height': 800
             }
         ),
 
