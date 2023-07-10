@@ -69,6 +69,7 @@ const LeafletVectorTile = (props) => {
             vectorGridRef.current.on('load', function () {
                 // 获取当前存在的图层名称信息
                 let layerNames = vectorGridRef.current.getDataLayerNames();
+                console.log(layerNames)
                 // 更新到_layerNames属性中
                 setProps({
                     _layerNames: layerNames

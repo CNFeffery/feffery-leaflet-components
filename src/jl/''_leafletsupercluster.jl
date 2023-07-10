@@ -9,6 +9,10 @@ A LeafletSuperCluster component.
 
 Keyword arguments:
 - `id` (String; optional)
+- `clickedPoint` (optional): . clickedPoint has the following type: lists containing elements 'feature', 'timestamp'.
+Those elements have the following types:
+  - `feature` (Dict; optional)
+  - `timestamp` (Real; optional)
 - `clusterBackground` (String; optional)
 - `clusterBorder` (String; optional)
 - `clusterIconBaseSize` (Real; optional)
@@ -43,7 +47,7 @@ Those elements have the following types:
 - `tooltipSticky` (Bool; optional)
 """
 function ''_leafletsupercluster(; kwargs...)
-        available_props = Symbol[:id, :clusterBackground, :clusterBorder, :clusterIconBaseSize, :clusterIconExtraSizeFactor, :clusterTextColor, :clusterTextSizeFactor, :extent, :iconOptions, :key, :loading_state, :maxZoom, :minPoints, :minZoom, :nodeSize, :positions, :radius, :tooltipField, :tooltipSticky]
+        available_props = Symbol[:id, :clickedPoint, :clusterBackground, :clusterBorder, :clusterIconBaseSize, :clusterIconExtraSizeFactor, :clusterTextColor, :clusterTextSizeFactor, :extent, :iconOptions, :key, :loading_state, :maxZoom, :minPoints, :minZoom, :nodeSize, :positions, :radius, :tooltipField, :tooltipSticky]
         wild_props = Symbol[]
         return Component("''_leafletsupercluster", "LeafletSuperCluster", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

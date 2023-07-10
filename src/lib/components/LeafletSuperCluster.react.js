@@ -151,7 +151,7 @@ const LeafletSuperCluster = (props) => {
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }>
-            {clusters.map((cluster) => {
+            {clusters.map((cluster, index) => {
                 // 提取聚类簇中心坐标
                 const [lng, lat] = cluster.geometry.coordinates;
                 // 提取判断是否为聚类簇的标识值，以及聚类簇中的点数量
@@ -164,6 +164,7 @@ const LeafletSuperCluster = (props) => {
                 if (isCluster) {
                     return (
                         <Marker
+                            key={index}
                             pmIgnore={true}
                             position={{
                                 lng: lng,
@@ -199,13 +200,26 @@ const LeafletSuperCluster = (props) => {
                 // 若当前对象为单点，则绘制单标记
                 return (
                     <Marker
+                        key={index}
                         pmIgnore={true}
                         position={{
                             lng: lng,
                             lat: lat
                         }}
                         icon={iconOptions ? L.icon(iconOptions) : L.icon(defaultIconOptions)}
-                    >{
+                        eventHandlers={{
+                            // 监听点击事件
+                            click: () => {
+                                setProps({
+                                    clickedPoint: {
+                                        feature: cluster,
+                                        timestamp: Date.now()
+                                    }
+                                })
+                            }
+                        }}
+                    >
+                        {
                             cluster.properties[tooltipField] ?
                                 <Tooltip
                                     sticky={tooltipSticky}
@@ -215,7 +229,8 @@ const LeafletSuperCluster = (props) => {
                                         }
                                     }}
                                 /> : null
-                        }</ Marker>
+                        }
+                    </ Marker>
                 );
             })}
         </ div>
@@ -298,6 +313,15 @@ LeafletSuperCluster.propTypes = {
 
     // 设置tooltip是否开启粘性显示，默认为false
     tooltipSticky: PropTypes.bool,
+
+    // 用于监听最近一次被点击的标记点相关信息
+    clickedPoint: PropTypes.exact({
+        // 记录被点击要素相关信息
+        feature: PropTypes.object,
+
+        // 记录点击事件对应的时间戳
+        timestamp: PropTypes.number
+    }),
 
     loading_state: PropTypes.shape({
         /**

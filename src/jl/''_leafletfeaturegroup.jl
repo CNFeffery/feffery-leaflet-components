@@ -26,9 +26,10 @@ Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
+- `zIndex` (Real; optional)
 """
 function ''_leafletfeaturegroup(; kwargs...)
-        available_props = Symbol[:children, :id, :_bounds, :bringToFront, :key, :loading_state]
+        available_props = Symbol[:children, :id, :_bounds, :bringToFront, :key, :loading_state, :zIndex]
         wild_props = Symbol[]
         return Component("''_leafletfeaturegroup", "LeafletFeatureGroup", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

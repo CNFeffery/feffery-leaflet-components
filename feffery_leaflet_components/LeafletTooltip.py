@@ -15,9 +15,9 @@ Keyword arguments:
 
 - className (string; optional)
 
-- direction (a value equal to: 'right', 'left', 'top', 'bottom', 'center', 'auto'; optional)
+- direction (a value equal to: 'right', 'left', 'top', 'bottom', 'center', 'auto'; default 'auto')
 
-- interactive (boolean; optional)
+- interactive (boolean; default False)
 
 - key (string; optional)
 
@@ -34,11 +34,11 @@ Keyword arguments:
     - prop_name (string; optional):
         Holds which property is loading.
 
-- opacity (number; optional)
+- opacity (number; default 0.9)
 
-- permanent (boolean; optional)
+- permanent (boolean; default False)
 
-- sticky (boolean; optional)"""
+- sticky (boolean; default False)"""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'

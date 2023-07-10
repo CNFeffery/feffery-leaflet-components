@@ -556,6 +556,13 @@
         "required": false,
         "description": ""
       },
+      "zIndex": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": ""
+      },
       "_bounds": {
         "type": {
           "name": "exact",
@@ -1539,6 +1546,13 @@
       "hidden": {
         "type": {
           "name": "bool"
+        },
+        "required": false,
+        "description": ""
+      },
+      "zIndex": {
+        "type": {
+          "name": "number"
         },
         "required": false,
         "description": ""
@@ -3671,6 +3685,23 @@
         "required": false,
         "description": ""
       },
+      "clickedPoint": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "feature": {
+              "name": "object",
+              "required": false
+            },
+            "timestamp": {
+              "name": "number",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
       "loading_state": {
         "type": {
           "name": "shape",
@@ -4027,35 +4058,55 @@
           ]
         },
         "required": false,
-        "description": ""
+        "description": "",
+        "defaultValue": {
+          "value": "'auto'",
+          "computed": false
+        }
       },
       "permanent": {
         "type": {
           "name": "bool"
         },
         "required": false,
-        "description": ""
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       },
       "sticky": {
         "type": {
           "name": "bool"
         },
         "required": false,
-        "description": ""
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       },
       "opacity": {
         "type": {
           "name": "number"
         },
         "required": false,
-        "description": ""
+        "description": "",
+        "defaultValue": {
+          "value": "0.9",
+          "computed": false
+        }
       },
       "interactive": {
         "type": {
           "name": "bool"
         },
         "required": false,
-        "description": ""
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       },
       "loading_state": {
         "type": {

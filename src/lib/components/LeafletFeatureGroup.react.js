@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { FeatureGroup } from 'react-leaflet';
+import { isUndefined } from 'lodash';
 
 // 定义要素分组组件LeafletFeatureGroup
 const LeafletFeatureGroup = (props) => {
@@ -12,6 +13,7 @@ const LeafletFeatureGroup = (props) => {
         id,
         children,
         bringToFront,
+        zIndex,
         loading_state,
         setProps
     } = props;
@@ -19,17 +21,19 @@ const LeafletFeatureGroup = (props) => {
     const featureGroupRef = useRef(null);
 
     useEffect(() => {
-        const currentBounds = featureGroupRef.current.getBounds()
-        if (currentBounds._southWest && currentBounds._northEast) {
-
-            setProps({
-                _bounds: {
-                    minx: currentBounds._southWest.lng,
-                    miny: currentBounds._southWest.lat,
-                    maxx: currentBounds._northEast.lng,
-                    maxy: currentBounds._northEast.lat
-                }
-            })
+        // 处理当前要素组整体bounds更新
+        if (featureGroupRef.current) {
+            const currentBounds = featureGroupRef.current.getBounds()
+            if (currentBounds._southWest && currentBounds._northEast) {
+                setProps({
+                    _bounds: {
+                        minx: currentBounds._southWest.lng,
+                        miny: currentBounds._southWest.lat,
+                        maxx: currentBounds._northEast.lng,
+                        maxy: currentBounds._northEast.lat
+                    }
+                })
+            }
         }
     }, [children])
 
@@ -42,6 +46,12 @@ const LeafletFeatureGroup = (props) => {
             })
         }
     }, [bringToFront])
+
+    useEffect(() => {
+        if (featureGroupRef.current && !isUndefined(zIndex)) {
+            featureGroupRef.current.setZIndex(zIndex)
+        }
+    }, [zIndex])
 
     // 返回定制化的前端组件
     return (
@@ -66,6 +76,9 @@ LeafletFeatureGroup.propTypes = {
 
     // 设置是否将当前图层置于顶层
     bringToFront: PropTypes.bool,
+
+    // 设置当前要素组的z-index信息
+    zIndex: PropTypes.number,
 
     // 监听当前要素组的整体bounds
     _bounds: PropTypes.exact({

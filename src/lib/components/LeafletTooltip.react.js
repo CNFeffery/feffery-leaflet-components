@@ -93,6 +93,11 @@ LeafletTooltip.propTypes = {
 
 // 设置默认参数
 LeafletTooltip.defaultProps = {
+    direction: 'auto',
+    permanent: false,
+    sticky: false,
+    opacity: 0.9,
+    interactive: false
 }
 
 export default React.memo(LeafletTooltip);

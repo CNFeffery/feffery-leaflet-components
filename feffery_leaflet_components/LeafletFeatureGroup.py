@@ -40,16 +40,18 @@ Keyword arguments:
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
-        Holds which property is loading."""
+        Holds which property is loading.
+
+- zIndex (number; optional)"""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletFeatureGroup'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, bringToFront=Component.UNDEFINED, _bounds=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', '_bounds', 'bringToFront', 'key', 'loading_state']
+    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, bringToFront=Component.UNDEFINED, zIndex=Component.UNDEFINED, _bounds=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', '_bounds', 'bringToFront', 'key', 'loading_state', 'zIndex']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', '_bounds', 'bringToFront', 'key', 'loading_state']
+        self.available_properties = ['children', 'id', '_bounds', 'bringToFront', 'key', 'loading_state', 'zIndex']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

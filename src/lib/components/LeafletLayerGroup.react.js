@@ -13,6 +13,7 @@ const LeafletLayerGroup = (props) => {
         id,
         children,
         hidden,
+        zIndex,
         loading_state,
         setProps
     } = props;
@@ -29,6 +30,12 @@ const LeafletLayerGroup = (props) => {
             }
         }
     }, [hidden])
+
+    useEffect(() => {
+        if (layerGroupRef.current && !isUndefined(zIndex)) {
+            layerGroupRef.current.setZIndex(zIndex)
+        }
+    }, [zIndex])
 
     // 返回定制化的前端组件
     return (
@@ -53,6 +60,9 @@ LeafletLayerGroup.propTypes = {
 
     // 控制是否隐藏当前图层组，默认为false
     hidden: PropTypes.bool,
+
+    // 设置当前图层组的z-index信息
+    zIndex: PropTypes.number,
 
     loading_state: PropTypes.shape({
         /**
