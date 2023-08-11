@@ -53,6 +53,7 @@
         "@plotly/webpack-dash-dynamic-import": "^1.2.0",
         "babel-eslint": "^10.0.2",
         "babel-loader": "^8.0.6",
+        "color": "^4.2.3",
         "copyfiles": "^2.1.1",
         "css-loader": "^3.0.0",
         "eslint": "^6.0.1",

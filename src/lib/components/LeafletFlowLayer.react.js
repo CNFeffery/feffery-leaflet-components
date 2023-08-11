@@ -1,7 +1,9 @@
+/* eslint-disable new-cap */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import L from "leaflet";
 import "./utils/leaflet.migrationLayer";
+import * as Color from 'color'
 import { useMap } from 'react-leaflet';
 
 // 定义流线图层组件LeafletMigrationLayer，api参数参考https://github.com/lit-forest/leaflet.migrationLayer
@@ -35,7 +37,7 @@ const LeafletFlowLayer = (props) => {
                     from: [item.from.lng, item.from.lat],
                     to: [item.to.lng, item.to.lat],
                     labels: [item.labels?.from || '', item.labels?.to || ''],
-                    color: item.color || '#3498db',
+                    color: Color(item.color || '#3498db').hex(),
                     value: item.value || 1
                 };
             })

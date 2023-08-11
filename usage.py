@@ -1,6 +1,6 @@
 import dash
 from dash import html
-import feffery_leaflet_components as flc
+import feffery_leaflet_components.alias as flc
 
 app = dash.Dash(__name__)
 
@@ -25,11 +25,11 @@ places = [
 
 app.layout = html.Div(
     [
-        flc.LeafletMap(
+        flc.Map(
             [
-                flc.LeafletLayerGroup(
+                flc.LayerGroup(
                     [
-                        flc.LeafletCircleMarker(
+                        flc.CircleMarker(
                             center={
                                 'lat': place['lat'],
                                 'lng': place['lng']
@@ -47,7 +47,7 @@ app.layout = html.Div(
                     ]
                 ),
 
-                flc.LeafletFlowLayer(
+                flc.FlowLayer(
                     flowData=[
                         {
                             'from': {
@@ -59,7 +59,7 @@ app.layout = html.Div(
                                 'lng': place2['lng']
                             },
                             'value': 1,
-                            'color': 'red',
+                            'color': 'purple',
                             'labels': {}
                         }
                         for place1 in places
