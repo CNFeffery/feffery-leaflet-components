@@ -1,8 +1,8 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useMap, Popup } from 'react-leaflet';
+import { Popup } from 'react-leaflet';
 
 // 定义弹出窗口组件LeafletPopup
 const LeafletPopup = (props) => {
@@ -12,9 +12,6 @@ const LeafletPopup = (props) => {
         id,
         children,
         className,
-        minWidth,
-        maxWidth,
-        maxHeight,
         keepInView,
         closeButton,
         closeOnEscapeKey,
@@ -28,9 +25,6 @@ const LeafletPopup = (props) => {
         <Popup
             id={id}
             className={className}
-            minWidth={minWidth}
-            maxWidth={maxWidth}
-            maxHeight={maxHeight}
             keepInView={keepInView}
             closeButton={closeButton}
             closeOnEscapeKey={closeOnEscapeKey}
@@ -54,15 +48,6 @@ LeafletPopup.propTypes = {
 
     // 为popup容器设置css类
     className: PropTypes.string,
-
-    // 设置popup容器的最小像素宽度，默认为50
-    minWidth: PropTypes.number,
-
-    // 设置popup容器的最大像素宽度，默认为300
-    maxWidth: PropTypes.number,
-
-    // 设置popup容器的最大高度，内容超出时会渲染滚动条，默认无限制
-    maxHeight: PropTypes.number,
 
     // 设置是否强制已展开的popup限定在视角内，默认为false
     keepInView: PropTypes.bool,

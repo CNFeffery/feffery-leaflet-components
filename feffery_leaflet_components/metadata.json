@@ -554,7 +554,11 @@
           "name": "bool"
         },
         "required": false,
-        "description": ""
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       },
       "zIndex": {
         "type": {
@@ -3164,27 +3168,6 @@
       "className": {
         "type": {
           "name": "string"
-        },
-        "required": false,
-        "description": ""
-      },
-      "minWidth": {
-        "type": {
-          "name": "number"
-        },
-        "required": false,
-        "description": ""
-      },
-      "maxWidth": {
-        "type": {
-          "name": "number"
-        },
-        "required": false,
-        "description": ""
-      },
-      "maxHeight": {
-        "type": {
-          "name": "number"
         },
         "required": false,
         "description": ""

@@ -1,56 +1,83 @@
 import dash
-import json
-import random
 from dash import html
 import feffery_leaflet_components as flc
-from dash.dependencies import Input, Output
 
 app = dash.Dash(__name__)
+
+# 示例地点数组
+places = [
+    {
+        'name': '纽约',
+        'lat': 40.7145481958237,
+        'lng': -74.00853058095109
+    },
+    {
+        'name': '北京',
+        'lat': 39.90892818332875,
+        'lng': 116.40977642887036
+    },
+    {
+        'name': '约翰内斯堡',
+        'lat': -26.160114470372378,
+        'lng': 28.01684955752199
+    }
+]
 
 app.layout = html.Div(
     [
         flc.LeafletMap(
             [
-                flc.LeafletTileLayer(),
-                flc.LeafletSuperCluster(
-                    id='demo-super-cluster',
-                    positions=[
+                flc.LeafletLayerGroup(
+                    [
+                        flc.LeafletCircleMarker(
+                            center={
+                                'lat': place['lat'],
+                                'lng': place['lng']
+                            },
+                            pathOptions={
+                                'fillColor': '#ff6b6b',
+                                'fillOpacity': 0.8,
+                                'color': '#ffc9c9',
+                                'weight': 10,
+                                'opacity': 0.8
+                            },
+                            radius=16
+                        )
+                        for place in places
+                    ]
+                ),
+
+                flc.LeafletFlowLayer(
+                    flowData=[
                         {
-                            'lng': random.normalvariate(0, 0.5),
-                            'lat': random.normalvariate(0, 0.5),
-                            'tooltip': f'示例点{_+1}',
-                            'key': f'示例点{_}'
+                            'from': {
+                                'lat': place1['lat'],
+                                'lng': place1['lng']
+                            },
+                            'to': {
+                                'lat': place2['lat'],
+                                'lng': place2['lng']
+                            },
+                            'value': 1,
+                            'color': 'red',
+                            'labels': {}
                         }
-                        for _ in range(50000)
-                    ],
-                    radius=100
+                        for place1 in places
+                        for place2 in places
+                        if place1['name'] != place2['name']
+                    ]
                 )
             ],
+            zoom=3,
             style={
-                'height': 600
+                'height': '100%'
             }
-        ),
-        html.Pre(id='demo-output')
+        )
     ],
     style={
-        'padding': 50
+        'height': '100vh'
     }
 )
-
-
-@app.callback(
-    Output('demo-output', 'children'),
-    Input('demo-super-cluster', 'clickedPoint'),
-    prevent_initial_call=True
-)
-def demo(clickedPoint):
-
-    return json.dumps(
-        clickedPoint,
-        indent=4,
-        ensure_ascii=False
-    )
-
 
 
 if __name__ == '__main__':

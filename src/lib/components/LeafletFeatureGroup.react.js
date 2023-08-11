@@ -71,7 +71,7 @@ LeafletFeatureGroup.propTypes = {
 
     key: PropTypes.string,
 
-    // 传入tooltip、popup组件
+    // 传入嵌套的若干矢量图层组件
     children: PropTypes.node,
 
     // 设置是否将当前图层置于顶层
@@ -112,6 +112,7 @@ LeafletFeatureGroup.propTypes = {
 
 // 设置默认参数
 LeafletFeatureGroup.defaultProps = {
+    bringToFront: false
 }
 
 export default React.memo(LeafletFeatureGroup);

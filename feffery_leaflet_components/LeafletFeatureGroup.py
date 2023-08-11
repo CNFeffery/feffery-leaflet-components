@@ -25,7 +25,7 @@ Keyword arguments:
 
     - miny (number; optional)
 
-- bringToFront (boolean; optional)
+- bringToFront (boolean; default False)
 
 - key (string; optional)
 

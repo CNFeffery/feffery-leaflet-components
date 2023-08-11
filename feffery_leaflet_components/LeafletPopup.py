@@ -36,22 +36,16 @@ Keyword arguments:
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
-        Holds which property is loading.
-
-- maxHeight (number; optional)
-
-- maxWidth (number; optional)
-
-- minWidth (number; optional)"""
+        Holds which property is loading."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletPopup'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, className=Component.UNDEFINED, minWidth=Component.UNDEFINED, maxWidth=Component.UNDEFINED, maxHeight=Component.UNDEFINED, keepInView=Component.UNDEFINED, closeButton=Component.UNDEFINED, closeOnEscapeKey=Component.UNDEFINED, closeOnClick=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'className', 'closeButton', 'closeOnClick', 'closeOnEscapeKey', 'keepInView', 'key', 'loading_state', 'maxHeight', 'maxWidth', 'minWidth']
+    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, className=Component.UNDEFINED, keepInView=Component.UNDEFINED, closeButton=Component.UNDEFINED, closeOnEscapeKey=Component.UNDEFINED, closeOnClick=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'className', 'closeButton', 'closeOnClick', 'closeOnEscapeKey', 'keepInView', 'key', 'loading_state']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'className', 'closeButton', 'closeOnClick', 'closeOnEscapeKey', 'keepInView', 'key', 'loading_state', 'maxHeight', 'maxWidth', 'minWidth']
+        self.available_properties = ['children', 'id', 'className', 'closeButton', 'closeOnClick', 'closeOnEscapeKey', 'keepInView', 'key', 'loading_state']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

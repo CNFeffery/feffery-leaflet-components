@@ -34,7 +34,7 @@ const LeafletFlowLayer = (props) => {
                 return {
                     from: [item.from.lng, item.from.lat],
                     to: [item.to.lng, item.to.lat],
-                    labels: [item.labels.from, item.labels.to],
+                    labels: [item.labels?.from || '', item.labels?.to || ''],
                     color: item.color || '#3498db',
                     value: item.value || 1
                 };
