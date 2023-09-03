@@ -9,6 +9,7 @@ A LeafletSuperCluster component.
 
 Keyword arguments:
 - `id` (String; optional)
+- `categoryField` (String; optional)
 - `clickedPoint` (optional): . clickedPoint has the following type: lists containing elements 'feature', 'timestamp'.
 Those elements have the following types:
   - `feature` (Dict; optional)
@@ -21,6 +22,16 @@ Those elements have the following types:
 - `clusterTextSizeFactor` (Real; optional)
 - `extent` (Real; optional)
 - `iconOptions` (optional): . iconOptions has the following type: lists containing elements 'iconUrl', 'iconSize', 'iconAnchor', 'popupAnchor', 'tooltipAnchor', 'shadowUrl', 'shadowSize', 'shadowAnchor', 'className'.
+Those elements have the following types:
+  - `iconUrl` (String; optional)
+  - `iconSize` (Array of Reals; optional)
+  - `iconAnchor` (Array of Reals; optional)
+  - `popupAnchor` (Array of Reals; optional)
+  - `tooltipAnchor` (Array of Reals; optional)
+  - `shadowUrl` (String; optional)
+  - `shadowSize` (Array of Reals; optional)
+  - `shadowAnchor` (Array of Reals; optional)
+  - `className` (String; optional) | Dict with Strings as keys and values of type lists containing elements 'iconUrl', 'iconSize', 'iconAnchor', 'popupAnchor', 'tooltipAnchor', 'shadowUrl', 'shadowSize', 'shadowAnchor', 'className'.
 Those elements have the following types:
   - `iconUrl` (String; optional)
   - `iconSize` (Array of Reals; optional)
@@ -47,7 +58,7 @@ Those elements have the following types:
 - `tooltipSticky` (Bool; optional)
 """
 function ''_leafletsupercluster(; kwargs...)
-        available_props = Symbol[:id, :clickedPoint, :clusterBackground, :clusterBorder, :clusterIconBaseSize, :clusterIconExtraSizeFactor, :clusterTextColor, :clusterTextSizeFactor, :extent, :iconOptions, :key, :loading_state, :maxZoom, :minPoints, :minZoom, :nodeSize, :positions, :radius, :tooltipField, :tooltipSticky]
+        available_props = Symbol[:id, :categoryField, :clickedPoint, :clusterBackground, :clusterBorder, :clusterIconBaseSize, :clusterIconExtraSizeFactor, :clusterTextColor, :clusterTextSizeFactor, :extent, :iconOptions, :key, :loading_state, :maxZoom, :minPoints, :minZoom, :nodeSize, :positions, :radius, :tooltipField, :tooltipSticky]
         wild_props = Symbol[]
         return Component("''_leafletsupercluster", "LeafletSuperCluster", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

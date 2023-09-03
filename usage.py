@@ -1,84 +1,62 @@
 import dash
+import random
 from dash import html
-import feffery_leaflet_components.alias as flc
+import feffery_leaflet_components as flc
+import pandas as pd
+
+
+data = pd.DataFrame(
+    {
+        'lng': [random.normalvariate(0, 1) for _ in range(5000)],
+        'lat': [random.normalvariate(0, 1) for _ in range(5000)],
+        'category': [random.choice(['类别A', '类别B', '类别C']) for _ in range(5000)]
+    }
+)
+
 
 app = dash.Dash(__name__)
 
-# 示例地点数组
-places = [
-    {
-        'name': '纽约',
-        'lat': 40.7145481958237,
-        'lng': -74.00853058095109
-    },
-    {
-        'name': '北京',
-        'lat': 39.90892818332875,
-        'lng': 116.40977642887036
-    },
-    {
-        'name': '约翰内斯堡',
-        'lat': -26.160114470372378,
-        'lng': 28.01684955752199
-    }
-]
-
 app.layout = html.Div(
     [
-        flc.Map(
+        flc.LeafletMap(
             [
-                flc.LayerGroup(
-                    [
-                        flc.CircleMarker(
-                            center={
-                                'lat': place['lat'],
-                                'lng': place['lng']
-                            },
-                            pathOptions={
-                                'fillColor': '#ff6b6b',
-                                'fillOpacity': 0.8,
-                                'color': '#ffc9c9',
-                                'weight': 10,
-                                'opacity': 0.8
-                            },
-                            radius=16
-                        )
-                        for place in places
-                    ]
-                ),
-
-                flc.FlowLayer(
-                    flowData=[
+                flc.LeafletTileLayer(),
+                flc.LeafletSuperCluster(
+                    positions=[
                         {
-                            'from': {
-                                'lat': place1['lat'],
-                                'lng': place1['lng']
-                            },
-                            'to': {
-                                'lat': place2['lat'],
-                                'lng': place2['lng']
-                            },
-                            'value': 1,
-                            'color': 'purple',
-                            'labels': {}
+                            'lng': row.lng,
+                            'lat': row.lat,
+                            'tooltip': row.category,
+                            'category': row.category
                         }
-                        for place1 in places
-                        for place2 in places
-                        if place1['name'] != place2['name']
-                    ]
+                        for row in data.itertuples()
+                    ],
+                    radius=100,
+                    iconOptions={
+                        '类别A': {
+                            'iconUrl': 'assets/小学-icon.png',
+                            'iconSize': [32, 32]
+                        },
+                        '类别B': {
+                            'iconUrl': 'assets/医院-icon.png',
+                            'iconSize': [32, 32]
+                        },
+                        '类别C': {
+                            'iconUrl': 'assets/幼儿园-icon.png',
+                            'iconSize': [32, 32]
+                        }
+                    }
                 )
             ],
-            zoom=3,
             style={
-                'height': '100%'
+                'height': 800
             }
         )
     ],
     style={
-        'height': '100vh'
+        'padding': 50
     }
 )
-
 
 if __name__ == '__main__':
     app.run(debug=True)

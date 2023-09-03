@@ -11,6 +11,8 @@ Keyword arguments:
 
 - id (string; optional)
 
+- categoryField (string; default 'category')
+
 - clickedPoint (dict; optional)
 
     `clickedPoint` is a dict with keys:
@@ -36,6 +38,24 @@ Keyword arguments:
 - iconOptions (dict; optional)
 
     `iconOptions` is a dict with keys:
+
+    - className (string; optional)
+
+    - iconAnchor (list of numbers; optional)
+
+    - iconSize (list of numbers; optional)
+
+    - iconUrl (string; optional)
+
+    - popupAnchor (list of numbers; optional)
+
+    - shadowAnchor (list of numbers; optional)
+
+    - shadowSize (list of numbers; optional)
+
+    - shadowUrl (string; optional)
+
+    - tooltipAnchor (list of numbers; optional) | dict with strings as keys and values of type dict with keys:
 
     - className (string; optional)
 
@@ -90,10 +110,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletSuperCluster'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, positions=Component.REQUIRED, clusterBackground=Component.UNDEFINED, clusterBorder=Component.UNDEFINED, clusterTextColor=Component.UNDEFINED, clusterIconBaseSize=Component.UNDEFINED, clusterIconExtraSizeFactor=Component.UNDEFINED, clusterTextSizeFactor=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, minPoints=Component.UNDEFINED, radius=Component.UNDEFINED, extent=Component.UNDEFINED, nodeSize=Component.UNDEFINED, iconOptions=Component.UNDEFINED, tooltipField=Component.UNDEFINED, tooltipSticky=Component.UNDEFINED, clickedPoint=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'clickedPoint', 'clusterBackground', 'clusterBorder', 'clusterIconBaseSize', 'clusterIconExtraSizeFactor', 'clusterTextColor', 'clusterTextSizeFactor', 'extent', 'iconOptions', 'key', 'loading_state', 'maxZoom', 'minPoints', 'minZoom', 'nodeSize', 'positions', 'radius', 'tooltipField', 'tooltipSticky']
+    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, positions=Component.REQUIRED, clusterBackground=Component.UNDEFINED, clusterBorder=Component.UNDEFINED, clusterTextColor=Component.UNDEFINED, clusterIconBaseSize=Component.UNDEFINED, clusterIconExtraSizeFactor=Component.UNDEFINED, clusterTextSizeFactor=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, minPoints=Component.UNDEFINED, radius=Component.UNDEFINED, extent=Component.UNDEFINED, nodeSize=Component.UNDEFINED, iconOptions=Component.UNDEFINED, tooltipField=Component.UNDEFINED, tooltipSticky=Component.UNDEFINED, categoryField=Component.UNDEFINED, clickedPoint=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'categoryField', 'clickedPoint', 'clusterBackground', 'clusterBorder', 'clusterIconBaseSize', 'clusterIconExtraSizeFactor', 'clusterTextColor', 'clusterTextSizeFactor', 'extent', 'iconOptions', 'key', 'loading_state', 'maxZoom', 'minPoints', 'minZoom', 'nodeSize', 'positions', 'radius', 'tooltipField', 'tooltipSticky']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'clickedPoint', 'clusterBackground', 'clusterBorder', 'clusterIconBaseSize', 'clusterIconExtraSizeFactor', 'clusterTextColor', 'clusterTextSizeFactor', 'extent', 'iconOptions', 'key', 'loading_state', 'maxZoom', 'minPoints', 'minZoom', 'nodeSize', 'positions', 'radius', 'tooltipField', 'tooltipSticky']
+        self.available_properties = ['id', 'categoryField', 'clickedPoint', 'clusterBackground', 'clusterBorder', 'clusterIconBaseSize', 'clusterIconExtraSizeFactor', 'clusterTextColor', 'clusterTextSizeFactor', 'extent', 'iconOptions', 'key', 'loading_state', 'maxZoom', 'minPoints', 'minZoom', 'nodeSize', 'positions', 'radius', 'tooltipField', 'tooltipSticky']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

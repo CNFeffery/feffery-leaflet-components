@@ -3589,63 +3589,130 @@
       },
       "iconOptions": {
         "type": {
-          "name": "exact",
-          "value": {
-            "iconUrl": {
-              "name": "string",
-              "required": false
-            },
-            "iconSize": {
-              "name": "arrayOf",
+          "name": "union",
+          "value": [
+            {
+              "name": "exact",
               "value": {
-                "name": "number"
-              },
-              "required": false
+                "iconUrl": {
+                  "name": "string",
+                  "required": false
+                },
+                "iconSize": {
+                  "name": "arrayOf",
+                  "value": {
+                    "name": "number"
+                  },
+                  "required": false
+                },
+                "iconAnchor": {
+                  "name": "arrayOf",
+                  "value": {
+                    "name": "number"
+                  },
+                  "required": false
+                },
+                "popupAnchor": {
+                  "name": "arrayOf",
+                  "value": {
+                    "name": "number"
+                  },
+                  "required": false
+                },
+                "tooltipAnchor": {
+                  "name": "arrayOf",
+                  "value": {
+                    "name": "number"
+                  },
+                  "required": false
+                },
+                "shadowUrl": {
+                  "name": "string",
+                  "required": false
+                },
+                "shadowSize": {
+                  "name": "arrayOf",
+                  "value": {
+                    "name": "number"
+                  },
+                  "required": false
+                },
+                "shadowAnchor": {
+                  "name": "arrayOf",
+                  "value": {
+                    "name": "number"
+                  },
+                  "required": false
+                },
+                "className": {
+                  "name": "string",
+                  "required": false
+                }
+              }
             },
-            "iconAnchor": {
-              "name": "arrayOf",
+            {
+              "name": "objectOf",
               "value": {
-                "name": "number"
-              },
-              "required": false
-            },
-            "popupAnchor": {
-              "name": "arrayOf",
-              "value": {
-                "name": "number"
-              },
-              "required": false
-            },
-            "tooltipAnchor": {
-              "name": "arrayOf",
-              "value": {
-                "name": "number"
-              },
-              "required": false
-            },
-            "shadowUrl": {
-              "name": "string",
-              "required": false
-            },
-            "shadowSize": {
-              "name": "arrayOf",
-              "value": {
-                "name": "number"
-              },
-              "required": false
-            },
-            "shadowAnchor": {
-              "name": "arrayOf",
-              "value": {
-                "name": "number"
-              },
-              "required": false
-            },
-            "className": {
-              "name": "string",
-              "required": false
+                "name": "exact",
+                "value": {
+                  "iconUrl": {
+                    "name": "string",
+                    "required": false
+                  },
+                  "iconSize": {
+                    "name": "arrayOf",
+                    "value": {
+                      "name": "number"
+                    },
+                    "required": false
+                  },
+                  "iconAnchor": {
+                    "name": "arrayOf",
+                    "value": {
+                      "name": "number"
+                    },
+                    "required": false
+                  },
+                  "popupAnchor": {
+                    "name": "arrayOf",
+                    "value": {
+                      "name": "number"
+                    },
+                    "required": false
+                  },
+                  "tooltipAnchor": {
+                    "name": "arrayOf",
+                    "value": {
+                      "name": "number"
+                    },
+                    "required": false
+                  },
+                  "shadowUrl": {
+                    "name": "string",
+                    "required": false
+                  },
+                  "shadowSize": {
+                    "name": "arrayOf",
+                    "value": {
+                      "name": "number"
+                    },
+                    "required": false
+                  },
+                  "shadowAnchor": {
+                    "name": "arrayOf",
+                    "value": {
+                      "name": "number"
+                    },
+                    "required": false
+                  },
+                  "className": {
+                    "name": "string",
+                    "required": false
+                  }
+                }
+              }
             }
-          }
+          ]
         },
         "required": false,
         "description": ""
@@ -3667,6 +3734,17 @@
         },
         "required": false,
         "description": ""
+      },
+      "categoryField": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'category'",
+          "computed": false
+        }
       },
       "clickedPoint": {
         "type": {

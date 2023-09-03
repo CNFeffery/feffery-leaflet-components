@@ -75,6 +75,7 @@ const LeafletSuperCluster = (props) => {
         iconOptions,
         tooltipField,
         tooltipSticky,
+        categoryField,
         loading_state,
         setProps
     } = props;
@@ -114,7 +115,7 @@ const LeafletSuperCluster = (props) => {
     const points = positions.map((point) => ({
         type: "Feature",
         properties: {
-            ...omit(point, ['lng', 'lat']),
+            ...omit(point, ['lng']),
             cluster: false
         },
         geometry: {
@@ -206,7 +207,16 @@ const LeafletSuperCluster = (props) => {
                             lng: lng,
                             lat: lat
                         }}
-                        icon={iconOptions ? L.icon(iconOptions) : L.icon(defaultIconOptions)}
+                        icon={
+                            iconOptions ?
+                                (
+                                    iconOptions[cluster.properties[categoryField]] ?
+                                        // 启用对应的映射图标参数
+                                        L.icon(iconOptions[cluster.properties[categoryField]]) :
+                                        L.icon(iconOptions)
+                                ) :
+                                L.icon(defaultIconOptions)
+                        }
                         eventHandlers={{
                             // 监听点击事件
                             click: () => {
@@ -287,32 +297,60 @@ LeafletSuperCluster.propTypes = {
     nodeSize: PropTypes.number,
 
     // 自定义图标参数
-    iconOptions: PropTypes.exact({
-        // 图标图片url
-        iconUrl: PropTypes.string,
-        // 设置图标图片主体尺寸
-        iconSize: PropTypes.arrayOf(PropTypes.number),
-        // 设置图标图片尖端坐标，以图片左上角为原点参照
-        iconAnchor: PropTypes.arrayOf(PropTypes.number),
-        // 设置popup打开的锚点，以iconAnchor为原点参照
-        popupAnchor: PropTypes.arrayOf(PropTypes.number),
-        // 设置tooltip打开的锚点，以iconAnchor为原点参照
-        tooltipAnchor: PropTypes.arrayOf(PropTypes.number),
-        // 设置阴影图片url
-        shadowUrl: PropTypes.string,
-        // 设置阴影图片的尺寸
-        shadowSize: PropTypes.arrayOf(PropTypes.number),
-        // 设置阴影图片的尖端坐标，以图片左上角为原点参照
-        shadowAnchor: PropTypes.arrayOf(PropTypes.number),
-        // 设置标记图标css类
-        className: PropTypes.string
-    }),
+    iconOptions: PropTypes.oneOfType([
+        PropTypes.exact({
+            // 图标图片url
+            iconUrl: PropTypes.string,
+            // 设置图标图片主体尺寸
+            iconSize: PropTypes.arrayOf(PropTypes.number),
+            // 设置图标图片尖端坐标，以图片左上角为原点参照
+            iconAnchor: PropTypes.arrayOf(PropTypes.number),
+            // 设置popup打开的锚点，以iconAnchor为原点参照
+            popupAnchor: PropTypes.arrayOf(PropTypes.number),
+            // 设置tooltip打开的锚点，以iconAnchor为原点参照
+            tooltipAnchor: PropTypes.arrayOf(PropTypes.number),
+            // 设置阴影图片url
+            shadowUrl: PropTypes.string,
+            // 设置阴影图片的尺寸
+            shadowSize: PropTypes.arrayOf(PropTypes.number),
+            // 设置阴影图片的尖端坐标，以图片左上角为原点参照
+            shadowAnchor: PropTypes.arrayOf(PropTypes.number),
+            // 设置标记图标css类
+            className: PropTypes.string
+        }),
+        // 分类单独设置图标用法，配合图标数据中的可选字段category
+        PropTypes.objectOf(
+            PropTypes.exact({
+                // 图标图片url
+                iconUrl: PropTypes.string,
+                // 设置图标图片主体尺寸
+                iconSize: PropTypes.arrayOf(PropTypes.number),
+                // 设置图标图片尖端坐标，以图片左上角为原点参照
+                iconAnchor: PropTypes.arrayOf(PropTypes.number),
+                // 设置popup打开的锚点，以iconAnchor为原点参照
+                popupAnchor: PropTypes.arrayOf(PropTypes.number),
+                // 设置tooltip打开的锚点，以iconAnchor为原点参照
+                tooltipAnchor: PropTypes.arrayOf(PropTypes.number),
+                // 设置阴影图片url
+                shadowUrl: PropTypes.string,
+                // 设置阴影图片的尺寸
+                shadowSize: PropTypes.arrayOf(PropTypes.number),
+                // 设置阴影图片的尖端坐标，以图片左上角为原点参照
+                shadowAnchor: PropTypes.arrayOf(PropTypes.number),
+                // 设置标记图标css类
+                className: PropTypes.string
+            })
+        )
+    ]),
 
     // 设置点对象中作为tooltip展示信息的字段名，默认为'tooltip'
     tooltipField: PropTypes.string,
 
     // 设置tooltip是否开启粘性显示，默认为false
     tooltipSticky: PropTypes.bool,
+
+    // 设置点对象中作为类别区分的字段，默认为'category'
+    categoryField: PropTypes.string,
 
     // 用于监听最近一次被点击的标记点相关信息
     clickedPoint: PropTypes.exact({
@@ -350,7 +388,8 @@ LeafletSuperCluster.defaultProps = {
     clusterIconBaseSize: 10,
     clusterIconExtraSizeFactor: 40,
     clusterTextSizeFactor: 0.4,
-    tooltipField: 'tooltip'
+    tooltipField: 'tooltip',
+    categoryField: 'category'
 }
 
 export default React.memo(LeafletSuperCluster);
