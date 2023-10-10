@@ -9,10 +9,26 @@ const LeafletMapListener = (props) => {
     // 取得必要属性或参数
     const {
         id,
+        _center,
+        _zoom,
+        _clickedLatLng,
+        _bounds,
+        debug,
         setProps
     } = props;
 
     const map = useMap();
+
+    useEffect(() => {
+        if (debug) {
+            console.log({
+                _center,
+                _zoom,
+                _clickedLatLng,
+                _bounds
+            })
+        }
+    }, [_center, _zoom, _clickedLatLng, _bounds])
 
     useEffect(() => {
         if (map) {
@@ -115,6 +131,10 @@ LeafletMapListener.propTypes = {
         maxy: PropTypes.number
     }),
 
+    // 设置是否开启调试模式，开启后每次地图中心点坐标、缩放级别、鼠标点击位置坐标、地图矩形区域坐标范围等信息变化时都会被打印
+    // 默认：false
+    debug: PropTypes.bool,
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -139,6 +159,7 @@ LeafletMapListener.propTypes = {
 
 // 设置默认参数
 LeafletMapListener.defaultProps = {
+    debug: false
 }
 
 export default React.memo(LeafletMapListener);

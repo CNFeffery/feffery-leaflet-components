@@ -24,6 +24,7 @@ Those elements have the following types:
   - `lng` (Real; optional)
   - `lat` (Real; optional)
 - `_zoom` (Real; optional)
+- `debug` (Bool; optional)
 - `key` (String; optional)
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
@@ -32,7 +33,7 @@ Those elements have the following types:
   - `component_name` (String; optional): Holds the name of the component that is loading
 """
 function ''_leafletmaplistener(; kwargs...)
-        available_props = Symbol[:id, :_bounds, :_center, :_clickedLatLng, :_zoom, :key, :loading_state]
+        available_props = Symbol[:id, :_bounds, :_center, :_clickedLatLng, :_zoom, :debug, :key, :loading_state]
         wild_props = Symbol[]
         return Component("''_leafletmaplistener", "LeafletMapListener", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
