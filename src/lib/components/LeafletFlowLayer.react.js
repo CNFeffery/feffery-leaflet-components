@@ -20,7 +20,8 @@ const LeafletFlowLayer = (props) => {
         arcLabel,
         arcLabelFontSize,
         arcLabelFontFamily,
-        isStatic
+        isStatic,
+        keepUniqueLabels
     } = props;
 
     const map = useMap();
@@ -36,11 +37,30 @@ const LeafletFlowLayer = (props) => {
                 return {
                     from: [item.from.lng, item.from.lat],
                     to: [item.to.lng, item.to.lat],
-                    labels: [item.labels?.from || '', item.labels?.to || ''],
+                    labels: [item.labels?.from || null, item.labels?.to || null],
                     color: Color(item.color || '#3498db').hex(),
                     value: item.value || 1
                 };
             })
+
+            if (keepUniqueLabels) {
+                // 保存所有标签唯一值数组
+                const labels = [];
+                // 记录data中各记录起点、重点label唯一值
+                for (let i = 0; i < data.length; i++) {
+                    if (!labels.includes(data[i].labels[0])) {
+                        labels.push(data[i].labels[0])
+                    } else {
+                        data[i].labels[0] = null
+                    }
+
+                    if (!labels.includes(data[i].labels[1])) {
+                        labels.push(data[i].labels[1])
+                    } else {
+                        data[i].labels[1] = null
+                    }
+                }
+            }
 
             if (flowLayer) {
                 // 更新当前流线图层实例的data
@@ -146,6 +166,12 @@ LeafletFlowLayer.propTypes = {
     // 设置是否以静态形式进行渲染，默认为false
     isStatic: PropTypes.bool,
 
+    /**
+     * 设置是否对起终点标签文字进行去重
+     * 默认：false
+     */
+    keepUniqueLabels: PropTypes.bool,
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -177,7 +203,8 @@ LeafletFlowLayer.defaultProps = {
     arcLabel: true,
     arcLabelFontSize: '10px',
     arcLabelFontFamily: 'sans-serif',
-    isStatic: false
+    isStatic: false,
+    keepUniqueLabels: false
 }
 
 export default React.memo(LeafletFlowLayer);

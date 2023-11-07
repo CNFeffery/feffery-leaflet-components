@@ -13,7 +13,6 @@ import { useMap } from 'react-leaflet';
 const LeafletStaticHeatMap = (props) => {
     // 取得必要属性或参数
     const {
-        id,
         points,
         multiplyFactor,
         size,
@@ -33,8 +32,7 @@ const LeafletStaticHeatMap = (props) => {
                         size: size,
                         units: 'm',
                         alphaRange: alphaRange,
-                        opacity: opacity,
-                        // _staticHeatmapId: id
+                        opacity: opacity
                     },
                     isUndefined
                 )

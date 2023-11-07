@@ -53,6 +53,9 @@ Keyword arguments:
 
 - isStatic (boolean; default False)
 
+- keepUniqueLabels (boolean; default False):
+    设置是否对起终点标签文字进行去重  默认：False.
+
 - key (string; optional)
 
 - loading_state (dict; optional)
@@ -78,10 +81,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletFlowLayer'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, flowData=Component.UNDEFINED, pulseRadius=Component.UNDEFINED, pulseBorderWidth=Component.UNDEFINED, arcWidth=Component.UNDEFINED, maxWidth=Component.UNDEFINED, arcLabel=Component.UNDEFINED, arcLabelFontSize=Component.UNDEFINED, arcLabelFontFamily=Component.UNDEFINED, isStatic=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'arcLabel', 'arcLabelFontFamily', 'arcLabelFontSize', 'arcWidth', 'flowData', 'isStatic', 'key', 'loading_state', 'maxWidth', 'pulseBorderWidth', 'pulseRadius']
+    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, flowData=Component.UNDEFINED, pulseRadius=Component.UNDEFINED, pulseBorderWidth=Component.UNDEFINED, arcWidth=Component.UNDEFINED, maxWidth=Component.UNDEFINED, arcLabel=Component.UNDEFINED, arcLabelFontSize=Component.UNDEFINED, arcLabelFontFamily=Component.UNDEFINED, isStatic=Component.UNDEFINED, keepUniqueLabels=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'arcLabel', 'arcLabelFontFamily', 'arcLabelFontSize', 'arcWidth', 'flowData', 'isStatic', 'keepUniqueLabels', 'key', 'loading_state', 'maxWidth', 'pulseBorderWidth', 'pulseRadius']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'arcLabel', 'arcLabelFontFamily', 'arcLabelFontSize', 'arcWidth', 'flowData', 'isStatic', 'key', 'loading_state', 'maxWidth', 'pulseBorderWidth', 'pulseRadius']
+        self.available_properties = ['id', 'arcLabel', 'arcLabelFontFamily', 'arcLabelFontSize', 'arcWidth', 'flowData', 'isStatic', 'keepUniqueLabels', 'key', 'loading_state', 'maxWidth', 'pulseBorderWidth', 'pulseRadius']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

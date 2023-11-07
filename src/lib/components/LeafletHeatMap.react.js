@@ -10,7 +10,6 @@ import { useMap } from 'react-leaflet';
 const LeafletHeatMap = (props) => {
     // 取得必要属性或参数
     const {
-        id,
         points,
         minOpacity,
         max,

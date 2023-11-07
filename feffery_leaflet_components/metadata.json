@@ -794,6 +794,17 @@
           "computed": false
         }
       },
+      "keepUniqueLabels": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "\u8bbe\u7f6e\u662f\u5426\u5bf9\u8d77\u7ec8\u70b9\u6807\u7b7e\u6587\u5b57\u8fdb\u884c\u53bb\u91cd\r\n\u9ed8\u8ba4\uff1afalse",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
       "loading_state": {
         "type": {
           "name": "shape",
