@@ -1,5 +1,5 @@
 /* eslint-disable new-cap */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import L from "leaflet";
 import "./utils/leaflet.migrationLayer";
@@ -20,18 +20,18 @@ const LeafletFlowLayer = (props) => {
         arcLabel,
         arcLabelFontSize,
         arcLabelFontFamily,
-        isStatic,
-        keepUniqueLabels
+        keepUniqueLabels,
+        setAction,
+        setProps
     } = props;
 
     const map = useMap();
 
     // 存储流线图层状态
-    const [flowLayer, setFlowLayer] = useState(null);
+    const flowLayerRef = useRef(null);
 
     useEffect(() => {
-
-        if (flowData) {
+        if (map && flowData) {
             // 将flowData加工为流线地图所需data格式
             const data = flowData.map(item => {
                 return {
@@ -62,46 +62,62 @@ const LeafletFlowLayer = (props) => {
                 }
             }
 
-            if (flowLayer) {
-                // 更新当前流线图层实例的data
-                flowLayer.setData(data);
+            // 若当前流线图层已存在
+            if (flowLayerRef.current) {
+                // 动态更新数据
+                flowLayerRef.current.setData(data);
             } else {
-                setFlowLayer(
-                    L.migrationLayer({
-                        map: map,
-                        data: data,
-                        pulseRadius: pulseRadius,
-                        pulseBorderWidth: pulseBorderWidth,
-                        arcWidth: arcWidth,
-                        maxWidth: maxWidth,
-                        arcLabel: arcLabel,
-                        arcLabelFont: `${arcLabelFontSize} ${arcLabelFontFamily}`,
-                        _migrationId: id
-                    })
-                )
+                const flowLayer = L.migrationLayer({
+                    map: map,
+                    data: data,
+                    pulseRadius: pulseRadius,
+                    pulseBorderWidth: pulseBorderWidth,
+                    arcWidth: arcWidth,
+                    maxWidth: maxWidth,
+                    arcLabel: arcLabel,
+                    arcLabelFont: `${arcLabelFontSize} ${arcLabelFontFamily}`,
+                    _migrationId: id
+                })
+
+                // 添加迁徙图层到地图
+                flowLayer.addTo(map)
+
+                // 更新迁徙图层引用
+                flowLayerRef.current = flowLayer;
             }
-        } else {
-            setFlowLayer(null)
         }
     }, [map, flowData])
 
-    // 在组件即将卸载前对flowLayer实例进行销毁
+    // 执行动作
     useEffect(() => {
-        return () => flowLayer && flowLayer.destroy()
-    })
-
-    if (map && flowLayer) {
-        flowLayer.addTo(map)
-        if (isStatic) {
-            map.on('zoomend moveend', () => {
-                flowLayer.pause()
+        if (setAction) {
+            if (setAction === 'pause') {
+                flowLayerRef.current.pause();
+            } else if (setAction === 'play') {
+                flowLayerRef.current.play();
+            } else if (setAction === 'hide') {
+                flowLayerRef.current.hide();
+            } else if (setAction === 'show') {
+                flowLayerRef.current.show();
+            }
+            setProps({
+                setAction: null
             })
-            flowLayer.pause()
         }
-    }
+    }, [setAction])
+
+    // 并在组件即将卸载前对flowLayer实例进行销毁
+    useEffect(() => {
+        return () => {
+            if (flowLayerRef.current) {
+                flowLayerRef.current.destroy();
+                flowLayerRef.current = null;
+            }
+        };
+    }, []);
 
     // 返回定制化的前端组件
-    return <div id={id} />;
+    return <></>;
 }
 
 // 定义参数或属性
@@ -163,14 +179,16 @@ LeafletFlowLayer.propTypes = {
     // 设置起终点文字字体
     arcLabelFontFamily: PropTypes.string,
 
-    // 设置是否以静态形式进行渲染，默认为false
-    isStatic: PropTypes.bool,
-
     /**
      * 设置是否对起终点标签文字进行去重
      * 默认：false
      */
     keepUniqueLabels: PropTypes.bool,
+
+    /**
+     * 手动执行动作，可选的有'pause'、'play'、'hide'、'show'，每次有效值更新后会还原为空值
+     */
+    setAction: PropTypes.oneOf(['pause', 'play', 'hide', 'show']),
 
     loading_state: PropTypes.shape({
         /**
@@ -203,7 +221,6 @@ LeafletFlowLayer.defaultProps = {
     arcLabel: true,
     arcLabelFontSize: '10px',
     arcLabelFontFamily: 'sans-serif',
-    isStatic: false,
     keepUniqueLabels: false
 }
 

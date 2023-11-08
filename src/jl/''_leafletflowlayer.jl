@@ -29,7 +29,6 @@ Those elements have the following types:
   - `to` (String; optional)
   - `color` (String; optional)
   - `value` (Real; optional)s
-- `isStatic` (Bool; optional)
 - `keepUniqueLabels` (Bool; optional): 设置是否对起终点标签文字进行去重
 默认：false
 - `key` (String; optional)
@@ -41,9 +40,10 @@ Those elements have the following types:
 - `maxWidth` (Real; optional)
 - `pulseBorderWidth` (Real; optional)
 - `pulseRadius` (Real; optional)
+- `setAction` (a value equal to: 'pause', 'play', 'hide', 'show'; optional): 手动执行动作，可选的有'pause'、'play'、'hide'、'show'，每次有效值更新后会还原为空值
 """
 function ''_leafletflowlayer(; kwargs...)
-        available_props = Symbol[:id, :arcLabel, :arcLabelFontFamily, :arcLabelFontSize, :arcWidth, :flowData, :isStatic, :keepUniqueLabels, :key, :loading_state, :maxWidth, :pulseBorderWidth, :pulseRadius]
+        available_props = Symbol[:id, :arcLabel, :arcLabelFontFamily, :arcLabelFontSize, :arcWidth, :flowData, :keepUniqueLabels, :key, :loading_state, :maxWidth, :pulseBorderWidth, :pulseRadius, :setAction]
         wild_props = Symbol[]
         return Component("''_leafletflowlayer", "LeafletFlowLayer", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
