@@ -44,25 +44,6 @@ app.layout = html.Div(
                 flc.LeafletTileLayer(),
                 flc.LeafletFlowLayer(
                     id='flow-layer',
-                    flowData=[
-                        {
-                            'from': {
-                                'lng': point1[0],
-                                'lat': point1[1]
-                            },
-                            'to': {
-                                'lng': point2[0],
-                                'lat': point2[1]
-                            },
-                            'labels': {
-                                'from': f'地点{idx1}',
-                                'to': f'地点{idx2}'
-                            }
-                        }
-                        for idx2, point2 in enumerate(random_points)
-                        for idx1, point1 in enumerate(random_points)
-                        if idx1 != idx2
-                    ],
                     arcLabelFontSize='20px',
                     keepUniqueLabels=True,
                     setAction='pause'

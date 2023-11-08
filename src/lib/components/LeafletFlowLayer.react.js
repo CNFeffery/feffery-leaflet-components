@@ -90,7 +90,7 @@ const LeafletFlowLayer = (props) => {
 
     // 执行动作
     useEffect(() => {
-        if (setAction) {
+        if (setAction && flowLayerRef.current) {
             if (setAction === 'pause') {
                 flowLayerRef.current.pause();
             } else if (setAction === 'play') {
