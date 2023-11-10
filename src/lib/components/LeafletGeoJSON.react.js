@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-else-return */
 /* eslint-disable prefer-const */
@@ -275,8 +276,10 @@ const LeafletGeoJSON = (props) => {
                             map.fitBounds(e.target.getBounds());
                         }
 
-                        // 图层置顶
-                        e.target.bringToFront();
+                        // 尝试图层置顶
+                        try {
+                            e.target.bringToFront();
+                        } catch (error) { }
 
                         // 更新_clickedFeature信息
                         setProps({
