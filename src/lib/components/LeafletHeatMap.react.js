@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undefined */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import L from "leaflet";
 import "leaflet.heat";
@@ -21,6 +21,7 @@ const LeafletHeatMap = (props) => {
     } = props;
 
     const map = useMap()
+    const heatmapLayerRef = useRef(null)
 
     useEffect(() => {
         if (map) {
@@ -35,10 +36,14 @@ const LeafletHeatMap = (props) => {
                 gradient,
                 // _heatmapId: id
             })
-
+            heatmapLayerRef.current = heatmapLayer
             heatmapLayer.addTo(map);
         }
     }, [map])
+
+    useEffect(() => {
+        return () => map.removeLayer(heatmapLayerRef.current);
+    }, [])
 
     return <></>
 }
