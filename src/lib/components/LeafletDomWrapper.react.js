@@ -1,7 +1,8 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useRef } from 'react';
-import L from 'leaflet';
+import React, { useRef, useEffect } from 'react';
+import { useMap } from 'react-leaflet';
+import { useHover } from 'ahooks';
 import PropTypes from 'prop-types';
 
 // 定义元素包装器组件LeafletDomWrapper
@@ -9,26 +10,34 @@ const LeafletDomWrapper = (props) => {
 
     // 取得必要属性或参数
     const {
-        children,
-        disableClickPropagation,
-        disableScrollPropagation
+        children
     } = props;
 
-    const childrenRef = useRef(null);
+    const ref = useRef(null);
+    const isHovering = useHover(ref);
+    const map = useMap();
 
     useEffect(() => {
-        if (childrenRef.current) {
-            if (disableClickPropagation) {
-                L.DomEvent.disableClickPropagation(childrenRef.current);
-            }
-            if (disableScrollPropagation) {
-                L.DomEvent.disableScrollPropagation(childrenRef.current);
+        // 若地图本身可拖动
+        if (map.options.dragging) {
+            if (isHovering) {
+                map.dragging.disable();
+            } else {
+                map.dragging.enable();
             }
         }
-    }, [children])
+        // 若地图本身可滚轮缩放
+        if (map.options.scrollWheelZoom) {
+            if (isHovering) {
+                map.scrollWheelZoom.disable();
+            } else {
+                map.scrollWheelZoom.enable();
+            }
+        }
+    }, [isHovering])
 
     return (
-        <div ref={childrenRef}>{children}</div>
+        <div ref={ref}>{children}</div>
     );
 }
 
@@ -43,18 +52,6 @@ LeafletDomWrapper.propTypes = {
      * 传入需要进行包装的外部自定义元素
      */
     children: PropTypes.node,
-
-    /**
-     * 是否屏蔽内部元素点击事件向外部地图实例的派发
-     * 默认：true
-     */
-    disableClickPropagation: PropTypes.bool,
-
-    /**
-     * 是否屏蔽内部元素滚轮事件向外部地图实例的派发
-     * 默认：true
-     */
-    disableScrollPropagation: PropTypes.bool,
 
     loading_state: PropTypes.shape({
         /**
@@ -80,8 +77,6 @@ LeafletDomWrapper.propTypes = {
 
 // 设置默认参数
 LeafletDomWrapper.defaultProps = {
-    disableClickPropagation: true,
-    disableScrollPropagation: true
 }
 
 export default React.memo(LeafletDomWrapper);

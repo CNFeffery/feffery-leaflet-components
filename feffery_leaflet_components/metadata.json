@@ -423,28 +423,6 @@
         "required": false,
         "description": "\u4f20\u5165\u9700\u8981\u8fdb\u884c\u5305\u88c5\u7684\u5916\u90e8\u81ea\u5b9a\u4e49\u5143\u7d20"
       },
-      "disableClickPropagation": {
-        "type": {
-          "name": "bool"
-        },
-        "required": false,
-        "description": "\u662f\u5426\u5c4f\u853d\u5185\u90e8\u5143\u7d20\u70b9\u51fb\u4e8b\u4ef6\u5411\u5916\u90e8\u5730\u56fe\u5b9e\u4f8b\u7684\u6d3e\u53d1\r\n\u9ed8\u8ba4\uff1atrue",
-        "defaultValue": {
-          "value": "true",
-          "computed": false
-        }
-      },
-      "disableScrollPropagation": {
-        "type": {
-          "name": "bool"
-        },
-        "required": false,
-        "description": "\u662f\u5426\u5c4f\u853d\u5185\u90e8\u5143\u7d20\u6eda\u8f6e\u4e8b\u4ef6\u5411\u5916\u90e8\u5730\u56fe\u5b9e\u4f8b\u7684\u6d3e\u53d1\r\n\u9ed8\u8ba4\uff1atrue",
-        "defaultValue": {
-          "value": "true",
-          "computed": false
-        }
-      },
       "loading_state": {
         "type": {
           "name": "shape",
