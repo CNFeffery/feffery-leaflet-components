@@ -397,6 +397,87 @@
       }
     }
   },
+  "src/lib/components/LeafletDomWrapper.react.js": {
+    "description": "",
+    "displayName": "LeafletDomWrapper",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "key": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "children": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": "\u4f20\u5165\u9700\u8981\u8fdb\u884c\u5305\u88c5\u7684\u5916\u90e8\u81ea\u5b9a\u4e49\u5143\u7d20"
+      },
+      "disableClickPropagation": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "\u662f\u5426\u5c4f\u853d\u5185\u90e8\u5143\u7d20\u70b9\u51fb\u4e8b\u4ef6\u5411\u5916\u90e8\u5730\u56fe\u5b9e\u4f8b\u7684\u6d3e\u53d1\r\n\u9ed8\u8ba4\uff1atrue",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "disableScrollPropagation": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "\u662f\u5426\u5c4f\u853d\u5185\u90e8\u5143\u7d20\u6eda\u8f6e\u4e8b\u4ef6\u5411\u5916\u90e8\u5730\u56fe\u5b9e\u4f8b\u7684\u6d3e\u53d1\r\n\u9ed8\u8ba4\uff1atrue",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
   "src/lib/components/LeafletExport.react.js": {
     "description": "",
     "displayName": "LeafletExport",

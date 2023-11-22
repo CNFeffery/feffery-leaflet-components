@@ -1,6 +1,7 @@
 from .LeafletAntPath import LeafletAntPath
 from .LeafletCircle import LeafletCircle
 from .LeafletCircleMarker import LeafletCircleMarker
+from .LeafletDomWrapper import LeafletDomWrapper
 from .LeafletExport import LeafletExport
 from .LeafletFeatureGroup import LeafletFeatureGroup
 from .LeafletFlowLayer import LeafletFlowLayer
@@ -28,6 +29,7 @@ __all__ = [
     "LeafletAntPath",
     "LeafletCircle",
     "LeafletCircleMarker",
+    "LeafletDomWrapper",
     "LeafletExport",
     "LeafletFeatureGroup",
     "LeafletFlowLayer",

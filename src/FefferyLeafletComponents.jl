@@ -8,6 +8,7 @@ const version = "0.0.1-b4"
 include("jl/''_leafletantpath.jl")
 include("jl/''_leafletcircle.jl")
 include("jl/''_leafletcirclemarker.jl")
+include("jl/''_leafletdomwrapper.jl")
 include("jl/''_leafletexport.jl")
 include("jl/''_leafletfeaturegroup.jl")
 include("jl/''_leafletflowlayer.jl")

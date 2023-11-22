@@ -3,6 +3,7 @@
 export(''LeafletAntPath)
 export(''LeafletCircle)
 export(''LeafletCircleMarker)
+export(''LeafletDomWrapper)
 export(''LeafletExport)
 export(''LeafletFeatureGroup)
 export(''LeafletFlowLayer)

@@ -9,17 +9,25 @@ app.layout = html.Div(
         flc.LeafletMap(
             [
                 flc.LeafletTileLayer(),
-                flc.LeafletTileSelect(
-                    urls=[
-                        {
-                            'url': 'http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
+                flc.LeafletDomWrapper(
+                    html.Div(
+                        style={
+                            'background': '#bfbfbf',
+                            'right': 15,
+                            'top': 15,
+                            'width': 300,
+                            'height': 300,
+                            'zIndex': 999,
+                            'position': 'absolute'
                         }
-                    ] * 3
+                    ),
+                    # disableScrollPropagation=False,
+                    # disableClickPropagation=False
                 )
             ],
-            scrollWheelZoom=False,
             style={
-                'height': 500
+                'height': 800,
+                'position': 'relative'
             }
         )
     ],

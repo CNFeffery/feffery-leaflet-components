@@ -24,6 +24,7 @@ import LeafletStaticHeatMap from './components/LeafletStaticHeatMap.react';
 import LeafletExport from './components/LeafletExport.react';
 import LeafletFeatureGroup from './components/LeafletFeatureGroup.react';
 import LeafletVectorTile from './components/LeafletVectorTile.react';
+import LeafletDomWrapper from './components/LeafletDomWrapper.react';
 
 export {
     LeafletMap,
@@ -50,5 +51,6 @@ export {
     LeafletStaticHeatMap,
     LeafletExport,
     LeafletFeatureGroup,
-    LeafletVectorTile
+    LeafletVectorTile,
+    LeafletDomWrapper
 };
