@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
 import { MapContainer, TileLayer } from 'react-leaflet';
@@ -51,7 +51,7 @@ const LeafletTileSelect = (props) => {
                     display: 'flex',
                     transition: containerVisible ? 'opacity 0.25s ease' : 'transform 0.25s ease',
                     transform: containerVisible ? 'none' : 'translateY(-9999px)',
-                    opacity: containerVisible ? 1: 0
+                    opacity: containerVisible ? 1 : 0
                 }}
                 className={containerClassName ?
                     `leaflet-tile-select-container ${containerClassName}` :
@@ -93,6 +93,7 @@ const LeafletTileSelect = (props) => {
                                     trackResize={false}
                                     touchZoom={false}
                                     scrollWheelZoom={false}
+                                    smoothWheelZoom={false}
                                     zoomControl={false}
                                     center={center}
                                     zoom={zoom}
