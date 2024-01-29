@@ -20,10 +20,14 @@ Those elements have the following types:
   - `lat` (Real; optional)
 - `className` (String; optional)
 - `closePopupOnClick` (Bool; optional)
-- `crs` (a value equal to: 'EPSG3857', 'EPSG4326', 'simple'; optional): 为当前地图配置坐标参考系
+- `crs` (optional): 为当前地图配置坐标参考系
 当传入字符串时，表示内置的几种基础坐标参考系，可选的有'EPSG3857'、'EPSG4326'、'simple'
 当传入字典时，用于使用自定义坐标参考系
-默认：'EPSG3857'
+默认：'EPSG3857'. crs has the following type: a value equal to: 'EPSG3857', 'EPSG4326', 'simple' | lists containing elements 'code', 'proj4def', 'options'.
+Those elements have the following types:
+  - `code` (String; optional): 坐标系代码，如EPSG:4490
+  - `proj4def` (String; optional): 坐标系def字符串
+  - `options` (Dict; optional): 其他坐标系参数
 - `doubleClickZoom` (Bool; optional)
 - `dragging` (Bool; optional)
 - `editToolbar` (Bool; optional)

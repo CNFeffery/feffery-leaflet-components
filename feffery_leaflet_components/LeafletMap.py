@@ -27,10 +27,22 @@ Keyword arguments:
 
 - closePopupOnClick (boolean; default True)
 
-- crs (a value equal to: 'EPSG3857', 'EPSG4326', 'simple'; default 'EPSG3857'):
+- crs (dict; default 'EPSG3857'):
     为当前地图配置坐标参考系
     当传入字符串时，表示内置的几种基础坐标参考系，可选的有'EPSG3857'、'EPSG4326'、'simple'
     当传入字典时，用于使用自定义坐标参考系  默认：'EPSG3857'.
+
+    `crs` is a a value equal to: 'EPSG3857', 'EPSG4326', 'simple' |
+    dict with keys:
+
+    - code (string; optional):
+        坐标系代码，如EPSG:4490.
+
+    - options (dict; optional):
+        其他坐标系参数.
+
+    - proj4def (string; optional):
+        坐标系def字符串.
 
 - doubleClickZoom (boolean; default True)
 

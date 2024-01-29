@@ -6,6 +6,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { MapContainer } from 'react-leaflet';
 import L from 'leaflet';
+import 'proj4leaflet';
 import 'leaflet/dist/leaflet.css';
 import "@geoman-io/leaflet-geoman-free";
 import "./utils/leaflet-measure-path";
@@ -84,6 +85,13 @@ const parseCRS = (crs) => {
         return L.CRS.EPSG4326;
     } else if (crs === 'simple') {
         return L.CRS.Simple;
+    } else {
+        // 构造自定义坐标系
+        return new L.Proj.CRS(
+            crs.code,
+            crs.proj4def,
+            crs.options
+        );
     }
 }
 
@@ -336,6 +344,21 @@ LeafletMap.propTypes = {
      */
     crs: PropTypes.oneOfType([
         PropTypes.oneOf(['EPSG3857', 'EPSG4326', 'simple']),
+        // 自定义坐标系
+        PropTypes.exact({
+            /**
+             * 坐标系代码，如EPSG:4490
+             */
+            code: PropTypes.string,
+            /**
+             * 坐标系def字符串
+             */
+            proj4def: PropTypes.string,
+            /**
+             * 其他坐标系参数
+             */
+            options: PropTypes.object
+        })
     ]),
 
     // 设置地图的缩放级别，默认为3

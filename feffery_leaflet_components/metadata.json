@@ -1759,6 +1759,26 @@
                   "computed": false
                 }
               ]
+            },
+            {
+              "name": "exact",
+              "value": {
+                "code": {
+                  "name": "string",
+                  "description": "\u5750\u6807\u7cfb\u4ee3\u7801\uff0c\u5982EPSG:4490",
+                  "required": false
+                },
+                "proj4def": {
+                  "name": "string",
+                  "description": "\u5750\u6807\u7cfbdef\u5b57\u7b26\u4e32",
+                  "required": false
+                },
+                "options": {
+                  "name": "object",
+                  "description": "\u5176\u4ed6\u5750\u6807\u7cfb\u53c2\u6570",
+                  "required": false
+                }
+              }
             }
           ]
         },
