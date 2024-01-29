@@ -20,6 +20,10 @@ Those elements have the following types:
   - `lat` (Real; optional)
 - `className` (String; optional)
 - `closePopupOnClick` (Bool; optional)
+- `crs` (a value equal to: 'EPSG3857', 'EPSG4326', 'simple'; optional): 为当前地图配置坐标参考系
+当传入字符串时，表示内置的几种基础坐标参考系，可选的有'EPSG3857'、'EPSG4326'、'simple'
+当传入字典时，用于使用自定义坐标参考系
+默认：'EPSG3857'
 - `doubleClickZoom` (Bool; optional)
 - `dragging` (Bool; optional)
 - `editToolbar` (Bool; optional)
@@ -71,7 +75,7 @@ Those elements have the following types:
 - `zoomDelta` (Real; optional)
 """
 function ''_leafletmap(; kwargs...)
-        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :key, :loading_state, :maxBounds, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scrollWheelZoom, :showMeasurements, :smoothWheelZoom, :style, :viewAutoCorrection, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
+        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :crs, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :key, :loading_state, :maxBounds, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scrollWheelZoom, :showMeasurements, :smoothWheelZoom, :style, :viewAutoCorrection, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
         wild_props = Symbol[]
         return Component("''_leafletmap", "LeafletMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

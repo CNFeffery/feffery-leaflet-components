@@ -76,6 +76,17 @@ const extractDrawnShapes = (item, i) => {
     return drawnShape;
 }
 
+// 处理坐标参考系参数的解析
+const parseCRS = (crs) => {
+    if (crs === 'EPSG3857') {
+        return L.CRS.EPSG3857;
+    } else if (crs === 'EPSG4326') {
+        return L.CRS.EPSG4326;
+    } else if (crs === 'simple') {
+        return L.CRS.Simple;
+    }
+}
+
 const LeafletMap = (props) => {
     const {
         id,
@@ -84,6 +95,7 @@ const LeafletMap = (props) => {
         className,
         children,
         center,
+        crs,
         zoom,
         doubleClickZoom,
         dragging,
@@ -124,6 +136,7 @@ const LeafletMap = (props) => {
                     height: '100%'
                 }}
                 center={center}
+                crs={crs && parseCRS(crs)}
                 zoom={zoom}
                 doubleClickZoom={doubleClickZoom}
                 dragging={dragging}
@@ -315,6 +328,16 @@ LeafletMap.propTypes = {
         lat: PropTypes.number
     }),
 
+    /**
+     * 为当前地图配置坐标参考系
+     * 当传入字符串时，表示内置的几种基础坐标参考系，可选的有'EPSG3857'、'EPSG4326'、'simple'
+     * 当传入字典时，用于使用自定义坐标参考系
+     * 默认：'EPSG3857'
+     */
+    crs: PropTypes.oneOfType([
+        PropTypes.oneOf(['EPSG3857', 'EPSG4326', 'simple']),
+    ]),
+
     // 设置地图的缩放级别，默认为3
     zoom: PropTypes.number,
 
@@ -467,6 +490,7 @@ LeafletMap.propTypes = {
 
 // 设置默认参数
 LeafletMap.defaultProps = {
+    crs: 'EPSG3857',
     center: { lng: 0, lat: 0 },
     zoom: 3,
     doubleClickZoom: true,

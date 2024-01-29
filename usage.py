@@ -8,10 +8,20 @@ app.layout = html.Div(
     [
         flc.LeafletMap(
             [
-                flc.LeafletTileLayer(
-                    tms=True
+                flc.LeafletMarker(
+                    position={
+                        'lng': 500,
+                        'lat': 500
+                    }
                 )
             ],
+            crs='simple',
+            maxBounds={
+                'minx': -10000,
+                'miny': -10000,
+                'maxx': 10000,
+                'maxy': 10000
+            },
             style={
                 'height': '100%'
             }
