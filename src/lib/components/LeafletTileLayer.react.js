@@ -14,6 +14,7 @@ const LeafletTileLayer = (props) => {
         opacity,
         zIndex,
         tileSize,
+        tms,
         loading_state
     } = props;
 
@@ -34,6 +35,7 @@ const LeafletTileLayer = (props) => {
             opacity={opacity}
             zIndex={zIndex}
             tileSize={tileSize}
+            tms={tms}
             ref={tileLayerRef}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
@@ -64,6 +66,10 @@ LeafletTileLayer.propTypes = {
     // 设置瓦片地图像素边长，默认为256
     tileSize: PropTypes.number,
 
+    // 设置当前瓦片地图服务是否属于TMS
+    // 默认：false
+    tms: PropTypes.bool,
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -90,7 +96,8 @@ LeafletTileLayer.propTypes = {
 LeafletTileLayer.defaultProps = {
     url: "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
     opacity: 1,
-    tileSize: 256
+    tileSize: 256,
+    tms: false
 }
 
 export default React.memo(LeafletTileLayer);

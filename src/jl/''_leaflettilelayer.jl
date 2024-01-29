@@ -18,11 +18,12 @@ Those elements have the following types:
   - `component_name` (String; optional): Holds the name of the component that is loading
 - `opacity` (Real; optional)
 - `tileSize` (Real; optional)
+- `tms` (Bool; optional)
 - `url` (String; optional)
 - `zIndex` (Real; optional)
 """
 function ''_leaflettilelayer(; kwargs...)
-        available_props = Symbol[:id, :attribution, :key, :loading_state, :opacity, :tileSize, :url, :zIndex]
+        available_props = Symbol[:id, :attribution, :key, :loading_state, :opacity, :tileSize, :tms, :url, :zIndex]
         wild_props = Symbol[]
         return Component("''_leaflettilelayer", "LeafletTileLayer", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
