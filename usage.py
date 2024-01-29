@@ -1,8 +1,17 @@
 import dash
+import requests
 from dash import html
 import feffery_leaflet_components as flc
 
-app = dash.Dash(__name__)
+response = (
+    requests
+    .get('http://23.36.35.226:6080/arcgis/rest/services/tspi/screen/MapServer?f=pjson')
+    .json()
+)
+
+app = dash.Dash(
+    __name__
+)
 
 app.layout = html.Div(
     [
@@ -14,8 +23,15 @@ app.layout = html.Div(
                         'lat': 29.563489
                     }
                 ),
-                flc.LeafletTileLayer(
-                    url='https://t0.tianditu.gov.cn/vec_c/wmts?layer=vec&style=default&tilematrixset=c&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&tileMatrix={z}&TileCol={x}&TileRow={y}&tk=37d1a2d8181bdf4eef74dd83d1222eef'
+                flc.EsriTiledMapLayer(
+                    url='http://23.36.35.226:6080/arcgis/rest/services/tspi/cq_center_image/MapServer'
+                ),
+                flc.EsriTiledMapLayer(
+                    url='http://23.36.35.226:6080/arcgis/rest/services/tspi/screen/MapServer'
+                ),
+                flc.EsriTiledMapLayer(
+                    opacity=0.1,
+                    url='http://23.36.2.111/multApp/datamanager/service/99a8a625-be64-44a1-a8ff-301b4a9f4182/014a0c75-14fe-4880-b445-252cc18544a0/f822d8f4-4a2f-4f58-8337-1179ac62efc4/MapServer'
                 )
             ],
             crs={
@@ -23,32 +39,18 @@ app.layout = html.Div(
                 'proj4def': '+proj=longlat +ellps=GRS80 +no_defs',
                 'options': {
                     'resolutions': [
-                        1.40625,
-                        0.703125,
-                        0.3515625,
-                        0.17578125,
-                        0.087890625,
-                        0.0439453125,
-                        0.02197265625,
-                        0.010986328125,
-                        0.0054931640625,
-                        0.00274658203125,
-                        0.001373291015625,
-                        6.866455078125e-4,
-                        3.4332275390625e-4,
-                        1.71661376953125e-4,
-                        8.58306884765625e-5,
-                        4.291534423828125e-5,
-                        2.1457672119140625e-5,
-                        1.0728836059570312e-5,
-                        5.364418029785156e-6,
-                        2.682209064925356e-6,
-                        1.3411045324626732e-6,
-                        6.705522662313365e-7,
+                        item['resolution']
+                        for item in
+                        response['tileInfo']['lods']
                     ],
                     'origin': [-180, 90]
                 }
             },
+            center={
+                'lng': 106.583467,
+                'lat': 29.563489
+            },
+            zoom=4,
             style={
                 'height': '100%'
             }

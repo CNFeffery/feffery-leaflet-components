@@ -1,3 +1,4 @@
+from .EsriTiledMapLayer import EsriTiledMapLayer
 from .LeafletAntPath import LeafletAntPath
 from .LeafletCircle import LeafletCircle
 from .LeafletCircleMarker import LeafletCircleMarker
@@ -26,6 +27,7 @@ from .LeafletTooltip import LeafletTooltip
 from .LeafletVectorTile import LeafletVectorTile
 
 __all__ = [
+    "EsriTiledMapLayer",
     "LeafletAntPath",
     "LeafletCircle",
     "LeafletCircleMarker",

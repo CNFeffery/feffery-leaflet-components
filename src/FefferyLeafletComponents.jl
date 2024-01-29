@@ -5,6 +5,7 @@ using Dash
 const resources_path = realpath(joinpath( @__DIR__, "..", "deps"))
 const version = "0.0.1-rc0"
 
+include("jl/''_esritiledmaplayer.jl")
 include("jl/''_leafletantpath.jl")
 include("jl/''_leafletcircle.jl")
 include("jl/''_leafletcirclemarker.jl")
