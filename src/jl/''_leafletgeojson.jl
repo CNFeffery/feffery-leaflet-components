@@ -33,7 +33,7 @@ Those elements have the following types:
   - `animate` (Bool; optional): fitBounds过程是否开启动画
   - `duration` (Real; optional): 对于开启过渡动画效果的gitBounds动作，设置动画持续时长，单位：秒
 默认：0.25
-  - `padding` (Array of Reals; optional): 为fitBounds动作调整后的视角，设置四周额外的留白空间，格式如[上下留白, 左右留白]
+  - `padding` (Array of Reals; optional): 为fitBounds动作调整后的视角，设置四周额外的像素大小留白空间，格式如[上下留白, 左右留白]
 - `hoverStyle` (optional)
 - `hoverable` (Bool; optional)
 - `key` (String; optional)

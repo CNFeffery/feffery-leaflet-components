@@ -61,7 +61,7 @@ Keyword arguments:
         执行fitBounds动作后的地图最大缩放级别.
 
     - padding (list of numbers; optional):
-        为fitBounds动作调整后的视角，设置四周额外的留白空间，格式如[上下留白, 左右留白].
+        为fitBounds动作调整后的视角，设置四周额外的像素大小留白空间，格式如[上下留白, 左右留白].
 
 - hoverStyle (optional)
 
@@ -102,7 +102,7 @@ Keyword arguments:
 
 - selectedStyle (optional)
 
-- showTooltip (boolean; default True)
+- showTooltip (boolean; default False)
 
 - tooltipClassName (string; optional)
 

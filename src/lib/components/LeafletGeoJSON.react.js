@@ -296,7 +296,7 @@ const LeafletGeoJSON = (props) => {
                     },
                     add: (e) => {
                         // 将处于选择状态的要素置顶
-                        if (selectedFeatureIds.indexOf(e.target.feature.properties[featureIdField]) !== -1) {
+                        if (e.target.feature.properties && selectedFeatureIds.indexOf(e.target.feature.properties[featureIdField]) !== -1) {
                             if (e.target.bringToFront) {
                                 e.target.bringToFront();
                             }
@@ -309,7 +309,7 @@ const LeafletGeoJSON = (props) => {
                 });
                 // 为每个要素添加tooltip
                 // 检查是否存在featureTooltipField指定的字段
-                if (feature.properties[featureTooltipField] && showTooltip) {
+                if (showTooltip && feature.properties[featureTooltipField]) {
                     layer.bindTooltip(
                         feature.properties[featureTooltipField],
                         {
@@ -423,7 +423,7 @@ const LeafletGeoJSON = (props) => {
                 (feature, latlng) => {
                     // 若pointRenderMode为marker模式
                     if (pointRenderMode === 'marker') {
-                        if (feature.properties[featureTooltipField] && showTooltip) {
+                        if (showTooltip && feature.properties[featureTooltipField]) {
                             return L.marker(latlng, { icon: defaultIcon }).bindTooltip(
                                 feature.properties[featureTooltipField],
                                 {
@@ -437,7 +437,7 @@ const LeafletGeoJSON = (props) => {
                         return L.marker(latlng, { icon: defaultIcon })
                     }
                     // 否则均视为circle-marker模式
-                    if (feature.properties[featureTooltipField] && showTooltip) {
+                    if (showTooltip && feature.properties[featureTooltipField]) {
                         return L.circleMarker(latlng, { radius: circleMarkerRadius }).bindTooltip(
                             feature.properties[featureTooltipField],
                             {
@@ -629,7 +629,7 @@ LeafletGeoJSON.defaultProps = {
     featureCategoryField: 'category',
     featureTooltipField: 'tooltip',
     selectedFeatureIds: [],
-    showTooltip: true,
+    showTooltip: false,
     mode: 'default',
     selectMode: 'single',
     hoverable: false,

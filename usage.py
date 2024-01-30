@@ -20,6 +20,7 @@ app.layout = html.Div(
                     opacity=0.6
                 ),
                 flc.LeafletGeoJSON(
+                    showTooltip=False,
                     data={
                         'type': 'FeatureCollection',
                         'features': [
@@ -36,8 +37,7 @@ app.layout = html.Div(
                                             [-4+i*3, -2+i],
                                         ]
                                     ]
-                                },
-                                'properties': {}
+                                }
                             }
                             for i in range(3)
                         ]
