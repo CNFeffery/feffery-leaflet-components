@@ -1162,6 +1162,38 @@
           "computed": false
         }
       },
+      "fitBoundsOptions": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "maxZoom": {
+              "name": "number",
+              "description": "\u6267\u884cfitBounds\u52a8\u4f5c\u540e\u7684\u5730\u56fe\u6700\u5927\u7f29\u653e\u7ea7\u522b",
+              "required": false
+            },
+            "animate": {
+              "name": "bool",
+              "description": "fitBounds\u8fc7\u7a0b\u662f\u5426\u5f00\u542f\u52a8\u753b",
+              "required": false
+            },
+            "duration": {
+              "name": "number",
+              "description": "\u5bf9\u4e8e\u5f00\u542f\u8fc7\u6e21\u52a8\u753b\u6548\u679c\u7684gitBounds\u52a8\u4f5c\uff0c\u8bbe\u7f6e\u52a8\u753b\u6301\u7eed\u65f6\u957f\uff0c\u5355\u4f4d\uff1a\u79d2\r\n\u9ed8\u8ba4\uff1a0.25",
+              "required": false
+            },
+            "padding": {
+              "name": "arrayOf",
+              "value": {
+                "name": "number"
+              },
+              "description": "\u4e3afitBounds\u52a8\u4f5c\u8c03\u6574\u540e\u7684\u89c6\u89d2\uff0c\u8bbe\u7f6e\u56db\u5468\u989d\u5916\u7684\u7559\u767d\u7a7a\u95f4\uff0c\u683c\u5f0f\u5982[\u4e0a\u4e0b\u7559\u767d, \u5de6\u53f3\u7559\u767d]",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
       "clickFeatureZoom": {
         "type": {
           "name": "bool"

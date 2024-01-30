@@ -56,6 +56,7 @@ const LeafletGeoJSON = (props) => {
         data,
         mode,
         fitBounds,
+        fitBoundsOptions,
         clickFeatureZoom,
         featureIdField,
         selectMode,
@@ -168,7 +169,10 @@ const LeafletGeoJSON = (props) => {
             // 更新图层数据
             geoJsonRef.current.clearLayers().addData(data)
             if (fitBounds) {
-                map.fitBounds(geoJsonRef.current.getBounds())
+                map.fitBounds(
+                    geoJsonRef.current.getBounds(),
+                    fitBoundsOptions
+                )
             }
         }
     }, [data])
@@ -372,7 +376,10 @@ const LeafletGeoJSON = (props) => {
 
                     // 处理是否对当前的GeoJSON层进行fitBounds操作
                     if (fitBounds) {
-                        map.fitBounds(geoJsonRef.current.getBounds());
+                        map.fitBounds(
+                            geoJsonRef.current.getBounds(),
+                            fitBoundsOptions
+                        );
                     }
                 },
                 click: (e) => {
@@ -480,6 +487,27 @@ LeafletGeoJSON.propTypes = {
 
     // 设置是否fitBounds，默认为true
     fitBounds: PropTypes.bool,
+
+    // fitBounds动作相关参数
+    fitBoundsOptions: PropTypes.exact({
+        /**
+         * 执行fitBounds动作后的地图最大缩放级别
+         */
+        maxZoom: PropTypes.number,
+        /**
+         * fitBounds过程是否开启动画
+         */
+        animate: PropTypes.bool,
+        /**
+         * 对于开启过渡动画效果的gitBounds动作，设置动画持续时长，单位：秒
+         * 默认：0.25
+         */
+        duration: PropTypes.number,
+        /**
+         * 为fitBounds动作调整后的视角，设置四周额外的像素大小留白空间，格式如[上下留白, 左右留白]
+         */
+        padding: PropTypes.arrayOf(PropTypes.number)
+    }),
 
     // 设置是否允许点击要素后将地图缩放以适应被点击的要素bounds范围，默认为false
     clickFeatureZoom: PropTypes.bool,

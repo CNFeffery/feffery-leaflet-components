@@ -27,6 +27,13 @@ Those elements have the following types:
   - `styles` (Array; optional)
   - `closed` (a value equal to: 'left', 'right'; optional)
 - `fitBounds` (Bool; optional)
+- `fitBoundsOptions` (optional): . fitBoundsOptions has the following type: lists containing elements 'maxZoom', 'animate', 'duration', 'padding'.
+Those elements have the following types:
+  - `maxZoom` (Real; optional): 执行fitBounds动作后的地图最大缩放级别
+  - `animate` (Bool; optional): fitBounds过程是否开启动画
+  - `duration` (Real; optional): 对于开启过渡动画效果的gitBounds动作，设置动画持续时长，单位：秒
+默认：0.25
+  - `padding` (Array of Reals; optional): 为fitBounds动作调整后的视角，设置四周额外的留白空间，格式如[上下留白, 左右留白]
 - `hoverStyle` (optional)
 - `hoverable` (Bool; optional)
 - `key` (String; optional)
@@ -52,7 +59,7 @@ Those elements have the following types:
 - `tooltipSticky` (Bool; optional)
 """
 function ''_leafletgeojson(; kwargs...)
-        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :circleMarkerRadius, :clickFeatureZoom, :data, :defaultStyle, :disableClickSelect, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :hoverStyle, :hoverable, :key, :lassoButtonPosition, :lassoResetSelectedFeatureIds, :lassoSelect, :lassoStyle, :lassoType, :loading_state, :mode, :pointRenderMode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :tooltipClassName, :tooltipDirection, :tooltipPermanent, :tooltipSticky]
+        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :circleMarkerRadius, :clickFeatureZoom, :data, :defaultStyle, :disableClickSelect, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :fitBoundsOptions, :hoverStyle, :hoverable, :key, :lassoButtonPosition, :lassoResetSelectedFeatureIds, :lassoSelect, :lassoStyle, :lassoType, :loading_state, :mode, :pointRenderMode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :tooltipClassName, :tooltipDirection, :tooltipPermanent, :tooltipSticky]
         wild_props = Symbol[]
         return Component("''_leafletgeojson", "LeafletGeoJSON", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
