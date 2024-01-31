@@ -1,6 +1,7 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 export(''EsriTiledMapLayer)
+export(''Fragment)
 export(''LeafletAntPath)
 export(''LeafletCircle)
 export(''LeafletCircleMarker)

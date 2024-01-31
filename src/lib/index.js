@@ -26,6 +26,7 @@ import LeafletFeatureGroup from './components/LeafletFeatureGroup.react';
 import LeafletVectorTile from './components/LeafletVectorTile.react';
 import LeafletDomWrapper from './components/LeafletDomWrapper.react';
 import EsriTiledMapLayer from './components/esri/EsriTiledMapLayer.react';
+import Fragment from './components/Fragment.react';
 
 export {
     LeafletMap,
@@ -54,5 +55,6 @@ export {
     LeafletFeatureGroup,
     LeafletVectorTile,
     LeafletDomWrapper,
-    EsriTiledMapLayer
+    EsriTiledMapLayer,
+    Fragment
 };
