@@ -72,32 +72,52 @@
     "props": {
       "id": {
         "type": {
-          "name": "custom",
-          "raw": "PropTypes.string"
+          "name": "string"
         },
         "required": false,
-        "description": ""
+        "description": "\u7ec4\u4ef6id"
+      },
+      "children": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": "\u7528\u4e8e\u4f20\u5165\u5185\u90e8\u7ec4\u4ef6"
       },
       "key": {
         "type": {
-          "name": "custom",
-          "raw": "PropTypes.string"
+          "name": "string"
         },
         "required": false,
-        "description": ""
+        "description": "\u8f85\u52a9\u5237\u65b0\u7528\u552f\u4e00\u6807\u8bc6key\u503c"
       },
       "loading_state": {
         "type": {
-          "name": "custom",
-          "raw": "PropTypes.shape({\r\n    /**\r\n     * Determines if the component is loading or not\r\n     */\r\n    is_loading: PropTypes.bool,\r\n    /**\r\n     * Holds which property is loading\r\n     */\r\n    prop_name: PropTypes.string,\r\n    /**\r\n     * Holds the name of the component that is loading\r\n     */\r\n    component_name: PropTypes.string\r\n})"
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
         },
         "required": false,
         "description": ""
       },
       "setProps": {
         "type": {
-          "name": "custom",
-          "raw": "PropTypes.func"
+          "name": "func"
         },
         "required": false,
         "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
@@ -2450,6 +2470,11 @@
                   "computed": false
                 }
               ],
+              "required": false
+            },
+            "delay": {
+              "name": "number",
+              "description": "\u8bbe\u7f6e\u5f53\u524d\u52a8\u4f5c\u7684\u5ef6\u65f6\u6267\u884c\u65f6\u957f\uff0c\u5355\u4f4d\uff1a\u6beb\u79d2\r\n\u9ed8\u8ba4\uff1a0",
               "required": false
             }
           }

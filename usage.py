@@ -17,34 +17,23 @@ app.layout = html.Div(
                     }
                 ),
                 flc.LeafletTileLayer(
-                    opacity=0.6
+                    opacity=0.8
                 ),
-                flc.LeafletGeoJSON(
-                    showTooltip=False,
-                    data={
-                        'type': 'FeatureCollection',
-                        'features': [
-                            {
-                                'type': 'Feature',
-                                'geometry': {
-                                    'type': 'Polygon',
-                                    'coordinates': [
-                                        [
-                                            [-4+i*3, -2+i],
-                                            [-4+i*3, 2+i],
-                                            [0+i*3, 2+i],
-                                            [0+i*3, -2+i],
-                                            [-4+i*3, -2+i],
-                                        ]
-                                    ]
-                                }
+                # 延时地图动作
+                flc.Fragment(
+                    [
+                        flc.LeafletMapAction(
+                            mapActionConfig={
+                                'type': 'fly-to',
+                                'center': {
+                                    'lng': 45,
+                                    'lat': 45
+                                },
+                                'zoom': 8,
+                                'delay': 1000
                             }
-                            for i in range(3)
-                        ]
-                    },
-                    fitBoundsOptions={
-                        'padding': [80, 80]
-                    }
+                        )
+                    ]
                 )
             ],
             center={

@@ -15,7 +15,7 @@ Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
-- `mapActionConfig` (optional): . mapActionConfig has the following type: lists containing elements 'type', 'center', 'zoom', 'zoomInOffset', 'zoomOutOffset', 'bounds', 'flyToDuration'.
+- `mapActionConfig` (optional): . mapActionConfig has the following type: lists containing elements 'type', 'center', 'zoom', 'zoomInOffset', 'zoomOutOffset', 'bounds', 'flyToDuration', 'delay'.
 Those elements have the following types:
   - `type` (a value equal to: 'set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'pan-to', 'fly-to', 'fly-to-bounds', 'invalidate-size'; optional)
   - `center` (optional): . center has the following type: lists containing elements 'lng', 'lat'.
@@ -32,6 +32,8 @@ Those elements have the following types:
   - `maxx` (Real; optional)
   - `maxy` (Real; optional)
   - `flyToDuration` (a value equal to: 'instant', 'fast', 'normal', 'slow', 'auto'; optional)
+  - `delay` (Real; optional): 设置当前动作的延时执行时长，单位：毫秒
+默认：0
 """
 function ''_leafletmapaction(; kwargs...)
         available_props = Symbol[:id, :key, :loading_state, :mapActionConfig]

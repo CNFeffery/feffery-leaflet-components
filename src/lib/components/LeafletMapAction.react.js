@@ -28,49 +28,86 @@ const LeafletMapAction = (props) => {
 
         if (mapActionConfig && mapActionConfig.type) {
             if (mapActionConfig.type === 'set-zoom') {
-                map.setZoom(mapActionConfig.zoom);
+                // set-zoom动作
+                setTimeout(
+                    () => {
+                        map.setZoom(mapActionConfig.zoom);
+                    },
+                    mapActionConfig.delay || 0
+                )
             } else if (mapActionConfig.type === 'zoom-in') {
-                map.zoomIn(mapActionConfig.zoomInOffset);
+                // zoom-in动作
+                setTimeout(
+                    () => {
+                        map.zoomIn(mapActionConfig.zoomInOffset);
+                    },
+                    mapActionConfig.delay || 0
+                )
             } else if (mapActionConfig.type === 'zoom-out') {
                 // zoom-out动作
-                map.zoomOut(mapActionConfig.zoomOutOffset);
+                setTimeout(
+                    () => {
+                        map.zoomOut(mapActionConfig.zoomOutOffset);
+                    },
+                    mapActionConfig.delay || 0
+                )
             } else if (mapActionConfig.type === 'set-view') {
                 // set-view动作
-                const lat = mapActionConfig.center.lat
-                const lng = mapActionConfig.center.lng
-                const zoom = mapActionConfig.zoom || map.getZoom()
-                map.setView([lat, lng], zoom);
+                setTimeout(
+                    () => {
+                        const lat = mapActionConfig.center.lat
+                        const lng = mapActionConfig.center.lng
+                        const zoom = mapActionConfig.zoom || map.getZoom()
+                        map.setView([lat, lng], zoom);
+                    },
+                    mapActionConfig.delay || 0
+                )
             } else if (mapActionConfig.type === 'pan-to') {
                 // set-view动作
-                const lat = mapActionConfig.center.lat
-                const lng = mapActionConfig.center.lng
-                map.panTo([lat, lng]);
+                setTimeout(
+                    () => {
+                        const lat = mapActionConfig.center.lat
+                        const lng = mapActionConfig.center.lng
+                        map.panTo([lat, lng]);
+                    },
+                    mapActionConfig.delay || 0
+                )
             } else if (mapActionConfig.type === 'fly-to') {
                 // fly-to动作
-                const lat = mapActionConfig.center.lat
-                const lng = mapActionConfig.center.lng
-                const zoom = mapActionConfig.zoom || map.getZoom()
-                map.flyTo([lat, lng], zoom,
-                    {
-                        duration: mapActionConfig.flyToDuration ?
-                            speedMap[mapActionConfig.flyToDuration] : speedMap['auto']
-                    });
+                setTimeout(
+                    () => {
+                        const lat = mapActionConfig.center.lat
+                        const lng = mapActionConfig.center.lng
+                        const zoom = mapActionConfig.zoom || map.getZoom()
+                        map.flyTo([lat, lng], zoom,
+                            {
+                                duration: mapActionConfig.flyToDuration ?
+                                    speedMap[mapActionConfig.flyToDuration] : speedMap['auto']
+                            });
+                    },
+                    mapActionConfig.delay || 0
+                )
             } else if (mapActionConfig.type === 'fly-to-bounds') {
                 // fly-to-bounds动作
-                const minx = mapActionConfig.bounds.minx
-                const miny = mapActionConfig.bounds.miny
-                const maxx = mapActionConfig.bounds.maxx
-                const maxy = mapActionConfig.bounds.maxy
-                map.flyToBounds(
-                    L.latLngBounds(
-                        L.latLng(miny, minx),
-                        L.latLng(maxy, maxx)
-                    ),
-                    {
-                        duration: mapActionConfig.flyToDuration ?
-                            speedMap[mapActionConfig.flyToDuration] : speedMap['auto']
-                    }
-                );
+                setTimeout(
+                    () => {
+                        const minx = mapActionConfig.bounds.minx
+                        const miny = mapActionConfig.bounds.miny
+                        const maxx = mapActionConfig.bounds.maxx
+                        const maxy = mapActionConfig.bounds.maxy
+                        map.flyToBounds(
+                            L.latLngBounds(
+                                L.latLng(miny, minx),
+                                L.latLng(maxy, maxx)
+                            ),
+                            {
+                                duration: mapActionConfig.flyToDuration ?
+                                    speedMap[mapActionConfig.flyToDuration] : speedMap['auto']
+                            }
+                        );
+                    },
+                    mapActionConfig.delay || 0
+                )
             } else if (mapActionConfig.type === 'invalidate-size') {
                 // 执行invalidate-size动作
                 map.invalidateSize();
@@ -130,6 +167,12 @@ LeafletMapAction.propTypes = {
 
         // 'fly-to'、'fly-to-bounds'模式下可用，用于设定地图飞行动画时间，单位：秒
         flyToDuration: PropTypes.oneOf(['instant', 'fast', 'normal', 'slow', 'auto']),
+
+        /**
+         * 设置当前动作的延时执行时长，单位：毫秒
+         * 默认：0
+         */
+        delay: PropTypes.number
     }),
 
     loading_state: PropTypes.shape({

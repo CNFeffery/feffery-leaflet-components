@@ -4,19 +4,28 @@ export ''_fragment
 
 """
     ''_fragment(;kwargs...)
+    ''_fragment(children::Any;kwargs...)
+    ''_fragment(children_maker::Function;kwargs...)
+
 
 A Fragment component.
 
 Keyword arguments:
-- `id` (optional)
-- `key` (optional)
-- `loading_state` (optional)
-- `setProps` (optional): Dash-assigned callback that should be called to report property changes
-to Dash, to make them available for callbacks.
+- `children` (a list of or a singular dash component, string or number; optional): 用于传入内部组件
+- `id` (String; optional): 组件id
+- `key` (String; optional): 辅助刷新用唯一标识key值
+- `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
+Those elements have the following types:
+  - `is_loading` (Bool; optional): Determines if the component is loading or not
+  - `prop_name` (String; optional): Holds which property is loading
+  - `component_name` (String; optional): Holds the name of the component that is loading
 """
 function ''_fragment(; kwargs...)
-        available_props = Symbol[:id, :key, :loading_state]
+        available_props = Symbol[:children, :id, :key, :loading_state]
         wild_props = Symbol[]
         return Component("''_fragment", "Fragment", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
+
+''_fragment(children::Any; kwargs...) = ''_fragment(;kwargs..., children = children)
+''_fragment(children_maker::Function; kwargs...) = ''_fragment(children_maker(); kwargs...)
 

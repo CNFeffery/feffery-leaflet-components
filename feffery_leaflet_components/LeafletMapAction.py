@@ -50,6 +50,9 @@ Keyword arguments:
 
         - lng (number; optional)
 
+    - delay (number; optional):
+        设置当前动作的延时执行时长，单位：毫秒  默认：0.
+
     - flyToDuration (a value equal to: 'instant', 'fast', 'normal', 'slow', 'auto'; optional)
 
     - type (a value equal to: 'set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'pan-to', 'fly-to', 'fly-to-bounds', 'invalidate-size'; optional)
