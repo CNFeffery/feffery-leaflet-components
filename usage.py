@@ -8,43 +8,29 @@ app = dash.Dash(
 
 app.layout = html.Div(
     [
-        flc.LeafletMap(
+        flc.LeafletMapProvider(
             [
-                flc.LeafletMarker(
-                    position={
+                flc.LeafletMap(
+                    [
+                        flc.LeafletTileLayer(
+                            opacity=0.8
+                        ),
+                        flc.LeafletMapSync(
+                            id=f'map-sync{i}',
+                            groupId=f'map-sync-group{str(i % 2)}'
+                        )
+                    ],
+                    center={
                         'lng': 106.583467,
                         'lat': 29.563489
+                    },
+                    zoom=4,
+                    style={
+                        'height': 'calc(100vh / 4)'
                     }
-                ),
-                flc.LeafletTileLayer(
-                    opacity=0.8
-                ),
-                # 延时地图动作
-                flc.Fragment(
-                    [
-                        flc.LeafletMapAction(
-                            mapActionConfig={
-                                'type': 'fly-to',
-                                'center': {
-                                    'lng': 45,
-                                    'lat': 45
-                                },
-                                'zoom': 8,
-                                'delay': 1000
-                            }
-                        )
-                    ]
                 )
-            ],
-            center={
-                'lng': 106.583467,
-                'lat': 29.563489
-            },
-            zoom=4,
-            zoomDelta=0.1,
-            style={
-                'height': '100%'
-            }
+                for i in range(4)
+            ]
         )
     ],
     style={

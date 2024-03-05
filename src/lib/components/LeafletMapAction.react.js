@@ -117,7 +117,7 @@ const LeafletMapAction = (props) => {
     }, [mapActionConfig])
 
     // 返回定制化的前端组件
-    return <div id={id} />;
+    return <></>;
 }
 
 // 定义参数或属性

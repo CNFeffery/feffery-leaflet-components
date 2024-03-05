@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { MapContainer } from 'react-leaflet';
 import L from 'leaflet';
@@ -192,7 +192,6 @@ const LeafletMap = (props) => {
                         );
                         measureControl.addTo(map);
                     }
-
 
                     if (maxBounds) {
                         map.fitBounds(L.latLngBounds(

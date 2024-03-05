@@ -2644,6 +2644,124 @@
       }
     }
   },
+  "src/lib/components/LeafletMapProvider.react.js": {
+    "description": "",
+    "displayName": "LeafletMapProvider",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u7ec4\u4ef6id"
+      },
+      "children": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": "\u7528\u4e8e\u4f20\u5165\u5185\u90e8\u7ec4\u4ef6"
+      },
+      "key": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u8f85\u52a9\u5237\u65b0\u7528\u552f\u4e00\u6807\u8bc6key\u503c"
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
+  "src/lib/components/LeafletMapSync.react.js": {
+    "description": "",
+    "displayName": "LeafletMapSync",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "\u5fc5\u586b\uff0c\u7ec4\u4ef6id"
+      },
+      "key": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u5f3a\u5236\u5237\u65b0\u7528"
+      },
+      "groupId": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u5730\u56fe\u7ec4id\uff0c\u7528\u4e8e\u9650\u5b9a\u5730\u56fe\u540c\u6b65\u884c\u4e3a\u53d1\u751f\u5728\u5f53\u524d\u76f8\u540cid\u7684\u7ec4\u5185"
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
   "src/lib/components/LeafletMarker.react.js": {
     "description": "",
     "displayName": "LeafletMarker",

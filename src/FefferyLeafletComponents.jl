@@ -3,7 +3,7 @@ module FefferyLeafletComponents
 using Dash
 
 const resources_path = realpath(joinpath( @__DIR__, "..", "deps"))
-const version = "0.0.1-rc0"
+const version = "0.1.0-rc0"
 
 include("jl/''_esritiledmaplayer.jl")
 include("jl/''_fragment.jl")
@@ -21,6 +21,8 @@ include("jl/''_leafletlayergroup.jl")
 include("jl/''_leafletmap.jl")
 include("jl/''_leafletmapaction.jl")
 include("jl/''_leafletmaplistener.jl")
+include("jl/''_leafletmapprovider.jl")
+include("jl/''_leafletmapsync.jl")
 include("jl/''_leafletmarker.jl")
 include("jl/''_leafletminimap.jl")
 include("jl/''_leafletpolygon.jl")
@@ -43,14 +45,14 @@ function __init__()
             [
                 DashBase.Resource(
     relative_package_path = "feffery_leaflet_components.min.js",
-    external_url = "https://unpkg.com/feffery_leaflet_components@0.0.1-rc0/feffery_leaflet_components/feffery_leaflet_components.min.js",
+    external_url = "https://unpkg.com/feffery_leaflet_components@0.1.0-rc0/feffery_leaflet_components/feffery_leaflet_components.min.js",
     dynamic = nothing,
     async = nothing,
     type = :js
 ),
 DashBase.Resource(
     relative_package_path = "feffery_leaflet_components.min.js.map",
-    external_url = "https://unpkg.com/feffery_leaflet_components@0.0.1-rc0/feffery_leaflet_components/feffery_leaflet_components.min.js.map",
+    external_url = "https://unpkg.com/feffery_leaflet_components@0.1.0-rc0/feffery_leaflet_components/feffery_leaflet_components.min.js.map",
     dynamic = true,
     async = nothing,
     type = :js

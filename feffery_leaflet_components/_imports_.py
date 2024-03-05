@@ -14,6 +14,8 @@ from .LeafletLayerGroup import LeafletLayerGroup
 from .LeafletMap import LeafletMap
 from .LeafletMapAction import LeafletMapAction
 from .LeafletMapListener import LeafletMapListener
+from .LeafletMapProvider import LeafletMapProvider
+from .LeafletMapSync import LeafletMapSync
 from .LeafletMarker import LeafletMarker
 from .LeafletMiniMap import LeafletMiniMap
 from .LeafletPolygon import LeafletPolygon
@@ -44,6 +46,8 @@ __all__ = [
     "LeafletMap",
     "LeafletMapAction",
     "LeafletMapListener",
+    "LeafletMapProvider",
+    "LeafletMapSync",
     "LeafletMarker",
     "LeafletMiniMap",
     "LeafletPolygon",
