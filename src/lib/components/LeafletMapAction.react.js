@@ -125,6 +125,9 @@ LeafletMapAction.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    /**
+     * 强制刷新用
+     */
     key: PropTypes.string,
 
     // 用于编排一次新的地图动作

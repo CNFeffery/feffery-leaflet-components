@@ -464,6 +464,9 @@ LeafletGeoJSON.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    /**
+     * 强制刷新用
+     */
     key: PropTypes.string,
 
     // 传入GeoJSON格式数据

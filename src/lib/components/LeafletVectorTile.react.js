@@ -109,6 +109,9 @@ LeafletVectorTile.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    /**
+     * 强制刷新用
+     */
     key: PropTypes.string,
 
     // 设置切片服务url地址，必填

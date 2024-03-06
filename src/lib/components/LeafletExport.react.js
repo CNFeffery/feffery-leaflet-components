@@ -92,6 +92,9 @@ LeafletExport.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    /**
+     * 强制刷新用
+     */
     key: PropTypes.string,
 
     // 设置导出控件方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'

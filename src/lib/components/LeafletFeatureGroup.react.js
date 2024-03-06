@@ -69,6 +69,9 @@ LeafletFeatureGroup.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    /**
+     * 强制刷新用
+     */
     key: PropTypes.string,
 
     // 传入嵌套的若干矢量图层组件

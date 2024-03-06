@@ -107,7 +107,9 @@ LeafletMarker.propTypes = {
     // 组件id
     id: PropTypes.string,
 
-    // 强制刷新用
+    /**
+     * 强制刷新用
+     */
     key: PropTypes.string,
 
     // 传入tooltip、popup组件

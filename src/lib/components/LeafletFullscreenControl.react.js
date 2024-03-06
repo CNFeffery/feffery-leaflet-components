@@ -42,6 +42,9 @@ LeafletFullscreenControl.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    /**
+     * 强制刷新用
+     */
     key: PropTypes.string,
 
     // 设置全屏控件的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'

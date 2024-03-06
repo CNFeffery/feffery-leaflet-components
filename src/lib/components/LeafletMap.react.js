@@ -312,6 +312,9 @@ LeafletMap.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    /**
+     * 强制刷新用
+     */
     key: PropTypes.string,
 
     // 定义当前地图容器下属所有图层元素

@@ -125,6 +125,9 @@ LeafletTileSelect.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    /**
+     * 强制刷新用
+     */
     key: PropTypes.string,
 
     // 设置各组成部分样式

@@ -53,6 +53,9 @@ LeafletHeatMap.propTypes = {
     // 组件id
     id: PropTypes.string,
 
+    /**
+     * 强制刷新用
+     */
     key: PropTypes.string,
 
     // 设置热力图渲染所需点数据，格式为由{lng: xxx, lat: xxx, weight: xxx}
