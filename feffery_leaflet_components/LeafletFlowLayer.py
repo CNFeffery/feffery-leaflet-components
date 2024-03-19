@@ -54,7 +54,8 @@ Keyword arguments:
 - keepUniqueLabels (boolean; default False):
     设置是否对起终点标签文字进行去重  默认：False.
 
-- key (string; optional)
+- key (string; optional):
+    强制刷新用.
 
 - loading_state (dict; optional)
 

@@ -25,7 +25,8 @@ Keyword arguments:
 
 - hideControlContainer (boolean; optional)
 
-- key (string; optional)
+- key (string; optional):
+    强制刷新用.
 
 - loading_state (dict; optional)
 

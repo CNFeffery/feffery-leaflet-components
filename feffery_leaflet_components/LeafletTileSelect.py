@@ -31,7 +31,8 @@ Keyword arguments:
 
 - containerVisible (boolean; default True)
 
-- key (string; optional)
+- key (string; optional):
+    强制刷新用.
 
 - loading_state (dict; optional)
 

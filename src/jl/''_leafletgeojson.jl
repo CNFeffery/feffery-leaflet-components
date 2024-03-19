@@ -36,7 +36,7 @@ Those elements have the following types:
   - `padding` (Array of Reals; optional): 为fitBounds动作调整后的视角，设置四周额外的像素大小留白空间，格式如[上下留白, 左右留白]
 - `hoverStyle` (optional)
 - `hoverable` (Bool; optional)
-- `key` (String; optional)
+- `key` (String; optional): 强制刷新用
 - `lassoButtonPosition` (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
 - `lassoResetSelectedFeatureIds` (Bool; optional)
 - `lassoSelect` (Bool; optional)

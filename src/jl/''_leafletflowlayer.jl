@@ -31,7 +31,7 @@ Those elements have the following types:
   - `value` (Real; optional)s
 - `keepUniqueLabels` (Bool; optional): 设置是否对起终点标签文字进行去重
 默认：false
-- `key` (String; optional)
+- `key` (String; optional): 强制刷新用
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not

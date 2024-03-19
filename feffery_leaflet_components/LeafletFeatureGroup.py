@@ -27,7 +27,8 @@ Keyword arguments:
 
 - bringToFront (boolean; default False)
 
-- key (string; optional)
+- key (string; optional):
+    强制刷新用.
 
 - loading_state (dict; optional)
 

@@ -16,7 +16,7 @@ Keyword arguments:
     组件id.
 
 - key (string; optional):
-    辅助刷新用唯一标识key值.
+    强制刷新用.
 
 - loading_state (dict; optional)
 

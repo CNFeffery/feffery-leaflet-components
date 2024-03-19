@@ -11,8 +11,6 @@ const EsriTiledMapLayer = (props) => {
 
     // 取得必要属性或参数
     const {
-        id,
-        key,
         url,
         opacity,
         loading_state,
@@ -24,12 +22,18 @@ const EsriTiledMapLayer = (props) => {
     // 初始化当前组件需要展示的单个或多个图层服务
     useEffect(() => {
         if (map && url) {
-            tiledMapLayer({
+            let currentLayer = tiledMapLayer({
                 url: url,
                 opacity: opacity
-            }).addTo(map)
+            })
+            currentLayer.addTo(map)
+
+            // 组件卸载时移除对应图层
+            return () => {
+                map.removeLayer(currentLayer);
+            }
         }
-    }, [])
+    }, [url, opacity])
 
     return <></>;
 }

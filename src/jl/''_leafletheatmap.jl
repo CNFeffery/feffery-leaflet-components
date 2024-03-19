@@ -11,7 +11,7 @@ Keyword arguments:
 - `id` (String; optional)
 - `blur` (Real; optional)
 - `gradient` (Dict; optional)
-- `key` (String; optional)
+- `key` (String; optional): 强制刷新用
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not

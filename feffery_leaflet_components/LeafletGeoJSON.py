@@ -67,7 +67,8 @@ Keyword arguments:
 
 - hoverable (boolean; default False)
 
-- key (string; optional)
+- key (string; optional):
+    强制刷新用.
 
 - lassoButtonPosition (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; default 'topleft')
 
