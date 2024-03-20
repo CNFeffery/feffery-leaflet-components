@@ -29,6 +29,7 @@ const LeafletMarker = (props) => {
     const {
         id,
         key,
+        className,
         children,
         iconOptions,
         position,
@@ -76,6 +77,7 @@ const LeafletMarker = (props) => {
     return (
         <Marker id={id}
             key={key}
+            className={className}
             icon={iconOptions ? L.icon(iconOptions) : L.icon(defaultIconOptions)}
             position={position}
             draggable={draggable}
@@ -111,6 +113,11 @@ LeafletMarker.propTypes = {
      * 强制刷新用
      */
     key: PropTypes.string,
+
+    /**
+     * 为当前矢量设置className
+     */
+    className: PropTypes.string,
 
     // 传入tooltip、popup组件
     children: PropTypes.node,

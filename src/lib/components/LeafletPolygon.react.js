@@ -12,6 +12,7 @@ const LeafletPolygon = (props) => {
     const {
         id,
         key,
+        className,
         children,
         positions,
         pathOptions,
@@ -39,6 +40,7 @@ const LeafletPolygon = (props) => {
     return (
         <Polygon id={id}
             key={key}
+            className={className}
             positions={positions}
             pathOptions={{
                 ...pathOptions,
@@ -71,6 +73,11 @@ LeafletPolygon.propTypes = {
      * 强制刷新用
      */
     key: PropTypes.string,
+
+    /**
+     * 为当前矢量设置className
+     */
+    className: PropTypes.string,
 
     // 传入tooltip、popup组件
     children: PropTypes.node,

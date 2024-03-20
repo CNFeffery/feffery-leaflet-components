@@ -14,6 +14,7 @@ const LeafletRectangle = (props) => {
     const {
         id,
         key,
+        className,
         children,
         bounds,
         pathOptions,
@@ -56,6 +57,7 @@ const LeafletRectangle = (props) => {
     return (
         <Rectangle id={id}
             key={key}
+            className={className}
             bounds={L.latLngBounds(
                 L.latLng(bounds.miny, bounds.minx),
                 L.latLng(bounds.maxy, bounds.maxx)
@@ -91,6 +93,11 @@ LeafletRectangle.propTypes = {
      * 强制刷新用
      */
     key: PropTypes.string,
+
+    /**
+     * 为当前矢量设置className
+     */
+    className: PropTypes.string,
 
     // 传入tooltip、popup组件
     children: PropTypes.node,

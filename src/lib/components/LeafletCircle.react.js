@@ -12,6 +12,7 @@ const LeafletCircle = (props) => {
     const {
         id,
         key,
+        className,
         children,
         center,
         radius,
@@ -41,6 +42,7 @@ const LeafletCircle = (props) => {
     return (
         <Circle id={id}
             key={key}
+            className={className}
             center={center}
             radius={radius}
             pathOptions={{
@@ -74,6 +76,11 @@ LeafletCircle.propTypes = {
      * 强制刷新用
      */
     key: PropTypes.string,
+
+    /**
+    * 为当前矢量设置className
+    */
+    className: PropTypes.string,
 
     // 传入tooltip、popup组件
     children: PropTypes.node,
