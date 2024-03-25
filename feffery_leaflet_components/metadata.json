@@ -289,6 +289,13 @@
         "required": false,
         "description": "\u5f3a\u5236\u5237\u65b0\u7528"
       },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u4e3a\u5f53\u524d\u77e2\u91cf\u8bbe\u7f6eclassName"
+      },
       "children": {
         "type": {
           "name": "node"
@@ -412,6 +419,13 @@
         },
         "required": false,
         "description": "\u5f3a\u5236\u5237\u65b0\u7528"
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u4e3a\u5f53\u524d\u77e2\u91cf\u8bbe\u7f6eclassName"
       },
       "children": {
         "type": {
@@ -2781,6 +2795,13 @@
         "required": false,
         "description": "\u5f3a\u5236\u5237\u65b0\u7528"
       },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u4e3a\u5f53\u524d\u77e2\u91cf\u8bbe\u7f6eclassName"
+      },
       "children": {
         "type": {
           "name": "node"
@@ -3201,6 +3222,13 @@
         "required": false,
         "description": "\u5f3a\u5236\u5237\u65b0\u7528"
       },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u4e3a\u5f53\u524d\u77e2\u91cf\u8bbe\u7f6eclassName"
+      },
       "children": {
         "type": {
           "name": "node"
@@ -3360,6 +3388,13 @@
         },
         "required": false,
         "description": "\u5f3a\u5236\u5237\u65b0\u7528"
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u4e3a\u5f53\u524d\u77e2\u91cf\u8bbe\u7f6eclassName"
       },
       "children": {
         "type": {
@@ -3676,6 +3711,13 @@
         },
         "required": false,
         "description": "\u5f3a\u5236\u5237\u65b0\u7528"
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u4e3a\u5f53\u524d\u77e2\u91cf\u8bbe\u7f6eclassName"
       },
       "children": {
         "type": {

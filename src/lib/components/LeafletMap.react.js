@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
-import React, { useRef, useContext } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { MapContainer } from 'react-leaflet';
 import L from 'leaflet';
@@ -166,7 +166,19 @@ const LeafletMap = (props) => {
                 }
                 whenCreated={map => {
                     if (measureControl) {
-                        const measureControl = L.control.measure(
+                        // https://github.com/ljagis/leaflet-measure/issues/171#issuecomment-1137483548
+                        // 修复测量过程地图异常移动的问题
+                        L.Control.Measure.include({
+                            _setCaptureMarkerIcon: function () {
+                                this._captureMarker.options.autoPanOnFocus = false;
+                                this._captureMarker.setIcon(
+                                    L.divIcon({
+                                        iconSize: this._map.getSize().multiplyBy(2)
+                                    })
+                                );
+                            },
+                        });
+                        let measureControl = L.control.measure(
                             {
                                 ...{
                                     position: 'topleft',
@@ -186,7 +198,7 @@ const LeafletMap = (props) => {
                                     secondaryLengthUnit: 'kilometers',
                                     primaryAreaUnit: 'sqmeters',
                                     secondaryAreaUnit: 'sqkilometers',
-                                    thousandsSep: '',
+                                    thousandsSep: ' '
                                 }
                             }
                         );

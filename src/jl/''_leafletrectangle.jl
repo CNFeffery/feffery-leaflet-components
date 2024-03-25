@@ -19,6 +19,7 @@ Those elements have the following types:
   - `miny` (Real; required)
   - `maxx` (Real; required)
   - `maxy` (Real; required)
+- `className` (String; optional): 为当前矢量设置className
 - `editable` (Bool; optional)
 - `key` (String; optional): 强制刷新用
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
@@ -31,7 +32,7 @@ Those elements have the following types:
 - `pathOptions` (optional)
 """
 function ''_leafletrectangle(; kwargs...)
-        available_props = Symbol[:children, :id, :bounds, :editable, :key, :loading_state, :mouseOverCount, :nClicks, :pathOptions]
+        available_props = Symbol[:children, :id, :bounds, :className, :editable, :key, :loading_state, :mouseOverCount, :nClicks, :pathOptions]
         wild_props = Symbol[]
         return Component("''_leafletrectangle", "LeafletRectangle", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

@@ -14,6 +14,7 @@ Keyword arguments:
 - `children` (a list of or a singular dash component, string or number; optional)
 - `id` (String; optional)
 - `autoPan` (Bool; optional)
+- `className` (String; optional): 为当前矢量设置className
 - `draggable` (Bool; optional)
 - `editable` (Bool; optional)
 - `iconOptions` (optional): . iconOptions has the following type: lists containing elements 'iconUrl', 'iconSize', 'iconAnchor', 'popupAnchor', 'tooltipAnchor', 'shadowUrl', 'shadowSize', 'shadowAnchor', 'className'.
@@ -44,7 +45,7 @@ Those elements have the following types:
 - `zIndexOffset` (Real; optional)
 """
 function ''_leafletmarker(; kwargs...)
-        available_props = Symbol[:children, :id, :autoPan, :draggable, :editable, :iconOptions, :key, :loading_state, :mouseOverCount, :nClicks, :opacity, :position, :riseOnHover, :zIndexOffset]
+        available_props = Symbol[:children, :id, :autoPan, :className, :draggable, :editable, :iconOptions, :key, :loading_state, :mouseOverCount, :nClicks, :opacity, :position, :riseOnHover, :zIndexOffset]
         wild_props = Symbol[]
         return Component("''_leafletmarker", "LeafletMarker", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

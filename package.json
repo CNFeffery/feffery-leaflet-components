@@ -1,6 +1,6 @@
 {
     "name": "feffery_leaflet_components",
-    "version": "0.1.0-rc1",
+    "version": "0.1.0-rc2",
     "description": "Best implementation of Leaflet in Plotly Dash.",
     "repository": {
         "type": "git",
@@ -31,7 +31,6 @@
         "leaflet-ant-path": "^1.3.0",
         "leaflet-arrowheads": "^1.4.0",
         "leaflet-lasso": "^2.2.11",
-        "leaflet-measure": "^3.1.0",
         "leaflet-minimap": "^3.6.1",
         "leaflet-webgl-heatmap": "^0.2.7",
         "leaflet.heat": "^0.2.0",

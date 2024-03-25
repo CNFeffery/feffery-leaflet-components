@@ -17,6 +17,7 @@ Keyword arguments:
 Those elements have the following types:
   - `lng` (Real; optional)
   - `lat` (Real; optional)
+- `className` (String; optional): 为当前矢量设置className
 - `editable` (Bool; optional)
 - `key` (String; optional): 强制刷新用
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
@@ -30,7 +31,7 @@ Those elements have the following types:
 - `radius` (Real; optional)
 """
 function ''_leafletcirclemarker(; kwargs...)
-        available_props = Symbol[:children, :id, :center, :editable, :key, :loading_state, :mouseOverCount, :nClicks, :pathOptions, :radius]
+        available_props = Symbol[:children, :id, :center, :className, :editable, :key, :loading_state, :mouseOverCount, :nClicks, :pathOptions, :radius]
         wild_props = Symbol[]
         return Component("''_leafletcirclemarker", "LeafletCircleMarker", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

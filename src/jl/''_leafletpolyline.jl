@@ -21,6 +21,7 @@ Those elements have the following types:
   - `frequency` (a value equal to: 'allvertices', 'endonly' | Real | String; optional)
   - `proportionalToTotal` (Bool; optional)
 - `arrowheadsPathOptions` (optional)
+- `className` (String; optional): 为当前矢量设置className
 - `editable` (Bool; optional)
 - `key` (String; optional): 强制刷新用
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
@@ -40,7 +41,7 @@ Those elements have the following types:
   - `lat` (Real; optional)ss
 """
 function ''_leafletpolyline(; kwargs...)
-        available_props = Symbol[:children, :id, :arrowheads, :arrowheadsPathOptions, :editable, :key, :loading_state, :mouseOverCount, :nClicks, :pathOptions, :positions]
+        available_props = Symbol[:children, :id, :arrowheads, :arrowheadsPathOptions, :className, :editable, :key, :loading_state, :mouseOverCount, :nClicks, :pathOptions, :positions]
         wild_props = Symbol[]
         return Component("''_leafletpolyline", "LeafletPolyline", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
