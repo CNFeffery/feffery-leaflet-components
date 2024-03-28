@@ -32,6 +32,68 @@
         "required": false,
         "description": ""
       },
+      "zIndex": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "\u8bbe\u7f6e\u5f53\u524d\u56fe\u5c42\u7684zIndex\u5c42\u7ea7"
+      },
+      "zoomOffset": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "\u7f29\u653e\u7ea7\u522b\u8c03\u6574\u91cf\r\n\u9ed8\u8ba4\uff1a0",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "identifyConfig": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "position": {
+              "name": "exact",
+              "value": {
+                "lng": {
+                  "name": "number",
+                  "description": "\u6807\u8bc6\u4f4d\u7f6e\u7ecf\u5ea6",
+                  "required": false
+                },
+                "lat": {
+                  "name": "number",
+                  "description": "\u6807\u8bc6\u4f4d\u7f6e\u7eac\u5ea6",
+                  "required": false
+                }
+              },
+              "description": "\u6807\u8bc6\u4f4d\u7f6e\u5750\u6807",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": "\u7528\u4e8e\u914d\u7f6e\u89e6\u53d1\u6bcf\u4e00\u6b21\u7684\u8981\u7d20\u6807\u8bc6\u64cd\u4f5c\uff0c\u6bcf\u6b21\u64cd\u4f5c\u5b8c\u6574\u540e\u4f1a\u81ea\u52a8\u91cd\u7f6e\u4e3a\u7a7a"
+      },
+      "identifyResult": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "\u6700\u8fd1\u4e00\u6b21\u6807\u8bc6\u64cd\u4f5c\u67e5\u8be2\u5230\u7684\u8981\u7d20\u4fe1\u606f"
+      },
+      "debug": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "\u662f\u5426\u5f00\u542fdebug\u6a21\u5f0f\r\n\u9ed8\u8ba4\uff1afalse",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
       "loading_state": {
         "type": {
           "name": "shape",

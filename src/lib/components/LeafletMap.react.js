@@ -176,7 +176,7 @@ const LeafletMap = (props) => {
                                         iconSize: this._map.getSize().multiplyBy(2)
                                     })
                                 );
-                            },
+                            }
                         });
                         let measureControl = L.control.measure(
                             {
@@ -197,8 +197,7 @@ const LeafletMap = (props) => {
                                     primaryLengthUnit: 'meters',
                                     secondaryLengthUnit: 'kilometers',
                                     primaryAreaUnit: 'sqmeters',
-                                    secondaryAreaUnit: 'sqkilometers',
-                                    thousandsSep: ' '
+                                    secondaryAreaUnit: 'sqkilometers'
                                 }
                             }
                         );
