@@ -128,6 +128,20 @@ Keyword arguments:
 
 - minZoom (number; default 0)
 
+- scaleControl (boolean; default False):
+    设置是否显示比例尺  默认：False.
+
+- scaleControlOptions (dict; optional):
+    配置比例尺相关参数.
+
+    `scaleControlOptions` is a dict with keys:
+
+    - imperial (boolean; optional):
+        是否显示英制单位  默认：True.
+
+    - position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional):
+        设置比例尺的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'.
+
 - scrollWheelZoom (boolean | a value equal to: 'center'; default True)
 
 - showMeasurements (boolean; default False)
@@ -150,10 +164,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletMap'
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, center=Component.UNDEFINED, crs=Component.UNDEFINED, zoom=Component.UNDEFINED, doubleClickZoom=Component.UNDEFINED, dragging=Component.UNDEFINED, closePopupOnClick=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, zoomDelta=Component.UNDEFINED, zoomControl=Component.UNDEFINED, scrollWheelZoom=Component.UNDEFINED, wheelPxPerZoomLevel=Component.UNDEFINED, smoothWheelZoom=Component.UNDEFINED, maxBounds=Component.UNDEFINED, editToolbar=Component.UNDEFINED, editToolbarControlsOptions=Component.UNDEFINED, showMeasurements=Component.UNDEFINED, maxDrawnShapes=Component.UNDEFINED, measureControl=Component.UNDEFINED, measureControlOptions=Component.UNDEFINED, viewAutoCorrection=Component.UNDEFINED, _drawnShapes=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', '_drawnShapes', 'center', 'className', 'closePopupOnClick', 'crs', 'doubleClickZoom', 'dragging', 'editToolbar', 'editToolbarControlsOptions', 'key', 'loading_state', 'maxBounds', 'maxDrawnShapes', 'maxZoom', 'measureControl', 'measureControlOptions', 'minZoom', 'scrollWheelZoom', 'showMeasurements', 'smoothWheelZoom', 'style', 'viewAutoCorrection', 'wheelPxPerZoomLevel', 'zoom', 'zoomControl', 'zoomDelta']
+    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, center=Component.UNDEFINED, crs=Component.UNDEFINED, zoom=Component.UNDEFINED, doubleClickZoom=Component.UNDEFINED, dragging=Component.UNDEFINED, closePopupOnClick=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, zoomDelta=Component.UNDEFINED, zoomControl=Component.UNDEFINED, scrollWheelZoom=Component.UNDEFINED, wheelPxPerZoomLevel=Component.UNDEFINED, smoothWheelZoom=Component.UNDEFINED, scaleControl=Component.UNDEFINED, scaleControlOptions=Component.UNDEFINED, maxBounds=Component.UNDEFINED, editToolbar=Component.UNDEFINED, editToolbarControlsOptions=Component.UNDEFINED, showMeasurements=Component.UNDEFINED, maxDrawnShapes=Component.UNDEFINED, measureControl=Component.UNDEFINED, measureControlOptions=Component.UNDEFINED, viewAutoCorrection=Component.UNDEFINED, _drawnShapes=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', '_drawnShapes', 'center', 'className', 'closePopupOnClick', 'crs', 'doubleClickZoom', 'dragging', 'editToolbar', 'editToolbarControlsOptions', 'key', 'loading_state', 'maxBounds', 'maxDrawnShapes', 'maxZoom', 'measureControl', 'measureControlOptions', 'minZoom', 'scaleControl', 'scaleControlOptions', 'scrollWheelZoom', 'showMeasurements', 'smoothWheelZoom', 'style', 'viewAutoCorrection', 'wheelPxPerZoomLevel', 'zoom', 'zoomControl', 'zoomDelta']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', '_drawnShapes', 'center', 'className', 'closePopupOnClick', 'crs', 'doubleClickZoom', 'dragging', 'editToolbar', 'editToolbarControlsOptions', 'key', 'loading_state', 'maxBounds', 'maxDrawnShapes', 'maxZoom', 'measureControl', 'measureControlOptions', 'minZoom', 'scrollWheelZoom', 'showMeasurements', 'smoothWheelZoom', 'style', 'viewAutoCorrection', 'wheelPxPerZoomLevel', 'zoom', 'zoomControl', 'zoomDelta']
+        self.available_properties = ['children', 'id', '_drawnShapes', 'center', 'className', 'closePopupOnClick', 'crs', 'doubleClickZoom', 'dragging', 'editToolbar', 'editToolbarControlsOptions', 'key', 'loading_state', 'maxBounds', 'maxDrawnShapes', 'maxZoom', 'measureControl', 'measureControlOptions', 'minZoom', 'scaleControl', 'scaleControlOptions', 'scrollWheelZoom', 'showMeasurements', 'smoothWheelZoom', 'style', 'viewAutoCorrection', 'wheelPxPerZoomLevel', 'zoom', 'zoomControl', 'zoomDelta']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

@@ -68,6 +68,13 @@ Those elements have the following types:
   - `activeColor` (String; optional)
   - `completedColor` (String; optional)
 - `minZoom` (Real; optional)
+- `scaleControl` (Bool; optional): 设置是否显示比例尺
+默认：false
+- `scaleControlOptions` (optional): 配置比例尺相关参数. scaleControlOptions has the following type: lists containing elements 'position', 'imperial'.
+Those elements have the following types:
+  - `position` (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional): 设置比例尺的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
+  - `imperial` (Bool; optional): 是否显示英制单位
+默认：true
 - `scrollWheelZoom` (Bool | a value equal to: 'center'; optional)
 - `showMeasurements` (Bool; optional)
 - `smoothWheelZoom` (Bool | a value equal to: 'center'; optional)
@@ -79,7 +86,7 @@ Those elements have the following types:
 - `zoomDelta` (Real; optional)
 """
 function ''_leafletmap(; kwargs...)
-        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :crs, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :key, :loading_state, :maxBounds, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scrollWheelZoom, :showMeasurements, :smoothWheelZoom, :style, :viewAutoCorrection, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
+        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :crs, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :key, :loading_state, :maxBounds, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scaleControl, :scaleControlOptions, :scrollWheelZoom, :showMeasurements, :smoothWheelZoom, :style, :viewAutoCorrection, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
         wild_props = Symbol[]
         return Component("''_leafletmap", "LeafletMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

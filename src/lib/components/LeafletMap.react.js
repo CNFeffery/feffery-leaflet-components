@@ -2,9 +2,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { MapContainer } from 'react-leaflet';
+import { MapContainer, ScaleControl } from 'react-leaflet';
 import L from 'leaflet';
 import 'proj4leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -115,6 +115,8 @@ const LeafletMap = (props) => {
         wheelPxPerZoomLevel,
         scrollWheelZoom,
         smoothWheelZoom,
+        scaleControl,
+        scaleControlOptions,
         maxBounds,
         editToolbar,
         editToolbarControlsOptions,
@@ -128,7 +130,20 @@ const LeafletMap = (props) => {
     } = props;
 
     const divRef = useRef(null);
+    const scaleRef = useRef(null);
     const size = useSize(divRef);
+
+    useEffect(() => {
+        if (scaleRef.current) {
+            scaleRef.current._updateMetric = function (maxMeters) {
+                const meters = this._getRoundNum(maxMeters),
+                    label = meters < 1000 ? `${meters} 米` : `${meters / 1000} 千米`;
+
+                this._updateScale(this._mScale, label, meters / maxMeters);
+            }
+            scaleRef.current._update();
+        }
+    }, [scaleRef.current])
 
     return (
         <div id={id}
@@ -313,6 +328,7 @@ const LeafletMap = (props) => {
             >
                 {children}
                 {viewAutoCorrection ? <AutoViewCorrection size={size} /> : null}
+                {scaleControl ? <ScaleControl ref={scaleRef} {...scaleControlOptions} /> : null}
             </MapContainer>
         </div>
     );
@@ -414,6 +430,27 @@ LeafletMap.propTypes = {
         PropTypes.bool,
         PropTypes.oneOf(['center'])
     ]),
+
+    /**
+     * 设置是否显示比例尺
+     * 默认：false
+     */
+    scaleControl: PropTypes.bool,
+
+    /**
+     * 配置比例尺相关参数
+     */
+    scaleControlOptions: PropTypes.exact({
+        /**
+         * 设置比例尺的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
+         */
+        position: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
+        /**
+         * 是否显示英制单位
+         * 默认：true
+         */
+        imperial: PropTypes.bool
+    }),
 
     // 设置地图可移动的bounds范围
     maxBounds: PropTypes.exact({
@@ -538,6 +575,7 @@ LeafletMap.defaultProps = {
     wheelPxPerZoomLevel: 60,
     zoomControl: true,
     scrollWheelZoom: true,
+    scaleControl: false,
     editToolbar: false,
     showMeasurements: false,
     maxDrawnShapes: null,

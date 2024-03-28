@@ -2171,6 +2171,54 @@
           "computed": false
         }
       },
+      "scaleControl": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "\u8bbe\u7f6e\u662f\u5426\u663e\u793a\u6bd4\u4f8b\u5c3a\r\n\u9ed8\u8ba4\uff1afalse",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "scaleControlOptions": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "position": {
+              "name": "enum",
+              "value": [
+                {
+                  "value": "'topleft'",
+                  "computed": false
+                },
+                {
+                  "value": "'topright'",
+                  "computed": false
+                },
+                {
+                  "value": "'bottomleft'",
+                  "computed": false
+                },
+                {
+                  "value": "'bottomright'",
+                  "computed": false
+                }
+              ],
+              "description": "\u8bbe\u7f6e\u6bd4\u4f8b\u5c3a\u7684\u65b9\u4f4d\uff0c\u53ef\u9009\u7684\u6709'topleft'\u3001'topright'\u3001'bottomleft'\u3001'bottomright'",
+              "required": false
+            },
+            "imperial": {
+              "name": "bool",
+              "description": "\u662f\u5426\u663e\u793a\u82f1\u5236\u5355\u4f4d\r\n\u9ed8\u8ba4\uff1atrue",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": "\u914d\u7f6e\u6bd4\u4f8b\u5c3a\u76f8\u5173\u53c2\u6570"
+      },
       "maxBounds": {
         "type": {
           "name": "exact",
