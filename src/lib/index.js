@@ -29,6 +29,7 @@ import EsriTiledMapLayer from './components/esri/EsriTiledMapLayer.react';
 import Fragment from './components/Fragment.react';
 import LeafletMapProvider from './components/LeafletMapProvider.react';
 import LeafletMapSync from './components/LeafletMapSync.react';
+import LeafletImageOverlay from './components/LeafletImageOverlay.react';
 
 export {
     LeafletMap,
@@ -60,5 +61,6 @@ export {
     EsriTiledMapLayer,
     Fragment,
     LeafletMapProvider,
-    LeafletMapSync
+    LeafletMapSync,
+    LeafletImageOverlay
 };

@@ -9,11 +9,21 @@ app.layout = html.Div(
     [
         flc.LeafletMap(
             [
-                flc.LeafletTileLayer()
+                flc.LeafletTileLayer(),
+                flc.LeafletImageOverlay(
+                    url='https://images.pexels.com/photos/2049422/pexels-photo-2049422.jpeg',
+                    bounds={
+                        'minx': 106,
+                        'miny': 29,
+                        'maxx': 108,
+                        'maxy': 31
+                    },
+                    opacity=0.6
+                )
             ],
             center={
-                "lat": 30.083312988281236,
-                "lng": 107.7401733398438
+                "lat": 29,
+                "lng": 106
             },
             zoom=9,
             zoomDelta=0.5,

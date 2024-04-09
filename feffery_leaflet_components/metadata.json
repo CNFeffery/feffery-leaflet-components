@@ -1838,6 +1838,104 @@
       }
     }
   },
+  "src/lib/components/LeafletImageOverlay.react.js": {
+    "description": "\u56fe\u7247\u53e0\u52a0\u7ec4\u4ef6LeafletImageOverlay",
+    "displayName": "LeafletImageOverlay",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u7ec4\u4ef6id"
+      },
+      "key": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u5f3a\u5236\u5237\u65b0\u7528"
+      },
+      "url": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "\u5fc5\u586b\uff0c\u56fe\u7247\u5730\u5740"
+      },
+      "bounds": {
+        "type": {
+          "name": "exact",
+          "value": {
+            "minx": {
+              "name": "number",
+              "required": true
+            },
+            "miny": {
+              "name": "number",
+              "required": true
+            },
+            "maxx": {
+              "name": "number",
+              "required": true
+            },
+            "maxy": {
+              "name": "number",
+              "required": true
+            }
+          }
+        },
+        "required": true,
+        "description": "\u5fc5\u586b\uff0c\u8bbe\u7f6e\u56fe\u7247\u53e0\u52a0\u533a\u57df\u5750\u6807\u8303\u56f4"
+      },
+      "opacity": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "\u56fe\u7247\u900f\u660e\u5ea6\uff0c\u53d6\u503c\u5e94\u5728`0`~`1`\u4e4b\u95f4"
+      },
+      "zIndex": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "\u5f53\u524d\u56fe\u5c42z\u8f74\u5c42\u7ea7"
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\r\nto Dash, to make them available for callbacks."
+      }
+    }
+  },
   "src/lib/components/LeafletLayerGroup.react.js": {
     "description": "",
     "displayName": "LeafletLayerGroup",

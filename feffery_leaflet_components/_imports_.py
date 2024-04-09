@@ -10,6 +10,7 @@ from .LeafletFlowLayer import LeafletFlowLayer
 from .LeafletFullscreenControl import LeafletFullscreenControl
 from .LeafletGeoJSON import LeafletGeoJSON
 from .LeafletHeatMap import LeafletHeatMap
+from .LeafletImageOverlay import LeafletImageOverlay
 from .LeafletLayerGroup import LeafletLayerGroup
 from .LeafletMap import LeafletMap
 from .LeafletMapAction import LeafletMapAction
@@ -42,6 +43,7 @@ __all__ = [
     "LeafletFullscreenControl",
     "LeafletGeoJSON",
     "LeafletHeatMap",
+    "LeafletImageOverlay",
     "LeafletLayerGroup",
     "LeafletMap",
     "LeafletMapAction",
