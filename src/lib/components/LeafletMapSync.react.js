@@ -11,6 +11,7 @@ const LeafletMapSync = (props) => {
     const {
         id,
         groupId,
+        syncStrategy,
         setProps
     } = props;
 
@@ -62,12 +63,12 @@ const LeafletMapSync = (props) => {
                 if (mapContext.viewState.groupId && mapContext.viewState.groupId === groupId) {
                     // 若当前操作中地图实例与当前地图id不相同，则更新地图中心点和缩放
                     if (mapContext.triggerId.current !== id) {
-                        map.setView(mapContext.viewState.center, mapContext.viewState.zoom, { animate: mapContext.viewState.eventType === 'zoom' });
+                        map.setView(mapContext.viewState.center, syncStrategy === 'all' ? mapContext.viewState.zoom : map.getZoom(), { animate: mapContext.viewState.eventType === 'zoom' });
                     }
                 } else if (!mapContext.viewState.groupId) {
                     // 若当前操作中地图实例与当前地图id不相同，则更新地图中心点和缩放
                     if (mapContext.triggerId.current !== id) {
-                        map.setView(mapContext.viewState.center, mapContext.viewState.zoom, { animate: mapContext.viewState.eventType === 'zoom' });
+                        map.setView(mapContext.viewState.center, syncStrategy === 'all' ? mapContext.viewState.zoom : map.getZoom(), { animate: mapContext.viewState.eventType === 'zoom' });
                     }
                 }
             }
@@ -94,6 +95,12 @@ LeafletMapSync.propTypes = {
      */
     groupId: PropTypes.string,
 
+    /**
+     * 同步行为策略，可选项有`'all'`、`'center'`
+     * 默认值：`'all'`
+     */
+    syncStrategy: PropTypes.oneOf(['all', 'center']),
+
     loading_state: PropTypes.shape({
         /**
          * Determines if the component is loading or not
@@ -118,6 +125,7 @@ LeafletMapSync.propTypes = {
 
 // 设置默认参数
 LeafletMapSync.defaultProps = {
+    syncStrategy: 'all'
 }
 
 export default React.memo(LeafletMapSync);

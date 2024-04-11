@@ -16,9 +16,11 @@ Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
+- `syncStrategy` (a value equal to: 'all', 'center'; optional): 同步行为策略，可选项有`'all'`、`'center'`
+默认值：`'all'`
 """
 function ''_leafletmapsync(; kwargs...)
-        available_props = Symbol[:id, :groupId, :key, :loading_state]
+        available_props = Symbol[:id, :groupId, :key, :loading_state, :syncStrategy]
         wild_props = Symbol[]
         return Component("''_leafletmapsync", "LeafletMapSync", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
