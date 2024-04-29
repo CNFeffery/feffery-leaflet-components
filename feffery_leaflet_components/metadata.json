@@ -1,6 +1,6 @@
 {
   "src/lib/components/esri/EsriTiledMapLayer.react.js": {
-    "description": "",
+    "description": "ESRI tiledMapLayer\u56fe\u5c42\u7ec4\u4ef6",
     "displayName": "EsriTiledMapLayer",
     "methods": [],
     "props": {

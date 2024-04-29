@@ -1,7 +1,6 @@
 import dash
 from dash import html
 import feffery_leaflet_components as flc
-from dash.dependencies import Input, Output
 
 app = dash.Dash(__name__)
 

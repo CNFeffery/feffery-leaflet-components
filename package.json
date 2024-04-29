@@ -44,8 +44,7 @@
         "svg-url-loader": "^7.1.1",
         "url-loader": "^4.1.1",
         "use-supercluster": "^0.4.0",
-        "uuid": "^8.3.2",
-        "zustand": "^4.5.2"
+        "uuid": "^8.3.2"
     },
     "devDependencies": {
         "@babel/core": "^7.5.4",

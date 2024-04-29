@@ -5,7 +5,7 @@ from dash.development.base_component import Component, _explicitize_args
 
 class EsriTiledMapLayer(Component):
     """An EsriTiledMapLayer component.
-
+ESRI tiledMapLayer图层组件
 
 Keyword arguments:
 

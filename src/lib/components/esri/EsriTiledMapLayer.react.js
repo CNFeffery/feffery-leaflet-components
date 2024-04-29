@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 /* eslint-disable consistent-return */
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
@@ -6,12 +7,11 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { tiledMapLayer } from "esri-leaflet";
 import { useMap } from 'react-leaflet';
-import useEsriStore from '../store/esriStore';
 
-// 定义ESRI tiledMapLayer图层组件
+/**
+ * ESRI tiledMapLayer图层组件
+ */
 const EsriTiledMapLayer = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
         url,
@@ -26,9 +26,6 @@ const EsriTiledMapLayer = (props) => {
 
     const map = useMap();
     const layerRef = useRef(null);
-
-    const identifyRequesting = useEsriStore(state => state.identifyRequesting);
-    const updateIdentityRequesting = useEsriStore(state => state.updateIdentityRequesting);
 
     // 初始化当前组件需要展示的单个或多个图层服务
     useEffect(() => {
@@ -53,36 +50,29 @@ const EsriTiledMapLayer = (props) => {
     useEffect(() => {
         if (identifyConfig) {
             if (layerRef.current) {
-                // 若当前不存在正在执行标识服务请求的图层
-                if (!identifyRequesting) {
-                    updateIdentityRequesting(true)
-                    try {
-                        layerRef.current
-                            .identify()
-                            .on(map)
-                            .at([identifyConfig.position.lat, identifyConfig.position.lng])
-                            .run((error, featureCollection, response) => {
-                                if (debug) {
-                                    console.log(
-                                        `identifyResult of : ${id}\n`,
-                                        {
-                                            featureCollection: featureCollection,
-                                            timestamp: Date.now()
-                                        }
-                                    )
-                                }
-                                updateIdentityRequesting(false)
-                                setProps({
-                                    identifyResult: {
+                try {
+                    layerRef.current
+                        .identify()
+                        .on(map)
+                        .at([identifyConfig.position.lat, identifyConfig.position.lng])
+                        .run((error, featureCollection, response) => {
+                            if (debug) {
+                                console.log(
+                                    `identifyResult of : ${id}\n`,
+                                    {
                                         featureCollection: featureCollection,
                                         timestamp: Date.now()
                                     }
-                                })
+                                )
+                            }
+                            setProps({
+                                identifyResult: {
+                                    featureCollection: featureCollection,
+                                    timestamp: Date.now()
+                                }
                             })
-                    } catch (error) {
-                        updateIdentityRequesting(false)
-                    }
-                }
+                        })
+                } catch (error) { }
             }
             setProps({
                 identifyConfig: null

@@ -6,7 +6,7 @@ export ''_esritiledmaplayer
     ''_esritiledmaplayer(;kwargs...)
 
 An EsriTiledMapLayer component.
-
+ESRI tiledMapLayer图层组件
 Keyword arguments:
 - `id` (String; optional)
 - `debug` (Bool; optional): 是否开启debug模式
