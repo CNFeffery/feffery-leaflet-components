@@ -1857,6 +1857,13 @@
         "required": false,
         "description": "\u5f3a\u5236\u5237\u65b0\u7528"
       },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u5f53\u524d\u56fe\u7247\u53e0\u52a0\u5c42css\u7c7b\u540d"
+      },
       "url": {
         "type": {
           "name": "string"

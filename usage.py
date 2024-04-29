@@ -11,6 +11,7 @@ app.layout = html.Div(
             [
                 flc.LeafletTileLayer(),
                 flc.LeafletImageOverlay(
+                    className='image-overlay-test',
                     url='https://images.pexels.com/photos/2049422/pexels-photo-2049422.jpeg',
                     bounds={
                         'minx': 106,

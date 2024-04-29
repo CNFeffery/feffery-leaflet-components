@@ -10,9 +10,9 @@ import { ImageOverlay, useMap } from 'react-leaflet';
  * 图片叠加组件LeafletImageOverlay
  */
 const LeafletImageOverlay = (props) => {
-
     const {
         id,
+        className,
         url,
         bounds,
         opacity,
@@ -59,6 +59,7 @@ const LeafletImageOverlay = (props) => {
     return (
         <ImageOverlay
             id={id}
+            className={className}
             ref={imageRef}
             url={url}
             bounds={L.latLngBounds(
@@ -84,6 +85,11 @@ LeafletImageOverlay.propTypes = {
      * 强制刷新用
      */
     key: PropTypes.string,
+
+    /**
+     * 当前图片叠加层css类名
+     */
+    className: PropTypes.string,
 
     /**
      * 必填，图片地址

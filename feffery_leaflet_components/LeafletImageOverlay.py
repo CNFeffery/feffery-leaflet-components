@@ -25,6 +25,9 @@ Keyword arguments:
 
     - miny (number; required)
 
+- className (string; optional):
+    当前图片叠加层css类名.
+
 - key (string; optional):
     强制刷新用.
 
@@ -60,10 +63,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletImageOverlay'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, url=Component.REQUIRED, bounds=Component.REQUIRED, opacity=Component.UNDEFINED, zIndex=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'bounds', 'key', 'loading_state', 'maxZoom', 'minZoom', 'opacity', 'url', 'zIndex']
+    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, className=Component.UNDEFINED, url=Component.REQUIRED, bounds=Component.REQUIRED, opacity=Component.UNDEFINED, zIndex=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'bounds', 'className', 'key', 'loading_state', 'maxZoom', 'minZoom', 'opacity', 'url', 'zIndex']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'bounds', 'key', 'loading_state', 'maxZoom', 'minZoom', 'opacity', 'url', 'zIndex']
+        self.available_properties = ['id', 'bounds', 'className', 'key', 'loading_state', 'maxZoom', 'minZoom', 'opacity', 'url', 'zIndex']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

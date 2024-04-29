@@ -15,6 +15,7 @@ Those elements have the following types:
   - `miny` (Real; required)
   - `maxx` (Real; required)
   - `maxy` (Real; required)
+- `className` (String; optional): 当前图片叠加层css类名
 - `key` (String; optional): 强制刷新用
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
@@ -28,7 +29,7 @@ Those elements have the following types:
 - `zIndex` (Real; optional): 当前图层z轴层级
 """
 function ''_leafletimageoverlay(; kwargs...)
-        available_props = Symbol[:id, :bounds, :key, :loading_state, :maxZoom, :minZoom, :opacity, :url, :zIndex]
+        available_props = Symbol[:id, :bounds, :className, :key, :loading_state, :maxZoom, :minZoom, :opacity, :url, :zIndex]
         wild_props = Symbol[]
         return Component("''_leafletimageoverlay", "LeafletImageOverlay", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
