@@ -21,12 +21,14 @@ Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
+- `maxZoom` (Real; optional): 图片显示的最大缩放级别，默认无限制
+- `minZoom` (Real; optional): 图片显示的最小缩放级别，默认无限制
 - `opacity` (Real; optional): 图片透明度，取值应在`0`~`1`之间
 - `url` (String; required): 必填，图片地址
 - `zIndex` (Real; optional): 当前图层z轴层级
 """
 function ''_leafletimageoverlay(; kwargs...)
-        available_props = Symbol[:id, :bounds, :key, :loading_state, :opacity, :url, :zIndex]
+        available_props = Symbol[:id, :bounds, :key, :loading_state, :maxZoom, :minZoom, :opacity, :url, :zIndex]
         wild_props = Symbol[]
         return Component("''_leafletimageoverlay", "LeafletImageOverlay", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

@@ -1903,6 +1903,20 @@
         "required": false,
         "description": "\u5f53\u524d\u56fe\u5c42z\u8f74\u5c42\u7ea7"
       },
+      "minZoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "\u56fe\u7247\u663e\u793a\u7684\u6700\u5c0f\u7f29\u653e\u7ea7\u522b\uff0c\u9ed8\u8ba4\u65e0\u9650\u5236"
+      },
+      "maxZoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "\u56fe\u7247\u663e\u793a\u7684\u6700\u5927\u7f29\u653e\u7ea7\u522b\uff0c\u9ed8\u8ba4\u65e0\u9650\u5236"
+      },
       "loading_state": {
         "type": {
           "name": "shape",

@@ -1,8 +1,10 @@
+/* eslint-disable no-magic-numbers */
+/* eslint-disable consistent-return */
 /* eslint-disable no-undefined */
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import PropTypes from 'prop-types';
-import { ImageOverlay } from 'react-leaflet';
+import { ImageOverlay, useMap } from 'react-leaflet';
 
 /**
  * 图片叠加组件LeafletImageOverlay
@@ -15,13 +17,49 @@ const LeafletImageOverlay = (props) => {
         bounds,
         opacity,
         zIndex,
+        minZoom,
+        maxZoom,
         loading_state
     } = props;
+
+    const map = useMap();
+    const imageRef = useRef(null);
+
+    // 控制当前图片层在超出minZoom或maxZoom范围后不显示
+    useEffect(() => {
+        if (map && (minZoom || maxZoom)) {
+            const updateImageOpacity = () => {
+                if (map.getZoom() >= (minZoom || 0) && map.getZoom() <= (maxZoom || 22)) {
+                    // 还原透明度
+                    if (opacity === 0) {
+                        imageRef.current.setOpacity(0);
+                    } else {
+                        imageRef.current.setOpacity(opacity || 1);
+                    }
+                } else {
+                    // 超出范围，隐藏图层
+                    imageRef.current.setOpacity(0);
+                }
+            }
+            map.on('zoomend', updateImageOpacity);
+            return () => {
+                // 还原透明度
+                if (opacity === 0) {
+                    imageRef.current.setOpacity(0);
+                } else {
+                    imageRef.current.setOpacity(opacity || 1);
+                }
+                // 移除事件
+                map.off('zoomend', updateImageOpacity);
+            }
+        }
+    }, [opacity, minZoom, maxZoom])
 
     // 返回定制化的前端组件
     return (
         <ImageOverlay
             id={id}
+            ref={imageRef}
             url={url}
             bounds={L.latLngBounds(
                 L.latLng(bounds.miny, bounds.minx),
@@ -75,6 +113,16 @@ LeafletImageOverlay.propTypes = {
      * 当前图层z轴层级
      */
     zIndex: PropTypes.number,
+
+    /**
+     * 图片显示的最小缩放级别，默认无限制
+     */
+    minZoom: PropTypes.number,
+
+    /**
+     * 图片显示的最大缩放级别，默认无限制
+     */
+    maxZoom: PropTypes.number,
 
     loading_state: PropTypes.shape({
         /**

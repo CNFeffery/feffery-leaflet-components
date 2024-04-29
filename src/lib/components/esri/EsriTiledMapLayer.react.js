@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
@@ -32,7 +33,7 @@ const EsriTiledMapLayer = (props) => {
     // 初始化当前组件需要展示的单个或多个图层服务
     useEffect(() => {
         if (map && url) {
-            let currentLayer = tiledMapLayer({
+            const currentLayer = tiledMapLayer({
                 url: url,
                 opacity: opacity,
                 zIndex: zIndex,

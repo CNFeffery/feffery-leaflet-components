@@ -85,14 +85,13 @@ const parseCRS = (crs) => {
         return L.CRS.EPSG4326;
     } else if (crs === 'simple') {
         return L.CRS.Simple;
-    } else {
-        // 构造自定义坐标系
-        return new L.Proj.CRS(
-            crs.code,
-            crs.proj4def,
-            crs.options
-        );
     }
+    // 构造自定义坐标系
+    return new L.Proj.CRS(
+        crs.code,
+        crs.proj4def,
+        crs.options
+    );
 }
 
 const LeafletMap = (props) => {
@@ -193,7 +192,7 @@ const LeafletMap = (props) => {
                                 );
                             }
                         });
-                        let measureControl = L.control.measure(
+                        const measureControl = L.control.measure(
                             {
                                 ...{
                                     position: 'topleft',

@@ -41,6 +41,12 @@ Keyword arguments:
     - prop_name (string; optional):
         Holds which property is loading.
 
+- maxZoom (number; optional):
+    图片显示的最大缩放级别，默认无限制.
+
+- minZoom (number; optional):
+    图片显示的最小缩放级别，默认无限制.
+
 - opacity (number; optional):
     图片透明度，取值应在`0`~`1`之间.
 
@@ -54,10 +60,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletImageOverlay'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, url=Component.REQUIRED, bounds=Component.REQUIRED, opacity=Component.UNDEFINED, zIndex=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'bounds', 'key', 'loading_state', 'opacity', 'url', 'zIndex']
+    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, url=Component.REQUIRED, bounds=Component.REQUIRED, opacity=Component.UNDEFINED, zIndex=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'bounds', 'key', 'loading_state', 'maxZoom', 'minZoom', 'opacity', 'url', 'zIndex']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'bounds', 'key', 'loading_state', 'opacity', 'url', 'zIndex']
+        self.available_properties = ['id', 'bounds', 'key', 'loading_state', 'maxZoom', 'minZoom', 'opacity', 'url', 'zIndex']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
