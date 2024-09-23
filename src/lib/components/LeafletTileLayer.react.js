@@ -14,6 +14,8 @@ const LeafletTileLayer = (props) => {
         opacity,
         zIndex,
         tileSize,
+        minZoom,
+        maxZoom,
         tms,
         loading_state
     } = props;
@@ -35,6 +37,8 @@ const LeafletTileLayer = (props) => {
             opacity={opacity}
             zIndex={zIndex}
             tileSize={tileSize}
+            minZoom={minZoom}
+            maxZoom={maxZoom}
             tms={tms}
             ref={tileLayerRef}
             data-dash-is-loading={
@@ -69,6 +73,18 @@ LeafletTileLayer.propTypes = {
     // 设置瓦片地图像素边长，默认为256
     tileSize: PropTypes.number,
 
+    /**
+     * 当前瓦片地图服务允许加载的最小缩放级别
+     * 默认值：`0`
+     */
+    minZoom: PropTypes.number,
+
+    /**
+     * 当前瓦片地图服务允许加载的最大缩放级别
+     * 默认值：`18`
+     */
+    maxZoom: PropTypes.number,
+
     // 设置当前瓦片地图服务是否属于TMS
     // 默认：false
     tms: PropTypes.bool,
@@ -100,6 +116,8 @@ LeafletTileLayer.defaultProps = {
     url: "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
     opacity: 1,
     tileSize: 256,
+    minZoom: 0,
+    maxZoom: 18,
     tms: false
 }
 

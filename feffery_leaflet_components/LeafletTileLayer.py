@@ -29,6 +29,12 @@ Keyword arguments:
     - prop_name (string; optional):
         Holds which property is loading.
 
+- maxZoom (number; default 18):
+    当前瓦片地图服务允许加载的最大缩放级别  默认值：`18`.
+
+- minZoom (number; default 0):
+    当前瓦片地图服务允许加载的最小缩放级别  默认值：`0`.
+
 - opacity (number; default 1)
 
 - tileSize (number; default 256)
@@ -43,10 +49,10 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletTileLayer'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, url=Component.UNDEFINED, attribution=Component.UNDEFINED, opacity=Component.UNDEFINED, zIndex=Component.UNDEFINED, tileSize=Component.UNDEFINED, tms=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'attribution', 'key', 'loading_state', 'opacity', 'tileSize', 'tms', 'url', 'zIndex']
+    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, url=Component.UNDEFINED, attribution=Component.UNDEFINED, opacity=Component.UNDEFINED, zIndex=Component.UNDEFINED, tileSize=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, tms=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'attribution', 'key', 'loading_state', 'maxZoom', 'minZoom', 'opacity', 'tileSize', 'tms', 'url', 'zIndex']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'attribution', 'key', 'loading_state', 'opacity', 'tileSize', 'tms', 'url', 'zIndex']
+        self.available_properties = ['id', 'attribution', 'key', 'loading_state', 'maxZoom', 'minZoom', 'opacity', 'tileSize', 'tms', 'url', 'zIndex']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

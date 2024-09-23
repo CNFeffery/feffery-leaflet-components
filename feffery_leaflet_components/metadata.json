@@ -4579,6 +4579,28 @@
           "computed": false
         }
       },
+      "minZoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "\u5f53\u524d\u74e6\u7247\u5730\u56fe\u670d\u52a1\u5141\u8bb8\u52a0\u8f7d\u7684\u6700\u5c0f\u7f29\u653e\u7ea7\u522b\r\n\u9ed8\u8ba4\u503c\uff1a`0`",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "maxZoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "\u5f53\u524d\u74e6\u7247\u5730\u56fe\u670d\u52a1\u5141\u8bb8\u52a0\u8f7d\u7684\u6700\u5927\u7f29\u653e\u7ea7\u522b\r\n\u9ed8\u8ba4\u503c\uff1a`18`",
+        "defaultValue": {
+          "value": "18",
+          "computed": false
+        }
+      },
       "tms": {
         "type": {
           "name": "bool"
