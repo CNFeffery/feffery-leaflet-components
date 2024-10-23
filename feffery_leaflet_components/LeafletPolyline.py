@@ -17,15 +17,15 @@ Keyword arguments:
 
     `arrowheads` is a boolean | dict with keys:
 
+    - yawn (number; optional)
+
     - fill (boolean; optional)
+
+    - size (number | string; optional)
 
     - frequency (a value equal to: 'allvertices', 'endonly' | number | string; optional)
 
     - proportionalToTotal (boolean; optional)
-
-    - size (number | string; optional)
-
-    - yawn (number; optional)
 
 - arrowheadsPathOptions (optional)
 
@@ -41,14 +41,14 @@ Keyword arguments:
 
     `loading_state` is a dict with keys:
 
-    - component_name (string; optional):
-        Holds the name of the component that is loading.
-
     - is_loading (boolean; optional):
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
         Holds which property is loading.
+
+    - component_name (string; optional):
+        Holds the name of the component that is loading.
 
 - mouseOverCount (number; default 0)
 
@@ -60,13 +60,13 @@ Keyword arguments:
 
     `positions` is a list of dicts with keys:
 
-    - lat (number; optional)
+    - lng (number; optional)
 
-    - lng (number; optional) | list of list of dicts with keys:
+    - lat (number; optional) | list of list of dicts with keys:
 
-    - lat (number; optional)
+    - lng (number; optional)
 
-    - lng (number; optional)s"""
+    - lat (number; optional)s"""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'

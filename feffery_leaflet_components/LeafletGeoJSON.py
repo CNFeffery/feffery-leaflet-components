@@ -41,9 +41,9 @@ Keyword arguments:
 
     - bins (list of list of numberss; optional)
 
-    - closed (a value equal to: 'left', 'right'; optional)
-
     - styles (list; optional)
+
+    - closed (a value equal to: 'left', 'right'; optional)
 
 - fitBounds (boolean; default True)
 
@@ -51,14 +51,14 @@ Keyword arguments:
 
     `fitBoundsOptions` is a dict with keys:
 
+    - maxZoom (number; optional):
+        执行fitBounds动作后的地图最大缩放级别.
+
     - animate (boolean; optional):
         fitBounds过程是否开启动画.
 
     - duration (number; optional):
         对于开启过渡动画效果的gitBounds动作，设置动画持续时长，单位：秒  默认：0.25.
-
-    - maxZoom (number; optional):
-        执行fitBounds动作后的地图最大缩放级别.
 
     - padding (list of numbers; optional):
         为fitBounds动作调整后的视角，设置四周额外的像素大小留白空间，格式如[上下留白, 左右留白].
@@ -84,14 +84,14 @@ Keyword arguments:
 
     `loading_state` is a dict with keys:
 
-    - component_name (string; optional):
-        Holds the name of the component that is loading.
-
     - is_loading (boolean; optional):
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
         Holds which property is loading.
+
+    - component_name (string; optional):
+        Holds the name of the component that is loading.
 
 - mode (a value equal to: 'default', 'selectable', 'choropleth', 'category'; default 'default')
 

@@ -15,29 +15,29 @@ Keyword arguments:
 
     `_bounds` is a dict with keys:
 
-    - maxx (number; optional)
-
-    - maxy (number; optional)
-
     - minx (number; optional)
 
     - miny (number; optional)
+
+    - maxx (number; optional)
+
+    - maxy (number; optional)
 
 - _center (dict; optional)
 
     `_center` is a dict with keys:
 
-    - lat (number; optional)
-
     - lng (number; optional)
+
+    - lat (number; optional)
 
 - _clickedLatLng (dict; optional)
 
     `_clickedLatLng` is a dict with keys:
 
-    - lat (number; optional)
-
     - lng (number; optional)
+
+    - lat (number; optional)
 
 - _zoom (number; optional)
 
@@ -50,14 +50,14 @@ Keyword arguments:
 
     `loading_state` is a dict with keys:
 
-    - component_name (string; optional):
-        Holds the name of the component that is loading.
-
     - is_loading (boolean; optional):
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
-        Holds which property is loading."""
+        Holds which property is loading.
+
+    - component_name (string; optional):
+        Holds the name of the component that is loading."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'

@@ -17,13 +17,13 @@ Keyword arguments:
 
     `_bounds` is a dict with keys:
 
-    - maxx (number; optional)
-
-    - maxy (number; optional)
-
     - minx (number; optional)
 
     - miny (number; optional)
+
+    - maxx (number; optional)
+
+    - maxy (number; optional)
 
 - bringToFront (boolean; default False)
 
@@ -34,14 +34,14 @@ Keyword arguments:
 
     `loading_state` is a dict with keys:
 
-    - component_name (string; optional):
-        Holds the name of the component that is loading.
-
     - is_loading (boolean; optional):
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
         Holds which property is loading.
+
+    - component_name (string; optional):
+        Holds the name of the component that is loading.
 
 - zIndex (number; optional)"""
     _children_props = []

@@ -19,9 +19,9 @@ Keyword arguments:
 
     `center` is a dict with keys:
 
-    - lat (number; optional)
-
     - lng (number; optional)
+
+    - lat (number; optional)
 
 - className (string; optional)
 
@@ -38,11 +38,11 @@ Keyword arguments:
     - code (string; optional):
         坐标系代码，如EPSG:4490.
 
-    - options (dict; optional):
-        其他坐标系参数.
-
     - proj4def (string; optional):
         坐标系def字符串.
+
+    - options (dict; optional):
+        其他坐标系参数.
 
 - doubleClickZoom (boolean; default True)
 
@@ -54,33 +54,33 @@ Keyword arguments:
 
     `editToolbarControlsOptions` is a dict with keys:
 
-    - cutPolygon (boolean; optional)
-
-    - dragMode (boolean; optional)
-
-    - drawCircle (boolean; optional)
-
-    - drawCircleMarker (boolean; optional)
+    - position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
 
     - drawMarker (boolean; optional)
 
-    - drawPolygon (boolean; optional)
+    - drawCircleMarker (boolean; optional)
 
     - drawPolyline (boolean; optional)
 
     - drawRectangle (boolean; optional)
 
+    - drawPolygon (boolean; optional)
+
+    - drawCircle (boolean; optional)
+
     - drawText (boolean; optional)
 
     - editMode (boolean; optional)
 
-    - oneBlock (boolean; optional)
+    - dragMode (boolean; optional)
 
-    - position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
+    - cutPolygon (boolean; optional)
 
     - removalMode (boolean; optional)
 
     - rotateMode (boolean; optional)
+
+    - oneBlock (boolean; optional)
 
 - key (string; optional):
     强制刷新用.
@@ -89,26 +89,26 @@ Keyword arguments:
 
     `loading_state` is a dict with keys:
 
-    - component_name (string; optional):
-        Holds the name of the component that is loading.
-
     - is_loading (boolean; optional):
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
         Holds which property is loading.
 
+    - component_name (string; optional):
+        Holds the name of the component that is loading.
+
 - maxBounds (dict; optional)
 
     `maxBounds` is a dict with keys:
 
-    - maxx (number; optional)
-
-    - maxy (number; optional)
-
     - minx (number; optional)
 
     - miny (number; optional)
+
+    - maxx (number; optional)
+
+    - maxy (number; optional)
 
 - maxDrawnShapes (number; optional)
 
@@ -120,11 +120,11 @@ Keyword arguments:
 
     `measureControlOptions` is a dict with keys:
 
+    - position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
+
     - activeColor (string; optional)
 
     - completedColor (string; optional)
-
-    - position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
 
 - minZoom (number; default 0)
 
@@ -136,11 +136,11 @@ Keyword arguments:
 
     `scaleControlOptions` is a dict with keys:
 
-    - imperial (boolean; optional):
-        是否显示英制单位  默认：True.
-
     - position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional):
         设置比例尺的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'.
+
+    - imperial (boolean; optional):
+        是否显示英制单位  默认：True.
 
 - scrollWheelZoom (boolean | a value equal to: 'center'; default True)
 

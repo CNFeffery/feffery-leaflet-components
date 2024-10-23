@@ -26,23 +26,23 @@ Keyword arguments:
 
     `iconOptions` is a dict with keys:
 
-    - className (string; optional)
-
-    - iconAnchor (list of numbers; optional)
+    - iconUrl (string; optional)
 
     - iconSize (list of numbers; optional)
 
-    - iconUrl (string; optional)
+    - iconAnchor (list of numbers; optional)
 
     - popupAnchor (list of numbers; optional)
 
-    - shadowAnchor (list of numbers; optional)
-
-    - shadowSize (list of numbers; optional)
+    - tooltipAnchor (list of numbers; optional)
 
     - shadowUrl (string; optional)
 
-    - tooltipAnchor (list of numbers; optional)
+    - shadowSize (list of numbers; optional)
+
+    - shadowAnchor (list of numbers; optional)
+
+    - className (string; optional)
 
 - key (string; optional):
     强制刷新用.
@@ -51,14 +51,14 @@ Keyword arguments:
 
     `loading_state` is a dict with keys:
 
-    - component_name (string; optional):
-        Holds the name of the component that is loading.
-
     - is_loading (boolean; optional):
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
         Holds which property is loading.
+
+    - component_name (string; optional):
+        Holds the name of the component that is loading.
 
 - mouseOverCount (number; default 0)
 
@@ -70,9 +70,9 @@ Keyword arguments:
 
     `position` is a dict with keys:
 
-    - lat (number; optional)
-
     - lng (number; optional)
+
+    - lat (number; optional)
 
 - riseOnHover (boolean; optional)
 

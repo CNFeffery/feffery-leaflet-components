@@ -23,15 +23,21 @@ Keyword arguments:
 
     `flowData` is a list of dicts with keys:
 
-    - color (string; optional)
-
     - from (dict; optional)
 
         `from` is a dict with keys:
 
+        - lng (number; optional)
+
         - lat (number; optional)
 
+    - to (dict; optional)
+
+        `to` is a dict with keys:
+
         - lng (number; optional)
+
+        - lat (number; optional)
 
     - labels (dict; optional)
 
@@ -41,13 +47,7 @@ Keyword arguments:
 
         - to (string; optional)
 
-    - to (dict; optional)
-
-        `to` is a dict with keys:
-
-        - lat (number; optional)
-
-        - lng (number; optional)
+    - color (string; optional)
 
     - value (number; optional)
 
@@ -61,14 +61,14 @@ Keyword arguments:
 
     `loading_state` is a dict with keys:
 
-    - component_name (string; optional):
-        Holds the name of the component that is loading.
-
     - is_loading (boolean; optional):
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
         Holds which property is loading.
+
+    - component_name (string; optional):
+        Holds the name of the component that is loading.
 
 - maxWidth (number; default 10)
 

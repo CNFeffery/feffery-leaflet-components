@@ -22,14 +22,14 @@ Keyword arguments:
 
     `loading_state` is a dict with keys:
 
-    - component_name (string; optional):
-        Holds the name of the component that is loading.
-
     - is_loading (boolean; optional):
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
         Holds which property is loading.
+
+    - component_name (string; optional):
+        Holds the name of the component that is loading.
 
 - syncStrategy (a value equal to: 'all', 'center'; default 'all'):
     同步行为策略，可选项有`'all'`、`'center'`  默认值：`'all'`."""

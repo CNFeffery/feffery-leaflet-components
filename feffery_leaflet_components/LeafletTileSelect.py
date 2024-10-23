@@ -15,9 +15,9 @@ Keyword arguments:
 
     `center` is a dict with keys:
 
-    - lat (number; optional)
-
     - lng (number; optional)
+
+    - lat (number; optional)
 
 - className (string; optional)
 
@@ -38,14 +38,14 @@ Keyword arguments:
 
     `loading_state` is a dict with keys:
 
-    - component_name (string; optional):
-        Holds the name of the component that is loading.
-
     - is_loading (boolean; optional):
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
         Holds which property is loading.
+
+    - component_name (string; optional):
+        Holds the name of the component that is loading.
 
 - selectedUrl (string; optional)
 

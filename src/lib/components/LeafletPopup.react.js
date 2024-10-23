@@ -16,6 +16,7 @@ const LeafletPopup = (props) => {
         closeButton,
         closeOnEscapeKey,
         closeOnClick,
+        width,
         loading_state,
         setProps
     } = props;
@@ -29,6 +30,7 @@ const LeafletPopup = (props) => {
             closeButton={closeButton}
             closeOnEscapeKey={closeOnEscapeKey}
             closeOnClick={closeOnClick}
+            minWidth={width}
             data-dash-is-loading={
                 (loading_state && loading_state.is_loading) || undefined
             }
@@ -63,6 +65,11 @@ LeafletPopup.propTypes = {
 
     // 设置点击地图时是否会触发popup的关闭
     closeOnClick: PropTypes.bool,
+
+    /**
+     * 为窗口设置固定像素宽度值
+     */
+    width: PropTypes.number,
 
     loading_state: PropTypes.shape({
         /**

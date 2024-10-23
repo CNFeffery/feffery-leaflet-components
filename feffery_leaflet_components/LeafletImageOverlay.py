@@ -17,13 +17,13 @@ Keyword arguments:
 
     `bounds` is a dict with keys:
 
-    - maxx (number; required)
-
-    - maxy (number; required)
-
     - minx (number; required)
 
     - miny (number; required)
+
+    - maxx (number; required)
+
+    - maxy (number; required)
 
 - className (string; optional):
     当前图片叠加层css类名.
@@ -35,14 +35,14 @@ Keyword arguments:
 
     `loading_state` is a dict with keys:
 
-    - component_name (string; optional):
-        Holds the name of the component that is loading.
-
     - is_loading (boolean; optional):
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
         Holds which property is loading.
+
+    - component_name (string; optional):
+        Holds the name of the component that is loading.
 
 - maxZoom (number; optional):
     图片显示的最大缩放级别，默认无限制.

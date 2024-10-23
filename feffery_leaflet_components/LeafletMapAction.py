@@ -18,51 +18,51 @@ Keyword arguments:
 
     `loading_state` is a dict with keys:
 
-    - component_name (string; optional):
-        Holds the name of the component that is loading.
-
     - is_loading (boolean; optional):
         Determines if the component is loading or not.
 
     - prop_name (string; optional):
         Holds which property is loading.
 
+    - component_name (string; optional):
+        Holds the name of the component that is loading.
+
 - mapActionConfig (dict; optional)
 
     `mapActionConfig` is a dict with keys:
 
-    - bounds (dict; optional)
-
-        `bounds` is a dict with keys:
-
-        - maxx (number; optional)
-
-        - maxy (number; optional)
-
-        - minx (number; optional)
-
-        - miny (number; optional)
+    - type (a value equal to: 'set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'pan-to', 'fly-to', 'fly-to-bounds', 'invalidate-size'; optional)
 
     - center (dict; optional)
 
         `center` is a dict with keys:
 
-        - lat (number; optional)
-
         - lng (number; optional)
 
-    - delay (number; optional):
-        设置当前动作的延时执行时长，单位：毫秒  默认：0.
-
-    - flyToDuration (a value equal to: 'instant', 'fast', 'normal', 'slow', 'auto'; optional)
-
-    - type (a value equal to: 'set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'pan-to', 'fly-to', 'fly-to-bounds', 'invalidate-size'; optional)
+        - lat (number; optional)
 
     - zoom (number; optional)
 
     - zoomInOffset (number; optional)
 
-    - zoomOutOffset (number; optional)"""
+    - zoomOutOffset (number; optional)
+
+    - bounds (dict; optional)
+
+        `bounds` is a dict with keys:
+
+        - minx (number; optional)
+
+        - miny (number; optional)
+
+        - maxx (number; optional)
+
+        - maxy (number; optional)
+
+    - flyToDuration (a value equal to: 'instant', 'fast', 'normal', 'slow', 'auto'; optional)
+
+    - delay (number; optional):
+        设置当前动作的延时执行时长，单位：毫秒  默认：0."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'

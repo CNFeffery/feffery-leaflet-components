@@ -24,9 +24,10 @@ Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
+- `width` (Real; optional): 为窗口设置固定像素宽度值
 """
 function ''_leafletpopup(; kwargs...)
-        available_props = Symbol[:children, :id, :className, :closeButton, :closeOnClick, :closeOnEscapeKey, :keepInView, :key, :loading_state]
+        available_props = Symbol[:children, :id, :className, :closeButton, :closeOnClick, :closeOnEscapeKey, :keepInView, :key, :loading_state, :width]
         wild_props = Symbol[]
         return Component("''_leafletpopup", "LeafletPopup", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
