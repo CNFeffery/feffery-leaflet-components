@@ -11,39 +11,20 @@ Keyword arguments:
 
 - id (string; optional)
 
-- _clickedFeature (dict; optional)
-
-- _hoveredFeature (dict; optional)
-
-- circleMarkerRadius (number; default 10)
-
-- clickFeatureZoom (boolean; default False)
+- key (string; optional):
+    强制刷新用.
 
 - data (dict; required)
 
+- mode (a value equal to: 'default', 'selectable', 'choropleth', 'category'; default 'default')
+
+- hoverable (boolean; default False)
+
 - defaultStyle (optional)
 
-- disableClickSelect (boolean; default False)
+- hoverStyle (optional)
 
-- featureCategoryField (string; default 'category')
-
-- featureCategoryToStyles (dict with strings as keys and values of type ; optional)
-
-- featureIdField (string; default 'id')
-
-- featureTooltipField (string; default 'tooltip')
-
-- featureValueField (string; default 'value')
-
-- featureValueToStyles (dict; optional)
-
-    `featureValueToStyles` is a dict with keys:
-
-    - bins (list of list of numberss; optional)
-
-    - styles (list; optional)
-
-    - closed (a value equal to: 'left', 'right'; optional)
+- selectedStyle (optional)
 
 - fitBounds (boolean; default True)
 
@@ -63,22 +44,61 @@ Keyword arguments:
     - padding (list of numbers; optional):
         为fitBounds动作调整后的视角，设置四周额外的像素大小留白空间，格式如[上下留白, 左右留白].
 
-- hoverStyle (optional)
+- clickFeatureZoom (boolean; default False)
 
-- hoverable (boolean; default False)
+- showTooltip (boolean; default False)
 
-- key (string; optional):
-    强制刷新用.
+- featureIdField (string; default 'id')
 
-- lassoButtonPosition (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; default 'topleft')
+- featureValueField (string; default 'value')
 
-- lassoResetSelectedFeatureIds (boolean; default False)
+- featureCategoryField (string; default 'category')
+
+- featureTooltipField (string; default 'tooltip')
+
+- selectMode (a value equal to: 'single', 'multiple'; default 'single')
+
+- disableClickSelect (boolean; default False)
+
+- selectedFeatureIds (list; optional)
+
+- featureValueToStyles (dict; optional)
+
+    `featureValueToStyles` is a dict with keys:
+
+    - bins (list of list of numberss; optional)
+
+    - styles (list; optional)
+
+    - closed (a value equal to: 'left', 'right'; optional)
+
+- featureCategoryToStyles (dict with strings as keys and values of type ; optional)
+
+- tooltipDirection (a value equal to: 'right', 'left', 'top', 'bottom', 'center', 'auto'; default 'auto')
+
+- tooltipPermanent (boolean; default False)
+
+- tooltipSticky (boolean; optional)
+
+- tooltipClassName (string; optional)
 
 - lassoSelect (boolean; default False)
 
+- lassoType (a value equal to: 'contain', 'intersect'; default 'intersect')
+
+- lassoResetSelectedFeatureIds (boolean; default False)
+
+- lassoButtonPosition (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; default 'topleft')
+
 - lassoStyle (optional)
 
-- lassoType (a value equal to: 'contain', 'intersect'; default 'intersect')
+- pointRenderMode (a value equal to: 'marker', 'circle-marker'; default 'circle-marker')
+
+- circleMarkerRadius (number; default 10)
+
+- _clickedFeature (dict; optional)
+
+- _hoveredFeature (dict; optional)
 
 - loading_state (dict; optional)
 
@@ -91,36 +111,16 @@ Keyword arguments:
         Holds which property is loading.
 
     - component_name (string; optional):
-        Holds the name of the component that is loading.
-
-- mode (a value equal to: 'default', 'selectable', 'choropleth', 'category'; default 'default')
-
-- pointRenderMode (a value equal to: 'marker', 'circle-marker'; default 'circle-marker')
-
-- selectMode (a value equal to: 'single', 'multiple'; default 'single')
-
-- selectedFeatureIds (list; optional)
-
-- selectedStyle (optional)
-
-- showTooltip (boolean; default False)
-
-- tooltipClassName (string; optional)
-
-- tooltipDirection (a value equal to: 'right', 'left', 'top', 'bottom', 'center', 'auto'; default 'auto')
-
-- tooltipPermanent (boolean; default False)
-
-- tooltipSticky (boolean; optional)"""
+        Holds the name of the component that is loading."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletGeoJSON'
     @_explicitize_args
     def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, data=Component.REQUIRED, mode=Component.UNDEFINED, hoverable=Component.UNDEFINED, defaultStyle=Component.UNDEFINED, hoverStyle=Component.UNDEFINED, selectedStyle=Component.UNDEFINED, fitBounds=Component.UNDEFINED, fitBoundsOptions=Component.UNDEFINED, clickFeatureZoom=Component.UNDEFINED, showTooltip=Component.UNDEFINED, featureIdField=Component.UNDEFINED, featureValueField=Component.UNDEFINED, featureCategoryField=Component.UNDEFINED, featureTooltipField=Component.UNDEFINED, selectMode=Component.UNDEFINED, disableClickSelect=Component.UNDEFINED, selectedFeatureIds=Component.UNDEFINED, featureValueToStyles=Component.UNDEFINED, featureCategoryToStyles=Component.UNDEFINED, tooltipDirection=Component.UNDEFINED, tooltipPermanent=Component.UNDEFINED, tooltipSticky=Component.UNDEFINED, tooltipClassName=Component.UNDEFINED, lassoSelect=Component.UNDEFINED, lassoType=Component.UNDEFINED, lassoResetSelectedFeatureIds=Component.UNDEFINED, lassoButtonPosition=Component.UNDEFINED, lassoStyle=Component.UNDEFINED, pointRenderMode=Component.UNDEFINED, circleMarkerRadius=Component.UNDEFINED, _clickedFeature=Component.UNDEFINED, _hoveredFeature=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', '_clickedFeature', '_hoveredFeature', 'circleMarkerRadius', 'clickFeatureZoom', 'data', 'defaultStyle', 'disableClickSelect', 'featureCategoryField', 'featureCategoryToStyles', 'featureIdField', 'featureTooltipField', 'featureValueField', 'featureValueToStyles', 'fitBounds', 'fitBoundsOptions', 'hoverStyle', 'hoverable', 'key', 'lassoButtonPosition', 'lassoResetSelectedFeatureIds', 'lassoSelect', 'lassoStyle', 'lassoType', 'loading_state', 'mode', 'pointRenderMode', 'selectMode', 'selectedFeatureIds', 'selectedStyle', 'showTooltip', 'tooltipClassName', 'tooltipDirection', 'tooltipPermanent', 'tooltipSticky']
+        self._prop_names = ['id', 'key', 'data', 'mode', 'hoverable', 'defaultStyle', 'hoverStyle', 'selectedStyle', 'fitBounds', 'fitBoundsOptions', 'clickFeatureZoom', 'showTooltip', 'featureIdField', 'featureValueField', 'featureCategoryField', 'featureTooltipField', 'selectMode', 'disableClickSelect', 'selectedFeatureIds', 'featureValueToStyles', 'featureCategoryToStyles', 'tooltipDirection', 'tooltipPermanent', 'tooltipSticky', 'tooltipClassName', 'lassoSelect', 'lassoType', 'lassoResetSelectedFeatureIds', 'lassoButtonPosition', 'lassoStyle', 'pointRenderMode', 'circleMarkerRadius', '_clickedFeature', '_hoveredFeature', 'loading_state']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', '_clickedFeature', '_hoveredFeature', 'circleMarkerRadius', 'clickFeatureZoom', 'data', 'defaultStyle', 'disableClickSelect', 'featureCategoryField', 'featureCategoryToStyles', 'featureIdField', 'featureTooltipField', 'featureValueField', 'featureValueToStyles', 'fitBounds', 'fitBoundsOptions', 'hoverStyle', 'hoverable', 'key', 'lassoButtonPosition', 'lassoResetSelectedFeatureIds', 'lassoSelect', 'lassoStyle', 'lassoType', 'loading_state', 'mode', 'pointRenderMode', 'selectMode', 'selectedFeatureIds', 'selectedStyle', 'showTooltip', 'tooltipClassName', 'tooltipDirection', 'tooltipPermanent', 'tooltipSticky']
+        self.available_properties = ['id', 'key', 'data', 'mode', 'hoverable', 'defaultStyle', 'hoverStyle', 'selectedStyle', 'fitBounds', 'fitBoundsOptions', 'clickFeatureZoom', 'showTooltip', 'featureIdField', 'featureValueField', 'featureCategoryField', 'featureTooltipField', 'selectMode', 'disableClickSelect', 'selectedFeatureIds', 'featureValueToStyles', 'featureCategoryToStyles', 'tooltipDirection', 'tooltipPermanent', 'tooltipSticky', 'tooltipClassName', 'lassoSelect', 'lassoType', 'lassoResetSelectedFeatureIds', 'lassoButtonPosition', 'lassoStyle', 'pointRenderMode', 'circleMarkerRadius', '_clickedFeature', '_hoveredFeature', 'loading_state']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

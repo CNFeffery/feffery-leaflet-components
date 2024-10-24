@@ -11,29 +11,34 @@ Keyword arguments:
 
 - id (string; optional)
 
-- categoryField (string; default 'category')
+- key (string; optional):
+    强制刷新用.
 
-- clickedPoint (dict; optional)
-
-    `clickedPoint` is a dict with keys:
-
-    - feature (dict; optional)
-
-    - timestamp (number; optional)
+- positions (list of dicts; required)
 
 - clusterBackground (string; optional)
 
 - clusterBorder (string; optional)
 
+- clusterTextColor (string; optional)
+
 - clusterIconBaseSize (number; default 10)
 
 - clusterIconExtraSizeFactor (number; default 40)
 
-- clusterTextColor (string; optional)
-
 - clusterTextSizeFactor (number; default 0.4)
 
+- minZoom (number; optional)
+
+- maxZoom (number; optional)
+
+- minPoints (number; optional)
+
+- radius (number; optional)
+
 - extent (number; optional)
+
+- nodeSize (number; optional)
 
 - iconOptions (dict; optional)
 
@@ -75,8 +80,19 @@ Keyword arguments:
 
     - className (string; optional)
 
-- key (string; optional):
-    强制刷新用.
+- tooltipField (string; default 'tooltip')
+
+- tooltipSticky (boolean; optional)
+
+- categoryField (string; default 'category')
+
+- clickedPoint (dict; optional)
+
+    `clickedPoint` is a dict with keys:
+
+    - feature (dict; optional)
+
+    - timestamp (number; optional)
 
 - loading_state (dict; optional)
 
@@ -89,32 +105,16 @@ Keyword arguments:
         Holds which property is loading.
 
     - component_name (string; optional):
-        Holds the name of the component that is loading.
-
-- maxZoom (number; optional)
-
-- minPoints (number; optional)
-
-- minZoom (number; optional)
-
-- nodeSize (number; optional)
-
-- positions (list of dicts; required)
-
-- radius (number; optional)
-
-- tooltipField (string; default 'tooltip')
-
-- tooltipSticky (boolean; optional)"""
+        Holds the name of the component that is loading."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletSuperCluster'
     @_explicitize_args
     def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, positions=Component.REQUIRED, clusterBackground=Component.UNDEFINED, clusterBorder=Component.UNDEFINED, clusterTextColor=Component.UNDEFINED, clusterIconBaseSize=Component.UNDEFINED, clusterIconExtraSizeFactor=Component.UNDEFINED, clusterTextSizeFactor=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, minPoints=Component.UNDEFINED, radius=Component.UNDEFINED, extent=Component.UNDEFINED, nodeSize=Component.UNDEFINED, iconOptions=Component.UNDEFINED, tooltipField=Component.UNDEFINED, tooltipSticky=Component.UNDEFINED, categoryField=Component.UNDEFINED, clickedPoint=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'categoryField', 'clickedPoint', 'clusterBackground', 'clusterBorder', 'clusterIconBaseSize', 'clusterIconExtraSizeFactor', 'clusterTextColor', 'clusterTextSizeFactor', 'extent', 'iconOptions', 'key', 'loading_state', 'maxZoom', 'minPoints', 'minZoom', 'nodeSize', 'positions', 'radius', 'tooltipField', 'tooltipSticky']
+        self._prop_names = ['id', 'key', 'positions', 'clusterBackground', 'clusterBorder', 'clusterTextColor', 'clusterIconBaseSize', 'clusterIconExtraSizeFactor', 'clusterTextSizeFactor', 'minZoom', 'maxZoom', 'minPoints', 'radius', 'extent', 'nodeSize', 'iconOptions', 'tooltipField', 'tooltipSticky', 'categoryField', 'clickedPoint', 'loading_state']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'categoryField', 'clickedPoint', 'clusterBackground', 'clusterBorder', 'clusterIconBaseSize', 'clusterIconExtraSizeFactor', 'clusterTextColor', 'clusterTextSizeFactor', 'extent', 'iconOptions', 'key', 'loading_state', 'maxZoom', 'minPoints', 'minZoom', 'nodeSize', 'positions', 'radius', 'tooltipField', 'tooltipSticky']
+        self.available_properties = ['id', 'key', 'positions', 'clusterBackground', 'clusterBorder', 'clusterTextColor', 'clusterIconBaseSize', 'clusterIconExtraSizeFactor', 'clusterTextSizeFactor', 'minZoom', 'maxZoom', 'minPoints', 'radius', 'extent', 'nodeSize', 'iconOptions', 'tooltipField', 'tooltipSticky', 'categoryField', 'clickedPoint', 'loading_state']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

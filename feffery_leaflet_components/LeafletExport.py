@@ -11,6 +11,19 @@ Keyword arguments:
 
 - id (string; optional)
 
+- key (string; optional):
+    强制刷新用.
+
+- position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
+
+- tileWait (number; optional)
+
+- filename (string; default 'map')
+
+- hideControlContainer (boolean; optional)
+
+- customSizeTooltip (string; optional)
+
 - customSize (dict; optional)
 
     `customSize` is a dict with keys:
@@ -18,15 +31,6 @@ Keyword arguments:
     - width (number; optional)
 
     - height (number; optional)
-
-- customSizeTooltip (string; optional)
-
-- filename (string; default 'map')
-
-- hideControlContainer (boolean; optional)
-
-- key (string; optional):
-    强制刷新用.
 
 - loading_state (dict; optional)
 
@@ -39,20 +43,16 @@ Keyword arguments:
         Holds which property is loading.
 
     - component_name (string; optional):
-        Holds the name of the component that is loading.
-
-- position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
-
-- tileWait (number; optional)"""
+        Holds the name of the component that is loading."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletExport'
     @_explicitize_args
     def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, position=Component.UNDEFINED, tileWait=Component.UNDEFINED, filename=Component.UNDEFINED, hideControlContainer=Component.UNDEFINED, customSizeTooltip=Component.UNDEFINED, customSize=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'customSize', 'customSizeTooltip', 'filename', 'hideControlContainer', 'key', 'loading_state', 'position', 'tileWait']
+        self._prop_names = ['id', 'key', 'position', 'tileWait', 'filename', 'hideControlContainer', 'customSizeTooltip', 'customSize', 'loading_state']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'customSize', 'customSizeTooltip', 'filename', 'hideControlContainer', 'key', 'loading_state', 'position', 'tileWait']
+        self.available_properties = ['id', 'key', 'position', 'tileWait', 'filename', 'hideControlContainer', 'customSizeTooltip', 'customSize', 'loading_state']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

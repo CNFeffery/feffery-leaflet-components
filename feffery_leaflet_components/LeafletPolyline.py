@@ -9,9 +9,29 @@ class LeafletPolyline(Component):
 
 Keyword arguments:
 
+- id (string; optional)
+
+- key (string; optional):
+    强制刷新用.
+
+- className (string; optional):
+    为当前矢量设置className.
+
 - children (a list of or a singular dash component, string or number; optional)
 
-- id (string; optional)
+- positions (list of dicts; required)
+
+    `positions` is a list of dicts with keys:
+
+    - lng (number; optional)
+
+    - lat (number; optional) | list of list of dicts with keys:
+
+    - lng (number; optional)
+
+    - lat (number; optional)s
+
+- pathOptions (optional)
 
 - arrowheads (dict; default False)
 
@@ -29,13 +49,11 @@ Keyword arguments:
 
 - arrowheadsPathOptions (optional)
 
-- className (string; optional):
-    为当前矢量设置className.
-
 - editable (boolean; default False)
 
-- key (string; optional):
-    强制刷新用.
+- nClicks (number; default 0)
+
+- mouseOverCount (number; default 0)
 
 - loading_state (dict; optional)
 
@@ -48,34 +66,16 @@ Keyword arguments:
         Holds which property is loading.
 
     - component_name (string; optional):
-        Holds the name of the component that is loading.
-
-- mouseOverCount (number; default 0)
-
-- nClicks (number; default 0)
-
-- pathOptions (optional)
-
-- positions (list of dicts; required)
-
-    `positions` is a list of dicts with keys:
-
-    - lng (number; optional)
-
-    - lat (number; optional) | list of list of dicts with keys:
-
-    - lng (number; optional)
-
-    - lat (number; optional)s"""
+        Holds the name of the component that is loading."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletPolyline'
     @_explicitize_args
     def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, className=Component.UNDEFINED, positions=Component.REQUIRED, pathOptions=Component.UNDEFINED, arrowheads=Component.UNDEFINED, arrowheadsPathOptions=Component.UNDEFINED, editable=Component.UNDEFINED, nClicks=Component.UNDEFINED, mouseOverCount=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'arrowheads', 'arrowheadsPathOptions', 'className', 'editable', 'key', 'loading_state', 'mouseOverCount', 'nClicks', 'pathOptions', 'positions']
+        self._prop_names = ['id', 'key', 'className', 'children', 'positions', 'pathOptions', 'arrowheads', 'arrowheadsPathOptions', 'editable', 'nClicks', 'mouseOverCount', 'loading_state']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'arrowheads', 'arrowheadsPathOptions', 'className', 'editable', 'key', 'loading_state', 'mouseOverCount', 'nClicks', 'pathOptions', 'positions']
+        self.available_properties = ['id', 'key', 'className', 'children', 'positions', 'pathOptions', 'arrowheads', 'arrowheadsPathOptions', 'editable', 'nClicks', 'mouseOverCount', 'loading_state']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

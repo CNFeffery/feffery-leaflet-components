@@ -11,6 +11,27 @@ Keyword arguments:
 
 - id (string; optional)
 
+- key (string; optional):
+    强制刷新用.
+
+- className (string; optional)
+
+- style (dict; optional)
+
+- containerClassName (string; optional)
+
+- containerStyle (dict; optional)
+
+- containerItemClassName (string; optional)
+
+- containerItemStyle (dict; optional)
+
+- urls (list of dicts; optional)
+
+    `urls` is a list of dicts with keys:
+
+    - url (string; optional)
+
 - center (dict; default { lng: 0, lat: 0 })
 
     `center` is a dict with keys:
@@ -19,20 +40,11 @@ Keyword arguments:
 
     - lat (number; optional)
 
-- className (string; optional)
+- zoom (number; default 3)
 
-- containerClassName (string; optional)
-
-- containerItemClassName (string; optional)
-
-- containerItemStyle (dict; optional)
-
-- containerStyle (dict; optional)
+- selectedUrl (string; optional)
 
 - containerVisible (boolean; default True)
-
-- key (string; optional):
-    强制刷新用.
 
 - loading_state (dict; optional)
 
@@ -45,28 +57,16 @@ Keyword arguments:
         Holds which property is loading.
 
     - component_name (string; optional):
-        Holds the name of the component that is loading.
-
-- selectedUrl (string; optional)
-
-- style (dict; optional)
-
-- urls (list of dicts; optional)
-
-    `urls` is a list of dicts with keys:
-
-    - url (string; optional)
-
-- zoom (number; default 3)"""
+        Holds the name of the component that is loading."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletTileSelect'
     @_explicitize_args
     def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, containerClassName=Component.UNDEFINED, containerStyle=Component.UNDEFINED, containerItemClassName=Component.UNDEFINED, containerItemStyle=Component.UNDEFINED, urls=Component.UNDEFINED, center=Component.UNDEFINED, zoom=Component.UNDEFINED, selectedUrl=Component.UNDEFINED, containerVisible=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'center', 'className', 'containerClassName', 'containerItemClassName', 'containerItemStyle', 'containerStyle', 'containerVisible', 'key', 'loading_state', 'selectedUrl', 'style', 'urls', 'zoom']
+        self._prop_names = ['id', 'key', 'className', 'style', 'containerClassName', 'containerStyle', 'containerItemClassName', 'containerItemStyle', 'urls', 'center', 'zoom', 'selectedUrl', 'containerVisible', 'loading_state']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'center', 'className', 'containerClassName', 'containerItemClassName', 'containerItemStyle', 'containerStyle', 'containerVisible', 'key', 'loading_state', 'selectedUrl', 'style', 'urls', 'zoom']
+        self.available_properties = ['id', 'key', 'className', 'style', 'containerClassName', 'containerStyle', 'containerItemClassName', 'containerItemStyle', 'urls', 'center', 'zoom', 'selectedUrl', 'containerVisible', 'loading_state']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

@@ -14,19 +14,6 @@ Keyword arguments:
 - key (string; optional):
     强制刷新用.
 
-- loading_state (dict; optional)
-
-    `loading_state` is a dict with keys:
-
-    - is_loading (boolean; optional):
-        Determines if the component is loading or not.
-
-    - prop_name (string; optional):
-        Holds which property is loading.
-
-    - component_name (string; optional):
-        Holds the name of the component that is loading.
-
 - mapActionConfig (dict; optional)
 
     `mapActionConfig` is a dict with keys:
@@ -62,16 +49,29 @@ Keyword arguments:
     - flyToDuration (a value equal to: 'instant', 'fast', 'normal', 'slow', 'auto'; optional)
 
     - delay (number; optional):
-        设置当前动作的延时执行时长，单位：毫秒  默认：0."""
+        设置当前动作的延时执行时长，单位：毫秒  默认：0.
+
+- loading_state (dict; optional)
+
+    `loading_state` is a dict with keys:
+
+    - is_loading (boolean; optional):
+        Determines if the component is loading or not.
+
+    - prop_name (string; optional):
+        Holds which property is loading.
+
+    - component_name (string; optional):
+        Holds the name of the component that is loading."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletMapAction'
     @_explicitize_args
     def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, mapActionConfig=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'key', 'loading_state', 'mapActionConfig']
+        self._prop_names = ['id', 'key', 'mapActionConfig', 'loading_state']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', 'loading_state', 'mapActionConfig']
+        self.available_properties = ['id', 'key', 'mapActionConfig', 'loading_state']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

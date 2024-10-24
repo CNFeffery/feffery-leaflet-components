@@ -56,7 +56,8 @@ module.exports = (env, argv) => {
             library: dashLibraryName,
             libraryTarget: 'window',
         },
-        devtool: 'source-map',
+        // devtool: false, // 开发阶段使用，生成全量source-map
+        devtool, // 发布阶段使用，生成最小化source-map
         externals,
         module: {
             rules: [

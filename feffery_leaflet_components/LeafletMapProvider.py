@@ -9,11 +9,11 @@ class LeafletMapProvider(Component):
 
 Keyword arguments:
 
-- children (a list of or a singular dash component, string or number; optional):
-    用于传入内部组件.
-
 - id (string; optional):
     组件id.
+
+- children (a list of or a singular dash component, string or number; optional):
+    用于传入内部组件.
 
 - key (string; optional):
     强制刷新用.
@@ -36,9 +36,9 @@ Keyword arguments:
     _type = 'LeafletMapProvider'
     @_explicitize_args
     def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'key', 'loading_state']
+        self._prop_names = ['id', 'children', 'key', 'loading_state']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'key', 'loading_state']
+        self.available_properties = ['id', 'children', 'key', 'loading_state']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
