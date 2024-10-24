@@ -5,26 +5,33 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletPopup(Component):
     """A LeafletPopup component.
-
+弹出窗口组件LeafletPopup
 
 Keyword arguments:
 
-- children (a list of or a singular dash component, string or number; optional)
+- children (a list of or a singular dash component, string or number; optional):
+    组件型，按钮内嵌元素.
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
-- className (string; optional)
+- className (string; optional):
+    当前组件css类名.
 
-- closeButton (boolean; optional)
+- closeButton (boolean; default False):
+    是否显示关闭按钮  默认值：`False`.
 
-- closeOnClick (boolean; optional)
+- closeOnClick (boolean; default True):
+    点击地图空白处是否可关闭窗口  默认值：`True`.
 
-- closeOnEscapeKey (boolean; optional)
+- closeOnEscapeKey (boolean; default True):
+    通过键盘`esc`键是否可关闭窗口  默认值：`True`.
 
-- keepInView (boolean; optional)
+- keepInView (boolean; default False):
+    已展开的窗口是否限制在地图范围内显示  默认值：`False`.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
 - loading_state (dict; optional)
 

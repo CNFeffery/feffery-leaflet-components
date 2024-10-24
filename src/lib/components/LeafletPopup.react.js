@@ -1,13 +1,15 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
+// reaact核心
 import React from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { Popup } from 'react-leaflet';
 
-// 定义弹出窗口组件LeafletPopup
+/**
+ * 弹出窗口组件LeafletPopup
+ */
 const LeafletPopup = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
         children,
@@ -21,7 +23,6 @@ const LeafletPopup = (props) => {
         setProps
     } = props;
 
-    // 返回定制化的前端组件
     return (
         <Popup
             id={id}
@@ -38,32 +39,49 @@ const LeafletPopup = (props) => {
     );
 }
 
-// 定义参数或属性
 LeafletPopup.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 设置tooltip内部的子元素
+    /**
+     * 组件型，按钮内嵌元素
+     */
     children: PropTypes.node,
 
-    // 为popup容器设置css类
+    /**
+     * 当前组件css类名
+     */
     className: PropTypes.string,
 
-    // 设置是否强制已展开的popup限定在视角内，默认为false
+    /**
+     * 已展开的窗口是否限制在地图范围内显示
+     * 默认值：`false`
+     */
     keepInView: PropTypes.bool,
 
-    // 设置是否为popup渲染关闭按钮，默认为false
+    /**
+     * 是否显示关闭按钮
+     * 默认值：`false`
+     */
     closeButton: PropTypes.bool,
 
-    // 设置popup是否可以受键盘ESC键控制关闭，默认为true
+    /**
+     * 通过键盘`esc`键是否可关闭窗口
+     * 默认值：`true`
+     */
     closeOnEscapeKey: PropTypes.bool,
 
-    // 设置点击地图时是否会触发popup的关闭
+    /**
+     * 点击地图空白处是否可关闭窗口
+     * 默认值：`true`
+     */
     closeOnClick: PropTypes.bool,
 
     /**
@@ -93,8 +111,11 @@ LeafletPopup.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletPopup.defaultProps = {
+    keepInView: false,
+    closeButton: false,
+    closeOnEscapeKey: true,
+    closeOnClick: true
 }
 
 export default React.memo(LeafletPopup);

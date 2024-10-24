@@ -3850,7 +3850,7 @@
     }
   },
   "src/lib/components/LeafletPopup.react.js": {
-    "description": "",
+    "description": "\u5f39\u51fa\u7a97\u53e3\u7ec4\u4ef6LeafletPopup",
     "displayName": "LeafletPopup",
     "methods": [],
     "props": {
@@ -3859,56 +3859,72 @@
           "name": "string"
         },
         "required": false,
-        "description": ""
+        "description": "\u7ec4\u4ef6\u552f\u4e00id"
       },
       "key": {
         "type": {
           "name": "string"
         },
         "required": false,
-        "description": "\u5f3a\u5236\u5237\u65b0\u7528"
+        "description": "\u5bf9\u5f53\u524d\u7ec4\u4ef6\u7684`key`\u503c\u8fdb\u884c\u66f4\u65b0\uff0c\u53ef\u5b9e\u73b0\u5f3a\u5236\u91cd\u7ed8\u5f53\u524d\u7ec4\u4ef6\u7684\u6548\u679c"
       },
       "children": {
         "type": {
           "name": "node"
         },
         "required": false,
-        "description": ""
+        "description": "\u7ec4\u4ef6\u578b\uff0c\u6309\u94ae\u5185\u5d4c\u5143\u7d20"
       },
       "className": {
         "type": {
           "name": "string"
         },
         "required": false,
-        "description": ""
+        "description": "\u5f53\u524d\u7ec4\u4ef6css\u7c7b\u540d"
       },
       "keepInView": {
         "type": {
           "name": "bool"
         },
         "required": false,
-        "description": ""
+        "description": "\u5df2\u5c55\u5f00\u7684\u7a97\u53e3\u662f\u5426\u9650\u5236\u5728\u5730\u56fe\u8303\u56f4\u5185\u663e\u793a\r\n\u9ed8\u8ba4\u503c\uff1a`false`",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       },
       "closeButton": {
         "type": {
           "name": "bool"
         },
         "required": false,
-        "description": ""
+        "description": "\u662f\u5426\u663e\u793a\u5173\u95ed\u6309\u94ae\r\n\u9ed8\u8ba4\u503c\uff1a`false`",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       },
       "closeOnEscapeKey": {
         "type": {
           "name": "bool"
         },
         "required": false,
-        "description": ""
+        "description": "\u901a\u8fc7\u952e\u76d8`esc`\u952e\u662f\u5426\u53ef\u5173\u95ed\u7a97\u53e3\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
       },
       "closeOnClick": {
         "type": {
           "name": "bool"
         },
         "required": false,
-        "description": ""
+        "description": "\u70b9\u51fb\u5730\u56fe\u7a7a\u767d\u5904\u662f\u5426\u53ef\u5173\u95ed\u7a97\u53e3\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
       },
       "width": {
         "type": {

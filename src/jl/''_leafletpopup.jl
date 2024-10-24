@@ -9,16 +9,20 @@ export ''_leafletpopup
 
 
 A LeafletPopup component.
-
+弹出窗口组件LeafletPopup
 Keyword arguments:
-- `children` (a list of or a singular dash component, string or number; optional)
-- `id` (String; optional)
-- `className` (String; optional)
-- `closeButton` (Bool; optional)
-- `closeOnClick` (Bool; optional)
-- `closeOnEscapeKey` (Bool; optional)
-- `keepInView` (Bool; optional)
-- `key` (String; optional): 强制刷新用
+- `children` (a list of or a singular dash component, string or number; optional): 组件型，按钮内嵌元素
+- `id` (String; optional): 组件唯一id
+- `className` (String; optional): 当前组件css类名
+- `closeButton` (Bool; optional): 是否显示关闭按钮
+默认值：`false`
+- `closeOnClick` (Bool; optional): 点击地图空白处是否可关闭窗口
+默认值：`true`
+- `closeOnEscapeKey` (Bool; optional): 通过键盘`esc`键是否可关闭窗口
+默认值：`true`
+- `keepInView` (Bool; optional): 已展开的窗口是否限制在地图范围内显示
+默认值：`false`
+- `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
