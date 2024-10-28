@@ -2,7 +2,7 @@
 name = "FefferyLeafletComponents"
 uuid = "1b08a953-4be3-4667-9a23-586b5e79026d"
 authors = ["CNFeffery <fefferypzy@gmail.com>"]
-version = "0.1.0-rc6"
+version = "0.1.0"
 
 [deps]
 Dash = "1b08a953-4be3-4667-9a23-3db579824955"

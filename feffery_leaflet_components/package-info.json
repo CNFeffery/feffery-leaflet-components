@@ -1,6 +1,6 @@
 {
     "name": "feffery_leaflet_components",
-    "version": "0.1.0-rc6",
+    "version": "0.1.0",
     "description": "Best implementation of Leaflet in Plotly Dash.",
     "repository": {
         "type": "git",
@@ -20,6 +20,7 @@
         "build:activated": "npm run build:js && npm run build:backends-activated"
     },
     "author": "CNFeffery <fefferypzy@gmail.com>",
+    "email": "fefferypzy@gmail.com",
     "license": "MIT",
     "dependencies": {
         "@babel/plugin-proposal-optional-chaining": "^7.16.7",
@@ -40,7 +41,7 @@
         "lodash": "^4.17.21",
         "proj4leaflet": "^1.0.2",
         "ramda": "^0.26.1",
-        "react-leaflet": "^4.0.0",
+        "react-leaflet": "^3.0.0",
         "svg-url-loader": "^7.1.1",
         "url-loader": "^4.1.1",
         "use-supercluster": "^0.4.0",

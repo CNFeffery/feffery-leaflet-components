@@ -7,26 +7,10 @@ app = dash.Dash(__name__)
 app.layout = html.Div(
     [
         flc.LeafletMap(
-            [
-                flc.LeafletTileLayer(),
-                flc.LeafletImageOverlay(
-                    className='image-overlay-test',
-                    url='https://images.pexels.com/photos/2049422/pexels-photo-2049422.jpeg',
-                    bounds={
-                        'minx': 106,
-                        'miny': 29,
-                        'maxx': 108,
-                        'maxy': 31,
-                    },
-                    opacity=0.6,
-                    maxZoom=14,
-                ),
-            ],
-            center={'lat': 29, 'lng': 106},
-            zoom=9,
-            zoomDelta=0.5,
-            scaleControl=True,
-            scaleControlOptions={'imperial': False},
+            [flc.LeafletTileLayer()],
+            center={'lng': 106.573344, 'lat': 29.560087},
+            zoom=13,
+            editToolbar=True,
             style={'height': '100%'},
         )
     ],
