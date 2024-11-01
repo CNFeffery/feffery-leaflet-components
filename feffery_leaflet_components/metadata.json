@@ -2031,7 +2031,7 @@
     }
   },
   "src/lib/components/LeafletMap.react.js": {
-    "description": "",
+    "description": "\u5730\u56fe\u5bb9\u5668\u7ec4\u4ef6LeafletMap",
     "displayName": "LeafletMap",
     "methods": [],
     "props": {
@@ -2040,35 +2040,35 @@
           "name": "string"
         },
         "required": false,
-        "description": ""
+        "description": "\u7ec4\u4ef6\u552f\u4e00id"
       },
       "key": {
         "type": {
           "name": "string"
         },
         "required": false,
-        "description": "\u5f3a\u5236\u5237\u65b0\u7528"
+        "description": "\u5bf9\u5f53\u524d\u7ec4\u4ef6\u7684`key`\u503c\u8fdb\u884c\u66f4\u65b0\uff0c\u53ef\u5b9e\u73b0\u5f3a\u5236\u91cd\u7ed8\u5f53\u524d\u7ec4\u4ef6\u7684\u6548\u679c"
       },
       "children": {
         "type": {
           "name": "node"
         },
         "required": false,
-        "description": ""
-      },
-      "className": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": ""
+        "description": "\u7ec4\u4ef6\u578b\uff0c\u5730\u56fe\u5185\u90e8\u7ec4\u4ef6"
       },
       "style": {
         "type": {
           "name": "object"
         },
         "required": false,
-        "description": ""
+        "description": "\u5f53\u524d\u7ec4\u4ef6css\u6837\u5f0f"
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "\u5f53\u524d\u7ec4\u4ef6css\u7c7b\u540d"
       },
       "center": {
         "type": {
@@ -2085,7 +2085,7 @@
           }
         },
         "required": false,
-        "description": "",
+        "description": "\u5730\u56fe\u9ed8\u8ba4\u4e2d\u5fc3\u5750\u6807\uff0c\u683c\u5f0f\uff1a`{'lng': xxx, 'lat': xxx}`\r\n\u9ed8\u8ba4\u503c\uff1a`{'lng': 0, 'lat': 0}`",
         "defaultValue": {
           "value": "{ lng: 0, lat: 0 }",
           "computed": false
@@ -2117,17 +2117,17 @@
               "value": {
                 "code": {
                   "name": "string",
-                  "description": "\u5750\u6807\u7cfb\u4ee3\u7801\uff0c\u5982EPSG:4490",
+                  "description": "\u5750\u6807\u7cfb\u4ee3\u7801",
                   "required": false
                 },
                 "proj4def": {
                   "name": "string",
-                  "description": "\u5750\u6807\u7cfbdef\u5b57\u7b26\u4e32",
+                  "description": "\u5750\u6807\u7cfb`def`\u5b57\u7b26\u4e32",
                   "required": false
                 },
                 "options": {
                   "name": "object",
-                  "description": "\u5176\u4ed6\u5750\u6807\u7cfb\u53c2\u6570",
+                  "description": "\u5750\u6807\u7cfb\u5176\u4ed6\u914d\u7f6e\u53c2\u6570",
                   "required": false
                 }
               }
@@ -2135,7 +2135,7 @@
           ]
         },
         "required": false,
-        "description": "\u4e3a\u5f53\u524d\u5730\u56fe\u914d\u7f6e\u5750\u6807\u53c2\u8003\u7cfb\r\n\u5f53\u4f20\u5165\u5b57\u7b26\u4e32\u65f6\uff0c\u8868\u793a\u5185\u7f6e\u7684\u51e0\u79cd\u57fa\u7840\u5750\u6807\u53c2\u8003\u7cfb\uff0c\u53ef\u9009\u7684\u6709'EPSG3857'\u3001'EPSG4326'\u3001'simple'\r\n\u5f53\u4f20\u5165\u5b57\u5178\u65f6\uff0c\u7528\u4e8e\u4f7f\u7528\u81ea\u5b9a\u4e49\u5750\u6807\u53c2\u8003\u7cfb\r\n\u9ed8\u8ba4\uff1a'EPSG3857'",
+        "description": "\u4e3a\u5f53\u524d\u5730\u56fe\u914d\u7f6e\u5750\u6807\u53c2\u8003\u7cfb\uff0c\u5f53\u4f20\u5165\u5b57\u7b26\u578b\u65f6\u53ef\u9009\u9879\u6709`'EPSG3857'`\u3001`'EPSG4326'`\u3001`'simple'`\uff0c\r\n\u5f53\u4f20\u5165\u5b57\u5178\u65f6\uff0c\u7528\u4e8e\u6784\u9020\u81ea\u5b9a\u4e49\u5750\u6807\u7cfb\u53c2\u6570\r\n\u9ed8\u8ba4\u503c\uff1a`'EPSG3857'`",
         "defaultValue": {
           "value": "'EPSG3857'",
           "computed": false
@@ -2146,7 +2146,7 @@
           "name": "number"
         },
         "required": false,
-        "description": "",
+        "description": "\u5730\u56fe\u9ed8\u8ba4\u7f29\u653e\u7ea7\u522b\r\n\u9ed8\u8ba4\u503c\uff1a`3`",
         "defaultValue": {
           "value": "3",
           "computed": false
@@ -2157,7 +2157,7 @@
           "name": "bool"
         },
         "required": false,
-        "description": "",
+        "description": "\u662f\u5426\u5141\u8bb8\u9f20\u6807\u53cc\u51fb\u5730\u56fe\u8fdb\u884c\u653e\u5927\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
         "defaultValue": {
           "value": "true",
           "computed": false
@@ -2168,7 +2168,7 @@
           "name": "bool"
         },
         "required": false,
-        "description": "",
+        "description": "\u662f\u5426\u5141\u8bb8\u9f20\u6807\u62d6\u62fd\u79fb\u52a8\u5730\u56fe\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
         "defaultValue": {
           "value": "true",
           "computed": false
@@ -2179,7 +2179,7 @@
           "name": "bool"
         },
         "required": false,
-        "description": "",
+        "description": "\u662f\u5426\u5141\u8bb8\u9f20\u6807\u70b9\u51fb\u5730\u56fe\u7a7a\u767d\u5904\u5173\u95ed\u5df2\u6253\u5f00\u7684`leafletPopup`\u5f39\u51fa\u5c42\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
         "defaultValue": {
           "value": "true",
           "computed": false
@@ -2190,7 +2190,7 @@
           "name": "number"
         },
         "required": false,
-        "description": "",
+        "description": "\u5730\u56fe\u6700\u5c0f\u7f29\u653e\u7ea7\u522b\r\n\u9ed8\u8ba4\u503c\uff1a`0`",
         "defaultValue": {
           "value": "0",
           "computed": false
@@ -2201,7 +2201,7 @@
           "name": "number"
         },
         "required": false,
-        "description": "",
+        "description": "\u5730\u56fe\u6700\u5927\u7f29\u653e\u7ea7\u522b\r\n\u9ed8\u8ba4\u503c\uff1a`18`",
         "defaultValue": {
           "value": "18",
           "computed": false
@@ -2212,7 +2212,7 @@
           "name": "number"
         },
         "required": false,
-        "description": "",
+        "description": "\u5730\u56fe\u5355\u6b21\u7f29\u653e\u53d8\u5316\u5bf9\u5e94\u7684\u7f29\u653e\u7ea7\u522b\u6b65\u957f\r\n\u9ed8\u8ba4\u503c\uff1a`1`",
         "defaultValue": {
           "value": "1",
           "computed": false
@@ -2223,7 +2223,7 @@
           "name": "bool"
         },
         "required": false,
-        "description": "",
+        "description": "\u662f\u5426\u663e\u793a\u5730\u56fe\u7f29\u653e\u7ec4\u4ef6\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
         "defaultValue": {
           "value": "true",
           "computed": false
@@ -2248,7 +2248,7 @@
           ]
         },
         "required": false,
-        "description": "",
+        "description": "\u662f\u5426\u5141\u8bb8\u901a\u7528\u9f20\u6807\u6eda\u8f6e\u7f29\u653e\u5730\u56fe\uff0c\u5f53\u4f20\u5165`'center'`\u65f6\u4f1a\u5728\u5141\u8bb8\u9f20\u6807\u6eda\u8f6e\u7f29\u653e\u5730\u56fe\u65f6\u65e0\u89c6\u9f20\u6807\u5b9e\u9645\u4f4d\u7f6e\uff0c\u4ee5\u5730\u56fe\u5f53\u524d\u4e2d\u5fc3\u4f5c\u4e3a\u7f29\u653e\u4f9d\u636e\u7684\u4e2d\u5fc3\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
         "defaultValue": {
           "value": "true",
           "computed": false
@@ -2259,7 +2259,7 @@
           "name": "number"
         },
         "required": false,
-        "description": "",
+        "description": "\u63a7\u5236\u9f20\u6807\u6eda\u8f6e\u6eda\u52a8\u591a\u5c11\u50cf\u7d20\u4f1a\u89e6\u53d1\u4e00\u4e2a\u5355\u4f4d`zoomDelta`\u7ea7\u522b\u7684\u5730\u56fe\u7f29\u653e\r\n\u9ed8\u8ba4\u503c\uff1a`60`",
         "defaultValue": {
           "value": "60",
           "computed": false
@@ -2284,7 +2284,7 @@
           ]
         },
         "required": false,
-        "description": "",
+        "description": "\u9488\u5bf9\u9f20\u6807\u6eda\u8f6e\u7f29\u653e\u5730\u56fe\u662f\u5426\u5f00\u542f\u4e1d\u6ed1\u6a21\u5f0f\uff0c\u5f53\u4f20\u5165`'center'`\u65f6\u4f1a\u5728\u5141\u8bb8\u9f20\u6807\u6eda\u8f6e\u7f29\u653e\u5730\u56fe\u65f6\u65e0\u89c6\u9f20\u6807\u5b9e\u9645\u4f4d\u7f6e\uff0c\u4ee5\u5730\u56fe\u5f53\u524d\u4e2d\u5fc3\u4f5c\u4e3a\u4e1d\u6ed1\u7f29\u653e\u4f9d\u636e\u7684\u4e2d\u5fc3\r\n\u9ed8\u8ba4\u503c\uff1a`false`",
         "defaultValue": {
           "value": "false",
           "computed": false
@@ -2295,7 +2295,7 @@
           "name": "bool"
         },
         "required": false,
-        "description": "\u8bbe\u7f6e\u662f\u5426\u663e\u793a\u6bd4\u4f8b\u5c3a\r\n\u9ed8\u8ba4\uff1afalse",
+        "description": "\u662f\u5426\u663e\u793a\u5730\u56fe\u6bd4\u4f8b\u5c3a\r\n\u9ed8\u8ba4\u503c\uff1a`false`",
         "defaultValue": {
           "value": "false",
           "computed": false
@@ -2325,18 +2325,18 @@
                   "computed": false
                 }
               ],
-              "description": "\u8bbe\u7f6e\u6bd4\u4f8b\u5c3a\u7684\u65b9\u4f4d\uff0c\u53ef\u9009\u7684\u6709'topleft'\u3001'topright'\u3001'bottomleft'\u3001'bottomright'",
+              "description": "\u8bbe\u7f6e\u6bd4\u4f8b\u5c3a\u65b9\u4f4d\uff0c\u53ef\u9009\u9879\u6709`'topLeft'`\u3001`'topRight'`\u3001`'bottomLeft'`\u3001`'bottomRight'`",
               "required": false
             },
             "imperial": {
               "name": "bool",
-              "description": "\u662f\u5426\u663e\u793a\u82f1\u5236\u5355\u4f4d\r\n\u9ed8\u8ba4\uff1atrue",
+              "description": "\u662f\u5426\u663e\u793a\u82f1\u5236\u5355\u4f4d",
               "required": false
             }
           }
         },
         "required": false,
-        "description": "\u914d\u7f6e\u6bd4\u4f8b\u5c3a\u76f8\u5173\u53c2\u6570"
+        "description": "\u914d\u7f6e\u5730\u56fe\u6bd4\u4f8b\u5c3a\u76f8\u5173\u53c2\u6570"
       },
       "maxBounds": {
         "type": {
@@ -2344,31 +2344,35 @@
           "value": {
             "minx": {
               "name": "number",
+              "description": "\u77e9\u5f62\u8303\u56f4\u5de6\u4e0b\u89d2\u7ecf\u5ea6",
               "required": false
             },
             "miny": {
               "name": "number",
+              "description": "\u77e9\u5f62\u8303\u56f4\u5de6\u4e0b\u89d2\u7eac\u5ea6",
               "required": false
             },
             "maxx": {
               "name": "number",
+              "description": "\u77e9\u5f62\u8303\u56f4\u53f3\u4e0a\u89d2\u7ecf\u5ea6",
               "required": false
             },
             "maxy": {
               "name": "number",
+              "description": "\u77e9\u5f62\u8303\u56f4\u53f3\u4e0a\u89d2\u7eac\u5ea6",
               "required": false
             }
           }
         },
         "required": false,
-        "description": ""
+        "description": "\u9650\u5236\u5730\u56fe\u53ef\u79fb\u52a8\u5750\u6807\u77e9\u5f62\u8303\u56f4"
       },
       "editToolbar": {
         "type": {
           "name": "bool"
         },
         "required": false,
-        "description": "",
+        "description": "\u662f\u5426\u663e\u793a\u7f16\u8f91\u6a21\u5f0f\u5de5\u5177\u680f\r\n\u9ed8\u8ba4\u503c\uff1a`false`",
         "defaultValue": {
           "value": "false",
           "computed": false
@@ -2398,71 +2402,92 @@
                   "computed": false
                 }
               ],
+              "description": "\u8bbe\u7f6e\u7f16\u8f91\u6a21\u5f0f\u5de5\u5177\u680f\u65b9\u4f4d\uff0c\u53ef\u9009\u9879\u6709`'topleft'`\u3001`'topright'`\u3001`'bottomleft'`\u3001`'bottomright'`\r\n\u9ed8\u8ba4\u503c\uff1a`'topleft'`",
               "required": false
             },
             "drawMarker": {
               "name": "bool",
+              "description": "\u662f\u5426\u5f00\u542f\u201c\u6807\u8bb0\u70b9\u7ed8\u5236\u201d\u529f\u80fd\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
               "required": false
             },
             "drawCircleMarker": {
               "name": "bool",
+              "description": "\u662f\u5426\u5f00\u542f\u201c\u5706\u5f62\u6807\u8bb0\u70b9\u201d\u7ed8\u5236\u529f\u80fd\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
               "required": false
             },
             "drawPolyline": {
               "name": "bool",
+              "description": "\u662f\u5426\u5f00\u542f\u201c\u6298\u7ebf\u201d\u7ed8\u5236\u529f\u80fd\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
               "required": false
             },
             "drawRectangle": {
               "name": "bool",
+              "description": "\u662f\u5426\u5f00\u542f\u201c\u77e9\u5f62\u201d\u7ed8\u5236\u529f\u80fd\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
               "required": false
             },
             "drawPolygon": {
               "name": "bool",
+              "description": "\u662f\u5426\u5f00\u542f\u201c\u591a\u8fb9\u5f62\u201d\u7ed8\u5236\u529f\u80fd\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
               "required": false
             },
             "drawCircle": {
               "name": "bool",
+              "description": "\u662f\u5426\u5f00\u542f\u201c\u5706\u5f62\u201d\u7ed8\u5236\u529f\u80fd\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
               "required": false
             },
             "drawText": {
               "name": "bool",
+              "description": "\u662f\u5426\u5f00\u542f\u201c\u6587\u5b57\u201d\u7ed8\u5236\u529f\u80fd\r\n\u9ed8\u8ba4\u503c\uff1a`false`",
               "required": false
             },
             "editMode": {
               "name": "bool",
+              "description": "\u662f\u5426\u5f00\u542f\u201c\u7f16\u8f91\u8981\u7d20\u201d\u529f\u80fd\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
               "required": false
             },
             "dragMode": {
               "name": "bool",
+              "description": "\u662f\u5426\u5f00\u542f\u201c\u62d6\u62fd\u8981\u7d20\u201d\u529f\u80fd\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
               "required": false
             },
             "cutPolygon": {
               "name": "bool",
+              "description": "\u662f\u5426\u5f00\u542f\u201c\u88c1\u526a\u8981\u7d20\u201d\u529f\u80fd\r\n\u9ed8\u8ba4\u503c\uff1a`false`",
               "required": false
             },
             "removalMode": {
               "name": "bool",
+              "description": "\u662f\u5426\u5f00\u542f\u201c\u79fb\u9664\u8981\u7d20\u201d\u529f\u80fd\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
               "required": false
             },
             "rotateMode": {
               "name": "bool",
+              "description": "\u662f\u5426\u5f00\u542f\u201c\u65cb\u8f6c\u8981\u7d20\u201d\u529f\u80fd\r\n\u9ed8\u8ba4\u503c\uff1a`true`",
               "required": false
             },
             "oneBlock": {
               "name": "bool",
+              "description": "\u5404\u529f\u80fd\u6309\u94ae\u662f\u5426\u96c6\u6210\u5728\u540c\u4e00\u4e2a\u5bb9\u5668\u4e2d\r\n\u9ed8\u8ba4\u503c\uff1a`false`",
               "required": false
             }
           }
         },
         "required": false,
-        "description": ""
+        "description": "\u914d\u7f6e\u7f16\u8f91\u6a21\u5f0f\u5de5\u5177\u680f"
+      },
+      "_drawnShapes": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "\u76d1\u542c\u7f16\u8f91\u6a21\u5f0f\u4e0b\u5df2\u7ed8\u5236\u77e2\u91cf\u4fe1\u606f"
       },
       "showMeasurements": {
         "type": {
           "name": "bool"
         },
         "required": false,
-        "description": "",
+        "description": "\u662f\u5426\u4e3a\u7f16\u8f91\u6a21\u5f0f\u4e0b\u521b\u5efa\u7684\u77e2\u91cf\u8981\u7d20\u6dfb\u52a0\u957f\u5ea6\u3001\u9762\u79ef\u6807\u6ce8\r\n\u9ed8\u8ba4\u503c\uff1a`false`",
         "defaultValue": {
           "value": "false",
           "computed": false
@@ -2473,7 +2498,7 @@
           "name": "number"
         },
         "required": false,
-        "description": "",
+        "description": "\u9488\u5bf9\u7f16\u8f91\u6a21\u5f0f\uff0c\u8bbe\u7f6e\u6700\u591a\u5141\u8bb8\u7ed8\u5236\u7684\u77e2\u91cf\u8981\u7d20\u4e2a\u6570\uff0c\u9ed8\u8ba4\u65e0\u9650\u5236",
         "defaultValue": {
           "value": "null",
           "computed": false
@@ -2484,7 +2509,7 @@
           "name": "bool"
         },
         "required": false,
-        "description": "",
+        "description": "\u662f\u5426\u663e\u793a\u6d4b\u91cf\u5de5\u5177\u680f\r\n\u9ed8\u8ba4\u503c\uff1a`false`",
         "defaultValue": {
           "value": "false",
           "computed": false
@@ -2514,38 +2539,34 @@
                   "computed": false
                 }
               ],
+              "description": "\u8bbe\u7f6e\u6d4b\u91cf\u5de5\u5177\u680f\u65b9\u4f4d\uff0c\u53ef\u9009\u9879\u6709`'topleft'`\u3001`'topright'`\u3001`'bottomleft'`\u3001`'bottomright'`\r\n\u9ed8\u8ba4\u503c\uff1a`'topleft'`",
               "required": false
             },
             "activeColor": {
               "name": "string",
+              "description": "\u6d4b\u91cf\u5de5\u5177\u6240\u7ed8\u5236\u8981\u7d20\u989c\u8272\r\n\u9ed8\u8ba4\u503c\uff1a`'#f1c40f'`",
               "required": false
             },
             "completedColor": {
               "name": "string",
+              "description": "\u6d4b\u91cf\u5de5\u5177\u7ed8\u5236\u5b8c\u6210\u540e\u7684\u8981\u7d20\u989c\u8272\r\n\u9ed8\u8ba4\u503c\uff1a`'#e74c3c'`",
               "required": false
             }
           }
         },
         "required": false,
-        "description": ""
+        "description": "\u914d\u7f6e\u6d4b\u91cf\u5de5\u5177"
       },
       "viewAutoCorrection": {
         "type": {
           "name": "bool"
         },
         "required": false,
-        "description": "",
+        "description": "\u662f\u5426\u5f00\u542f\u89c6\u89d2\u81ea\u52a8\u6821\u6b63\uff0c\u8b6c\u5982\u5730\u56fe\u6240\u5728\u5bb9\u5668\u50cf\u7d20\u5c3a\u5bf8\u53d1\u751f\u53d8\u5316\u540e\uff0c\u4f1a\u81ea\u52a8\u6821\u6b63\u5730\u56fe\u7684\u89c6\u89d2\r\n\u9ed8\u8ba4\u503c\uff1a`false`",
         "defaultValue": {
           "value": "false",
           "computed": false
         }
-      },
-      "_drawnShapes": {
-        "type": {
-          "name": "array"
-        },
-        "required": false,
-        "description": ""
       },
       "loading_state": {
         "type": {

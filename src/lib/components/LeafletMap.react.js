@@ -2,29 +2,33 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
+// react核心
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { MapContainer, ScaleControl } from 'react-leaflet';
 import L from 'leaflet';
-import 'proj4leaflet';
-import 'leaflet/dist/leaflet.css';
 import "@geoman-io/leaflet-geoman-free";
+import 'proj4leaflet';
 import "./utils/leaflet-measure-path";
-import "./utils/leaflet-measure-path.css";
-import "./styles.css";
+import 'leaflet-measure/dist/leaflet-measure.cn';
 import {
     markerIcon,
     marker2xIcon,
     markerShadow
 } from './utils/exportImages.react';
-import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
-import { v4 as uuidv4 } from 'uuid';
-import 'leaflet-measure/dist/leaflet-measure.cn';
-import { omitBy, isUndefined } from 'lodash';
-import 'leaflet-measure/dist/leaflet-measure.css';
 import { AutoViewCorrection } from './utils/UtilsComponents';
 import './utils/SmoothWheelZoom';
+// 辅助库
 import { useSize } from 'ahooks';
+import { v4 as uuidv4 } from 'uuid';
+import { omitBy, isUndefined } from 'lodash';
+// 样式
+import 'leaflet/dist/leaflet.css';
+import "./utils/leaflet-measure-path.css";
+import "./styles.css";
+import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
+import 'leaflet-measure/dist/leaflet-measure.css';
 
 const customTranslation = {
     "tooltips": {
@@ -94,6 +98,9 @@ const parseCRS = (crs) => {
     );
 }
 
+/**
+ * 地图容器组件LeafletMap
+ */
 const LeafletMap = (props) => {
     const {
         id,
@@ -333,29 +340,36 @@ const LeafletMap = (props) => {
     );
 }
 
-// 定义参数或属性
 LeafletMap.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 定义当前地图容器下属所有图层元素
+    /**
+     * 组件型，地图内部组件
+     */
     children: PropTypes.node,
 
-    // css类名
-    className: PropTypes.string,
-
-    // 自定义css字典
+    /**
+     * 当前组件css样式
+     */
     style: PropTypes.object,
 
-    // 地图通用控制类参数
+    /**
+     * 当前组件css类名
+     */
+    className: PropTypes.string,
 
-    // 设置地图中心坐标，格式：{lng: xxx, lat: xxx}
-    // 默认为{lng: 0, lat: 0}
+    /**
+     * 地图默认中心坐标，格式：`{'lng': xxx, 'lat': xxx}`
+     * 默认值：`{'lng': 0, 'lat': 0}`
+     */
     center: PropTypes.exact({
         // 经度
         lng: PropTypes.number,
@@ -365,178 +379,272 @@ LeafletMap.propTypes = {
     }),
 
     /**
-     * 为当前地图配置坐标参考系
-     * 当传入字符串时，表示内置的几种基础坐标参考系，可选的有'EPSG3857'、'EPSG4326'、'simple'
-     * 当传入字典时，用于使用自定义坐标参考系
-     * 默认：'EPSG3857'
+     * 为当前地图配置坐标参考系，当传入字符型时可选项有`'EPSG3857'`、`'EPSG4326'`、`'simple'`，
+     * 当传入字典时，用于构造自定义坐标系参数
+     * 默认值：`'EPSG3857'`
      */
     crs: PropTypes.oneOfType([
         PropTypes.oneOf(['EPSG3857', 'EPSG4326', 'simple']),
-        // 自定义坐标系
         PropTypes.exact({
             /**
-             * 坐标系代码，如EPSG:4490
+             * 坐标系代码
              */
             code: PropTypes.string,
             /**
-             * 坐标系def字符串
+             * 坐标系`def`字符串
              */
             proj4def: PropTypes.string,
             /**
-             * 其他坐标系参数
+             * 坐标系其他配置参数
              */
             options: PropTypes.object
         })
     ]),
 
-    // 设置地图的缩放级别，默认为3
+    /**
+     * 地图默认缩放级别
+     * 默认值：`3`
+     */
     zoom: PropTypes.number,
 
-    // 设置是否允许双击地图进行放大，默认为true
+    /**
+     * 是否允许鼠标双击地图进行放大
+     * 默认值：`true`
+     */
     doubleClickZoom: PropTypes.bool,
 
-    // 设置是否允许鼠标拖拽地图，默认为true
+    /**
+     * 是否允许鼠标拖拽移动地图
+     * 默认值：`true`
+     */
     dragging: PropTypes.bool,
 
-    // 设置是否允许用户鼠标点击地图空白处来关闭popup卡片，默认为true
+    /**
+     * 是否允许鼠标点击地图空白处关闭已打开的`leafletPopup`弹出层
+     * 默认值：`true`
+     */
     closePopupOnClick: PropTypes.bool,
 
-    // 设置zoom级别下限
+    /**
+     * 地图最小缩放级别
+     * 默认值：`0`
+     */
     minZoom: PropTypes.number,
 
-    // 设置zoom级别上限
+    /**
+     * 地图最大缩放级别
+     * 默认值：`18`
+     */
     maxZoom: PropTypes.number,
 
-    // 设置地图缩放级别变化的步长，默认为1
+    /**
+     * 地图单次缩放变化对应的缩放级别步长
+     * 默认值：`1`
+     */
     zoomDelta: PropTypes.number,
 
-    // 设置是否显示地图缩放组件，默认为true
+    /**
+     * 是否显示地图缩放组件
+     * 默认值：`true`
+     */
     zoomControl: PropTypes.bool,
 
-    // 设置是否允许用户鼠标滚轮缩放地图，默认为true
-    // 亦可传入'center'使得地图无视鼠标实际位置，仅以地图当前中心作为缩放依据的中心
+    /**
+     * 是否允许通用鼠标滚轮缩放地图，当传入`'center'`时会在允许鼠标滚轮缩放地图时无视鼠标实际位置，以地图当前中心作为缩放依据的中心
+     * 默认值：`true`
+     */
     scrollWheelZoom: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.oneOf(['center'])
     ]),
 
-    // 设置鼠标滚轮滚动多少像素会触发一个单位zoomDelta的缩放，默认为60
+    /**
+     * 控制鼠标滚轮滚动多少像素会触发一个单位`zoomDelta`级别的地图缩放
+     * 默认值：`60`
+     */
     wheelPxPerZoomLevel: PropTypes.number,
 
-    // 设置是否开启丝滑滑轮放缩效果，默认为false
-    // 亦可传入'center'使得地图无视鼠标实际位置，仅以地图当前中心作为丝滑缩放依据的中心
+    /**
+     * 针对鼠标滚轮缩放地图是否开启丝滑模式，当传入`'center'`时会在允许鼠标滚轮缩放地图时无视鼠标实际位置，以地图当前中心作为丝滑缩放依据的中心
+     * 默认值：`false`
+     */
     smoothWheelZoom: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.oneOf(['center'])
     ]),
 
     /**
-     * 设置是否显示比例尺
-     * 默认：false
+     * 是否显示地图比例尺
+     * 默认值：`false`
      */
     scaleControl: PropTypes.bool,
 
     /**
-     * 配置比例尺相关参数
+     * 配置地图比例尺相关参数
      */
     scaleControlOptions: PropTypes.exact({
         /**
-         * 设置比例尺的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
+         * 设置比例尺方位，可选项有`'topLeft'`、`'topRight'`、`'bottomLeft'`、`'bottomRight'`
          */
         position: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
         /**
          * 是否显示英制单位
-         * 默认：true
          */
         imperial: PropTypes.bool
     }),
 
-    // 设置地图可移动的bounds范围
+    /**
+     * 限制地图可移动坐标矩形范围
+     */
     maxBounds: PropTypes.exact({
+        /**
+         * 矩形范围左下角经度
+         */
         minx: PropTypes.number,
+        /**
+         * 矩形范围左下角纬度
+         */
         miny: PropTypes.number,
+        /**
+         * 矩形范围右上角经度
+         */
         maxx: PropTypes.number,
+        /**
+         * 矩形范围右上角纬度
+         */
         maxy: PropTypes.number
     }),
 
-    // 地图编辑模式配置类参数
-
-    // 设置是否渲染编辑模式工具栏，默认为false
+    /**
+     * 是否显示编辑模式工具栏
+     * 默认值：`false`
+     */
     editToolbar: PropTypes.bool,
 
-    // 设置与编辑模式工具栏显示内容相关的参数
+    /**
+     * 配置编辑模式工具栏
+     */
     editToolbarControlsOptions: PropTypes.exact({
-        // 设置编辑模式工具栏的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
-        // 默认为'topleft'
+        /**
+         * 设置编辑模式工具栏方位，可选项有`'topleft'`、`'topright'`、`'bottomleft'`、`'bottomright'`
+         * 默认值：`'topleft'`
+         */
         position: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
-
-        // 设置是否渲染“添加标记点”绘制按钮，默认为true
+        /**
+         * 是否开启“标记点绘制”功能
+         * 默认值：`true`
+         */
         drawMarker: PropTypes.bool,
-
-        // 设置是否渲染“圆形标记点”绘制按钮，默认为true
+        /**
+         * 是否开启“圆形标记点”绘制功能
+         * 默认值：`true`
+         */
         drawCircleMarker: PropTypes.bool,
-
-        // 设置是否渲染“折线”绘制按钮，默认为true
+        /**
+         * 是否开启“折线”绘制功能
+         * 默认值：`true`
+         */
         drawPolyline: PropTypes.bool,
-
-        // 设置是否渲染“矩形”绘制按钮，默认为true
+        /**
+         * 是否开启“矩形”绘制功能
+         * 默认值：`true`
+         */
         drawRectangle: PropTypes.bool,
-
-        // 设置是否渲染“多边形”绘制按钮，默认为true
+        /**
+         * 是否开启“多边形”绘制功能
+         * 默认值：`true`
+         */
         drawPolygon: PropTypes.bool,
-
-        // 设置是否渲染“圆形”绘制按钮，默认为true
+        /**
+         * 是否开启“圆形”绘制功能
+         * 默认值：`true`
+         */
         drawCircle: PropTypes.bool,
-
-        // 设置是否渲染“文字”绘制按钮，默认为false
+        /**
+         * 是否开启“文字”绘制功能
+         * 默认值：`false`
+         */
         drawText: PropTypes.bool,
-
-        // 设置是否渲染“编辑要素”按钮，默认为true
+        /**
+         * 是否开启“编辑要素”功能
+         * 默认值：`true`
+         */
         editMode: PropTypes.bool,
-
-        // 设置是否渲染“拖拽要素”按钮，默认为true
+        /**
+         * 是否开启“拖拽要素”功能
+         * 默认值：`true`
+         */
         dragMode: PropTypes.bool,
-
-        // 设置是否渲染“剪切要素”按钮，默认为false
+        /**
+         * 是否开启“裁剪要素”功能
+         * 默认值：`false`
+         */
         cutPolygon: PropTypes.bool,
-
-        // 设置是否渲染“移除要素”按钮，默认为true
+        /**
+         * 是否开启“移除要素”功能
+         * 默认值：`true`
+         */
         removalMode: PropTypes.bool,
-
-        // 设置是否渲染“旋转要素”按钮，默认为true
+        /**
+         * 是否开启“旋转要素”功能
+         * 默认值：`true`
+         */
         rotateMode: PropTypes.bool,
-
-        // 设置是否将所有按钮放置于同一容器内，默认为false
+        /**
+         * 各功能按钮是否集成在同一个容器中
+         * 默认值：`false`
+         */
         oneBlock: PropTypes.bool
     }),
 
-    // 设置是否为编辑模式下创建的矢量要素添加长度、面积标注，默认为false
+    /**
+     * 监听编辑模式下已绘制矢量信息
+     */
+    _drawnShapes: PropTypes.array,
+
+    /**
+     * 是否为编辑模式下创建的矢量要素添加长度、面积标注
+     * 默认值：`false`
+     */
     showMeasurements: PropTypes.bool,
 
-    // 设置最大同时存在的已绘制矢量要素，默认不限制
+    /**
+     * 针对编辑模式，设置最多允许绘制的矢量要素个数，默认无限制
+     */
     maxDrawnShapes: PropTypes.number,
 
-    // 设置是否添加测量工具栏，默认为false
+    /**
+     * 是否显示测量工具栏
+     * 默认值：`false`
+     */
     measureControl: PropTypes.bool,
 
-    // 配置测量工具相关参数
+    /**
+     * 配置测量工具
+     */
     measureControlOptions: PropTypes.exact({
-        // 设置测量工具栏的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
-        // 默认为'topleft'
+        /**
+         * 设置测量工具栏方位，可选项有`'topleft'`、`'topright'`、`'bottomleft'`、`'bottomright'`
+         * 默认值：`'topleft'`
+         */
         position: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
-
-        // 设置测量工具绘制时的要素颜色，默认为'#f1c40f'
+        /**
+         * 测量工具所绘制要素颜色
+         * 默认值：`'#f1c40f'`
+         */
         activeColor: PropTypes.string,
-
-        // 设置测量工具绘制完成时的要素颜色，默认为'#e74c3c'
+        /**
+         * 测量工具绘制完成后的要素颜色
+         * 默认值：`'#e74c3c'`
+         */
         completedColor: PropTypes.string
     }),
 
-    // 设置是否启用自动视角校正，会带来性能上的一些压力，默认为false
+    /**
+     * 是否开启视角自动校正，譬如地图所在容器像素尺寸发生变化后，会自动校正地图的视角
+     * 默认值：`false`
+     */
     viewAutoCorrection: PropTypes.bool,
-
-    // 事件监听类属性值
-    _drawnShapes: PropTypes.array,
 
     loading_state: PropTypes.shape({
         /**
@@ -560,10 +668,9 @@ LeafletMap.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletMap.defaultProps = {
-    crs: 'EPSG3857',
     center: { lng: 0, lat: 0 },
+    crs: 'EPSG3857',
     zoom: 3,
     doubleClickZoom: true,
     dragging: true,
@@ -571,16 +678,16 @@ LeafletMap.defaultProps = {
     minZoom: 0,
     maxZoom: 18,
     zoomDelta: 1,
-    wheelPxPerZoomLevel: 60,
     zoomControl: true,
     scrollWheelZoom: true,
+    wheelPxPerZoomLevel: 60,
+    smoothWheelZoom: false,
     scaleControl: false,
     editToolbar: false,
     showMeasurements: false,
     maxDrawnShapes: null,
     measureControl: false,
-    viewAutoCorrection: false,
-    smoothWheelZoom: false
+    viewAutoCorrection: false
 }
 
 export default React.memo(LeafletMap);
