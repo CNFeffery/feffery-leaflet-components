@@ -4537,7 +4537,7 @@
     }
   },
   "src/lib/components/LeafletTileLayer.react.js": {
-    "description": "",
+    "description": "\u74e6\u7247\u670d\u52a1\u56fe\u5c42\u7ec4\u4ef6LeafletTileLayer",
     "displayName": "LeafletTileLayer",
     "methods": [],
     "props": {
@@ -4623,6 +4623,20 @@
           "value": "18",
           "computed": false
         }
+      },
+      "minNativeZoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "\u74e6\u7247\u5730\u56fe\u670d\u52a1\u53ef\u7528\u7684\u6700\u5c0f\u7f29\u653e\u7ea7\u522b\u3002\u5982\u679c\u6307\u5b9a\u4e86\u8be5\u503c\uff0c\u6240\u6709\u4f4e\u4e8e`minNativeZoom`\u7684\u7f29\u653e\u7ea7\u522b\u4e0a\u7684\u74e6\u7247\u5c06\u4ece\u6700\u5c0f\u539f\u751f\u7f29\u653e\u7ea7\u522b\u52a0\u8f7d\u5e76\u81ea\u52a8\u7f29\u653e"
+      },
+      "maxNativeZoom": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "\u74e6\u7247\u5730\u56fe\u670d\u52a1\u53ef\u7528\u7684\u6700\u5927\u7f29\u653e\u7ea7\u522b\u3002\u5982\u679c\u6307\u5b9a\u4e86\u8be5\u503c\uff0c\u6240\u6709\u9ad8\u4e8e`maxNativeZoom`\u7684\u7f29\u653e\u7ea7\u522b\u4e0a\u7684\u74e6\u7247\u5c06\u4ece\u6700\u5927\u539f\u751f\u7f29\u653e\u7ea7\u522b\u52a0\u8f7d\u5e76\u81ea\u52a8\u7f29\u653e"
       },
       "tms": {
         "type": {

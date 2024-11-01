@@ -6,7 +6,7 @@ export ''_leaflettilelayer
     ''_leaflettilelayer(;kwargs...)
 
 A LeafletTileLayer component.
-
+瓦片服务图层组件LeafletTileLayer
 Keyword arguments:
 - `id` (String; optional)
 - `attribution` (String; optional)
@@ -16,8 +16,10 @@ Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
+- `maxNativeZoom` (Real; optional): 瓦片地图服务可用的最大缩放级别。如果指定了该值，所有高于`maxNativeZoom`的缩放级别上的瓦片将从最大原生缩放级别加载并自动缩放
 - `maxZoom` (Real; optional): 当前瓦片地图服务允许加载的最大缩放级别
 默认值：`18`
+- `minNativeZoom` (Real; optional): 瓦片地图服务可用的最小缩放级别。如果指定了该值，所有低于`minNativeZoom`的缩放级别上的瓦片将从最小原生缩放级别加载并自动缩放
 - `minZoom` (Real; optional): 当前瓦片地图服务允许加载的最小缩放级别
 默认值：`0`
 - `opacity` (Real; optional)
@@ -27,7 +29,7 @@ Those elements have the following types:
 - `zIndex` (Real; optional)
 """
 function ''_leaflettilelayer(; kwargs...)
-        available_props = Symbol[:id, :attribution, :key, :loading_state, :maxZoom, :minZoom, :opacity, :tileSize, :tms, :url, :zIndex]
+        available_props = Symbol[:id, :attribution, :key, :loading_state, :maxNativeZoom, :maxZoom, :minNativeZoom, :minZoom, :opacity, :tileSize, :tms, :url, :zIndex]
         wild_props = Symbol[]
         return Component("''_leaflettilelayer", "LeafletTileLayer", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

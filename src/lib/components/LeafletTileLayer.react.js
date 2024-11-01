@@ -3,10 +3,10 @@ import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TileLayer } from 'react-leaflet';
 
-// 定义底图图层组件LeafletTileLayer，api参数参考https://react-leaflet.js.org/docs/api-components/#tilelayer
+/**
+ * 瓦片服务图层组件LeafletTileLayer
+ */
 const LeafletTileLayer = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
         url,
@@ -16,6 +16,8 @@ const LeafletTileLayer = (props) => {
         tileSize,
         minZoom,
         maxZoom,
+        minNativeZoom,
+        maxNativeZoom,
         tms,
         loading_state
     } = props;
@@ -28,7 +30,6 @@ const LeafletTileLayer = (props) => {
         }
     }, [url]);
 
-    // 返回定制化的前端组件
     return (
         <TileLayer
             id={id}
@@ -39,6 +40,8 @@ const LeafletTileLayer = (props) => {
             tileSize={tileSize}
             minZoom={minZoom}
             maxZoom={maxZoom}
+            minNativeZoom={minNativeZoom}
+            maxNativeZoom={maxNativeZoom}
             tms={tms}
             ref={tileLayerRef}
             data-dash-is-loading={
@@ -48,7 +51,6 @@ const LeafletTileLayer = (props) => {
     );
 }
 
-// 定义参数或属性
 LeafletTileLayer.propTypes = {
     // 组件id
     id: PropTypes.string,
@@ -84,6 +86,16 @@ LeafletTileLayer.propTypes = {
      * 默认值：`18`
      */
     maxZoom: PropTypes.number,
+
+    /**
+     * 瓦片地图服务可用的最小缩放级别。如果指定了该值，所有低于`minNativeZoom`的缩放级别上的瓦片将从最小原生缩放级别加载并自动缩放
+     */
+    minNativeZoom: PropTypes.number,
+
+    /**
+     * 瓦片地图服务可用的最大缩放级别。如果指定了该值，所有高于`maxNativeZoom`的缩放级别上的瓦片将从最大原生缩放级别加载并自动缩放
+     */
+    maxNativeZoom: PropTypes.number,
 
     // 设置当前瓦片地图服务是否属于TMS
     // 默认：false
