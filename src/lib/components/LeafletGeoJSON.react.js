@@ -624,7 +624,6 @@ LeafletGeoJSON.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletGeoJSON.defaultProps = {
     fitBounds: true,
     featureIdField: 'id',
