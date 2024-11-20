@@ -13,7 +13,7 @@ A LeafletCircleMarker component.
 Keyword arguments:
 - `children` (a list of or a singular dash component, string or number; optional): 要传入的`LeafletTooltip`、`LeafletPopup`组件，配合当前图层使用
 - `id` (String; optional): 组件唯一id
-- `center` (required): 必填项，圆圈中心坐标. center has the following type: lists containing elements 'lng', 'lat'.
+- `center` (required): 必填项，圆形标记中心坐标. center has the following type: lists containing elements 'lng', 'lat'.
 Those elements have the following types:
   - `lng` (Real; optional): 经度
   - `lat` (Real; optional): 纬度
@@ -31,7 +31,7 @@ Those elements have the following types:
 - `nClicks` (Real; optional): 监听当前要素累计点击次数
 默认值：`0`
 - `pathOptions` (optional): 矢量样式配置参数
-- `radius` (Real; optional): 圆圈像素半径
+- `radius` (Real; optional): 圆形标记像素半径
 默认值：`10`
 """
 function ''_leafletcirclemarker(; kwargs...)

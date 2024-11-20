@@ -89,7 +89,7 @@ LeafletCircleMarker.propTypes = {
     children: PropTypes.node,
 
     /**
-     * 必填项，圆圈中心坐标
+     * 必填项，圆形标记中心坐标
      */
     center: PropTypes.exact({
         /**
@@ -103,7 +103,7 @@ LeafletCircleMarker.propTypes = {
     }).isRequired,
 
     /**
-     * 圆圈像素半径
+     * 圆形标记像素半径
      * 默认值：`10`
      */
     radius: PropTypes.number,

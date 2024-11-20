@@ -22,7 +22,7 @@ Keyword arguments:
     要传入的`LeafletTooltip`、`LeafletPopup`组件，配合当前图层使用.
 
 - center (dict; required):
-    必填项，圆圈中心坐标.
+    必填项，圆形标记中心坐标.
 
     `center` is a dict with keys:
 
@@ -33,7 +33,7 @@ Keyword arguments:
         纬度.
 
 - radius (number; default 10):
-    圆圈像素半径  默认值：`10`.
+    圆形标记像素半径  默认值：`10`.
 
 - pathOptions (optional):
     矢量样式配置参数.
