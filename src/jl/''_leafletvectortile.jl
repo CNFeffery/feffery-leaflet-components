@@ -6,25 +6,30 @@ export ''_leafletvectortile
     ''_leafletvectortile(;kwargs...)
 
 A LeafletVectorTile component.
-
+矢量切片图层组件LeafletVectorTile
 Keyword arguments:
-- `id` (String; optional)
-- `_clickedFeature` (Dict; optional)
-- `_layerNames` (Array; optional)
-- `extraProps` (Dict; optional)
-- `featureIdField` (String; optional)
-- `interactive` (Bool; optional)
-- `key` (String; optional): 强制刷新用
+- `id` (String; optional): 组件唯一id
+- `_clickedFeature` (Dict; optional): 监听要素点击事件
+- `_layerNames` (Array; optional): 监听当前服务中已加载的全部图层名称
+- `extraProps` (Dict; optional): 额外自定义参数
+- `featureIdField` (String; optional): 切片数据要素属性中作为图层唯一识别`id`的字段
+默认值：`'id'`
+- `interactive` (Bool; optional): 当前图层是否允许交互功能
+默认值：`false`
+- `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
-- `maxZoom` (Real; optional)
-- `minZoom` (Real; optional)
-- `renderer` (a value equal to: 'svg', 'canvas'; optional)
-- `url` (String; optional)
-- `vectorTileLayerStyles` (optional): . vectorTileLayerStyles has the following type: Dict with Strings as keys and values of type String | Dict with Strings as keys and values of type lists containing elements 'func'.
+- `maxZoom` (Real; optional): 当前地图服务允许加载的最大缩放级别
+默认值：`18`
+- `minZoom` (Real; optional): 当前地图服务允许加载的最小缩放级别
+默认值：`0`
+- `renderer` (a value equal to: 'svg', 'canvas'; optional): 渲染方式，可选项有`'svg'`、`'canvas'`
+默认值：`'svg'`
+- `url` (String; optional): 切片服务地址
+- `vectorTileLayerStyles` (optional): 针对不同切片图层设置样式，键：图层名称，值：样式字典或`javascript`控制函数字符串. vectorTileLayerStyles has the following type: Dict with Strings as keys and values of type String | Dict with Strings as keys and values of type lists containing elements 'func'.
 Those elements have the following types:
   - `func` (String; optional)
 """

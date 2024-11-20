@@ -5,26 +5,33 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletVectorTile(Component):
     """A LeafletVectorTile component.
-
+矢量切片图层组件LeafletVectorTile
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- url (string; optional)
+- url (string; optional):
+    切片服务地址.
 
-- minZoom (number; default 1)
+- minZoom (number; default 1):
+    当前地图服务允许加载的最小缩放级别  默认值：`0`.
 
-- maxZoom (number; default 18)
+- maxZoom (number; default 18):
+    当前地图服务允许加载的最大缩放级别  默认值：`18`.
 
-- interactive (boolean; default False)
+- interactive (boolean; default False):
+    当前图层是否允许交互功能  默认值：`False`.
 
-- featureIdField (string; default 'id')
+- featureIdField (string; default 'id'):
+    切片数据要素属性中作为图层唯一识别`id`的字段  默认值：`'id'`.
 
-- vectorTileLayerStyles (dict; optional)
+- vectorTileLayerStyles (dict; optional):
+    针对不同切片图层设置样式，键：图层名称，值：样式字典或`javascript`控制函数字符串.
 
     `vectorTileLayerStyles` is a dict with strings as keys and values
     of type string | dict with strings as keys and values of type dict
@@ -32,13 +39,17 @@ Keyword arguments:
 
     - func (string; optional)
 
-- extraProps (dict; optional)
+- extraProps (dict; optional):
+    额外自定义参数.
 
-- renderer (a value equal to: 'svg', 'canvas'; default 'svg')
+- renderer (a value equal to: 'svg', 'canvas'; default 'svg'):
+    渲染方式，可选项有`'svg'`、`'canvas'`  默认值：`'svg'`.
 
-- _layerNames (list; optional)
+- _layerNames (list; optional):
+    监听当前服务中已加载的全部图层名称.
 
-- _clickedFeature (dict; optional)
+- _clickedFeature (dict; optional):
+    监听要素点击事件.
 
 - loading_state (dict; optional)
 
