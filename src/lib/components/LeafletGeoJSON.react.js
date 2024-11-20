@@ -3,18 +3,22 @@
 /* eslint-disable no-else-return */
 /* eslint-disable prefer-const */
 /* eslint-disable no-undefined */
+// react核心
 import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import L from 'leaflet';
 import "leaflet-lasso";
 import { GeoJSON, useMap } from 'react-leaflet';
-import { isUndefined, omitBy, isEqual } from 'lodash';
-import { pathOptionsPropTypes } from './BasePropTypes.react';
 import {
     markerIcon,
     marker2xIcon,
     markerShadow
 } from './utils/exportImages.react';
+// 辅助库
+import { isUndefined, omitBy, isEqual } from 'lodash';
+// 参数类型
+import { pathOptionsPropTypes } from './BasePropTypes.react';
 
 // 修正全局默认marker图标不显示的问题
 const defaultIcon = L.icon({
@@ -48,9 +52,10 @@ const _selectedStyle = {
     opacity: 1
 }
 
-// 定义GeoJSON图层组件LeafletGeoJSON，api参数参考
+/**
+ * GeoJSON图层组件LeafletGeoJSON
+ */
 const LeafletGeoJSON = (props) => {
-    // 取得必要属性或参数
     let {
         id,
         data,
@@ -459,147 +464,231 @@ const LeafletGeoJSON = (props) => {
     );
 }
 
-// 定义参数或属性
 LeafletGeoJSON.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 传入GeoJSON格式数据
+    /**
+     * 必填，传入`GeoJSON`数据
+     */
     data: PropTypes.object.isRequired,
 
-    /* 基础参数 */
-    // 设置功能模式，可选的有'default'、'selectable'（选择模式）、'choropleth'（分层设色模式）以及'category'（分类设色模式）
+    /**
+     * 功能模式，可选项有`'default'`、`'selectable'`（选择模式）、`'choropleth'`（分层设色模式）、`'category'`（分类设色模式）
+     * 默认值：`'default'`
+     */
     mode: PropTypes.oneOf(['default', 'selectable', 'choropleth', 'category']),
 
-    // 设置是否开启要素鼠标悬浮效果，默认为false
+    /**
+     * 是否开启要素鼠标悬浮效果
+     * 默认值：`false`
+     */
     hoverable: PropTypes.bool,
 
-    // 定义要素默认样式
+    /**
+     * 要素默认样式
+     */
     defaultStyle: pathOptionsPropTypes,
 
-    // 定义要素鼠标悬浮样式（需设置hoverable=true）
+    /**
+     * 当`hoverable=true`时，设置要素在鼠标悬停时的样式
+     */
     hoverStyle: pathOptionsPropTypes,
 
-    // 定义要素选中样式（需设置selectMode='single'或'multiple'）
+    /**
+     * 当`selectMode`为`'single'`或``'multiple'`时，设置要素在选中时的样式
+     */
     selectedStyle: pathOptionsPropTypes,
 
-    // 设置是否fitBounds，默认为true
+    /**
+     * 是否启用图层范围自适应缩放功能
+     * 默认值：`true`
+     */
     fitBounds: PropTypes.bool,
 
-    // fitBounds动作相关参数
+    /**
+     * 配置图层范围自适应缩放的选项
+     */
     fitBoundsOptions: PropTypes.exact({
         /**
-         * 执行fitBounds动作后的地图最大缩放级别
+         * 缩放后允许的最大缩放级别
          */
         maxZoom: PropTypes.number,
         /**
-         * fitBounds过程是否开启动画
+         * 缩放过程是否开启过渡动画效果
          */
         animate: PropTypes.bool,
         /**
-         * 对于开启过渡动画效果的gitBounds动作，设置动画持续时长，单位：秒
-         * 默认：0.25
+         * 缩放过程动画时长，单位：秒
+         * 默认值：`0.25`
          */
         duration: PropTypes.number,
         /**
-         * 为fitBounds动作调整后的视角，设置四周额外的像素大小留白空间，格式如[上下留白, 左右留白]
+         * 缩放过程后，各个方向上额外的像素留白大小，格式：`[上下留白, 左右留白]`
          */
         padding: PropTypes.arrayOf(PropTypes.number)
     }),
 
-    // 设置是否允许点击要素后将地图缩放以适应被点击的要素bounds范围，默认为false
+    /**
+     * 是否在点击要素后，自动缩放到对应要素的范围
+     * 默认值：`false`
+     */
     clickFeatureZoom: PropTypes.bool,
 
-    // 设置是否允许tooltip渲染，默认为false
+    /**
+     * 是否为要素启用信息框功能
+     * 默认值：`false`
+     */
     showTooltip: PropTypes.bool,
 
-    // 配置要素选择功能
-    // 设置作为唯一识别id的字段名，默认为'id'
+    /**
+     * 设置作为唯一识别`id`的字段名
+     * 默认值：`'id'`
+     */
     featureIdField: PropTypes.string,
 
-    // 设置作为要素数值的字段名，默认为'value'
+    /**
+     * 设置作为要素数值的字段名
+     * 默认值：`'value'`
+     */
     featureValueField: PropTypes.string,
 
-    // 设置作为要素类别的字段名，默认为'category'
+    /**
+     * 设置作为要素类别的字段名
+     * 默认值：`'category'`
+     */
     featureCategoryField: PropTypes.string,
 
-    // 设置作为要素鼠标悬浮tooltip信息的字段名，默认为'tooltip'
+    /**
+     * 设置作为要素鼠标信息框内容的字段名
+     * 默认值：`'tooltip'`
+     */
     featureTooltipField: PropTypes.string,
 
-    // 要素点击选择模式，可选的有'single'（单选模式）及'multiple'（多选模式）
-    // 默认为'single'
+    /**
+     * 要素点击选择模式，可选项有`'single'`（单选模式）、`'multiple'`（多选模式）
+     * 默认值：`'single'`
+     */
     selectMode: PropTypes.oneOf(['single', 'multiple']),
 
-    // 设置是否禁用主动点击选择要素功能，默认为false
+    /**
+     * 是否禁用主动点击选择要素功能
+     * 默认值：`false`
+     */
     disableClickSelect: PropTypes.bool,
 
-    // 记录&设置当前已选中要素id
+    /**
+     * 监听或设置当前已选中要素`id`数组
+     */
     selectedFeatureIds: PropTypes.array,
 
-    // 配置分层设色模式所需的分段区间数组及分段对应色彩值参数
+    /**
+     * 配置分层设色模式
+     */
     featureValueToStyles: PropTypes.exact({
-        // 分段区间数组，每个元素格式为[左区间值, 右区间值]
+        /**
+         * 各分段区间数组，每个元素格式：`[左区间值, 右区间值]`
+         */
         bins: PropTypes.arrayOf(
             PropTypes.arrayOf(PropTypes.number)
         ),
-
-        // 设置与区间一一对应的样式对象数组
+        /**
+         * 按顺序定义与分段区间一一对应的样式
+         */
         styles: PropTypes.arrayOf(pathOptionsPropTypes),
-
-        // 设置区间是左闭还是右闭，默认为'left'
+        /**
+         * 区间闭合方式，可选项有`'left'`（左闭）、`'right'`（右闭）
+         * 默认值：`'left'`
+         */
         closed: PropTypes.oneOf(['left', 'right'])
     }),
 
-    // 配置分类设色模式所需的分类数组及分类对应色彩值参数
+    /**
+     * 配置分类设色模式，键为分类值，值为样式字典
+     */
     featureCategoryToStyles: PropTypes.objectOf(
         pathOptionsPropTypes
     ),
 
-    // 设置要素的tooltip展开方位，可选的有'right'、'left'、'top'、'bottom'、'center'与'auto'
-    // 默认为'auto'，其中'auto'会自动根据方位在'left'与'right'之间进行切换
+    /**
+     * 要素信息框展开方向，可选项有`'right'`、`'left'`、`'top'`、`'bottom'`、`'center'`、`'auto'`
+     * 默认值：`'auto'`
+     */
     tooltipDirection: PropTypes.oneOf(['right', 'left', 'top', 'bottom', 'center', 'auto']),
 
-    // 设置是否永久展开要素的tooltip而无需鼠标悬浮触发，默认为false
+    /**
+     * 是否永久展开要素对应的信息框，而无需鼠标移入触发
+     * 默认值：`false`
+     */
     tooltipPermanent: PropTypes.bool,
 
-    // 设置要素的tooltip是否跟随鼠标，默认为false
+    /**
+     * 要素对应信息框是否跟随鼠标位置
+     * 默认值：`false`
+     */
     tooltipSticky: PropTypes.bool,
 
-    // 设置要素的tooltip对应的css类
+    /**
+     * 要素信息框css类名
+     */
     tooltipClassName: PropTypes.string,
 
-    // 多选模式下设置是否开启lasso套圈选择功能，默认为false
+    /**
+     * 多选模式下，是否开启套圈选择功能
+     * 默认值：`false`
+     */
     lassoSelect: PropTypes.bool,
 
-    // 定义lasso套圈功能的拓扑检查方式，可选的有'contain'（包含检查）及'intersect'（相交检查）
-    // 默认为'intersect'
+    /**
+     * 套圈选择功能空间关系判定方式，可选项有`'contain'`（包含检查）、`'intersect'`（相交检查）
+     * 默认值：`'intersect'`
+     */
     lassoType: PropTypes.oneOf(['contain', 'intersect']),
 
-    // 当套圈选择开启时，每次新点击套索按钮时是否重置selectedFeatureIds，默认为false
+    /**
+     * 套圈选择功能开启时，是否在每次新点击套索按钮时重置`selectedFeatureIds`
+     * 默认值：`false`
+     */
     lassoResetSelectedFeatureIds: PropTypes.bool,
 
-    // 设置套圈选择触发按钮的位置，默认为'topleft'，可选的有'topleft'，'topright'，'bottomleft'，'bottomright'
+    /**
+     * 套圈选择功能触发按钮方位，可选项有`'topleft'`、`'topright'`、`'bottomleft'`、`'bottomright'`
+     * 默认值：`'topleft'`
+     */
     lassoButtonPosition: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
 
-    // 设置套圈的矢量样式
+    /**
+     * 套圈样式
+     */
     lassoStyle: pathOptionsPropTypes,
 
-    // 用于设置针对点要素的渲染策略，可选的有'marker'、'circle-marker'，默认为'circle-marker'
+    /**
+     * 针对点要素的渲染策略，可选项有`'marker'`、`'circle-marker'`
+     * 默认值：`'circle-marker'`
+     */
     pointRenderMode: PropTypes.oneOf(['marker', 'circle-marker']),
 
-    // 针对circle-marker模式，设置像素半径，默认为10
+    /**
+     * 当`pointRenderMode='circle-marker'`时的圆形标记像素半径
+     * 默认值：`10`
+     */
     circleMarkerRadius: PropTypes.number,
 
-    // 要素常规事件记录
-    // 要素点击事件
+    /**
+     * 监听要素点击事件
+     */
     _clickedFeature: PropTypes.object,
 
-    // 要素鼠标悬浮事件
+    /**
+     * 监听要素鼠标悬停事件
+     */
     _hoveredFeature: PropTypes.object,
 
     loading_state: PropTypes.shape({
