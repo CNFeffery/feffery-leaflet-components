@@ -1,6 +1,8 @@
 /* eslint-disable no-undefined */
+// react核心
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { TileLayer } from 'react-leaflet';
 
 /**
@@ -52,27 +54,41 @@ const LeafletTileLayer = (props) => {
 }
 
 LeafletTileLayer.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 设置地图服务的url参数
+    /**
+     * 地图服务地址，默认显示高德地图公共图层
+     */
     url: PropTypes.string,
 
-    // 设置attribution参数
+    /**
+     * 地图服务`attribution`属性
+     */
     attribution: PropTypes.string,
 
-    // 设置图层透明度，默认为1
+    /**
+     * 图层透明度
+     * 默认值：`1`
+     */
     opacity: PropTypes.number,
 
-    // 设置z轴层级
+    /**
+     * 当前图层`z`轴顺序
+     */
     zIndex: PropTypes.number,
 
-    // 设置瓦片地图像素边长，默认为256
+    /**
+     * 瓦片服务图片像素边长
+     * 默认值：`256`
+     */
     tileSize: PropTypes.number,
 
     /**
@@ -97,8 +113,10 @@ LeafletTileLayer.propTypes = {
      */
     maxNativeZoom: PropTypes.number,
 
-    // 设置当前瓦片地图服务是否属于TMS
-    // 默认：false
+    /**
+     * 设置当前地图服务是否符合`tms`类型
+     * 默认值：`false`
+     */
     tms: PropTypes.bool,
 
     loading_state: PropTypes.shape({
@@ -123,7 +141,6 @@ LeafletTileLayer.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletTileLayer.defaultProps = {
     url: "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
     opacity: 1,

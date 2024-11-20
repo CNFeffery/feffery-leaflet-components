@@ -8,9 +8,9 @@ export ''_leaflettilelayer
 A LeafletTileLayer component.
 瓦片服务图层组件LeafletTileLayer
 Keyword arguments:
-- `id` (String; optional)
-- `attribution` (String; optional)
-- `key` (String; optional): 强制刷新用
+- `id` (String; optional): 组件唯一id
+- `attribution` (String; optional): 地图服务`attribution`属性
+- `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
@@ -22,11 +22,14 @@ Those elements have the following types:
 - `minNativeZoom` (Real; optional): 瓦片地图服务可用的最小缩放级别。如果指定了该值，所有低于`minNativeZoom`的缩放级别上的瓦片将从最小原生缩放级别加载并自动缩放
 - `minZoom` (Real; optional): 当前瓦片地图服务允许加载的最小缩放级别
 默认值：`0`
-- `opacity` (Real; optional)
-- `tileSize` (Real; optional)
-- `tms` (Bool; optional)
-- `url` (String; optional)
-- `zIndex` (Real; optional)
+- `opacity` (Real; optional): 图层透明度
+默认值：`1`
+- `tileSize` (Real; optional): 瓦片服务图片像素边长
+默认值：`256`
+- `tms` (Bool; optional): 设置当前地图服务是否符合`tms`类型
+默认值：`false`
+- `url` (String; optional): 地图服务地址，默认显示高德地图公共图层
+- `zIndex` (Real; optional): 当前图层`z`轴顺序
 """
 function ''_leaflettilelayer(; kwargs...)
         available_props = Symbol[:id, :attribution, :key, :loading_state, :maxNativeZoom, :maxZoom, :minNativeZoom, :minZoom, :opacity, :tileSize, :tms, :url, :zIndex]

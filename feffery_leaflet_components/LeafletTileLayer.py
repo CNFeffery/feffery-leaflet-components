@@ -9,20 +9,26 @@ class LeafletTileLayer(Component):
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- url (string; default "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}")
+- url (string; default "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}"):
+    地图服务地址，默认显示高德地图公共图层.
 
-- attribution (string; optional)
+- attribution (string; optional):
+    地图服务`attribution`属性.
 
-- opacity (number; default 1)
+- opacity (number; default 1):
+    图层透明度  默认值：`1`.
 
-- zIndex (number; optional)
+- zIndex (number; optional):
+    当前图层`z`轴顺序.
 
-- tileSize (number; default 256)
+- tileSize (number; default 256):
+    瓦片服务图片像素边长  默认值：`256`.
 
 - minZoom (number; default 0):
     当前瓦片地图服务允许加载的最小缩放级别  默认值：`0`.
@@ -36,7 +42,8 @@ Keyword arguments:
 - maxNativeZoom (number; optional):
     瓦片地图服务可用的最大缩放级别。如果指定了该值，所有高于`maxNativeZoom`的缩放级别上的瓦片将从最大原生缩放级别加载并自动缩放.
 
-- tms (boolean; default False)
+- tms (boolean; default False):
+    设置当前地图服务是否符合`tms`类型  默认值：`False`.
 
 - loading_state (dict; optional)
 
