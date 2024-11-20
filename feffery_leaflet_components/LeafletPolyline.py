@@ -5,55 +5,75 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletPolyline(Component):
     """A LeafletPolyline component.
-
+折线图层组件LeafletPolyline
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
 - className (string; optional):
-    为当前矢量设置className.
+    当前图层css类名.
 
-- children (a list of or a singular dash component, string or number; optional)
+- children (a list of or a singular dash component, string or number; optional):
+    要传入的`LeafletTooltip`、`LeafletPopup`组件，配合当前图层使用.
 
-- positions (list of dicts; required)
+- positions (list of dicts; required):
+    必填，定义折线坐标.
 
     `positions` is a list of dicts with keys:
 
-    - lng (number; optional)
+    - lng (number; optional):
+        经度.
 
-    - lat (number; optional) | list of list of dicts with keys:
+    - lat (number; optional):
+        纬度. | list of list of dicts with keys:
 
-    - lng (number; optional)
+    - lng (number; optional):
+        经度.
 
-    - lat (number; optional)s
+    - lat (number; optional):
+        纬度.s
 
-- pathOptions (optional)
+- pathOptions (optional):
+    矢量样式配置参数.
 
-- arrowheads (dict; default False)
+- arrowheads (dict; default False):
+    配置额外箭头效果  默认值：`False`.
 
     `arrowheads` is a boolean | dict with keys:
 
-    - yawn (number; optional)
+    - yawn (number; optional):
+        箭头开合角度  默认值：`60`.
 
-    - fill (boolean; optional)
+    - fill (boolean; optional):
+        是否绘制实心箭头  默认值：`False`.
 
-    - size (number | string; optional)
+    - size (number | string; optional):
+        箭头尺寸比例，传入数值型是以米为单位，传入字符串时表示对应所附着折线的百分比，或css格式尺寸值  默认值：`'15%'`.
 
-    - frequency (a value equal to: 'allvertices', 'endonly' | number | string; optional)
+    - frequency (a value equal to: 'allvertices', 'endonly' | number | string; optional):
+        箭头在折线上的绘制频率，可选项有`'allvertices'`（每个折点对应1个箭头）、`'endonly'`（只在线要素末端绘制1个箭头）
+        当传入以`'m'`结尾的字符串时表示以米为单位的间隔，传入以`'px'`结尾的字符串时表示以像素为单位的间隔
+        传入数值型时表示以等间距方式绘制固定数量的箭头  默认值：`'allvertices'`.
 
-    - proportionalToTotal (boolean; optional)
+    - proportionalToTotal (boolean; optional):
+        当`size`设置为百分比形式时，针对多段折线要素，是否以整体折线长度总和为百分比对应的单位1  默认值：`False`.
 
-- arrowheadsPathOptions (optional)
+- arrowheadsPathOptions (optional):
+    箭头样式配置参数，默认沿用`pathOptions`.
 
-- editable (boolean; default False)
+- editable (boolean; default False):
+    当前要素是否可编辑  默认值：`False`.
 
-- nClicks (number; default 0)
+- nClicks (number; default 0):
+    监听当前要素累计点击次数  默认值：`0`.
 
-- mouseOverCount (number; default 0)
+- mouseOverCount (number; default 0):
+    监听当前要素鼠标移入事件累计次数  默认值：`0`.
 
 - loading_state (dict; optional)
 

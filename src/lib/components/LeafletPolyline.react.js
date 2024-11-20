@@ -1,19 +1,22 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
+// react核心
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import 'leaflet-arrowheads';
 import { Polyline } from 'react-leaflet';
+// 辅助库
 import { isBoolean } from 'lodash';
+// 参数类型
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 
-// 定义折线图层组件LeafletPolyline
+/**
+ * 折线图层组件LeafletPolyline
+ */
 const LeafletPolyline = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
-        key,
         className,
         children,
         positions,
@@ -67,7 +70,6 @@ const LeafletPolyline = (props) => {
 
     return (
         <Polyline id={id}
-            key={key}
             className={className}
             positions={positions}
             pathOptions={{
@@ -92,99 +94,129 @@ const LeafletPolyline = (props) => {
     );
 }
 
-// 定义参数或属性
 LeafletPolyline.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
     /**
-     * 为当前矢量设置className
+     * 当前图层css类名
      */
     className: PropTypes.string,
 
-    // 传入tooltip、popup组件
+    /**
+     * 要传入的`LeafletTooltip`、`LeafletPopup`组件，配合当前图层使用
+     */
     children: PropTypes.node,
 
-    // 设置折线中折点坐标数组，必填
+    /**
+     * 必填，定义折线坐标
+     */
     positions: PropTypes.oneOfType([
         PropTypes.arrayOf(
             PropTypes.exact({
-                // 经度
+                /**
+                 * 经度
+                 */
                 lng: PropTypes.number,
-
-                // 纬度
+                /**
+                 * 纬度
+                 */
                 lat: PropTypes.number
             })
         ),
         PropTypes.arrayOf(
             PropTypes.arrayOf(
                 PropTypes.exact({
-                    // 经度
+                    /**
+                     * 经度
+                     */
                     lng: PropTypes.number,
-
-                    // 纬度
+                    /**
+                     * 纬度
+                     */
                     lat: PropTypes.number
                 })
             )
         )
     ]).isRequired,
 
-    // 设置样式相关参数
+    /**
+     * 矢量样式配置参数
+     */
     pathOptions: pathOptionsPropTypes,
 
-    // 设置arrowheads效果，默认为false
+    /**
+     * 配置额外箭头效果
+     * 默认值：`false`
+     */
     arrowheads: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.exact({
-            // 设置箭头开合角度，默认为60
+            /**
+             * 箭头开合角度
+             * 默认值：`60`
+             */
             yawn: PropTypes.number,
-
-            // 设置是否绘制实心箭头，默认为false
+            /**
+             * 是否绘制实心箭头
+             * 默认值：`false`
+             */
             fill: PropTypes.bool,
-
-            // 设置箭头尺寸，默认为'15%'
+            /**
+             * 箭头尺寸比例，传入数值型是以米为单位，传入字符串时表示对应所附着折线的百分比，或css格式尺寸值
+             * 默认值：`'15%'`
+             */
             size: PropTypes.oneOfType([
-                // 数值型输入表示米为单位
                 PropTypes.number,
-                // 字符型输入表示以附着polyline为主体的百分比尺寸
-                // 或css像素尺寸输入
                 PropTypes.string
             ]),
-
-            // 设置箭头在线要素上的绘制频率，默认为'allvertices'
+            /**
+             * 箭头在折线上的绘制频率，可选项有`'allvertices'`（每个折点对应1个箭头）、`'endonly'`（只在线要素末端绘制1个箭头）
+             * 当传入以`'m'`结尾的字符串时表示以米为单位的间隔，传入以`'px'`结尾的字符串时表示以像素为单位的间隔
+             * 传入数值型时表示以等间距方式绘制固定数量的箭头
+             * 默认值：`'allvertices'`
+             */
             frequency: PropTypes.oneOfType([
-                // 策略名称，'allvertices'表示每个折点对应1个箭头
-                // 'endonly'表示只在线要素末端绘制1个箭头
                 PropTypes.oneOf(['allvertices', 'endonly']),
-                // 等间距绘制固定数量的箭头
                 PropTypes.number,
-                // 以'm'结尾定义间隔若干米绘制每个箭头，如'100m'
-                // 以'px'结尾定义间隔若干像素绘制每个箭头，如'100px'
                 PropTypes.string
             ]),
-
-            // 当size设置为百分比时，用于设置针对多段线要素
-            // 的百分比分母从平均分段线长度变为所有线要素长度之和
-            // 默认为false
+            /**
+             * 当`size`设置为百分比形式时，针对多段折线要素，是否以整体折线长度总和为百分比对应的单位1
+             * 默认值：`false`
+             */
             proportionalToTotal: PropTypes.bool,
         })
     ]),
 
-    // 为箭头设置优先级更高的要素样式
+    /**
+     * 箭头样式配置参数，默认沿用`pathOptions`
+     */
     arrowheadsPathOptions: pathOptionsPropTypes,
 
-    // 设置是否可编辑，默认为false
+    /**
+     * 当前要素是否可编辑
+     * 默认值：`false`
+     */
     editable: PropTypes.bool,
 
-    // 监听当前折线的被点击次数，默认为0
+    /**
+     * 监听当前要素累计点击次数
+     * 默认值：`0`
+     */
     nClicks: PropTypes.number,
 
-    // 监听当前折线发生鼠标移入事件次数，默认为0
+    /**
+     * 监听当前要素鼠标移入事件累计次数
+     * 默认值：`0`
+     */
     mouseOverCount: PropTypes.number,
 
     loading_state: PropTypes.shape({
@@ -209,7 +241,6 @@ LeafletPolyline.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletPolyline.defaultProps = {
     arrowheads: false,
     editable: false,
