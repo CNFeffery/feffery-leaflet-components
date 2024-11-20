@@ -5,65 +5,88 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletMarker(Component):
     """A LeafletMarker component.
-
+标记图层组件LeafletMarker
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
 - className (string; optional):
-    为当前矢量设置className.
+    当前图层css类名.
 
-- children (a list of or a singular dash component, string or number; optional)
+- children (a list of or a singular dash component, string or number; optional):
+    要传入的`LeafletTooltip`、`LeafletPopup`组件，配合当前图层使用.
 
-- position (dict; required)
+- position (dict; required):
+    必填项，标记中心坐标.
 
     `position` is a dict with keys:
 
-    - lng (number; optional)
+    - lng (number; optional):
+        经度.
 
-    - lat (number; optional)
+    - lat (number; optional):
+        纬度.
 
-- draggable (boolean; optional)
+- draggable (boolean; optional):
+    当前标记是否可拖拽  默认值：`False`.
 
-- iconOptions (dict; optional)
+- iconOptions (dict; optional):
+    配置图标参数.
 
     `iconOptions` is a dict with keys:
 
-    - iconUrl (string; optional)
+    - iconUrl (string; optional):
+        图标图片地址.
 
-    - iconSize (list of numbers; optional)
+    - iconSize (list of numbers; optional):
+        图标像素尺寸，格式：`[width, height]`.
 
-    - iconAnchor (list of numbers; optional)
+    - iconAnchor (list of numbers; optional):
+        图标尖端坐标，以图片左上角为原点，格式：`[x, y]`.
 
-    - popupAnchor (list of numbers; optional)
+    - popupAnchor (list of numbers; optional):
+        弹出卡片展开锚点，以`iconAnchor`为原点参照，格式：`[x, y]`.
 
-    - tooltipAnchor (list of numbers; optional)
+    - tooltipAnchor (list of numbers; optional):
+        信息框展开锚点，以`iconAnchor`为原点参照，格式：`[x, y]`.
 
-    - shadowUrl (string; optional)
+    - shadowUrl (string; optional):
+        阴影图片地址.
 
-    - shadowSize (list of numbers; optional)
+    - shadowSize (list of numbers; optional):
+        阴影图片像素尺寸，格式：`[width, height]`.
 
-    - shadowAnchor (list of numbers; optional)
+    - shadowAnchor (list of numbers; optional):
+        阴影图片的尖端坐标，以图片左上角为原点参照，格式：`[x, y]`.
 
-    - className (string; optional)
+    - className (string; optional):
+        标记图标css类.
 
-- opacity (number; optional)
+- opacity (number; optional):
+    图标透明度  默认值：`1`.
 
-- editable (boolean; default False)
+- editable (boolean; default False):
+    当前要素是否可编辑  默认值：`False`.
 
-- zIndexOffset (number; optional)
+- zIndexOffset (number; optional):
+    当前图层`z`轴偏移单位.
 
-- riseOnHover (boolean; optional)
+- riseOnHover (boolean; optional):
+    当鼠标悬浮于当前标记上时，是否自动调整图层至顶层  默认值：`False`.
 
-- autoPan (boolean; optional)
+- autoPan (boolean; optional):
+    当拖拽标记至地图边缘时，设置是否允许地图自动移动以适应边缘  默认值：`False`.
 
-- nClicks (number; default 0)
+- nClicks (number; default 0):
+    监听当前要素累计点击次数  默认值：`0`.
 
-- mouseOverCount (number; default 0)
+- mouseOverCount (number; default 0):
+    监听当前要素鼠标移入事件累计次数  默认值：`0`.
 
 - loading_state (dict; optional)
 

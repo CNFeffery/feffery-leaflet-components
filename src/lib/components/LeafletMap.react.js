@@ -104,7 +104,6 @@ const parseCRS = (crs) => {
 const LeafletMap = (props) => {
     const {
         id,
-        key,
         style,
         className,
         children,
@@ -153,7 +152,6 @@ const LeafletMap = (props) => {
 
     return (
         <div id={id}
-            key={key}
             style={style}
             className={className}
             ref={divRef}

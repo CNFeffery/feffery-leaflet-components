@@ -1,8 +1,10 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
+// react核心
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { Marker } from 'react-leaflet';
 import L from 'leaflet';
 import {
@@ -22,13 +24,12 @@ const defaultIconOptions = {
     shadowSize: [41, 41]
 }
 
-// 定义标志图层组件LeafletMarker
+/**
+ * 标记图层组件LeafletMarker
+ */
 const LeafletMarker = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
-        key,
         className,
         children,
         iconOptions,
@@ -76,7 +77,6 @@ const LeafletMarker = (props) => {
 
     return (
         <Marker id={id}
-            key={key}
             className={className}
             icon={iconOptions ? L.icon(iconOptions) : L.icon(defaultIconOptions)}
             position={position}
@@ -104,76 +104,128 @@ const LeafletMarker = (props) => {
     );
 }
 
-// 定义参数或属性
 LeafletMarker.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
     /**
-     * 为当前矢量设置className
+     * 当前图层css类名
      */
     className: PropTypes.string,
 
-    // 传入tooltip、popup组件
+    /**
+     * 要传入的`LeafletTooltip`、`LeafletPopup`组件，配合当前图层使用
+     */
     children: PropTypes.node,
 
-    // 设置标记坐标，必填
+    /**
+     * 必填项，标记中心坐标
+     */
     position: PropTypes.exact({
-        // 经度
+        /**
+         * 经度
+         */
         lng: PropTypes.number,
-        // 纬度
+        /**
+         * 纬度
+         */
         lat: PropTypes.number
     }).isRequired,
 
-    // 设置是否可进行拖拽，默认为false
+    /**
+     * 当前标记是否可拖拽
+     * 默认值：`false`
+     */
     draggable: PropTypes.bool,
 
-    // 自定义图标参数
+    /**
+     * 配置图标参数
+     */
     iconOptions: PropTypes.exact({
-        // 图标图片url
+        /**
+         * 图标图片地址
+         */
         iconUrl: PropTypes.string,
-        // 设置图标图片主体尺寸
+        /**
+         * 图标像素尺寸，格式：`[width, height]`
+         */
         iconSize: PropTypes.arrayOf(PropTypes.number),
-        // 设置图标图片尖端坐标，以图片左上角为原点参照
+        /**
+         * 图标尖端坐标，以图片左上角为原点，格式：`[x, y]`
+         */
         iconAnchor: PropTypes.arrayOf(PropTypes.number),
-        // 设置popup打开的锚点，以iconAnchor为原点参照
+        /**
+         * 弹出卡片展开锚点，以`iconAnchor`为原点参照，格式：`[x, y]`
+         */
         popupAnchor: PropTypes.arrayOf(PropTypes.number),
-        // 设置tooltip打开的锚点，以iconAnchor为原点参照
+        /**
+         * 信息框展开锚点，以`iconAnchor`为原点参照，格式：`[x, y]`
+         */
         tooltipAnchor: PropTypes.arrayOf(PropTypes.number),
-        // 设置阴影图片url
+        /**
+         * 阴影图片地址
+         */
         shadowUrl: PropTypes.string,
-        // 设置阴影图片的尺寸
+        /**
+         * 阴影图片像素尺寸，格式：`[width, height]`
+         */
         shadowSize: PropTypes.arrayOf(PropTypes.number),
-        // 设置阴影图片的尖端坐标，以图片左上角为原点参照
+        /**
+         * 阴影图片的尖端坐标，以图片左上角为原点参照，格式：`[x, y]`
+         */
         shadowAnchor: PropTypes.arrayOf(PropTypes.number),
-        // 设置标记图标css类
+        /**
+         * 标记图标css类
+         */
         className: PropTypes.string
     }),
 
-    // 设置透明度，默认为1
+    /**
+     * 图标透明度
+     * 默认值：`1`
+     */
     opacity: PropTypes.number,
 
-    // 设置是否可编辑，默认为false
+    /**
+     * 当前要素是否可编辑
+     * 默认值：`false`
+     */
     editable: PropTypes.bool,
 
-    // 设置zIndexOffset
+    /**
+     * 当前图层`z`轴偏移单位
+     */
     zIndexOffset: PropTypes.number,
 
-    // 设置当鼠标悬浮于当前标记上时，是否自动调整图层至顶层，默认为false
+    /**
+     * 当鼠标悬浮于当前标记上时，是否自动调整图层至顶层
+     * 默认值：`false`
+     */
     riseOnHover: PropTypes.bool,
 
-    // 当拖拽标记至地图边缘时，设置是否允许地图自动移动以适应边缘，默认为false
+    /**
+     * 当拖拽标记至地图边缘时，设置是否允许地图自动移动以适应边缘
+     * 默认值：`false`
+     */
     autoPan: PropTypes.bool,
 
-    // 监听当前圆圈标志的被点击次数，默认为0
+    /**
+     * 监听当前要素累计点击次数
+     * 默认值：`0`
+     */
     nClicks: PropTypes.number,
 
-    // 监听当前圆圈标志发生鼠标移入事件次数，默认为0
+    /**
+     * 监听当前要素鼠标移入事件累计次数
+     * 默认值：`0`
+     */
     mouseOverCount: PropTypes.number,
 
     loading_state: PropTypes.shape({
@@ -198,7 +250,6 @@ LeafletMarker.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletMarker.defaultProps = {
     editable: false,
     nClicks: 0,

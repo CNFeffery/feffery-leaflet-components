@@ -14,7 +14,6 @@ import { pathOptionsPropTypes } from './BasePropTypes.react';
 const LeafletCircleMarker = (props) => {
     const {
         id,
-        key,
         className,
         children,
         center,
@@ -43,7 +42,6 @@ const LeafletCircleMarker = (props) => {
 
     return (
         <CircleMarker id={id}
-            key={key}
             className={className}
             center={center}
             radius={radius}
