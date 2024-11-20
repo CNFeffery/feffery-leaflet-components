@@ -30,9 +30,11 @@ Keyword arguments:
 
     `center` is a dict with keys:
 
-    - lng (number; optional)
+    - lng (number; optional):
+        经度.
 
-    - lat (number; optional)
+    - lat (number; optional):
+        纬度.
 
 - crs (dict; default 'EPSG3857'):
     为当前地图配置坐标参考系，当传入字符型时可选项有`'EPSG3857'`、`'EPSG4326'`、`'simple'`，

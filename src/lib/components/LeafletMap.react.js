@@ -371,10 +371,13 @@ LeafletMap.propTypes = {
      * 默认值：`{'lng': 0, 'lat': 0}`
      */
     center: PropTypes.exact({
-        // 经度
+        /**
+         * 经度
+         */
         lng: PropTypes.number,
-
-        // 纬度
+        /**
+         *纬度
+         */
         lat: PropTypes.number
     }),
 

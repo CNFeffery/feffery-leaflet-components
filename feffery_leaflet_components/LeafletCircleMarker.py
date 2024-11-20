@@ -5,37 +5,47 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletCircleMarker(Component):
     """A LeafletCircleMarker component.
-
+圆形标记图层组件LeafletCircleMarker
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
 - className (string; optional):
-    为当前矢量设置className.
+    当前图层css类名.
 
-- children (a list of or a singular dash component, string or number; optional)
+- children (a list of or a singular dash component, string or number; optional):
+    要传入的`LeafletTooltip`、`LeafletPopup`组件，配合当前图层使用.
 
-- center (dict; required)
+- center (dict; required):
+    必填项，圆圈中心坐标.
 
     `center` is a dict with keys:
 
-    - lng (number; optional)
+    - lng (number; optional):
+        经度.
 
-    - lat (number; optional)
+    - lat (number; optional):
+        纬度.
 
-- radius (number; default 10)
+- radius (number; default 10):
+    圆圈像素半径  默认值：`10`.
 
-- pathOptions (optional)
+- pathOptions (optional):
+    矢量样式配置参数.
 
-- editable (boolean; default False)
+- editable (boolean; default False):
+    当前要素是否可编辑  默认值：`False`.
 
-- nClicks (number; default 0)
+- nClicks (number; default 0):
+    监听当前要素累计点击次数  默认值：`0`.
 
-- mouseOverCount (number; default 0)
+- mouseOverCount (number; default 0):
+    监听当前要素鼠标移入事件累计次数  默认值：`0`.
 
 - loading_state (dict; optional)
 

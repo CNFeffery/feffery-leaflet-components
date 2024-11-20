@@ -17,8 +17,8 @@ Keyword arguments:
 - `center` (optional): 地图默认中心坐标，格式：`{'lng': xxx, 'lat': xxx}`
 默认值：`{'lng': 0, 'lat': 0}`. center has the following type: lists containing elements 'lng', 'lat'.
 Those elements have the following types:
-  - `lng` (Real; optional)
-  - `lat` (Real; optional)
+  - `lng` (Real; optional): 经度
+  - `lat` (Real; optional): 纬度
 - `className` (String; optional): 当前组件css类名
 - `closePopupOnClick` (Bool; optional): 是否允许鼠标点击地图空白处关闭已打开的`leafletPopup`弹出层
 默认值：`true`
