@@ -9,27 +9,30 @@ export ''_leafletrectangle
 
 
 A LeafletRectangle component.
-
+矩形图层组件LeafletRectangle
 Keyword arguments:
-- `children` (a list of or a singular dash component, string or number; optional)
-- `id` (String; optional)
-- `bounds` (required): . bounds has the following type: lists containing elements 'minx', 'miny', 'maxx', 'maxy'.
+- `children` (a list of or a singular dash component, string or number; optional): 要传入的`LeafletTooltip`、`LeafletPopup`组件，配合当前图层使用
+- `id` (String; optional): 组件唯一id
+- `bounds` (required): 必填项，定义矩形左下角、右上角坐标. bounds has the following type: lists containing elements 'minx', 'miny', 'maxx', 'maxy'.
 Those elements have the following types:
-  - `minx` (Real; required)
-  - `miny` (Real; required)
-  - `maxx` (Real; required)
-  - `maxy` (Real; required)
-- `className` (String; optional): 为当前矢量设置className
-- `editable` (Bool; optional)
-- `key` (String; optional): 强制刷新用
+  - `minx` (Real; required): 矩形左下角经度
+  - `miny` (Real; required): 矩形左下角纬度
+  - `maxx` (Real; required): 矩形右上角经度
+  - `maxy` (Real; required): 矩形右上角纬度
+- `className` (String; optional): 当前图层css类名
+- `editable` (Bool; optional): 当前要素是否可编辑
+默认值：`false`
+- `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
-- `mouseOverCount` (Real; optional)
-- `nClicks` (Real; optional)
-- `pathOptions` (optional)
+- `mouseOverCount` (Real; optional): 监听当前要素鼠标移入事件累计次数
+默认值：`0`
+- `nClicks` (Real; optional): 监听当前要素累计点击次数
+默认值：`0`
+- `pathOptions` (optional): 矢量样式配置参数
 """
 function ''_leafletrectangle(; kwargs...)
         available_props = Symbol[:children, :id, :bounds, :className, :editable, :key, :loading_state, :mouseOverCount, :nClicks, :pathOptions]
