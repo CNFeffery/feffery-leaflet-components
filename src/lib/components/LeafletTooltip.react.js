@@ -52,7 +52,7 @@ LeafletTooltip.propTypes = {
     key: PropTypes.string,
 
     /**
-     * 当前图层css类名
+     * 信息框css类名
      */
     className: PropTypes.string,
 

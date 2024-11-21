@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { Popup } from 'react-leaflet';
 
 /**
- * 弹出窗口组件LeafletPopup
+ * 弹框组件LeafletPopup
  */
 const LeafletPopup = (props) => {
     const {
@@ -51,17 +51,17 @@ LeafletPopup.propTypes = {
     key: PropTypes.string,
 
     /**
-     * 组件型，按钮内嵌元素
-     */
-    children: PropTypes.node,
-
-    /**
-     * 当前组件css类名
+     * 弹框css类名
      */
     className: PropTypes.string,
 
     /**
-     * 已展开的窗口是否限制在地图范围内显示
+     * 弹框内部元素
+     */
+    children: PropTypes.node,
+
+    /**
+     * 已展开的弹框是否限制在地图范围内显示
      * 默认值：`false`
      */
     keepInView: PropTypes.bool,
@@ -73,19 +73,19 @@ LeafletPopup.propTypes = {
     closeButton: PropTypes.bool,
 
     /**
-     * 通过键盘`esc`键是否可关闭窗口
+     * 通过键盘`esc`键是否可关闭弹框
      * 默认值：`true`
      */
     closeOnEscapeKey: PropTypes.bool,
 
     /**
-     * 点击地图空白处是否可关闭窗口
+     * 点击地图空白处是否可关闭弹框
      * 默认值：`true`
      */
     closeOnClick: PropTypes.bool,
 
     /**
-     * 为窗口设置固定像素宽度值
+     * 为弹框设置固定像素宽度值
      */
     width: PropTypes.number,
 

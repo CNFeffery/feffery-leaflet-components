@@ -13,7 +13,7 @@ A LeafletTooltip component.
 Keyword arguments:
 - `children` (a list of or a singular dash component, string or number; optional): 信息框内部元素
 - `id` (String; optional): 组件唯一id
-- `className` (String; optional): 当前图层css类名
+- `className` (String; optional): 信息框css类名
 - `direction` (a value equal to: 'right', 'left', 'top', 'bottom', 'center', 'auto'; optional): 信息框展开方向，可选项有`'right'`、`'left'`、`'top'`、`'bottom'`、`'center'`、`'auto'`
 默认值：`'auto'`
 - `interactive` (Bool; optional): 信息框内部元素是否可交互

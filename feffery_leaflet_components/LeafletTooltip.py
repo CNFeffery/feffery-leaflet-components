@@ -16,7 +16,7 @@ Keyword arguments:
     对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
 - className (string; optional):
-    当前图层css类名.
+    信息框css类名.
 
 - children (a list of or a singular dash component, string or number; optional):
     信息框内部元素.
