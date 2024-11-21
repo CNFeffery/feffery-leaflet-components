@@ -1,9 +1,11 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable consistent-return */
 /* eslint-disable no-undefined */
+// react核心
 import React, { useEffect, useRef } from 'react';
-import L from 'leaflet';
 import PropTypes from 'prop-types';
+// leaflet核心
+import L from 'leaflet';
 import { ImageOverlay, useMap } from 'react-leaflet';
 
 /**
@@ -55,7 +57,6 @@ const LeafletImageOverlay = (props) => {
         }
     }, [opacity, minZoom, maxZoom])
 
-    // 返回定制化的前端组件
     return (
         <ImageOverlay
             id={id}
@@ -77,17 +78,17 @@ const LeafletImageOverlay = (props) => {
 
 LeafletImageOverlay.propTypes = {
     /**
-     * 组件id
+     * 组件唯一id
      */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
     /**
-     * 当前图片叠加层css类名
+     * 当前图层css类名
      */
     className: PropTypes.string,
 
@@ -100,23 +101,31 @@ LeafletImageOverlay.propTypes = {
      * 必填，设置图片叠加区域坐标范围
      */
     bounds: PropTypes.exact({
-        // 矩形左下角经度
+        /**
+         * 叠加区域左下角经度
+         */
         minx: PropTypes.number.isRequired,
-        // 矩形左下角纬度
+        /**
+         * 叠加区域左下角纬度
+         */
         miny: PropTypes.number.isRequired,
-        // 矩形右上角经度
+        /**
+         * 叠加区域右上角经度
+         */
         maxx: PropTypes.number.isRequired,
-        // 矩形右上角纬度
+        /**
+         * 叠加区域右上角纬度
+         */
         maxy: PropTypes.number.isRequired
     }).isRequired,
 
     /**
-     * 图片透明度，取值应在`0`~`1`之间
+     * 图片透明度，取值应在`0`到`1`之间
      */
     opacity: PropTypes.number,
 
     /**
-     * 当前图层z轴层级
+     * 当前图层`z`轴层级
      */
     zIndex: PropTypes.number,
 
@@ -152,7 +161,6 @@ LeafletImageOverlay.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletImageOverlay.defaultProps = {
 }
 

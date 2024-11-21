@@ -10,13 +10,13 @@ class LeafletImageOverlay(Component):
 Keyword arguments:
 
 - id (string; optional):
-    组件id.
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
 - className (string; optional):
-    当前图片叠加层css类名.
+    当前图层css类名.
 
 - url (string; required):
     必填，图片地址.
@@ -26,19 +26,23 @@ Keyword arguments:
 
     `bounds` is a dict with keys:
 
-    - minx (number; required)
+    - minx (number; required):
+        叠加区域左下角经度.
 
-    - miny (number; required)
+    - miny (number; required):
+        叠加区域左下角纬度.
 
-    - maxx (number; required)
+    - maxx (number; required):
+        叠加区域右上角经度.
 
-    - maxy (number; required)
+    - maxy (number; required):
+        叠加区域右上角纬度.
 
 - opacity (number; optional):
-    图片透明度，取值应在`0`~`1`之间.
+    图片透明度，取值应在`0`到`1`之间.
 
 - zIndex (number; optional):
-    当前图层z轴层级.
+    当前图层`z`轴层级.
 
 - minZoom (number; optional):
     图片显示的最小缩放级别，默认无限制.
