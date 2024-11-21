@@ -1,14 +1,17 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undefined */
+// react核心
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import L from "leaflet";
 import "leaflet.heat";
 import { useMap } from 'react-leaflet';
 
-// 定义热力图层组件LeafletHeatMap
+/**
+ * 热力图层组件LeafletHeatMap
+ */
 const LeafletHeatMap = (props) => {
-    // 取得必要属性或参数
     const {
         points,
         minOpacity,
@@ -48,39 +51,64 @@ const LeafletHeatMap = (props) => {
     return <></>
 }
 
-// 定义参数或属性
 LeafletHeatMap.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 设置热力图渲染所需点数据，格式为由{lng: xxx, lat: xxx, weight: xxx}
-    // 所组成的数组，其中weight可选，表示权重
+    /**
+     * 热力点数据
+     */
     points: PropTypes.arrayOf(
         PropTypes.exact({
+            /**
+             * 当前热力点经度
+             */
             lng: PropTypes.number,
+            /**
+             * 当前热力点纬度
+             */
             lat: PropTypes.number,
+            /**
+             * 当前热力点权重
+             */
             weight: PropTypes.number
         })
     ),
 
-    // 设置最小透明度，取值在0~1之间，0表示完全透明
+    /**
+     * 透明度下限，取值应在`0`到`1`之间
+     * 默认值：`0`
+     */
     minOpacity: PropTypes.number,
 
-    // 设置权重的上限，默认为1.0
+    /**
+     * 权重上限范围
+     * 默认值：`1`
+     */
     max: PropTypes.number,
 
-    // 设置每个热力点的半径大小，默认为25
+    /**
+     * 热力点像素半径
+     * 默认值：`25`
+     */
     radius: PropTypes.number,
 
-    // 设置每个热力点的模糊程度，默认为15
+    /**
+     * 热力点模糊程度
+     * 默认值：`15`
+     */
     blur: PropTypes.number,
 
-    // 自定义色彩过渡断点规则，例如：{0.4: 'blue', 0.65: 'lime', 1: 'red'}
+    /**
+     * 颜色分段规则，譬如：`{0.4: 'blue', 0.65: 'lime', 1: 'red'}`
+     */
     gradient: PropTypes.object,
 
     loading_state: PropTypes.shape({
@@ -105,7 +133,6 @@ LeafletHeatMap.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletHeatMap.defaultProps = {
     minOpacity: 0,
     max: 1,

@@ -5,34 +5,44 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletHeatMap(Component):
     """A LeafletHeatMap component.
-
+热力图层组件LeafletHeatMap
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- points (list of dicts; optional)
+- points (list of dicts; optional):
+    热力点数据.
 
     `points` is a list of dicts with keys:
 
-    - lng (number; optional)
+    - lng (number; optional):
+        当前热力点经度.
 
-    - lat (number; optional)
+    - lat (number; optional):
+        当前热力点纬度.
 
-    - weight (number; optional)
+    - weight (number; optional):
+        当前热力点权重.
 
-- minOpacity (number; default 0)
+- minOpacity (number; default 0):
+    透明度下限，取值应在`0`到`1`之间  默认值：`0`.
 
-- max (number; default 1)
+- max (number; default 1):
+    权重上限范围  默认值：`1`.
 
-- radius (number; default 25)
+- radius (number; default 25):
+    热力点像素半径  默认值：`25`.
 
-- blur (number; default 15)
+- blur (number; default 15):
+    热力点模糊程度  默认值：`15`.
 
-- gradient (dict; optional)
+- gradient (dict; optional):
+    颜色分段规则，譬如：`{0.4: 'blue', 0.65: 'lime', 1: 'red'}`.
 
 - loading_state (dict; optional)
 
