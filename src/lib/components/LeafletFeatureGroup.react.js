@@ -1,14 +1,17 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
+// react核心
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { FeatureGroup } from 'react-leaflet';
+// 辅助库
 import { isUndefined } from 'lodash';
 
-// 定义要素分组组件LeafletFeatureGroup
+/**
+ * 要素分组组件LeafletFeatureGroup
+ */
 const LeafletFeatureGroup = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
         children,
@@ -64,26 +67,36 @@ const LeafletFeatureGroup = (props) => {
     );
 }
 
-// 定义参数或属性
 LeafletFeatureGroup.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 传入嵌套的若干矢量图层组件
+    /**
+     * 传入内部相关要素类图层组件
+     */
     children: PropTypes.node,
 
-    // 设置是否将当前图层置于顶层
+    /**
+     * 是否将当前要素分组置于顶层
+     * 默认值：`false`
+     */
     bringToFront: PropTypes.bool,
 
-    // 设置当前要素组的z-index信息
+    /**
+     * 当前要素分组`z`轴层级
+     */
     zIndex: PropTypes.number,
 
-    // 监听当前要素组的整体bounds
+    /**
+     * 监听当前要素分组整体矩形范围
+     */
     _bounds: PropTypes.exact({
         minx: PropTypes.number,
         miny: PropTypes.number,
@@ -113,7 +126,6 @@ LeafletFeatureGroup.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletFeatureGroup.defaultProps = {
     bringToFront: false
 }
