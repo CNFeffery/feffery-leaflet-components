@@ -1,13 +1,15 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
+// react核心
 import React from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { Tooltip } from 'react-leaflet';
 
-// 定义提示框组件LeafletTooltip
+/**
+ * 信息框组件LeafletTooltip
+ */
 const LeafletTooltip = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
         className,
@@ -21,7 +23,6 @@ const LeafletTooltip = (props) => {
         setProps
     } = props;
 
-    // 返回定制化的前端组件
     return (
         <Tooltip
             id={id}
@@ -39,37 +40,55 @@ const LeafletTooltip = (props) => {
     );
 }
 
-// 定义参数或属性
 LeafletTooltip.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 为tooltip容器设置css类
+    /**
+     * 当前图层css类名
+     */
     className: PropTypes.string,
 
-    // 设置tooltip内部的子元素
+    /**
+     * 信息框内部元素
+     */
     children: PropTypes.node,
 
-    // 设置tooltip展开方位，可选的有'right'、'left'、'top'、'bottom'、'center'与'auto'
-    // 默认为'auto'，其中'auto'会自动根据方位在'left'与'right'之间进行切换
+    /**
+     * 信息框展开方向，可选项有`'right'`、`'left'`、`'top'`、`'bottom'`、`'center'`、`'auto'`
+     * 默认值：`'auto'`
+     */
     direction: PropTypes.oneOf(['right', 'left', 'top', 'bottom', 'center', 'auto']),
 
-    // 设置是否永久展开tooltip而无需鼠标悬浮触发，默认为false
+    /**
+     * 信息框是否保持展开状态，而无需鼠标移入触发
+     * 默认值：`false`
+     */
     permanent: PropTypes.bool,
 
-    // 设置是否开启tooltip鼠标跟随模式，默认为false
-    // 设置为true时，tooltip会跟随鼠标在要素内的移动自动改变位置
+    /**
+     * 信息框是否跟随鼠标位置
+     * 默认值：`false`
+     */
     sticky: PropTypes.bool,
 
-    // 设置tooltip的容器透明度，默认为0.9
+    /**
+     * 信息框透明度
+     * 默认值：`0.9`
+     */
     opacity: PropTypes.number,
 
-    // 设置是否允许tooltip监听内部元素的鼠标事件，默认为false
+    /**
+     * 信息框内部元素是否可交互
+     * 默认值：`false`
+     */
     interactive: PropTypes.bool,
 
     loading_state: PropTypes.shape({
@@ -94,7 +113,6 @@ LeafletTooltip.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletTooltip.defaultProps = {
     direction: 'auto',
     permanent: false,

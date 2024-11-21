@@ -5,28 +5,37 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletTooltip(Component):
     """A LeafletTooltip component.
-
+信息框组件LeafletTooltip
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- className (string; optional)
+- className (string; optional):
+    当前图层css类名.
 
-- children (a list of or a singular dash component, string or number; optional)
+- children (a list of or a singular dash component, string or number; optional):
+    信息框内部元素.
 
-- direction (a value equal to: 'right', 'left', 'top', 'bottom', 'center', 'auto'; default 'auto')
+- direction (a value equal to: 'right', 'left', 'top', 'bottom', 'center', 'auto'; default 'auto'):
+    信息框展开方向，可选项有`'right'`、`'left'`、`'top'`、`'bottom'`、`'center'`、`'auto'`
+    默认值：`'auto'`.
 
-- permanent (boolean; default False)
+- permanent (boolean; default False):
+    信息框是否保持展开状态，而无需鼠标移入触发  默认值：`False`.
 
-- sticky (boolean; default False)
+- sticky (boolean; default False):
+    信息框是否跟随鼠标位置  默认值：`False`.
 
-- opacity (number; default 0.9)
+- opacity (number; default 0.9):
+    信息框透明度  默认值：`0.9`.
 
-- interactive (boolean; default False)
+- interactive (boolean; default False):
+    信息框内部元素是否可交互  默认值：`False`.
 
 - loading_state (dict; optional)
 
