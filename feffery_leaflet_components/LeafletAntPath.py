@@ -5,40 +5,53 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletAntPath(Component):
     """A LeafletAntPath component.
-
+蚂蚁路径图层组件LeafletAntPath
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- positions (list of dicts; required)
+- positions (list of dicts; required):
+    必填，定义折线坐标.
 
     `positions` is a list of dicts with keys:
 
-    - lng (number; optional)
+    - lng (number; optional):
+        经度.
 
-    - lat (number; optional) | list of list of dicts with keys:
+    - lat (number; optional):
+        纬度. | list of list of dicts with keys:
 
-    - lng (number; optional)
+    - lng (number; optional):
+        经度.
 
-    - lat (number; optional)s
+    - lat (number; optional):
+        纬度.s
 
-- pathOptions (optional)
+- pathOptions (optional):
+    矢量样式配置参数.
 
-- paused (boolean; optional)
+- paused (boolean; optional):
+    是否暂停蚂蚁路径动画  默认值：`False`.
 
-- reverse (boolean; optional)
+- reverse (boolean; optional):
+    是否翻转蚂蚁路径动画方向  默认值：`False`.
 
-- hardwareAccelerated (boolean; optional)
+- hardwareAccelerated (boolean; optional):
+    是否开启硬件加速  默认值：`False`.
 
-- pulseColor (string; optional)
+- pulseColor (string; optional):
+    折线分隔颜色  默认值：`'white'`.
 
-- delay (number; optional)
+- delay (number; optional):
+    动画延迟，单位：毫秒.
 
-- dashArray (string; optional)
+- dashArray (string; optional):
+    折线分段格式  默认值：`'10, 20'`.
 
 - loading_state (dict; optional)
 

@@ -1,14 +1,18 @@
+// react核心
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { antPath } from 'leaflet-ant-path';
 import { useMap } from 'react-leaflet';
-import { pathOptionsPropTypes } from './BasePropTypes.react';
+// 辅助库
 import { isUndefined, omitBy } from 'lodash';
+// 参数类型
+import { pathOptionsPropTypes } from './BasePropTypes.react';
 
-// 定义蚂蚁路径图层组件LeafletAntPath
+/**
+ * 蚂蚁路径图层组件LeafletAntPath
+ */
 const LeafletAntPath = (props) => {
-
-    // 取得必要属性或参数
     const {
         positions,
         pathOptions,
@@ -65,25 +69,31 @@ const LeafletAntPath = (props) => {
     return <></>;
 }
 
-// 定义参数或属性
 LeafletAntPath.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 设置折线中折点坐标数组，必填
+    /**
+     * 必填，定义折线坐标
+     */
     positions: PropTypes.oneOfType([
         // 单折线
         PropTypes.arrayOf(
             PropTypes.exact({
-                // 经度
+                /**
+                 * 经度
+                 */
                 lng: PropTypes.number,
-
-                // 纬度
+                /**
+                 * 纬度
+                 */
                 lat: PropTypes.number
             })
         ),
@@ -91,35 +101,57 @@ LeafletAntPath.propTypes = {
         PropTypes.arrayOf(
             PropTypes.arrayOf(
                 PropTypes.exact({
-                    // 经度
+                    /**
+                     * 经度
+                     */
                     lng: PropTypes.number,
-
-                    // 纬度
+                    /**
+                     * 纬度
+                     */
                     lat: PropTypes.number
                 })
             )
         )
     ]).isRequired,
 
-    // 设置样式相关参数
+    /**
+     * 矢量样式配置参数
+     */
     pathOptions: pathOptionsPropTypes,
 
-    // 设置是否暂停蚂蚁路径，默认为false
+    /**
+     * 是否暂停蚂蚁路径动画
+     * 默认值：`false`
+     */
     paused: PropTypes.bool,
 
-    // 设置是否颠倒动画方向，默认为false
+    /**
+     * 是否翻转蚂蚁路径动画方向
+     * 默认值：`false`
+     */
     reverse: PropTypes.bool,
 
-    // 设置是否开启硬件加速，默认为false
+    /**
+     * 是否开启硬件加速
+     * 默认值：`false`
+     */
     hardwareAccelerated: PropTypes.bool,
 
-    // 设置线段分隔颜色，默认为'white'
+    /**
+     * 折线分隔颜色
+     * 默认值：`'white'`
+     */
     pulseColor: PropTypes.string,
 
-    // 动画延迟，单位：毫秒
+    /**
+     * 动画延迟，单位：毫秒
+     */
     delay: PropTypes.number,
 
-    // 设置分段模式，默认为'10, 20'
+    /**
+     * 折线分段格式
+     * 默认值：`'10, 20'`
+     */
     dashArray: PropTypes.string,
 
     loading_state: PropTypes.shape({
@@ -144,7 +176,6 @@ LeafletAntPath.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletAntPath.defaultProps = {
 }
 
