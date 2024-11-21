@@ -5,32 +5,41 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletStaticHeatMap(Component):
     """A LeafletStaticHeatMap component.
-
+静态热力图层组件LeafletStaticHeatMap
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- points (list of dicts; optional)
+- points (list of dicts; optional):
+    热力点数据.
 
     `points` is a list of dicts with keys:
 
-    - lng (number; optional)
+    - lng (number; optional):
+        热力点经度.
 
-    - lat (number; optional)
+    - lat (number; optional):
+        热力点纬度.
 
-    - weight (number; optional)
+    - weight (number; optional):
+        热力点权重.
 
-- multiplyFactor (number; optional)
+- multiplyFactor (number; default 1):
+    热力权重全局变换系数，将原始的各热力点权重值变为`权重 * multiplyFactor`  默认值：`1`.
 
-- size (number; optional)
+- size (number; default 30000):
+    热力点半径，单位：米  默认值：`30000`.
 
-- opacity (number; optional)
+- opacity (number; default 1):
+    热力点透明度  默认值：`1`.
 
-- alphaRange (number; optional)
+- alphaRange (number; optional):
+    权重比例阈值上限，取值应在`0`到`1`之间.
 
 - loading_state (dict; optional)
 

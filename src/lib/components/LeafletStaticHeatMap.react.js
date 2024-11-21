@@ -1,17 +1,21 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undefined */
+// react核心
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import L from "leaflet";
 import "leaflet-webgl-heatmap";
 import "./utils/webgl-heatmap";
-import { omitBy, isUndefined } from 'lodash';
 import { useMap } from 'react-leaflet';
+// 辅助库
+import { omitBy, isUndefined } from 'lodash';
 
-// 定义静态热力图层组件LeafletStaticHeatMap
+/**
+ * 静态热力图层组件LeafletStaticHeatMap
+ */
 const LeafletStaticHeatMap = (props) => {
-    // 取得必要属性或参数
     const {
         points,
         multiplyFactor,
@@ -53,36 +57,58 @@ const LeafletStaticHeatMap = (props) => {
     return <></>
 }
 
-// 定义参数或属性
 LeafletStaticHeatMap.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 设置热力图渲染所需点数据，格式为由{lng: xxx, lat: xxx, weight: xxx}
-    // 所组成的数组，其中weight可选，表示权重
+    /**
+     * 热力点数据
+     */
     points: PropTypes.arrayOf(
         PropTypes.exact({
+            /**
+             * 热力点经度
+             */
             lng: PropTypes.number,
+            /**
+             * 热力点纬度
+             */
             lat: PropTypes.number,
+            /**
+             * 热力点权重
+             */
             weight: PropTypes.number
         })
     ),
 
-    // 设置针对所有点的weight统一乘以的变换系数
+    /**
+     * 热力权重全局变换系数，将原始的各热力点权重值变为`权重 * multiplyFactor`
+     * 默认值：`1`
+     */
     multiplyFactor: PropTypes.number,
 
-    // 设置热力点距离半径（单位：米），默认为30000
+    /**
+     * 热力点半径，单位：米
+     * 默认值：`30000`
+     */
     size: PropTypes.number,
 
-    // 设置热力点透明度，默认为1
+    /**
+     * 热力点透明度
+     * 默认值：`1`
+     */
     opacity: PropTypes.number,
 
-    // 设置weight阈值上限，合法取值在0到1之间
+    /**
+     * 权重比例阈值上限，取值应在`0`到`1`之间
+     */
     alphaRange: PropTypes.number,
 
     loading_state: PropTypes.shape({
@@ -107,8 +133,10 @@ LeafletStaticHeatMap.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletStaticHeatMap.defaultProps = {
+    multiplyFactor: 1,
+    size: 30000,
+    opacity: 1
 }
 
 export default React.memo(LeafletStaticHeatMap);
