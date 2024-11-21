@@ -1,15 +1,18 @@
 /* eslint-disable new-cap */
+// react核心
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
+import { useMap } from 'react-leaflet';
 import L from "leaflet";
 import "./utils/leaflet.migrationLayer";
+// 辅助库
 import * as Color from 'color'
-import { useMap } from 'react-leaflet';
 
-// 定义流线图层组件LeafletMigrationLayer，api参数参考https://github.com/lit-forest/leaflet.migrationLayer
+/**
+ * 流线图层组件LeafletMigrationLayer
+ */
 const LeafletFlowLayer = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
         flowData,
@@ -116,80 +119,125 @@ const LeafletFlowLayer = (props) => {
         };
     }, []);
 
-    // 返回定制化的前端组件
     return <></>;
 }
 
-// 定义参数或属性
 LeafletFlowLayer.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 定义流数据结构
+    /**
+     * 定义流数据
+     */
     flowData: PropTypes.arrayOf(
         PropTypes.exact({
-            // 流起点坐标
+            /**
+             * 当前流数据起点坐标
+             */
             from: PropTypes.exact({
-                // 经度
+                /**
+                 * 经度
+                 */
                 lng: PropTypes.number,
-                // 纬度
+                /**
+                 * 纬度
+                 */
                 lat: PropTypes.number
             }),
-            // 流终点坐标
+            /**
+             * 当前流数据终点坐标
+             */
             to: PropTypes.exact({
-                // 经度
+                /**
+                 * 经度
+                 */
                 lng: PropTypes.number,
-                // 纬度
+                /**
+                 * 纬度
+                 */
                 lat: PropTypes.number
             }),
-            // 定义起点文字标签、终点文字标签
+            /**
+             * 当前流线起点、终点文字标签
+             */
             labels: PropTypes.exact({
-                // 起点文字标签
+                /**
+                 * 起点文字标签
+                 */
                 from: PropTypes.string,
-                // 终点文字标签
+                /**
+                 * 终点文字标签
+                 */
                 to: PropTypes.string
             }),
-            // 定义流线色彩
+            /**
+             * 当前流线颜色值
+             */
             color: PropTypes.string,
-            // 定义流量数值，会影响流线的宽度
+            /**
+             * 当前流线流量数值，与流线显示的宽度相关联
+             */
             value: PropTypes.number
         })
     ),
 
-    // 定义扩散圈像素半径
+    /**
+     * 扩散圆圈效果像素半径
+     * 默认值：`30`
+     */
     pulseRadius: PropTypes.number,
 
-    // 定义扩散圈边框像素宽度
+    /**
+     * 扩散圆圈边框像素宽度
+     * 默认值：`3`
+     */
     pulseBorderWidth: PropTypes.number,
 
-    // 定义流线像素宽度
+    /**
+     * 流线最小像素宽度
+     * 默认值：`1`
+     */
     arcWidth: PropTypes.number,
 
-    // 设置流线最大像素宽度
+    /**
+     * 流线最大像素宽度
+     * 默认值：`10`
+     */
     maxWidth: PropTypes.number,
 
-    // 设置是否展示起终点文字标签
+    /**
+     * 是否显示流线起点、终点文字标签
+     * 默认值：`true`
+     */
     arcLabel: PropTypes.bool,
 
-    // 设置起终点文字字体大小
+    /**
+     * 流线起点、终点文字标签字体大小
+     * 默认值：`'10px'`
+     */
     arcLabelFontSize: PropTypes.string,
 
-    // 设置起终点文字字体
+    /**
+     * 流线起点、终点文字标签字体
+     * 默认值：`'sans-serif'`
+     */
     arcLabelFontFamily: PropTypes.string,
 
     /**
-     * 设置是否对起终点标签文字进行去重
-     * 默认：false
+     * 是否自动对起点、终点文字标签去重
+     * 默认值：`false`
      */
     keepUniqueLabels: PropTypes.bool,
 
     /**
-     * 手动执行动作，可选的有'pause'、'play'、'hide'、'show'，每次有效值更新后会还原为空值
+     * 手动执行控制动作，可选的有`'pause'`、`'play'`、`'hide'`、`'show'`，每次有效值更新后会重置为空值
      */
     setAction: PropTypes.oneOf(['pause', 'play', 'hide', 'show']),
 
@@ -215,7 +263,6 @@ LeafletFlowLayer.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletFlowLayer.defaultProps = {
     pulseRadius: 30,
     pulseBorderWidth: 3,
