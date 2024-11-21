@@ -11,7 +11,7 @@ export ''_leafletfeaturegroup
 A LeafletFeatureGroup component.
 要素分组组件LeafletFeatureGroup
 Keyword arguments:
-- `children` (a list of or a singular dash component, string or number; optional): 传入内部相关要素类图层组件
+- `children` (a list of or a singular dash component, string or number; optional): 传入内部相关要素类组件
 - `id` (String; optional): 组件唯一id
 - `_bounds` (optional): 监听当前要素分组整体矩形范围. _bounds has the following type: lists containing elements 'minx', 'miny', 'maxx', 'maxy'.
 Those elements have the following types:

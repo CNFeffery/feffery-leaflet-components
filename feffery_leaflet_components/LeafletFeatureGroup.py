@@ -16,7 +16,7 @@ Keyword arguments:
     对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
 - children (a list of or a singular dash component, string or number; optional):
-    传入内部相关要素类图层组件.
+    传入内部相关要素类组件.
 
 - bringToFront (boolean; default False):
     是否将当前要素分组置于顶层  默认值：`False`.

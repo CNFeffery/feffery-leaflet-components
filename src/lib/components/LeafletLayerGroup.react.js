@@ -1,14 +1,17 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
+// react核心
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { LayerGroup, useMap } from 'react-leaflet';
+// 辅助库
 import { isUndefined } from 'lodash';
 
-// 定义图层分组组件LeafletLayerGroup
+/**
+ * 图层分组组件LeafletLayerGroup
+ */
 const LeafletLayerGroup = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
         children,
@@ -48,23 +51,31 @@ const LeafletLayerGroup = (props) => {
     );
 }
 
-// 定义参数或属性
 LeafletLayerGroup.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 传入tooltip、popup组件
+    /**
+     * 传入内部相关图层类组件
+     */
     children: PropTypes.node,
 
-    // 控制是否隐藏当前图层组，默认为false
+    /**
+     * 是否隐藏当前图层分组
+     * 默认值：`false`
+     */
     hidden: PropTypes.bool,
 
-    // 设置当前图层组的z-index信息
+    /**
+     * 当前要素分组`z`轴层级
+     */
     zIndex: PropTypes.number,
 
     loading_state: PropTypes.shape({
@@ -89,7 +100,6 @@ LeafletLayerGroup.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletLayerGroup.defaultProps = {
 }
 

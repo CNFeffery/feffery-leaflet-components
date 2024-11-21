@@ -79,7 +79,7 @@ LeafletFeatureGroup.propTypes = {
     key: PropTypes.string,
 
     /**
-     * 传入内部相关要素类图层组件
+     * 传入内部相关要素类组件
      */
     children: PropTypes.node,
 
