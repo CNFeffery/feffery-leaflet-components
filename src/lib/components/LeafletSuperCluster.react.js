@@ -1,11 +1,12 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+// react核心
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import "@geoman-io/leaflet-geoman-free";
 import { useMap, Marker, Tooltip } from 'react-leaflet';
-import { omit, omitBy, isUndefined } from 'lodash';
 import L from 'leaflet';
 import {
     markerIcon,
@@ -13,6 +14,8 @@ import {
     markerShadow
 } from './utils/exportImages.react';
 import useSupercluster from 'use-supercluster';
+// 辅助库
+import { omit, omitBy, isUndefined } from 'lodash';
 
 // 修正全局默认marker图标不显示的问题
 const defaultIconOptions = {
@@ -53,10 +56,10 @@ const fetchIcon = (count, size, clusterOptions) => {
     return icons[count];
 };
 
-// 定义巨量标记聚类图层组件LeafletSuperCluster
+/**
+ * 巨量标记聚类图层组件LeafletSuperCluster
+ */
 const LeafletSuperCluster = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
         positions,
@@ -247,120 +250,210 @@ const LeafletSuperCluster = (props) => {
     );
 }
 
-// 定义参数或属性
 LeafletSuperCluster.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 设置标记信息对象数组，必填
+    /**
+     * 必填，定义标记点坐标
+     */
     positions: PropTypes.arrayOf(
         PropTypes.object
     ).isRequired,
 
-    // 聚类簇背景，同css中的background属性
+    /**
+     * 聚类簇背景，同css中的``background``属性
+     */
     clusterBackground: PropTypes.string,
 
-    // 聚类簇轮廓，同css中的border属性
+    /**
+     * 聚类簇边框，同css中的`border`属性
+     */
     clusterBorder: PropTypes.string,
 
-    // 聚类簇文字色彩，同css中的color属性
+    /**
+     * 聚类簇文字颜色，同css中的`color`属性
+     */
     clusterTextColor: PropTypes.string,
 
-    // 设置聚类簇的基础像素尺寸，默认为10
-    // 聚类簇像素尺寸计算方式：clusterIconBaseSize+(簇内点数量/图层点总数)*clusterIconExtraSizeFactor
+    /**
+     * 聚类簇基础像素尺寸
+     * 各聚类簇实际尺寸计算方式：`clusterIconBaseSize+(簇内点数量/图层点总数)*clusterIconExtraSizeFactor`
+     * 默认值：`10`
+     */
     clusterIconBaseSize: PropTypes.number,
 
-    // 设置聚类簇的额外像素尺寸系数，默认为40
+    /**
+     * 聚类簇尺寸扩张系数，具体计算规则见参数`clusterIconBaseSize`说明
+     * 默认值：`40`
+     */
     clusterIconExtraSizeFactor: PropTypes.number,
 
-    // 设置聚类簇中的文字尺寸占簇尺寸的比例，默认为0.4
+    /**
+     * 聚类簇文字尺寸占对应簇整体尺寸的比例
+     * 默认值：`0.4`
+     */
     clusterTextSizeFactor: PropTypes.number,
 
-    // 设置生成聚类簇的最小缩放级别，默认为0
+    /**
+     * 聚类簇生成对应的最小缩放级别
+     * 默认值：`0`
+     */
     minZoom: PropTypes.number,
 
-    // 设置生成聚类簇的最大缩放级别，默认为16
+    /**
+     * 聚类簇生成对应的最大缩放级别
+     * 默认值：`16`
+     */
     maxZoom: PropTypes.number,
 
-    // 设置形成聚类簇至少需要的点数量，默认为2
+    /**
+     * 形成聚类簇所需的最小标记点数量
+     * 默认值：`2`
+     */
     minPoints: PropTypes.number,
 
-    // 设置聚类簇像素半径，默认为40
+    /**
+     * 聚类簇像素半径
+     * 默认值：`40`
+     */
     radius: PropTypes.number,
 
-    // 设置当前地图中使用的瓦片地图像素边长，默认为512
+    /**
+     * 当前地图中使用的瓦片地图像素边长
+     * 默认值：`512`
+     */
     extent: PropTypes.number,
 
-    // 设置聚类过程中生成的KD-树节点尺寸，默认为64
+    /**
+     * 控制聚类过程`KD`树节点尺寸
+     * 默认值：`64`
+     */
     nodeSize: PropTypes.number,
 
-    // 自定义图标参数
+    /**
+     * 配置图标，支持分类独立控制
+     */
     iconOptions: PropTypes.oneOfType([
         PropTypes.exact({
-            // 图标图片url
+            /**
+             * 图标图片地址
+             */
             iconUrl: PropTypes.string,
-            // 设置图标图片主体尺寸
+            /**
+             * 图标像素尺寸，格式：`[width, height]`
+             */
             iconSize: PropTypes.arrayOf(PropTypes.number),
-            // 设置图标图片尖端坐标，以图片左上角为原点参照
+            /**
+             * 图标尖端坐标，以图片左上角为原点，格式：`[x, y]`
+             */
             iconAnchor: PropTypes.arrayOf(PropTypes.number),
-            // 设置popup打开的锚点，以iconAnchor为原点参照
+            /**
+             * 弹出卡片展开锚点，以`iconAnchor`为原点参照，格式：`[x, y]`
+             */
             popupAnchor: PropTypes.arrayOf(PropTypes.number),
-            // 设置tooltip打开的锚点，以iconAnchor为原点参照
+            /**
+             * 信息框展开锚点，以`iconAnchor`为原点参照，格式：`[x, y]`
+             */
             tooltipAnchor: PropTypes.arrayOf(PropTypes.number),
-            // 设置阴影图片url
+            /**
+             * 阴影图片地址
+             */
             shadowUrl: PropTypes.string,
-            // 设置阴影图片的尺寸
+            /**
+             * 阴影图片像素尺寸，格式：`[width, height]`
+             */
             shadowSize: PropTypes.arrayOf(PropTypes.number),
-            // 设置阴影图片的尖端坐标，以图片左上角为原点参照
+            /**
+             * 阴影图片的尖端坐标，以图片左上角为原点参照，格式：`[x, y]`
+             */
             shadowAnchor: PropTypes.arrayOf(PropTypes.number),
-            // 设置标记图标css类
+            /**
+             * 标记图标css类
+             */
             className: PropTypes.string
         }),
-        // 分类单独设置图标用法，配合图标数据中的可选字段category
+        /**
+         * 以类别为键，分别配置不同类别的图标参数
+         */
         PropTypes.objectOf(
             PropTypes.exact({
-                // 图标图片url
+                /**
+                 * 图标图片地址
+                 */
                 iconUrl: PropTypes.string,
-                // 设置图标图片主体尺寸
+                /**
+                 * 图标像素尺寸，格式：`[width, height]`
+                 */
                 iconSize: PropTypes.arrayOf(PropTypes.number),
-                // 设置图标图片尖端坐标，以图片左上角为原点参照
+                /**
+                 * 图标尖端坐标，以图片左上角为原点，格式：`[x, y]`
+                 */
                 iconAnchor: PropTypes.arrayOf(PropTypes.number),
-                // 设置popup打开的锚点，以iconAnchor为原点参照
+                /**
+                 * 弹出卡片展开锚点，以`iconAnchor`为原点参照，格式：`[x, y]`
+                 */
                 popupAnchor: PropTypes.arrayOf(PropTypes.number),
-                // 设置tooltip打开的锚点，以iconAnchor为原点参照
+                /**
+                 * 信息框展开锚点，以`iconAnchor`为原点参照，格式：`[x, y]`
+                 */
                 tooltipAnchor: PropTypes.arrayOf(PropTypes.number),
-                // 设置阴影图片url
+                /**
+                 * 阴影图片地址
+                 */
                 shadowUrl: PropTypes.string,
-                // 设置阴影图片的尺寸
+                /**
+                 * 阴影图片像素尺寸，格式：`[width, height]`
+                 */
                 shadowSize: PropTypes.arrayOf(PropTypes.number),
-                // 设置阴影图片的尖端坐标，以图片左上角为原点参照
+                /**
+                 * 阴影图片的尖端坐标，以图片左上角为原点参照，格式：`[x, y]`
+                 */
                 shadowAnchor: PropTypes.arrayOf(PropTypes.number),
-                // 设置标记图标css类
+                /**
+                 * 标记图标css类
+                 */
                 className: PropTypes.string
             })
         )
     ]),
 
-    // 设置点对象中作为tooltip展示信息的字段名，默认为'tooltip'
+    /**
+     * 标记点数据作为信息框内容的字段
+     * 默认值：`'tooltip'`
+     */
     tooltipField: PropTypes.string,
 
-    // 设置tooltip是否开启粘性显示，默认为false
+    /**
+     * 信息框是否跟随鼠标位置
+     * 默认值：`false`
+     */
     tooltipSticky: PropTypes.bool,
 
-    // 设置点对象中作为类别区分的字段，默认为'category'
+    /**
+     * 标记点数据作为类别的字段
+     * 默认值：`'category'`
+     */
     categoryField: PropTypes.string,
 
-    // 用于监听最近一次被点击的标记点相关信息
+    /**
+     * 监听标记点点击事件
+     */
     clickedPoint: PropTypes.exact({
-        // 记录被点击要素相关信息
+        /**
+         * 被点击要素数据
+         */
         feature: PropTypes.object,
-
-        // 记录点击事件对应的时间戳
+        /**
+         * 事件对应时间戳
+         */
         timestamp: PropTypes.number
     }),
 
@@ -386,7 +479,6 @@ LeafletSuperCluster.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletSuperCluster.defaultProps = {
     clusterIconBaseSize: 10,
     clusterIconExtraSizeFactor: 40,

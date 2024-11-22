@@ -5,94 +5,135 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletSuperCluster(Component):
     """A LeafletSuperCluster component.
-
+巨量标记聚类图层组件LeafletSuperCluster
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- positions (list of dicts; required)
+- positions (list of dicts; required):
+    必填，定义标记点坐标.
 
-- clusterBackground (string; optional)
+- clusterBackground (string; optional):
+    聚类簇背景，同css中的``background``属性.
 
-- clusterBorder (string; optional)
+- clusterBorder (string; optional):
+    聚类簇边框，同css中的`border`属性.
 
-- clusterTextColor (string; optional)
+- clusterTextColor (string; optional):
+    聚类簇文字颜色，同css中的`color`属性.
 
-- clusterIconBaseSize (number; default 10)
+- clusterIconBaseSize (number; default 10):
+    聚类簇基础像素尺寸
+    各聚类簇实际尺寸计算方式：`clusterIconBaseSize+(簇内点数量/图层点总数)*clusterIconExtraSizeFactor`
+    默认值：`10`.
 
-- clusterIconExtraSizeFactor (number; default 40)
+- clusterIconExtraSizeFactor (number; default 40):
+    聚类簇尺寸扩张系数，具体计算规则见参数`clusterIconBaseSize`说明  默认值：`40`.
 
-- clusterTextSizeFactor (number; default 0.4)
+- clusterTextSizeFactor (number; default 0.4):
+    聚类簇文字尺寸占对应簇整体尺寸的比例  默认值：`0.4`.
 
-- minZoom (number; optional)
+- minZoom (number; optional):
+    聚类簇生成对应的最小缩放级别  默认值：`0`.
 
-- maxZoom (number; optional)
+- maxZoom (number; optional):
+    聚类簇生成对应的最大缩放级别  默认值：`16`.
 
-- minPoints (number; optional)
+- minPoints (number; optional):
+    形成聚类簇所需的最小标记点数量  默认值：`2`.
 
-- radius (number; optional)
+- radius (number; optional):
+    聚类簇像素半径  默认值：`40`.
 
-- extent (number; optional)
+- extent (number; optional):
+    当前地图中使用的瓦片地图像素边长  默认值：`512`.
 
-- nodeSize (number; optional)
+- nodeSize (number; optional):
+    控制聚类过程`KD`树节点尺寸  默认值：`64`.
 
-- iconOptions (dict; optional)
+- iconOptions (dict; optional):
+    配置图标，支持分类独立控制.
 
     `iconOptions` is a dict with keys:
 
-    - iconUrl (string; optional)
+    - iconUrl (string; optional):
+        图标图片地址.
 
-    - iconSize (list of numbers; optional)
+    - iconSize (list of numbers; optional):
+        图标像素尺寸，格式：`[width, height]`.
 
-    - iconAnchor (list of numbers; optional)
+    - iconAnchor (list of numbers; optional):
+        图标尖端坐标，以图片左上角为原点，格式：`[x, y]`.
 
-    - popupAnchor (list of numbers; optional)
+    - popupAnchor (list of numbers; optional):
+        弹出卡片展开锚点，以`iconAnchor`为原点参照，格式：`[x, y]`.
 
-    - tooltipAnchor (list of numbers; optional)
+    - tooltipAnchor (list of numbers; optional):
+        信息框展开锚点，以`iconAnchor`为原点参照，格式：`[x, y]`.
 
-    - shadowUrl (string; optional)
+    - shadowUrl (string; optional):
+        阴影图片地址.
 
-    - shadowSize (list of numbers; optional)
+    - shadowSize (list of numbers; optional):
+        阴影图片像素尺寸，格式：`[width, height]`.
 
-    - shadowAnchor (list of numbers; optional)
+    - shadowAnchor (list of numbers; optional):
+        阴影图片的尖端坐标，以图片左上角为原点参照，格式：`[x, y]`.
 
-    - className (string; optional) | dict with strings as keys and values of type dict with keys:
+    - className (string; optional):
+        标记图标css类. | dict with strings as keys and values of type dict with keys:
 
-    - iconUrl (string; optional)
+    - iconUrl (string; optional):
+        图标图片地址.
 
-    - iconSize (list of numbers; optional)
+    - iconSize (list of numbers; optional):
+        图标像素尺寸，格式：`[width, height]`.
 
-    - iconAnchor (list of numbers; optional)
+    - iconAnchor (list of numbers; optional):
+        图标尖端坐标，以图片左上角为原点，格式：`[x, y]`.
 
-    - popupAnchor (list of numbers; optional)
+    - popupAnchor (list of numbers; optional):
+        弹出卡片展开锚点，以`iconAnchor`为原点参照，格式：`[x, y]`.
 
-    - tooltipAnchor (list of numbers; optional)
+    - tooltipAnchor (list of numbers; optional):
+        信息框展开锚点，以`iconAnchor`为原点参照，格式：`[x, y]`.
 
-    - shadowUrl (string; optional)
+    - shadowUrl (string; optional):
+        阴影图片地址.
 
-    - shadowSize (list of numbers; optional)
+    - shadowSize (list of numbers; optional):
+        阴影图片像素尺寸，格式：`[width, height]`.
 
-    - shadowAnchor (list of numbers; optional)
+    - shadowAnchor (list of numbers; optional):
+        阴影图片的尖端坐标，以图片左上角为原点参照，格式：`[x, y]`.
 
-    - className (string; optional)
+    - className (string; optional):
+        标记图标css类.
 
-- tooltipField (string; default 'tooltip')
+- tooltipField (string; default 'tooltip'):
+    标记点数据作为信息框内容的字段  默认值：`'tooltip'`.
 
-- tooltipSticky (boolean; optional)
+- tooltipSticky (boolean; optional):
+    信息框是否跟随鼠标位置  默认值：`False`.
 
-- categoryField (string; default 'category')
+- categoryField (string; default 'category'):
+    标记点数据作为类别的字段  默认值：`'category'`.
 
-- clickedPoint (dict; optional)
+- clickedPoint (dict; optional):
+    监听标记点点击事件.
 
     `clickedPoint` is a dict with keys:
 
-    - feature (dict; optional)
+    - feature (dict; optional):
+        被点击要素数据.
 
-    - timestamp (number; optional)
+    - timestamp (number; optional):
+        事件对应时间戳.
 
 - loading_state (dict; optional)
 
