@@ -2,8 +2,10 @@
 /* eslint-disable dot-notation */
 /* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
+// react核心
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { useMap } from 'react-leaflet';
 
 const speedMap = {
@@ -14,18 +16,17 @@ const speedMap = {
     auto: 0
 }
 
+/**
+ * 地图动作组件LeafletMapAction
+ */
 const LeafletMapAction = (props) => {
-
-    // 取得必要属性或参数
     let {
-        id,
         mapActionConfig
     } = props;
 
     const map = useMap();
 
     useEffect(() => {
-
         if (mapActionConfig && mapActionConfig.type) {
             if (mapActionConfig.type === 'set-zoom') {
                 // set-zoom动作
@@ -120,60 +121,93 @@ const LeafletMapAction = (props) => {
     return <></>;
 }
 
-// 定义参数或属性
 LeafletMapAction.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 用于编排一次新的地图动作
+    /**
+     * 编排触发新的地图动作
+     */
     mapActionConfig: PropTypes.exact({
-        // 设置地图视角切换动作类型，可选值：'set-zoom'/'zoom-in'/'zoom-out'/'fly-to'/'fly-to-bounds'
-        // 'set-zoom'：改变地图缩放级别，受参数zoom控制
-        // 'zoom-in'：在当前地图zoom基础上，放大设定的级别，受zoomInOffset参数控制
-        // 'zoom-out'：在当前地图zoom基础上，缩小设定的级别，受zoomOutOffset参数控制
-        // 'set-view'：改变地图视角，受center参数控制目标中心坐标、受zoom参数设置目标缩放级别
-        // 'pan-to'：改变地图视角，受center参数控制目标中心坐标
-        // 'fly-to'：强制以飞行模式改变地图视角，受center参数控制目标中心坐标、受zoom参数设置目标缩放级别
-        // 'fly-to-bounds'：强制以飞行模式改变地图视角，受bounds参数控制目标视角范围
-        // 'invalidate-size'：在地图容器尺寸变化后，用于重新校正地图尺寸
+        /**
+         * 地图动作类型，可选项有`'set-zoom'`、`'zoom-in'`、`'zoom-out'`、`'set-view'`、`'pan-to'`、`'fly-to'`、`'fly-to-bounds'`、`'invalidate-size'`，其中
+         * `'set-zoom'`模式用于更新地图缩放级别；
+         * `'zoom-in'`用于在当前地图缩放级别基础上，放大设定的级别；
+         * `'zoom-out'`用于在当前地图缩放级别基础上，缩小设定的级别;
+         * `'set-view'`用于更新地图视角；
+         * `'pan-to'`用于移动地图中心点位置；
+         * `'fly-to'`用于以飞行动画模式更新地图视角;
+         * `'fly-to-bounds'`用于以飞行动画模式令地图视角自适应目标矩形区域范围;
+         * `'invalidate-size'`用于手动刷新矫正地图视角；
+         */
         type: PropTypes.oneOf(['set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'pan-to', 'fly-to', 'fly-to-bounds', 'invalidate-size']),
 
-        // 设置地图视角切换对应的中心点坐标信息，若无，则使用地图当前中心点
+        /**
+         * 地图动作目标中心点坐标，适用的地图动作类型：`'set-view'`、`'pan-to'`、`'fly-to'`
+         */
         center: PropTypes.exact({
-            // 经度
+            /**
+             * 目标中心点经度
+             */
             lng: PropTypes.number,
-            // 纬度
+            /**
+             * 目标中心点纬度
+             */
             lat: PropTypes.number
         }),
 
-        // 设置地图视角切换对应的缩放级别，不设置则切换地图视角过程中不会改变地图缩放级别
+        /**
+         * 地图动作目标缩放级别，若不设置，相关地图动作动画过程将不会改变地图缩放级别，适用的地图动作类型：`'set-zoom'`、`'set-view'`、`'fly-to'`
+         */
         zoom: PropTypes.number,
 
-        // 'zoom-in'模式下可用，用于设定地图放大级别的偏移量
+        /**
+         * 地图动作目标放大层级单位数量，适用的地图动作类型：`'zoom-in'`
+         */
         zoomInOffset: PropTypes.number,
 
-        // 'zoom-out'模式下可用，用于设定地图缩小级别的偏移量
+        /**
+         * 地图动作目标缩小层级单位数量，适用的地图动作类型：`'zoom-out'`
+         */
         zoomOutOffset: PropTypes.number,
 
-        // 'fly-to-bounds'模式下可用，用于设定地图矩形视角范围
+        /**
+         * 地图动作目标矩形范围坐标，适用的地图动作类型：`'fly-to-bounds'`
+         */
         bounds: PropTypes.exact({
+            /**
+             * 目标矩形区域最小经度
+             */
             minx: PropTypes.number,
+            /**
+             * 目标矩形区域最小纬度
+             */
             miny: PropTypes.number,
+            /**
+             * 目标矩形区域最大经度
+             */
             maxx: PropTypes.number,
+            /**
+             * 目标矩形区域最大纬度
+             */
             maxy: PropTypes.number
         }),
 
-        // 'fly-to'、'fly-to-bounds'模式下可用，用于设定地图飞行动画时间，单位：秒
+        /**
+         * 地图飞行类动画对应过渡时长，单位：秒，适用的地图动作类型：`'fly-to'`、`'fly-to-bounds'`
+         */
         flyToDuration: PropTypes.oneOf(['instant', 'fast', 'normal', 'slow', 'auto']),
 
         /**
-         * 设置当前动作的延时执行时长，单位：毫秒
-         * 默认：0
+         * 地图动作目标执行延时，单位：毫秒
+         * 默认值：`0`
          */
         delay: PropTypes.number
     }),
@@ -200,7 +234,6 @@ LeafletMapAction.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletMapAction.defaultProps = {
 }
 
