@@ -5,52 +5,73 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletMiniMap(Component):
     """A LeafletMiniMap component.
-
+迷你地图组件LeafletMiniMap
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- url (string; default "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+- url (string; default "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"):
+    迷你地图瓦片地图服务地址.
 
-- attribution (string; optional)
+- attribution (string; optional):
+    迷你地图瓦片地图服务`attribution`信息.
 
-- opacity (number; default 1)
+- opacity (number; default 1):
+    迷你地图瓦片地图服务透明度.
 
-- zIndex (number; optional)
+- zIndex (number; optional):
+    迷你地图瓦片地图服务`z`轴层级.
 
-- minZoom (number; optional)
+- minZoom (number; optional):
+    缩放级别下限.
 
-- maxZoom (number; optional)
+- maxZoom (number; optional):
+    缩放级别上限.
 
-- position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
+- position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional):
+    迷你地图显示方位，可选的有`'topleft'`、`'topright'`、`'bottomleft'`、`'bottomright'`
+    默认值：`'bottomright'`.
 
-- width (number; optional)
+- width (number; optional):
+    迷你地图整体像素宽度  默认值：`150`.
 
-- height (number; optional)
+- height (number; optional):
+    迷你地图整体像素高度  默认值：`150`.
 
-- collapsedWidth (number; optional)
+- collapsedWidth (number; optional):
+    迷你地图折叠状态下的像素宽度  默认值：`19`.
 
-- collapsedHeight (number; optional)
+- collapsedHeight (number; optional):
+    迷你地图折叠状态下的像素高度  默认值：`19`.
 
-- zoomLevelOffset (number; optional)
+- zoomLevelOffset (number; optional):
+    迷你地图与主体地图的缩放级别偏差  默认值：`-5`.
 
-- zoomLevelFixed (number; optional)
+- zoomLevelFixed (number; optional):
+    迷你地图强制锁定的缩放级别.
 
-- zoomAnimation (boolean; optional)
+- zoomAnimation (boolean; optional):
+    迷你地图是否启用缩放变化动画  默认值：`False`.
 
-- toggleDisplay (boolean; optional)
+- toggleDisplay (boolean; optional):
+    是否渲染迷你地图折叠按钮  默认值：`False`.
 
-- autoToggleDisplay (boolean; optional)
+- autoToggleDisplay (boolean; optional):
+    当参数`zoomLevelFixed`有效，且主体地图范围不再适应迷你地图时，是否自动隐藏迷你地图  默认值：`False`.
 
-- aimingRectOptions (optional)
+- aimingRectOptions (optional):
+    迷你地图范围标识框要素样式.
 
-- shadowRectOptions (optional)
+- shadowRectOptions (optional):
+    迷你地图范围标识框阴影要素样式.
 
-- minimized (boolean; optional)
+- minimized (boolean; optional):
+    迷你地图初始化时是否处于折叠状态.
 
 - loading_state (dict; optional)
 

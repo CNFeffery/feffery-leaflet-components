@@ -1,20 +1,23 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
+// react核心
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import MiniMap from 'leaflet-minimap';
 import "leaflet-minimap/dist/Control.MiniMap.min.css";
-import { pathOptionsPropTypes } from './BasePropTypes.react';
+// 辅助库
 import { isUndefined, omitBy } from 'lodash';
+// 参数类型
+import { pathOptionsPropTypes } from './BasePropTypes.react';
 
-// 定义迷你图组件LeafletMiniMap
+/**
+ * 迷你地图组件LeafletMiniMap
+ */
 const LeafletMiniMap = (props) => {
-
-    // 取得必要属性或参数
     const {
-        id,
         url,
         attribution,
         opacity,
@@ -76,77 +79,122 @@ const LeafletMiniMap = (props) => {
             .addTo(map);
     }, [])
 
-    // 返回定制化的前端组件
     return <></>;
 }
 
-// 定义参数或属性
 LeafletMiniMap.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 设置地图服务的url参数
+    /**
+     * 迷你地图瓦片地图服务地址
+     */
     url: PropTypes.string,
 
-    // 设置attribution参数
+    /**
+     * 迷你地图瓦片地图服务`attribution`信息
+     */
     attribution: PropTypes.string,
 
-    // 设置图层透明度，默认为1
+    /**
+     * 迷你地图瓦片地图服务透明度
+     */
     opacity: PropTypes.number,
 
-    // 设置z轴层级
+    /**
+     * 迷你地图瓦片地图服务`z`轴层级
+     */
     zIndex: PropTypes.number,
 
-    // 设置zoom级别下限
+    /**
+     * 缩放级别下限
+     */
     minZoom: PropTypes.number,
 
-    // 设置zoom级别上限
+    /**
+     * 缩放级别上限
+     */
     maxZoom: PropTypes.number,
 
-    // 设置迷你图的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
-    // 默认为'bottomright'
+    /**
+     * 迷你地图显示方位，可选的有`'topleft'`、`'topright'`、`'bottomleft'`、`'bottomright'`
+     * 默认值：`'bottomright'`
+     */
     position: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
 
-    // 设置迷你图的像素宽度，默认为150
+    /**
+     * 迷你地图整体像素宽度
+     * 默认值：`150`
+     */
     width: PropTypes.number,
 
-    // 设置迷你图的像素高度，默认为150
+    /**
+     * 迷你地图整体像素高度
+     * 默认值：`150`
+     */
     height: PropTypes.number,
 
-    // 设置折叠状态下迷你图的像素宽度，默认为19
+    /**
+     * 迷你地图折叠状态下的像素宽度
+     * 默认值：`19`
+     */
     collapsedWidth: PropTypes.number,
 
-    // 设置折叠状态下迷你图的像素高度，默认为19
+    /**
+     * 迷你地图折叠状态下的像素高度
+     * 默认值：`19`
+     */
     collapsedHeight: PropTypes.number,
 
-    // 设置迷你图与主体地图的zoom级别偏差，默认为-5
+    /**
+     * 迷你地图与主体地图的缩放级别偏差
+     * 默认值：`-5`
+     */
     zoomLevelOffset: PropTypes.number,
 
-    // 设置迷你图的强制缩放级别，会导致迷你图zoom级别锁定
+    /**
+     * 迷你地图强制锁定的缩放级别
+     */
     zoomLevelFixed: PropTypes.number,
 
-    // 设置迷你图是否渲染缩放变化动画，默认为false
+    /**
+     * 迷你地图是否启用缩放变化动画
+     * 默认值：`false`
+     */
     zoomAnimation: PropTypes.bool,
 
-    // 设置是否渲染迷你图折叠按钮，默认为false
+    /**
+     * 是否渲染迷你地图折叠按钮
+     * 默认值：`false`
+     */
     toggleDisplay: PropTypes.bool,
 
-    // 当zoomLevelFixed参数被设置且主体地图的bounds范围不再适应迷你图时
-    // 是否自动隐藏迷你图，默认为false
+    /**
+     * 当参数`zoomLevelFixed`有效，且主体地图范围不再适应迷你地图时，是否自动隐藏迷你地图
+     * 默认值：`false`
+     */
     autoToggleDisplay: PropTypes.bool,
 
-    // 为迷你图目标范围标识框设置要素样式
+    /**
+     * 迷你地图范围标识框要素样式
+     */
     aimingRectOptions: pathOptionsPropTypes,
 
-    // 为迷你图目标范围标识框的阴影设置要素样式
+    /**
+     * 迷你地图范围标识框阴影要素样式
+     */
     shadowRectOptions: pathOptionsPropTypes,
 
-    // 设置迷你图初始化时是否处于折叠状态
+    /**
+     * 迷你地图初始化时是否处于折叠状态
+     */
     minimized: PropTypes.bool,
 
     loading_state: PropTypes.shape({
@@ -171,7 +219,6 @@ LeafletMiniMap.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletMiniMap.defaultProps = {
     url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     opacity: 1
