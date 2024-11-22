@@ -6,31 +6,33 @@ export ''_leaflettileselect
     ''_leaflettileselect(;kwargs...)
 
 A LeafletTileSelect component.
-
+瓦片底图选择组件LeafletTileSelect
 Keyword arguments:
-- `id` (String; optional)
-- `center` (optional): . center has the following type: lists containing elements 'lng', 'lat'.
+- `id` (String; optional): 组件唯一id
+- `center` (optional): 地图中心坐标. center has the following type: lists containing elements 'lng', 'lat'.
 Those elements have the following types:
-  - `lng` (Real; optional)
-  - `lat` (Real; optional)
-- `className` (String; optional)
-- `containerClassName` (String; optional)
-- `containerItemClassName` (String; optional)
-- `containerItemStyle` (Dict; optional)
-- `containerStyle` (Dict; optional)
-- `containerVisible` (Bool; optional)
-- `key` (String; optional): 强制刷新用
+  - `lng` (Real; optional): 经度
+  - `lat` (Real; optional): 纬度
+- `className` (String; optional): 当前组件css类名
+- `containerClassName` (String; optional): 图层选择卡片容器css类名
+- `containerItemClassName` (String; optional): 图层选择子项css类名
+- `containerItemStyle` (Dict; optional): 图层选择子项css样式
+- `containerStyle` (Dict; optional): 图层选择卡片容器css样式
+- `containerVisible` (Bool; optional): 监听或设置选择卡片是否展开
+默认值：`false`
+- `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not
   - `prop_name` (String; optional): Holds which property is loading
   - `component_name` (String; optional): Holds the name of the component that is loading
-- `selectedUrl` (String; optional)
-- `style` (Dict; optional)
-- `urls` (optional): . urls has the following type: Array of lists containing elements 'url'.
+- `selectedUrl` (String; optional): 监听或设置已选中的瓦片地图服务
+- `style` (Dict; optional): 当前组件css样式
+- `urls` (optional): 配置瓦片地图服务选项. urls has the following type: Array of lists containing elements 'url'.
 Those elements have the following types:
-  - `url` (String; optional)s
-- `zoom` (Real; optional)
+  - `url` (String; optional): 当前瓦片地图服务地址s
+- `zoom` (Real; optional): 地图缩放级别
+默认值：`1`
 """
 function ''_leaflettileselect(; kwargs...)
         available_props = Symbol[:id, :center, :className, :containerClassName, :containerItemClassName, :containerItemStyle, :containerStyle, :containerVisible, :key, :loading_state, :selectedUrl, :style, :urls, :zoom]

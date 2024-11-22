@@ -5,46 +5,61 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletTileSelect(Component):
     """A LeafletTileSelect component.
-
+瓦片底图选择组件LeafletTileSelect
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- className (string; optional)
+- className (string; optional):
+    当前组件css类名.
 
-- style (dict; optional)
+- style (dict; optional):
+    当前组件css样式.
 
-- containerClassName (string; optional)
+- containerClassName (string; optional):
+    图层选择卡片容器css类名.
 
-- containerStyle (dict; optional)
+- containerStyle (dict; optional):
+    图层选择卡片容器css样式.
 
-- containerItemClassName (string; optional)
+- containerItemClassName (string; optional):
+    图层选择子项css类名.
 
-- containerItemStyle (dict; optional)
+- containerItemStyle (dict; optional):
+    图层选择子项css样式.
 
-- urls (list of dicts; optional)
+- urls (list of dicts; optional):
+    配置瓦片地图服务选项.
 
     `urls` is a list of dicts with keys:
 
-    - url (string; optional)
+    - url (string; optional):
+        当前瓦片地图服务地址.
 
-- center (dict; default { lng: 0, lat: 0 })
+- center (dict; default { lng: 0, lat: 0 }):
+    地图中心坐标.
 
     `center` is a dict with keys:
 
-    - lng (number; optional)
+    - lng (number; optional):
+        经度.
 
-    - lat (number; optional)
+    - lat (number; optional):
+        纬度.
 
-- zoom (number; default 3)
+- zoom (number; default 3):
+    地图缩放级别  默认值：`1`.
 
-- selectedUrl (string; optional)
+- selectedUrl (string; optional):
+    监听或设置已选中的瓦片地图服务.
 
-- containerVisible (boolean; default True)
+- containerVisible (boolean; default True):
+    监听或设置选择卡片是否展开  默认值：`False`.
 
 - loading_state (dict; optional)
 

@@ -1,16 +1,18 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
+// react核心
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import L from 'leaflet';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import tileSelectIcon from "./images/tile-select-icon.png";
 
-// 定义瓦片底图选择组件LeafletTileSelect
+/**
+ * 瓦片底图选择组件LeafletTileSelect
+ */
 const LeafletTileSelect = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
         className,
@@ -35,7 +37,6 @@ const LeafletTileSelect = (props) => {
         L.DomEvent.disableScrollPropagation(divRef.current);
     });
 
-    // 返回定制化的前端组件
     return (
         <div id={id}
             ref={divRef}
@@ -120,57 +121,88 @@ const LeafletTileSelect = (props) => {
     );
 }
 
-// 定义参数或属性
 LeafletTileSelect.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 设置各组成部分样式
-    // 整体容器
+    /**
+     * 当前组件css类名
+     */
     className: PropTypes.string,
 
+    /**
+     * 当前组件css样式
+     */
     style: PropTypes.object,
 
-    // 图层选择卡片容器
+    /**
+     * 图层选择卡片容器css类名
+     */
     containerClassName: PropTypes.string,
 
+    /**
+     * 图层选择卡片容器css样式
+     */
     containerStyle: PropTypes.object,
 
-    // 图层选择子项
+    /**
+     * 图层选择子项css类名
+     */
     containerItemClassName: PropTypes.string,
 
+    /**
+     * 图层选择子项css样式
+     */
     containerItemStyle: PropTypes.object,
 
-    // 设置待选的瓦片地图服务url数组
+    /**
+     * 配置瓦片地图服务选项
+     */
     urls: PropTypes.arrayOf(
         PropTypes.exact({
-            // 当前瓦片地图服务url
+            /**
+             * 当前瓦片地图服务地址
+             */
             url: PropTypes.string
         })
     ),
 
-    // 设置地图中心坐标，格式：[纬度, 经度]
-    // 默认为[0, 0]
+    /**
+     * 地图中心坐标
+     */
     center: PropTypes.exact({
-        // 经度
+        /**
+         * 经度
+         */
         lng: PropTypes.number,
-
-        // 纬度
+        /**
+         * 纬度
+         */
         lat: PropTypes.number
     }),
 
-    // 设置地图的缩放级别，默认为1
+    /**
+     * 地图缩放级别
+     * 默认值：`1`
+     */
     zoom: PropTypes.number,
 
-    // 对应被选中的底图url值
+    /**
+     * 监听或设置已选中的瓦片地图服务
+     */
     selectedUrl: PropTypes.string,
 
-    // 对应选择卡片是否展开，默认为false
+    /**
+     * 监听或设置选择卡片是否展开
+     * 默认值：`false`
+     */
     containerVisible: PropTypes.bool,
 
     loading_state: PropTypes.shape({
@@ -195,7 +227,6 @@ LeafletTileSelect.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletTileSelect.defaultProps = {
     center: { lng: 0, lat: 0 },
     zoom: 3,
