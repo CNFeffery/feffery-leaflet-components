@@ -5,46 +5,57 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletMapListener(Component):
     """A LeafletMapListener component.
-
+地图事件监听组件LeafletMapListener
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- _center (dict; optional)
+- _center (dict; optional):
+    监听当前地图中心点坐标.
 
     `_center` is a dict with keys:
 
-    - lng (number; optional)
+    - lng (number; optional):
+        中心点经度.
 
-    - lat (number; optional)
+    - lat (number; optional):
+        中心点纬度.
 
-- _zoom (number; optional)
+- _zoom (number; optional):
+    监听当前地图缩放级别.
 
-- _clickedLatLng (dict; optional)
+- _clickedLatLng (dict; optional):
+    监听地图鼠标点击事件.
 
     `_clickedLatLng` is a dict with keys:
 
-    - lng (number; optional)
+    - lat (number; optional):
+        点击位置对应纬度.
 
-    - lat (number; optional)
-
-- _bounds (dict; optional)
+- _bounds (dict; optional):
+    监听当前地图矩形区域坐标范围.
 
     `_bounds` is a dict with keys:
 
-    - minx (number; optional)
+    - minx (number; optional):
+        矩形区域最小经度.
 
-    - miny (number; optional)
+    - miny (number; optional):
+        矩形区域最小纬度.
 
-    - maxx (number; optional)
+    - maxx (number; optional):
+        矩形区域最大经度.
 
-    - maxy (number; optional)
+    - maxy (number; optional):
+        矩形区域最大纬度.
 
-- debug (boolean; default False)
+- debug (boolean; default False):
+    是否开启调试模式，开启后浏览器控制台中将实时打印相关地图事件结果  默认值：`False`.
 
 - loading_state (dict; optional)
 

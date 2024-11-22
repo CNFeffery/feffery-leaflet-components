@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
+// react核心
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { useMap } from 'react-leaflet';
 
-// 定义地图事件监听组件LeafletMapListener
+/**
+ * 地图事件监听组件LeafletMapListener
+ */
 const LeafletMapListener = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
         _center,
@@ -93,49 +95,78 @@ const LeafletMapListener = (props) => {
 
     }, [])
 
-    // 返回定制化的前端组件
-    return <div id={id} />;
+    return <></>;
 }
 
-// 定义参数或属性
 LeafletMapListener.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
+    /**
+     * 监听当前地图中心点坐标
+     */
     _center: PropTypes.exact({
-        // 经度
+        /**
+         * 中心点经度
+         */
         lng: PropTypes.number,
-
-        // 纬度
+        /**
+         * 中心点纬度
+         */
         lat: PropTypes.number
     }),
 
+    /**
+     * 监听当前地图缩放级别
+     */
     _zoom: PropTypes.number,
 
-    // 记录地图点击事件对应的经纬度坐标
+    /**
+     * 监听地图鼠标点击事件
+     */
     _clickedLatLng: PropTypes.exact({
-        // 经度
-        lng: PropTypes.number,
-
-        // 纬度
+        /**
+         * 点击位置对应经度
+         */
+        /**
+         * 点击位置对应纬度
+         */
         lat: PropTypes.number
     }),
 
-    // 获取当前地图矩形区域坐标范围信息
+    /**
+     * 监听当前地图矩形区域坐标范围
+     */
     _bounds: PropTypes.exact({
+        /**
+         * 矩形区域最小经度
+         */
         minx: PropTypes.number,
+        /**
+         * 矩形区域最小纬度
+         */
         miny: PropTypes.number,
+        /**
+         * 矩形区域最大经度
+         */
         maxx: PropTypes.number,
+        /**
+         * 矩形区域最大纬度
+         */
         maxy: PropTypes.number
     }),
 
-    // 设置是否开启调试模式，开启后每次地图中心点坐标、缩放级别、鼠标点击位置坐标、地图矩形区域坐标范围等信息变化时都会被打印
-    // 默认：false
+    /**
+     * 是否开启调试模式，开启后浏览器控制台中将实时打印相关地图事件结果
+     * 默认值：`false`
+     */
     debug: PropTypes.bool,
 
     loading_state: PropTypes.shape({
@@ -160,7 +191,6 @@ LeafletMapListener.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletMapListener.defaultProps = {
     debug: false
 }
