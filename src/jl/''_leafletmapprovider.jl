@@ -9,11 +9,11 @@ export ''_leafletmapprovider
 
 
 A LeafletMapProvider component.
-
+地图编排组件LeafletMapProvider
 Keyword arguments:
-- `children` (a list of or a singular dash component, string or number; optional): 用于传入内部组件
-- `id` (String; optional): 组件id
-- `key` (String; optional): 强制刷新用
+- `children` (a list of or a singular dash component, string or number; optional): 传入内部需要编排的若干目标`LeafletMap`地图相关组件
+- `id` (String; optional): 组件唯一id
+- `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
 - `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
 Those elements have the following types:
   - `is_loading` (Bool; optional): Determines if the component is loading or not

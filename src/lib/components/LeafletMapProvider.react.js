@@ -1,10 +1,13 @@
+// react核心
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+// 上下文
 import MapContext from '../contexts/MapContext';
 
-// 定义地图编排组件LeafletMapProvider
+/**
+ * 地图编排组件LeafletMapProvider
+ */
 const LeafletMapProvider = (props) => {
-
     const {
         children
     } = props;
@@ -23,22 +26,21 @@ const LeafletMapProvider = (props) => {
     );
 };
 
-// 定义参数或属性
 LeafletMapProvider.propTypes = {
     /**
-     * 组件id
+     * 组件唯一id
      */
     id: PropTypes.string,
 
     /**
-     * 用于传入内部组件
-     */
-    children: PropTypes.node,
-
-    /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
+
+    /**
+     * 传入内部需要编排的若干目标`LeafletMap`地图相关组件
+     */
+    children: PropTypes.node,
 
     loading_state: PropTypes.shape({
         /**
@@ -62,7 +64,6 @@ LeafletMapProvider.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletMapProvider.defaultProps = {
 }
 
