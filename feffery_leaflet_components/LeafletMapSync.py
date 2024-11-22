@@ -5,18 +5,18 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletMapSync(Component):
     """A LeafletMapSync component.
-
+地图同步组件LeafletMapSync
 
 Keyword arguments:
 
 - id (string; required):
-    必填，组件id.
+    必填，组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
 - groupId (string; optional):
-    地图组id，用于限定地图同步行为发生在当前相同id的组内.
+    地图组`id`，用于限定地图同步行为发生在当前相同`id`的组内.
 
 - syncStrategy (a value equal to: 'all', 'center'; default 'all'):
     同步行为策略，可选项有`'all'`、`'center'`  默认值：`'all'`.

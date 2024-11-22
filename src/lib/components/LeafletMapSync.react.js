@@ -1,13 +1,16 @@
 /* eslint-disable no-unused-vars */
+// react核心
 import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { useMap } from 'react-leaflet';
+// 上下文
 import MapContext from '../contexts/MapContext';
 
-// 定义地图同步组件LeafletMapSync
+/**
+ * 地图同步组件LeafletMapSync
+ */
 const LeafletMapSync = (props) => {
-
-    // 取得必要属性或参数
     const {
         id,
         groupId,
@@ -78,20 +81,19 @@ const LeafletMapSync = (props) => {
     return <></>;
 }
 
-// 定义参数或属性
 LeafletMapSync.propTypes = {
     /**
-     * 必填，组件id
+     * 必填，组件唯一id
      */
     id: PropTypes.string.isRequired,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
     /**
-     * 地图组id，用于限定地图同步行为发生在当前相同id的组内
+     * 地图组`id`，用于限定地图同步行为发生在当前相同`id`的组内
      */
     groupId: PropTypes.string,
 
@@ -123,7 +125,6 @@ LeafletMapSync.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletMapSync.defaultProps = {
     syncStrategy: 'all'
 }
