@@ -5,18 +5,18 @@ from dash.development.base_component import Component, _explicitize_args
 
 class Fragment(Component):
     """A Fragment component.
-
+空节点组件Fragment
 
 Keyword arguments:
 
 - id (string; optional):
-    组件id.
+    组件唯一id.
+
+- key (string; optional):
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
 - children (a list of or a singular dash component, string or number; optional):
     用于传入内部组件.
-
-- key (string; optional):
-    强制刷新用.
 
 - loading_state (dict; optional)
 
@@ -36,9 +36,9 @@ Keyword arguments:
     _type = 'Fragment'
     @_explicitize_args
     def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'children', 'key', 'loading_state']
+        self._prop_names = ['id', 'key', 'children', 'loading_state']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'children', 'key', 'loading_state']
+        self.available_properties = ['id', 'key', 'children', 'loading_state']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
