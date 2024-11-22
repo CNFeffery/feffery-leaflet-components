@@ -1,14 +1,17 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
+// react核心
 import React, { useRef, useEffect } from 'react';
-import { useMap } from 'react-leaflet';
-import { useHover } from 'ahooks';
 import PropTypes from 'prop-types';
+// leaflet核心
+import { useMap } from 'react-leaflet';
+// 辅助库
+import { useHover } from 'ahooks';
 
-// 定义元素包装器组件LeafletDomWrapper
+/**
+ * 元素包装器组件LeafletDomWrapper
+ */
 const LeafletDomWrapper = (props) => {
-
-    // 取得必要属性或参数
     const {
         children
     } = props;
@@ -41,13 +44,14 @@ const LeafletDomWrapper = (props) => {
     );
 }
 
-// 定义参数或属性
 LeafletDomWrapper.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
@@ -78,7 +82,6 @@ LeafletDomWrapper.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletDomWrapper.defaultProps = {
 }
 
