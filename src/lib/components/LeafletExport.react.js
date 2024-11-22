@@ -1,19 +1,21 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undefined */
+// react核心
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import L from "leaflet";
 import "./utils/leaflet-easyprint"
-import { omitBy, isUndefined } from 'lodash';
 import { useMap } from 'react-leaflet';
+// 辅助库
+import { omitBy, isUndefined } from 'lodash';
 
-// 定义地图导出组件LeafletExport
-// 挂载后不可更新
+/**
+ * 地图导出组件LeafletExport
+ */
 const LeafletExport = (props) => {
-    // 取得必要属性或参数
     const {
-        id,
         position,
         tileWait,
         filename,
@@ -84,40 +86,60 @@ const LeafletExport = (props) => {
         }
     }, [map])
 
-    return <div />;
+    return <></>;
 }
 
-// 定义参数或属性
 LeafletExport.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 设置导出控件方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
-    // 默认为'topleft'
+    /**
+     * 导出控件显示方位，可选项有`'topleft'`、`'topright'`、`'bottomleft'`、`'bottomright'`
+     * 默认值：`'topleft'`
+     */
     position: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
 
-    // 设置底图瓦片文件渲染等待时长（单位：毫秒），默认为500
+    /**
+     * 地图瓦片文件加载等待时长，单位：毫秒
+     * 默认值：500
+     */
     tileWait: PropTypes.number,
 
-    // 设置导出文件名称，默认为'map'
+    /**
+     * 图片导出文件名
+     * 默认值：`'map'`
+     */
     filename: PropTypes.string,
 
-    // 设置导出图片时是否隐藏地图上其其他控件，默认为true
+    /**
+     * 导出图片时是否自动隐藏其他无关控件
+     * 默认值：`true`
+     */
     hideControlContainer: PropTypes.bool,
 
-    // 设置自定义导出尺寸下的tooltip信息
+    /**
+     * 为自定义导出尺寸控件设置提示文案内容
+     */
     customSizeTooltip: PropTypes.string,
 
-    // 设置自定义导出尺寸下的图片像素长宽
+    /**
+     * 配置自定义尺寸
+     */
     customSize: PropTypes.exact({
-        // 像素宽度
+        /**
+         * 像素宽度
+         */
         width: PropTypes.number,
-        // 像素高度
+        /**
+         * 像素高度
+         */
         height: PropTypes.number
     }),
 
@@ -143,7 +165,6 @@ LeafletExport.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletExport.defaultProps = {
     filename: 'map'
 }

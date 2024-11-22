@@ -5,32 +5,42 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletExport(Component):
     """A LeafletExport component.
-
+地图导出组件LeafletExport
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
+- position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional):
+    导出控件显示方位，可选项有`'topleft'`、`'topright'`、`'bottomleft'`、`'bottomright'`
+    默认值：`'topleft'`.
 
-- tileWait (number; optional)
+- tileWait (number; optional):
+    地图瓦片文件加载等待时长，单位：毫秒  默认值：500.
 
-- filename (string; default 'map')
+- filename (string; default 'map'):
+    图片导出文件名  默认值：`'map'`.
 
-- hideControlContainer (boolean; optional)
+- hideControlContainer (boolean; optional):
+    导出图片时是否自动隐藏其他无关控件  默认值：`True`.
 
-- customSizeTooltip (string; optional)
+- customSizeTooltip (string; optional):
+    为自定义导出尺寸控件设置提示文案内容.
 
-- customSize (dict; optional)
+- customSize (dict; optional):
+    配置自定义尺寸.
 
     `customSize` is a dict with keys:
 
-    - width (number; optional)
+    - width (number; optional):
+        像素宽度.
 
-    - height (number; optional)
+    - height (number; optional):
+        像素高度.
 
 - loading_state (dict; optional)
 
