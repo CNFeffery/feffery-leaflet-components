@@ -9,22 +9,26 @@ ESRI tiledMapLayer图层组件
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
-- key (string; optional)
+- key (string; optional):
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- url (string; optional)
+- url (string; optional):
+    esri TileLayer地图服务地址.
 
-- opacity (number; optional)
+- opacity (number; optional):
+    当前图层透明度.
 
 - zIndex (number; optional):
-    设置当前图层的zIndex层级.
+    当前图层`z`轴层级.
 
 - zoomOffset (number; default 0):
-    缩放级别调整量  默认：0.
+    缩放级别偏移量  默认值：`0`.
 
 - identifyConfig (dict; optional):
-    用于配置触发每一次的要素标识操作，每次操作完整后会自动重置为空.
+    配置触发要素标识操作，每次操作完成后会自动重置为空值.
 
     `identifyConfig` is a dict with keys:
 
@@ -40,10 +44,10 @@ Keyword arguments:
             标识位置纬度.
 
 - identifyResult (dict; optional):
-    最近一次标识操作查询到的要素信息.
+    监听标识查询结果.
 
 - debug (boolean; default False):
-    是否开启debug模式  默认：False.
+    是否开启debug模式  默认值：`False`.
 
 - loading_state (dict; optional)
 

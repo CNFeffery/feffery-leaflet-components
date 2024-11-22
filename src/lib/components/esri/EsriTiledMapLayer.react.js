@@ -3,8 +3,10 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
+// react核心
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import { tiledMapLayer } from "esri-leaflet";
 import { useMap } from 'react-leaflet';
 
@@ -83,33 +85,40 @@ const EsriTiledMapLayer = (props) => {
     return <></>;
 }
 
-// 定义参数或属性
 EsriTiledMapLayer.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
-    // 强制刷新用
+    /**
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
+     */
     key: PropTypes.string,
 
-    // 设置需要加载的esri TileLayer地图服务地址
+    /**
+     * esri TileLayer地图服务地址
+     */
     url: PropTypes.string,
 
-    // 设置当前图层的透明程度
+    /**
+     * 当前图层透明度
+     */
     opacity: PropTypes.number,
 
     /**
-     * 设置当前图层的zIndex层级
+     * 当前图层`z`轴层级
      */
     zIndex: PropTypes.number,
 
     /**
-     * 缩放级别调整量
-     * 默认：0
+     * 缩放级别偏移量
+     * 默认值：`0`
      */
     zoomOffset: PropTypes.number,
 
     /**
-     * 用于配置触发每一次的要素标识操作，每次操作完整后会自动重置为空
+     * 配置触发要素标识操作，每次操作完成后会自动重置为空值
      */
     identifyConfig: PropTypes.exact({
         /**
@@ -128,13 +137,13 @@ EsriTiledMapLayer.propTypes = {
     }),
 
     /**
-     * 最近一次标识操作查询到的要素信息
+     * 监听标识查询结果
      */
     identifyResult: PropTypes.object,
 
     /**
      * 是否开启debug模式
-     * 默认：false
+     * 默认值：`false`
      */
     debug: PropTypes.bool,
 
@@ -160,7 +169,6 @@ EsriTiledMapLayer.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 EsriTiledMapLayer.defaultProps = {
     zoomOffset: 0,
     debug: false
