@@ -1,19 +1,19 @@
 /* eslint-disable no-undefined */
 /* eslint-disable no-unused-vars */
+// react核心
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+// leaflet核心
 import "./utils/Control.FullScreen";
 import "./utils/Control.FullScreen.css";
 import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 
-// 定义地图全屏化组件LeafletFullscreenControl
+/**
+ * 地图全屏化组件LeafletFullscreenControl
+ */
 const LeafletFullscreenControl = (props) => {
-
-    // 取得必要属性或参数
     const {
-        id,
-        key,
         position,
         forceSeparateButton,
         loading_state,
@@ -33,24 +33,29 @@ const LeafletFullscreenControl = (props) => {
         }
     }, [map])
 
-    // 返回定制化的前端组件
     return < ></>
 }
 
-// 定义参数或属性
 LeafletFullscreenControl.propTypes = {
-    // 组件id
+    /**
+     * 组件唯一id
+     */
     id: PropTypes.string,
 
     /**
-     * 强制刷新用
+     * 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
      */
     key: PropTypes.string,
 
-    // 设置全屏控件的方位，可选的有'topleft'、'topright'、'bottomleft'、'bottomright'
+    /**
+     * 全屏控件方位，可选项有`'topleft'`、`'topright'`、`'bottomleft'`、`'bottomright'`
+     */
     position: PropTypes.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
 
-    // 设置控件按钮是否强制脱离于放缩控件，默认为false
+    /**
+     * 控件按钮是否强制脱离于地图缩放控件
+     * 默认值：`false`
+     */
     forceSeparateButton: PropTypes.bool,
 
     loading_state: PropTypes.shape({
@@ -75,7 +80,6 @@ LeafletFullscreenControl.propTypes = {
     setProps: PropTypes.func
 };
 
-// 设置默认参数
 LeafletFullscreenControl.LeafletFullscreenControl = {
     forceSeparateButton: false
 }

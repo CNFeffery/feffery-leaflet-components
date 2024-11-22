@@ -5,18 +5,21 @@ from dash.development.base_component import Component, _explicitize_args
 
 class LeafletFullscreenControl(Component):
     """A LeafletFullscreenControl component.
-
+地图全屏化组件LeafletFullscreenControl
 
 Keyword arguments:
 
-- id (string; optional)
+- id (string; optional):
+    组件唯一id.
 
 - key (string; optional):
-    强制刷新用.
+    对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果.
 
-- position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional)
+- position (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; optional):
+    全屏控件方位，可选项有`'topleft'`、`'topright'`、`'bottomleft'`、`'bottomright'`.
 
-- forceSeparateButton (boolean; optional)
+- forceSeparateButton (boolean; optional):
+    控件按钮是否强制脱离于地图缩放控件  默认值：`False`.
 
 - loading_state (dict; optional)
 
