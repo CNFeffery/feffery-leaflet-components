@@ -124,6 +124,7 @@ const LeafletMap = (props) => {
         scaleControlOptions,
         maxBounds,
         maxBoundsViscosity,
+        maxBoundsDelay,
         editToolbar,
         editToolbarControlsOptions,
         showMeasurements,
@@ -226,19 +227,21 @@ const LeafletMap = (props) => {
                     }
 
                     if (maxBounds) {
-                        map.fitBounds(L.latLngBounds(
-                            L.latLng(maxBounds.miny, maxBounds.minx),
-                            L.latLng(maxBounds.maxy, maxBounds.maxx)
-                        ))
-                        // 强制更新minZoom
-                        map.setMinZoom(
-                            map.getBoundsZoom(
-                                L.latLngBounds(
-                                    L.latLng(maxBounds.miny, maxBounds.minx),
-                                    L.latLng(maxBounds.maxy, maxBounds.maxx)
+                        setTimeout(() => {
+                            map.fitBounds(L.latLngBounds(
+                                L.latLng(maxBounds.miny, maxBounds.minx),
+                                L.latLng(maxBounds.maxy, maxBounds.maxx)
+                            ))
+                            // 强制更新minZoom
+                            map.setMinZoom(
+                                map.getBoundsZoom(
+                                    L.latLngBounds(
+                                        L.latLng(maxBounds.miny, maxBounds.minx),
+                                        L.latLng(maxBounds.maxy, maxBounds.maxx)
+                                    )
                                 )
-                            )
-                        );
+                            );
+                        }, maxBoundsDelay)
                     }
 
                     // 修正全局默认marker图标不显示的问题
@@ -534,6 +537,12 @@ LeafletMap.propTypes = {
     maxBoundsViscosity: PropTypes.number,
 
     /**
+     * `maxBounds`参数初始化生效延时，单位：毫秒
+     * 默认值：`0`
+     */
+    maxBoundsDelay: PropTypes.number,
+
+    /**
      * 是否显示编辑模式工具栏
      * 默认值：`false`
      */
@@ -702,6 +711,7 @@ LeafletMap.defaultProps = {
     smoothWheelZoom: false,
     scaleControl: false,
     maxBoundsViscosity: 0,
+    maxBoundsDelay: 0,
     editToolbar: false,
     showMeasurements: false,
     maxDrawnShapes: null,

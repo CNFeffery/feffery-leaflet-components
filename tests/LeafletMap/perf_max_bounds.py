@@ -38,6 +38,7 @@ app.layout = html.Div(
                             }
                         ],
                     },
+                    fitBounds=False,
                     fitBoundsOptions={'duration': 0},
                 ),
             ],
@@ -48,6 +49,7 @@ app.layout = html.Div(
                 'maxy': 45,
             },
             maxBoundsViscosity=1,
+            maxBoundsDelay=500,
             zoomDelta=0.001,
             style=style(height='100%'),
         )
