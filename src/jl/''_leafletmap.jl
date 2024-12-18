@@ -77,6 +77,8 @@ Those elements have the following types:
   - `miny` (Real; optional): 矩形范围左下角纬度
   - `maxx` (Real; optional): 矩形范围右上角经度
   - `maxy` (Real; optional): 矩形范围右上角纬度
+- `maxBoundsViscosity` (Real; optional): 当`maxBounds`参数有效时，控制地图被拖拽出限制边界范围的牢固程度，取值在`0`到`1`之间，`1`表示完全不允许拖拽出限制范围
+默认值：`0`
 - `maxDrawnShapes` (Real; optional): 针对编辑模式，设置最多允许绘制的矢量要素个数，默认无限制
 - `maxZoom` (Real; optional): 地图最大缩放级别
 默认值：`18`
@@ -117,7 +119,7 @@ Those elements have the following types:
 默认值：`1`
 """
 function ''_leafletmap(; kwargs...)
-        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :crs, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :key, :loading_state, :maxBounds, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scaleControl, :scaleControlOptions, :scrollWheelZoom, :showMeasurements, :smoothWheelZoom, :style, :viewAutoCorrection, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
+        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :crs, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :key, :loading_state, :maxBounds, :maxBoundsViscosity, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scaleControl, :scaleControlOptions, :scrollWheelZoom, :showMeasurements, :smoothWheelZoom, :style, :viewAutoCorrection, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
         wild_props = Symbol[]
         return Component("''_leafletmap", "LeafletMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

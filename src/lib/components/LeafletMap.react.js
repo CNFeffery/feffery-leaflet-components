@@ -123,6 +123,7 @@ const LeafletMap = (props) => {
         scaleControl,
         scaleControlOptions,
         maxBounds,
+        maxBoundsViscosity,
         editToolbar,
         editToolbarControlsOptions,
         showMeasurements,
@@ -183,6 +184,7 @@ const LeafletMap = (props) => {
                         L.latLng(maxBounds.maxy, maxBounds.maxx)
                     ) : undefined
                 }
+                maxBoundsViscosity={maxBoundsViscosity}
                 whenCreated={map => {
                     if (measureControl) {
                         // https://github.com/ljagis/leaflet-measure/issues/171#issuecomment-1137483548
@@ -228,6 +230,15 @@ const LeafletMap = (props) => {
                             L.latLng(maxBounds.miny, maxBounds.minx),
                             L.latLng(maxBounds.maxy, maxBounds.maxx)
                         ))
+                        // 强制更新minZoom
+                        map.setMinZoom(
+                            map.getBoundsZoom(
+                                L.latLngBounds(
+                                    L.latLng(maxBounds.miny, maxBounds.minx),
+                                    L.latLng(maxBounds.maxy, maxBounds.maxx)
+                                )
+                            )
+                        );
                     }
 
                     // 修正全局默认marker图标不显示的问题
@@ -517,6 +528,12 @@ LeafletMap.propTypes = {
     }),
 
     /**
+     * 当`maxBounds`参数有效时，控制地图被拖拽出限制边界范围的牢固程度，取值在`0`到`1`之间，`1`表示完全不允许拖拽出限制范围
+     * 默认值：`0`
+     */
+    maxBoundsViscosity: PropTypes.number,
+
+    /**
      * 是否显示编辑模式工具栏
      * 默认值：`false`
      */
@@ -684,6 +701,7 @@ LeafletMap.defaultProps = {
     wheelPxPerZoomLevel: 60,
     smoothWheelZoom: false,
     scaleControl: false,
+    maxBoundsViscosity: 0,
     editToolbar: false,
     showMeasurements: false,
     maxDrawnShapes: null,

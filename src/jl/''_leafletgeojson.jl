@@ -36,6 +36,8 @@ Those elements have the following types:
 默认值：`'left'`
 - `fitBounds` (Bool; optional): 是否启用图层范围自适应缩放功能
 默认值：`true`
+- `fitBoundsDelay` (Real; optional): 针对图层范围自适应缩放设置执行延时时长，单位：毫秒
+默认值：`0`
 - `fitBoundsOptions` (optional): 配置图层范围自适应缩放的选项. fitBoundsOptions has the following type: lists containing elements 'maxZoom', 'animate', 'duration', 'padding'.
 Those elements have the following types:
   - `maxZoom` (Real; optional): 缩放后允许的最大缩放级别
@@ -80,7 +82,7 @@ Those elements have the following types:
 默认值：`false`
 """
 function ''_leafletgeojson(; kwargs...)
-        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :circleMarkerRadius, :clickFeatureZoom, :data, :defaultStyle, :disableClickSelect, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :fitBoundsOptions, :hoverStyle, :hoverable, :key, :lassoButtonPosition, :lassoResetSelectedFeatureIds, :lassoSelect, :lassoStyle, :lassoType, :loading_state, :mode, :pointRenderMode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :tooltipClassName, :tooltipDirection, :tooltipPermanent, :tooltipSticky]
+        available_props = Symbol[:id, :_clickedFeature, :_hoveredFeature, :circleMarkerRadius, :clickFeatureZoom, :data, :defaultStyle, :disableClickSelect, :featureCategoryField, :featureCategoryToStyles, :featureIdField, :featureTooltipField, :featureValueField, :featureValueToStyles, :fitBounds, :fitBoundsDelay, :fitBoundsOptions, :hoverStyle, :hoverable, :key, :lassoButtonPosition, :lassoResetSelectedFeatureIds, :lassoSelect, :lassoStyle, :lassoType, :loading_state, :mode, :pointRenderMode, :selectMode, :selectedFeatureIds, :selectedStyle, :showTooltip, :tooltipClassName, :tooltipDirection, :tooltipPermanent, :tooltipSticky]
         wild_props = Symbol[]
         return Component("''_leafletgeojson", "LeafletGeoJSON", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

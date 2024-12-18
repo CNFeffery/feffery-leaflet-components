@@ -62,6 +62,7 @@ const LeafletGeoJSON = (props) => {
         mode,
         fitBounds,
         fitBoundsOptions,
+        fitBoundsDelay,
         clickFeatureZoom,
         featureIdField,
         selectMode,
@@ -174,10 +175,12 @@ const LeafletGeoJSON = (props) => {
             // 更新图层数据
             geoJsonRef.current.clearLayers().addData(data)
             if (fitBounds) {
-                map.fitBounds(
-                    geoJsonRef.current.getBounds(),
-                    fitBoundsOptions
-                )
+                setTimeout(() => {
+                    map.fitBounds(
+                        geoJsonRef.current.getBounds(),
+                        fitBoundsOptions
+                    )
+                }, [fitBoundsDelay])
             }
         }
     }, [data])
@@ -537,6 +540,12 @@ LeafletGeoJSON.propTypes = {
     }),
 
     /**
+     * 针对图层范围自适应缩放设置执行延时时长，单位：毫秒
+     * 默认值：`0`
+     */
+    fitBoundsDelay: PropTypes.number,
+
+    /**
      * 是否在点击要素后，自动缩放到对应要素的范围
      * 默认值：`false`
      */
@@ -715,6 +724,7 @@ LeafletGeoJSON.propTypes = {
 
 LeafletGeoJSON.defaultProps = {
     fitBounds: true,
+    fitBoundsDelay: 0,
     featureIdField: 'id',
     featureValueField: 'value',
     featureCategoryField: 'category',
