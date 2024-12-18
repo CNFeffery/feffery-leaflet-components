@@ -1,4 +1,4 @@
-> 本项目处于早期活跃开发测试阶段
+> 本项目即将发布正式版本，敬请期待😉
 
 <p align="center">
 	<img src="./flc-logo.svg" height=200></img>
@@ -14,7 +14,7 @@
 
 </div>
 
-`feffery-components`计划子项目，`Plotly Dash`第三方组件库，基于`Leaflet`，将更好用的地图交互及可视化组件引入`Dash`的世界🥳，最新版本：`0.1.0-rc8`
+`feffery-components`计划子项目，`Plotly Dash`第三方组件库，基于`Leaflet`，将更好用的地图交互功能及可视化组件引入`Dash`的世界🥳，最新版本：`0.1.0-rc9`（2024-12-18）
 
 ## 1 最新版本安装方式
 
