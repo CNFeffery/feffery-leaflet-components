@@ -14,17 +14,15 @@ import { omitBy, isUndefined } from 'lodash';
 /**
  * 地图导出组件LeafletExport
  */
-const LeafletExport = (props) => {
-    const {
-        position,
-        tileWait,
-        filename,
-        hideControlContainer,
-        customSizeTooltip,
-        customSize,
-        setProps,
-        loading_state
-    } = props;
+const LeafletExport = ({
+    position,
+    tileWait,
+    filename = 'map',
+    hideControlContainer,
+    customSizeTooltip,
+    customSize,
+    setProps
+}) => {
 
     let sizeModes;
 
@@ -143,30 +141,11 @@ LeafletExport.propTypes = {
         height: PropTypes.number
     }),
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletExport.defaultProps = {
-    filename: 'map'
-}
 
 export default React.memo(LeafletExport);

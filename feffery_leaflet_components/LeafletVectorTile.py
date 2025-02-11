@@ -1,6 +1,13 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+import typing  # noqa: F401
+import numbers # noqa: F401
+from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.development.base_component import ComponentType # noqa: F401
+except ImportError:
+    ComponentType = typing.TypeVar("ComponentType", bound=Component)
 
 
 class LeafletVectorTile(Component):
@@ -49,29 +56,38 @@ Keyword arguments:
     监听当前服务中已加载的全部图层名称.
 
 - _clickedFeature (dict; optional):
-    监听要素点击事件.
-
-- loading_state (dict; optional)
-
-    `loading_state` is a dict with keys:
-
-    - is_loading (boolean; optional):
-        Determines if the component is loading or not.
-
-    - prop_name (string; optional):
-        Holds which property is loading.
-
-    - component_name (string; optional):
-        Holds the name of the component that is loading."""
+    监听要素点击事件."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletVectorTile'
+    VectorTileLayerStyles = TypedDict(
+        "VectorTileLayerStyles",
+            {
+            "func": NotRequired[str]
+        }
+    )
+
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, url=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, interactive=Component.UNDEFINED, featureIdField=Component.UNDEFINED, vectorTileLayerStyles=Component.UNDEFINED, extraProps=Component.UNDEFINED, renderer=Component.UNDEFINED, _layerNames=Component.UNDEFINED, _clickedFeature=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'key', 'url', 'minZoom', 'maxZoom', 'interactive', 'featureIdField', 'vectorTileLayerStyles', 'extraProps', 'renderer', '_layerNames', '_clickedFeature', 'loading_state']
+    def __init__(
+        self,
+        id: typing.Optional[str] = None,
+        key: typing.Optional[str] = None,
+        url: typing.Optional[str] = None,
+        minZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        maxZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        interactive: typing.Optional[bool] = None,
+        featureIdField: typing.Optional[str] = None,
+        vectorTileLayerStyles: typing.Optional[typing.Union[typing.Dict[typing.Union[str, float, int], str], typing.Dict[typing.Union[str, float, int], "VectorTileLayerStyles"]]] = None,
+        extraProps: typing.Optional[dict] = None,
+        renderer: typing.Optional[Literal["svg", "canvas"]] = None,
+        _layerNames: typing.Optional[typing.Sequence] = None,
+        _clickedFeature: typing.Optional[dict] = None,
+        **kwargs
+    ):
+        self._prop_names = ['id', 'key', 'url', 'minZoom', 'maxZoom', 'interactive', 'featureIdField', 'vectorTileLayerStyles', 'extraProps', 'renderer', '_layerNames', '_clickedFeature']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', 'url', 'minZoom', 'maxZoom', 'interactive', 'featureIdField', 'vectorTileLayerStyles', 'extraProps', 'renderer', '_layerNames', '_clickedFeature', 'loading_state']
+        self.available_properties = ['id', 'key', 'url', 'minZoom', 'maxZoom', 'interactive', 'featureIdField', 'vectorTileLayerStyles', 'extraProps', 'renderer', '_layerNames', '_clickedFeature']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

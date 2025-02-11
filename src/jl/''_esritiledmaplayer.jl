@@ -19,11 +19,6 @@ Those elements have the following types:
   - `lat` (Real; optional): 标识位置纬度
 - `identifyResult` (Dict; optional): 监听标识查询结果
 - `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
-- `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
-Those elements have the following types:
-  - `is_loading` (Bool; optional): Determines if the component is loading or not
-  - `prop_name` (String; optional): Holds which property is loading
-  - `component_name` (String; optional): Holds the name of the component that is loading
 - `opacity` (Real; optional): 当前图层透明度
 - `url` (String; optional): esri TileLayer地图服务地址
 - `zIndex` (Real; optional): 当前图层`z`轴层级
@@ -31,7 +26,7 @@ Those elements have the following types:
 默认值：`0`
 """
 function ''_esritiledmaplayer(; kwargs...)
-        available_props = Symbol[:id, :debug, :identifyConfig, :identifyResult, :key, :loading_state, :opacity, :url, :zIndex, :zoomOffset]
+        available_props = Symbol[:id, :debug, :identifyConfig, :identifyResult, :key, :opacity, :url, :zIndex, :zoomOffset]
         wild_props = Symbol[]
         return Component("''_esritiledmaplayer", "EsriTiledMapLayer", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

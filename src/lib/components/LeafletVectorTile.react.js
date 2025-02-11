@@ -15,19 +15,18 @@ import { isEqual, isUndefined, clone } from 'lodash';
 /**
  * 矢量切片图层组件LeafletVectorTile
  */
-const LeafletVectorTile = (props) => {
-    const {
-        id,
-        url,
-        minZoom,
-        maxZoom,
-        interactive,
-        featureIdField,
-        vectorTileLayerStyles,
-        extraProps,
-        renderer,
-        setProps
-    } = props;
+const LeafletVectorTile = ({
+    id,
+    url,
+    minZoom = 1,
+    maxZoom = 18,
+    interactive = false,
+    featureIdField = 'id',
+    vectorTileLayerStyles,
+    extraProps,
+    renderer = 'svg',
+    setProps
+}) => {
 
     const map = useMap()
     const vectorGridRef = useRef(null);
@@ -180,35 +179,12 @@ LeafletVectorTile.propTypes = {
      */
     _clickedFeature: PropTypes.object,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletVectorTile.defaultProps = {
-    minZoom: 1,
-    maxZoom: 18,
-    interactive: false,
-    featureIdField: 'id',
-    renderer: 'svg'
-}
 
 const preventUpdateProps = ['_layerNames', '_clickedFeature'];
 

@@ -16,30 +16,28 @@ import { pathOptionsPropTypes } from './BasePropTypes.react';
 /**
  * 迷你地图组件LeafletMiniMap
  */
-const LeafletMiniMap = (props) => {
-    const {
-        url,
-        attribution,
-        opacity,
-        zIndex,
-        minZoom,
-        maxZoom,
-        position,
-        width,
-        height,
-        collapsedWidth,
-        collapsedHeight,
-        zoomLevelOffset,
-        zoomLevelFixed,
-        zoomAnimation,
-        toggleDisplay,
-        autoToggleDisplay,
-        aimingRectOptions,
-        shadowRectOptions,
-        minimized,
-        loading_state,
-        setProps
-    } = props;
+const LeafletMiniMap = ({
+    url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    attribution,
+    opacity = 1,
+    zIndex,
+    minZoom,
+    maxZoom,
+    position,
+    width,
+    height,
+    collapsedWidth,
+    collapsedHeight,
+    zoomLevelOffset,
+    zoomLevelFixed,
+    zoomAnimation,
+    toggleDisplay,
+    autoToggleDisplay,
+    aimingRectOptions,
+    shadowRectOptions,
+    minimized,
+    setProps
+}) => {
 
     const map = useMap()
 
@@ -197,31 +195,11 @@ LeafletMiniMap.propTypes = {
      */
     minimized: PropTypes.bool,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletMiniMap.defaultProps = {
-    url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    opacity: 1
-}
 
 export default React.memo(LeafletMiniMap);

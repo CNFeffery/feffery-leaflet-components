@@ -20,11 +20,6 @@ Keyword arguments:
 - `height` (Real; optional): 迷你地图整体像素高度
 默认值：`150`
 - `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
-- `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
-Those elements have the following types:
-  - `is_loading` (Bool; optional): Determines if the component is loading or not
-  - `prop_name` (String; optional): Holds which property is loading
-  - `component_name` (String; optional): Holds the name of the component that is loading
 - `maxZoom` (Real; optional): 缩放级别上限
 - `minZoom` (Real; optional): 缩放级别下限
 - `minimized` (Bool; optional): 迷你地图初始化时是否处于折叠状态
@@ -45,7 +40,7 @@ Those elements have the following types:
 默认值：`-5`
 """
 function ''_leafletminimap(; kwargs...)
-        available_props = Symbol[:id, :aimingRectOptions, :attribution, :autoToggleDisplay, :collapsedHeight, :collapsedWidth, :height, :key, :loading_state, :maxZoom, :minZoom, :minimized, :opacity, :position, :shadowRectOptions, :toggleDisplay, :url, :width, :zIndex, :zoomAnimation, :zoomLevelFixed, :zoomLevelOffset]
+        available_props = Symbol[:id, :aimingRectOptions, :attribution, :autoToggleDisplay, :collapsedHeight, :collapsedWidth, :height, :key, :maxZoom, :minZoom, :minimized, :opacity, :position, :shadowRectOptions, :toggleDisplay, :url, :width, :zIndex, :zoomAnimation, :zoomLevelFixed, :zoomLevelOffset]
         wild_props = Symbol[]
         return Component("''_leafletminimap", "LeafletMiniMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

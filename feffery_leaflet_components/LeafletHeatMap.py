@@ -1,6 +1,13 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+import typing  # noqa: F401
+import numbers # noqa: F401
+from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.development.base_component import ComponentType # noqa: F401
+except ImportError:
+    ComponentType = typing.TypeVar("ComponentType", bound=Component)
 
 
 class LeafletHeatMap(Component):
@@ -42,29 +49,36 @@ Keyword arguments:
     热力点模糊程度  默认值：`15`.
 
 - gradient (dict; optional):
-    颜色分段规则，譬如：`{0.4: 'blue', 0.65: 'lime', 1: 'red'}`.
-
-- loading_state (dict; optional)
-
-    `loading_state` is a dict with keys:
-
-    - is_loading (boolean; optional):
-        Determines if the component is loading or not.
-
-    - prop_name (string; optional):
-        Holds which property is loading.
-
-    - component_name (string; optional):
-        Holds the name of the component that is loading."""
+    颜色分段规则，譬如：`{0.4: 'blue', 0.65: 'lime', 1: 'red'}`."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletHeatMap'
+    Points = TypedDict(
+        "Points",
+            {
+            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
+            "lat": NotRequired[typing.Union[int, float, numbers.Number]],
+            "weight": NotRequired[typing.Union[int, float, numbers.Number]]
+        }
+    )
+
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, points=Component.UNDEFINED, minOpacity=Component.UNDEFINED, max=Component.UNDEFINED, radius=Component.UNDEFINED, blur=Component.UNDEFINED, gradient=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'key', 'points', 'minOpacity', 'max', 'radius', 'blur', 'gradient', 'loading_state']
+    def __init__(
+        self,
+        id: typing.Optional[str] = None,
+        key: typing.Optional[str] = None,
+        points: typing.Optional[typing.Sequence["Points"]] = None,
+        minOpacity: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        max: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        radius: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        blur: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        gradient: typing.Optional[dict] = None,
+        **kwargs
+    ):
+        self._prop_names = ['id', 'key', 'points', 'minOpacity', 'max', 'radius', 'blur', 'gradient']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', 'points', 'minOpacity', 'max', 'radius', 'blur', 'gradient', 'loading_state']
+        self.available_properties = ['id', 'key', 'points', 'minOpacity', 'max', 'radius', 'blur', 'gradient']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

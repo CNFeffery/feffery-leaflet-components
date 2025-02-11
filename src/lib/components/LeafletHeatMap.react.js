@@ -11,17 +11,15 @@ import { useMap } from 'react-leaflet';
 /**
  * 热力图层组件LeafletHeatMap
  */
-const LeafletHeatMap = (props) => {
-    const {
-        points,
-        minOpacity,
-        max,
-        radius,
-        blur,
-        gradient,
-        setProps,
-        loading_state
-    } = props;
+const LeafletHeatMap = ({
+    points,
+    minOpacity = 0,
+    max = 1,
+    radius = 25,
+    blur = 15,
+    gradient,
+    setProps
+}) => {
 
     const map = useMap()
     const heatmapLayerRef = useRef(null)
@@ -111,33 +109,11 @@ LeafletHeatMap.propTypes = {
      */
     gradient: PropTypes.object,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletHeatMap.defaultProps = {
-    minOpacity: 0,
-    max: 1,
-    radius: 25,
-    blur: 15
-}
 
 export default React.memo(LeafletHeatMap);

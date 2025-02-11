@@ -4,25 +4,25 @@ import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // leaflet核心
 import { TileLayer } from 'react-leaflet';
+// 辅助库
+import { useLoading } from '../utils';
 
 /**
  * 瓦片服务图层组件LeafletTileLayer
  */
-const LeafletTileLayer = (props) => {
-    const {
-        id,
-        url,
-        attribution,
-        opacity,
-        zIndex,
-        tileSize,
-        minZoom,
-        maxZoom,
-        minNativeZoom,
-        maxNativeZoom,
-        tms,
-        loading_state
-    } = props;
+const LeafletTileLayer = ({
+    id,
+    url = "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
+    attribution,
+    opacity = 1,
+    zIndex,
+    tileSize = 256,
+    minZoom = 0,
+    maxZoom = 18,
+    minNativeZoom,
+    maxNativeZoom,
+    tms = false
+}) => {
 
     const tileLayerRef = useRef(null);
 
@@ -46,9 +46,7 @@ const LeafletTileLayer = (props) => {
             maxNativeZoom={maxNativeZoom}
             tms={tms}
             ref={tileLayerRef}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }
+            data-dash-is-loading={useLoading()}
         />
     );
 }
@@ -119,35 +117,11 @@ LeafletTileLayer.propTypes = {
      */
     tms: PropTypes.bool,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletTileLayer.defaultProps = {
-    url: "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
-    opacity: 1,
-    tileSize: 256,
-    minZoom: 0,
-    maxZoom: 18,
-    tms: false
-}
 
 export default React.memo(LeafletTileLayer);

@@ -11,11 +11,6 @@ Keyword arguments:
 - `id` (String; optional): 组件唯一id
 - `alphaRange` (Real; optional): 权重比例阈值上限，取值应在`0`到`1`之间
 - `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
-- `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
-Those elements have the following types:
-  - `is_loading` (Bool; optional): Determines if the component is loading or not
-  - `prop_name` (String; optional): Holds which property is loading
-  - `component_name` (String; optional): Holds the name of the component that is loading
 - `multiplyFactor` (Real; optional): 热力权重全局变换系数，将原始的各热力点权重值变为`权重 * multiplyFactor`
 默认值：`1`
 - `opacity` (Real; optional): 热力点透明度
@@ -29,7 +24,7 @@ Those elements have the following types:
 默认值：`30000`
 """
 function ''_leafletstaticheatmap(; kwargs...)
-        available_props = Symbol[:id, :alphaRange, :key, :loading_state, :multiplyFactor, :opacity, :points, :size]
+        available_props = Symbol[:id, :alphaRange, :key, :multiplyFactor, :opacity, :points, :size]
         wild_props = Symbol[]
         return Component("''_leafletstaticheatmap", "LeafletStaticHeatMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

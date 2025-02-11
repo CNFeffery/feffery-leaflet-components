@@ -11,10 +11,9 @@ import { useHover } from 'ahooks';
 /**
  * 元素包装器组件LeafletDomWrapper
  */
-const LeafletDomWrapper = (props) => {
-    const {
-        children
-    } = props;
+const LeafletDomWrapper = ({
+    children
+}) => {
 
     const ref = useRef(null);
     const isHovering = useHover(ref);
@@ -60,29 +59,11 @@ LeafletDomWrapper.propTypes = {
      */
     children: PropTypes.node,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletDomWrapper.defaultProps = {
-}
 
 export default React.memo(LeafletDomWrapper);

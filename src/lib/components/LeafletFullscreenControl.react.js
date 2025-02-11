@@ -12,13 +12,11 @@ import L from 'leaflet';
 /**
  * 地图全屏化组件LeafletFullscreenControl
  */
-const LeafletFullscreenControl = (props) => {
-    const {
-        position,
-        forceSeparateButton,
-        loading_state,
-        setProps
-    } = props;
+const LeafletFullscreenControl = ({
+    position,
+    forceSeparateButton = false,
+    setProps
+}) => {
 
     const map = useMap()
 
@@ -58,30 +56,11 @@ LeafletFullscreenControl.propTypes = {
      */
     forceSeparateButton: PropTypes.bool,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletFullscreenControl.LeafletFullscreenControl = {
-    forceSeparateButton: false
-}
 
 export default React.memo(LeafletFullscreenControl);

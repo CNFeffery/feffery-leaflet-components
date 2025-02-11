@@ -5,23 +5,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // leaflet核心
 import { Popup } from 'react-leaflet';
+// 辅助库
+import { useLoading } from '../utils';
 
 /**
  * 弹框组件LeafletPopup
  */
-const LeafletPopup = (props) => {
-    const {
-        id,
-        children,
-        className,
-        keepInView,
-        closeButton,
-        closeOnEscapeKey,
-        closeOnClick,
-        width,
-        loading_state,
-        setProps
-    } = props;
+const LeafletPopup = ({
+    id,
+    children,
+    className,
+    keepInView = false,
+    closeButton = false,
+    closeOnEscapeKey = true,
+    closeOnClick = true,
+    width,
+    setProps
+}) => {
 
     return (
         <Popup
@@ -32,9 +32,7 @@ const LeafletPopup = (props) => {
             closeOnEscapeKey={closeOnEscapeKey}
             closeOnClick={closeOnClick}
             minWidth={width}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }
+            data-dash-is-loading={useLoading()}
         >{children}</Popup>
     );
 }
@@ -89,33 +87,11 @@ LeafletPopup.propTypes = {
      */
     width: PropTypes.number,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletPopup.defaultProps = {
-    keepInView: false,
-    closeButton: false,
-    closeOnEscapeKey: true,
-    closeOnClick: true
-}
 
 export default React.memo(LeafletPopup);

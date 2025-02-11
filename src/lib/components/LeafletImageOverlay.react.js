@@ -7,22 +7,22 @@ import PropTypes from 'prop-types';
 // leaflet核心
 import L from 'leaflet';
 import { ImageOverlay, useMap } from 'react-leaflet';
+// 辅助库
+import { useLoading } from '../utils';
 
 /**
  * 图片叠加组件LeafletImageOverlay
  */
-const LeafletImageOverlay = (props) => {
-    const {
-        id,
-        className,
-        url,
-        bounds,
-        opacity,
-        zIndex,
-        minZoom,
-        maxZoom,
-        loading_state
-    } = props;
+const LeafletImageOverlay = ({
+    id,
+    className,
+    url,
+    bounds,
+    opacity,
+    zIndex,
+    minZoom,
+    maxZoom
+}) => {
 
     const map = useMap();
     const imageRef = useRef(null);
@@ -69,9 +69,7 @@ const LeafletImageOverlay = (props) => {
             )}
             opacity={opacity}
             zIndex={zIndex}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }
+            data-dash-is-loading={useLoading()}
         />
     );
 }
@@ -139,29 +137,11 @@ LeafletImageOverlay.propTypes = {
      */
     maxZoom: PropTypes.number,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletImageOverlay.defaultProps = {
-}
 
 export default React.memo(LeafletImageOverlay);

@@ -12,6 +12,8 @@ import {
     marker2xIcon,
     markerShadow
 } from './utils/exportImages.react';
+// 辅助库
+import { useLoading } from '../utils';
 
 // 修正全局默认marker图标不显示的问题
 const defaultIconOptions = {
@@ -27,24 +29,22 @@ const defaultIconOptions = {
 /**
  * 标记图层组件LeafletMarker
  */
-const LeafletMarker = (props) => {
-    const {
-        id,
-        className,
-        children,
-        iconOptions,
-        position,
-        draggable,
-        opacity,
-        editable,
-        zIndexOffset,
-        riseOnHover,
-        autoPan,
-        nClicks,
-        mouseOverCount,
-        loading_state,
-        setProps
-    } = props;
+const LeafletMarker = ({
+    id,
+    className,
+    children,
+    iconOptions,
+    position,
+    draggable,
+    opacity,
+    editable = false,
+    zIndexOffset,
+    riseOnHover,
+    autoPan,
+    nClicks = 0,
+    mouseOverCount = 0,
+    setProps
+}) => {
 
     const markerRef = useRef(null);
 
@@ -97,9 +97,7 @@ const LeafletMarker = (props) => {
                     setProps({ mouseOverCount: mouseOverCount + 1 })
                 }
             }}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }
+            data-dash-is-loading={useLoading()}
         >{children}</Marker>
     );
 }
@@ -228,32 +226,11 @@ LeafletMarker.propTypes = {
      */
     mouseOverCount: PropTypes.number,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletMarker.defaultProps = {
-    editable: false,
-    nClicks: 0,
-    mouseOverCount: 0
-}
 
 export default React.memo(LeafletMarker);

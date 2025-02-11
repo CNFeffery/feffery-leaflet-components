@@ -49,11 +49,6 @@ Those elements have the following types:
   - `shadowAnchor` (Array of Reals; optional): 阴影图片的尖端坐标，以图片左上角为原点参照，格式：`[x, y]`
   - `className` (String; optional): 标记图标css类
 - `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
-- `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
-Those elements have the following types:
-  - `is_loading` (Bool; optional): Determines if the component is loading or not
-  - `prop_name` (String; optional): Holds which property is loading
-  - `component_name` (String; optional): Holds the name of the component that is loading
 - `maxZoom` (Real; optional): 聚类簇生成对应的最大缩放级别
 默认值：`16`
 - `minPoints` (Real; optional): 形成聚类簇所需的最小标记点数量
@@ -71,7 +66,7 @@ Those elements have the following types:
 默认值：`false`
 """
 function ''_leafletsupercluster(; kwargs...)
-        available_props = Symbol[:id, :categoryField, :clickedPoint, :clusterBackground, :clusterBorder, :clusterIconBaseSize, :clusterIconExtraSizeFactor, :clusterTextColor, :clusterTextSizeFactor, :extent, :iconOptions, :key, :loading_state, :maxZoom, :minPoints, :minZoom, :nodeSize, :positions, :radius, :tooltipField, :tooltipSticky]
+        available_props = Symbol[:id, :categoryField, :clickedPoint, :clusterBackground, :clusterBorder, :clusterIconBaseSize, :clusterIconExtraSizeFactor, :clusterTextColor, :clusterTextSizeFactor, :extent, :iconOptions, :key, :maxZoom, :minPoints, :minZoom, :nodeSize, :positions, :radius, :tooltipField, :tooltipSticky]
         wild_props = Symbol[]
         return Component("''_leafletsupercluster", "LeafletSuperCluster", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

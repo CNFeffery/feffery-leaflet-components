@@ -1,6 +1,13 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+import typing  # noqa: F401
+import numbers # noqa: F401
+from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.development.base_component import ComponentType # noqa: F401
+except ImportError:
+    ComponentType = typing.TypeVar("ComponentType", bound=Component)
 
 
 class LeafletMiniMap(Component):
@@ -71,29 +78,41 @@ Keyword arguments:
     迷你地图范围标识框阴影要素样式.
 
 - minimized (boolean; optional):
-    迷你地图初始化时是否处于折叠状态.
-
-- loading_state (dict; optional)
-
-    `loading_state` is a dict with keys:
-
-    - is_loading (boolean; optional):
-        Determines if the component is loading or not.
-
-    - prop_name (string; optional):
-        Holds which property is loading.
-
-    - component_name (string; optional):
-        Holds the name of the component that is loading."""
+    迷你地图初始化时是否处于折叠状态."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletMiniMap'
+
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, url=Component.UNDEFINED, attribution=Component.UNDEFINED, opacity=Component.UNDEFINED, zIndex=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, position=Component.UNDEFINED, width=Component.UNDEFINED, height=Component.UNDEFINED, collapsedWidth=Component.UNDEFINED, collapsedHeight=Component.UNDEFINED, zoomLevelOffset=Component.UNDEFINED, zoomLevelFixed=Component.UNDEFINED, zoomAnimation=Component.UNDEFINED, toggleDisplay=Component.UNDEFINED, autoToggleDisplay=Component.UNDEFINED, aimingRectOptions=Component.UNDEFINED, shadowRectOptions=Component.UNDEFINED, minimized=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'key', 'url', 'attribution', 'opacity', 'zIndex', 'minZoom', 'maxZoom', 'position', 'width', 'height', 'collapsedWidth', 'collapsedHeight', 'zoomLevelOffset', 'zoomLevelFixed', 'zoomAnimation', 'toggleDisplay', 'autoToggleDisplay', 'aimingRectOptions', 'shadowRectOptions', 'minimized', 'loading_state']
+    def __init__(
+        self,
+        id: typing.Optional[str] = None,
+        key: typing.Optional[str] = None,
+        url: typing.Optional[str] = None,
+        attribution: typing.Optional[str] = None,
+        opacity: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        zIndex: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        minZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        maxZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        position: typing.Optional[Literal["topleft", "topright", "bottomleft", "bottomright"]] = None,
+        width: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        height: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        collapsedWidth: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        collapsedHeight: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        zoomLevelOffset: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        zoomLevelFixed: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        zoomAnimation: typing.Optional[bool] = None,
+        toggleDisplay: typing.Optional[bool] = None,
+        autoToggleDisplay: typing.Optional[bool] = None,
+        aimingRectOptions: typing.Optional[typing.Any] = None,
+        shadowRectOptions: typing.Optional[typing.Any] = None,
+        minimized: typing.Optional[bool] = None,
+        **kwargs
+    ):
+        self._prop_names = ['id', 'key', 'url', 'attribution', 'opacity', 'zIndex', 'minZoom', 'maxZoom', 'position', 'width', 'height', 'collapsedWidth', 'collapsedHeight', 'zoomLevelOffset', 'zoomLevelFixed', 'zoomAnimation', 'toggleDisplay', 'autoToggleDisplay', 'aimingRectOptions', 'shadowRectOptions', 'minimized']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', 'url', 'attribution', 'opacity', 'zIndex', 'minZoom', 'maxZoom', 'position', 'width', 'height', 'collapsedWidth', 'collapsedHeight', 'zoomLevelOffset', 'zoomLevelFixed', 'zoomAnimation', 'toggleDisplay', 'autoToggleDisplay', 'aimingRectOptions', 'shadowRectOptions', 'minimized', 'loading_state']
+        self.available_properties = ['id', 'key', 'url', 'attribution', 'opacity', 'zIndex', 'minZoom', 'maxZoom', 'position', 'width', 'height', 'collapsedWidth', 'collapsedHeight', 'zoomLevelOffset', 'zoomLevelFixed', 'zoomAnimation', 'toggleDisplay', 'autoToggleDisplay', 'aimingRectOptions', 'shadowRectOptions', 'minimized']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

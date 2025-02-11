@@ -1,6 +1,13 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+import typing  # noqa: F401
+import numbers # noqa: F401
+from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.development.base_component import ComponentType # noqa: F401
+except ImportError:
+    ComponentType = typing.TypeVar("ComponentType", bound=Component)
 
 
 class LeafletSuperCluster(Component):
@@ -133,29 +140,62 @@ Keyword arguments:
         被点击要素数据.
 
     - timestamp (number; optional):
-        事件对应时间戳.
-
-- loading_state (dict; optional)
-
-    `loading_state` is a dict with keys:
-
-    - is_loading (boolean; optional):
-        Determines if the component is loading or not.
-
-    - prop_name (string; optional):
-        Holds which property is loading.
-
-    - component_name (string; optional):
-        Holds the name of the component that is loading."""
+        事件对应时间戳."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletSuperCluster'
+    IconOptions = TypedDict(
+        "IconOptions",
+            {
+            "iconUrl": NotRequired[str],
+            "iconSize": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
+            "iconAnchor": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
+            "popupAnchor": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
+            "tooltipAnchor": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
+            "shadowUrl": NotRequired[str],
+            "shadowSize": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
+            "shadowAnchor": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
+            "className": NotRequired[str]
+        }
+    )
+
+    ClickedPoint = TypedDict(
+        "ClickedPoint",
+            {
+            "feature": NotRequired[dict],
+            "timestamp": NotRequired[typing.Union[int, float, numbers.Number]]
+        }
+    )
+
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, positions=Component.REQUIRED, clusterBackground=Component.UNDEFINED, clusterBorder=Component.UNDEFINED, clusterTextColor=Component.UNDEFINED, clusterIconBaseSize=Component.UNDEFINED, clusterIconExtraSizeFactor=Component.UNDEFINED, clusterTextSizeFactor=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, minPoints=Component.UNDEFINED, radius=Component.UNDEFINED, extent=Component.UNDEFINED, nodeSize=Component.UNDEFINED, iconOptions=Component.UNDEFINED, tooltipField=Component.UNDEFINED, tooltipSticky=Component.UNDEFINED, categoryField=Component.UNDEFINED, clickedPoint=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'key', 'positions', 'clusterBackground', 'clusterBorder', 'clusterTextColor', 'clusterIconBaseSize', 'clusterIconExtraSizeFactor', 'clusterTextSizeFactor', 'minZoom', 'maxZoom', 'minPoints', 'radius', 'extent', 'nodeSize', 'iconOptions', 'tooltipField', 'tooltipSticky', 'categoryField', 'clickedPoint', 'loading_state']
+    def __init__(
+        self,
+        id: typing.Optional[str] = None,
+        key: typing.Optional[str] = None,
+        positions: typing.Optional[typing.Sequence[dict]] = None,
+        clusterBackground: typing.Optional[str] = None,
+        clusterBorder: typing.Optional[str] = None,
+        clusterTextColor: typing.Optional[str] = None,
+        clusterIconBaseSize: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        clusterIconExtraSizeFactor: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        clusterTextSizeFactor: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        minZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        maxZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        minPoints: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        radius: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        extent: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        nodeSize: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        iconOptions: typing.Optional[typing.Union["IconOptions", typing.Dict[typing.Union[str, float, int], "IconOptions"]]] = None,
+        tooltipField: typing.Optional[str] = None,
+        tooltipSticky: typing.Optional[bool] = None,
+        categoryField: typing.Optional[str] = None,
+        clickedPoint: typing.Optional["ClickedPoint"] = None,
+        **kwargs
+    ):
+        self._prop_names = ['id', 'key', 'positions', 'clusterBackground', 'clusterBorder', 'clusterTextColor', 'clusterIconBaseSize', 'clusterIconExtraSizeFactor', 'clusterTextSizeFactor', 'minZoom', 'maxZoom', 'minPoints', 'radius', 'extent', 'nodeSize', 'iconOptions', 'tooltipField', 'tooltipSticky', 'categoryField', 'clickedPoint']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', 'positions', 'clusterBackground', 'clusterBorder', 'clusterTextColor', 'clusterIconBaseSize', 'clusterIconExtraSizeFactor', 'clusterTextSizeFactor', 'minZoom', 'maxZoom', 'minPoints', 'radius', 'extent', 'nodeSize', 'iconOptions', 'tooltipField', 'tooltipSticky', 'categoryField', 'clickedPoint', 'loading_state']
+        self.available_properties = ['id', 'key', 'positions', 'clusterBackground', 'clusterBorder', 'clusterTextColor', 'clusterIconBaseSize', 'clusterIconExtraSizeFactor', 'clusterTextSizeFactor', 'minZoom', 'maxZoom', 'minPoints', 'radius', 'extent', 'nodeSize', 'iconOptions', 'tooltipField', 'tooltipSticky', 'categoryField', 'clickedPoint']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

@@ -16,6 +16,7 @@ import {
 import useSupercluster from 'use-supercluster';
 // 辅助库
 import { omit, omitBy, isUndefined } from 'lodash';
+import { useLoading } from '../utils';
 
 // 修正全局默认marker图标不显示的问题
 const defaultIconOptions = {
@@ -59,29 +60,27 @@ const fetchIcon = (count, size, clusterOptions) => {
 /**
  * 巨量标记聚类图层组件LeafletSuperCluster
  */
-const LeafletSuperCluster = (props) => {
-    const {
-        id,
-        positions,
-        clusterBackground,
-        clusterBorder,
-        clusterTextColor,
-        clusterIconBaseSize,
-        clusterIconExtraSizeFactor,
-        clusterTextSizeFactor,
-        minZoom,
-        maxZoom,
-        minPoints,
-        radius,
-        extent,
-        nodeSize,
-        iconOptions,
-        tooltipField,
-        tooltipSticky,
-        categoryField,
-        loading_state,
-        setProps
-    } = props;
+const LeafletSuperCluster = ({
+    id,
+    positions,
+    clusterBackground,
+    clusterBorder,
+    clusterTextColor,
+    clusterIconBaseSize = 10,
+    clusterIconExtraSizeFactor = 40,
+    clusterTextSizeFactor = 0.4,
+    minZoom,
+    maxZoom,
+    minPoints,
+    radius,
+    extent,
+    nodeSize,
+    iconOptions,
+    tooltipField = 'tooltip',
+    tooltipSticky,
+    categoryField = 'category',
+    setProps
+}) => {
 
     // 统一地图视角参数用于减少重复绘制
     const [boundsZoom, setBoundsZoom] = useState({});
@@ -152,9 +151,7 @@ const LeafletSuperCluster = (props) => {
 
     return (
         <div id={id}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }>
+            data-dash-is-loading={useLoading()}>
             {clusters.map((cluster, index) => {
                 // 提取聚类簇中心坐标
                 const [lng, lat] = cluster.geometry.coordinates;
@@ -457,34 +454,11 @@ LeafletSuperCluster.propTypes = {
         timestamp: PropTypes.number
     }),
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletSuperCluster.defaultProps = {
-    clusterIconBaseSize: 10,
-    clusterIconExtraSizeFactor: 40,
-    clusterTextSizeFactor: 0.4,
-    tooltipField: 'tooltip',
-    categoryField: 'category'
-}
 
 export default React.memo(LeafletSuperCluster);

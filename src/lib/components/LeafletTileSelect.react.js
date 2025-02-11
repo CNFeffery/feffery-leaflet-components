@@ -8,27 +8,27 @@ import PropTypes from 'prop-types';
 import L from 'leaflet';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import tileSelectIcon from "./images/tile-select-icon.png";
+// 辅助库
+import { useLoading } from '../utils';
 
 /**
  * 瓦片底图选择组件LeafletTileSelect
  */
-const LeafletTileSelect = (props) => {
-    const {
-        id,
-        className,
-        style,
-        containerClassName,
-        containerStyle,
-        containerItemClassName,
-        containerItemStyle,
-        urls,
-        center,
-        zoom,
-        selectedUrl,
-        containerVisible,
-        loading_state,
-        setProps
-    } = props;
+const LeafletTileSelect = ({
+    id,
+    className,
+    style,
+    containerClassName,
+    containerStyle,
+    containerItemClassName,
+    containerItemStyle,
+    urls,
+    center = { lng: 0, lat: 0 },
+    zoom = 3,
+    selectedUrl,
+    containerVisible = true,
+    setProps
+}) => {
 
     const divRef = useRef(null);
 
@@ -42,9 +42,7 @@ const LeafletTileSelect = (props) => {
             ref={divRef}
             style={{ ...style }}
             className={className ? `leaflet-tile-select ${className}` : 'leaflet-tile-select'}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }
+            data-dash-is-loading={useLoading()}
         >
             {<div
                 style={{
@@ -205,32 +203,11 @@ LeafletTileSelect.propTypes = {
      */
     containerVisible: PropTypes.bool,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletTileSelect.defaultProps = {
-    center: { lng: 0, lat: 0 },
-    zoom: 3,
-    containerVisible: true
-}
 
 export default React.memo(LeafletTileSelect);
