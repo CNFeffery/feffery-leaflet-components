@@ -12,21 +12,20 @@ import * as Color from 'color'
 /**
  * 流线图层组件LeafletMigrationLayer
  */
-const LeafletFlowLayer = (props) => {
-    const {
-        id,
-        flowData,
-        pulseRadius,
-        pulseBorderWidth,
-        arcWidth,
-        maxWidth,
-        arcLabel,
-        arcLabelFontSize,
-        arcLabelFontFamily,
-        keepUniqueLabels,
-        setAction,
-        setProps
-    } = props;
+const LeafletFlowLayer = ({
+    id,
+    flowData,
+    pulseRadius = 30,
+    pulseBorderWidth = 3,
+    arcWidth = 1,
+    maxWidth = 10,
+    arcLabel = true,
+    arcLabelFontSize = '10px',
+    arcLabelFontFamily = 'sans-serif',
+    keepUniqueLabels = false,
+    setAction,
+    setProps
+}) => {
 
     const map = useMap();
 
@@ -241,37 +240,11 @@ LeafletFlowLayer.propTypes = {
      */
     setAction: PropTypes.oneOf(['pause', 'play', 'hide', 'show']),
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletFlowLayer.defaultProps = {
-    pulseRadius: 30,
-    pulseBorderWidth: 3,
-    arcWidth: 1,
-    maxWidth: 10,
-    arcLabel: true,
-    arcLabelFontSize: '10px',
-    arcLabelFontFamily: 'sans-serif',
-    keepUniqueLabels: false
-}
 
 export default React.memo(LeafletFlowLayer);

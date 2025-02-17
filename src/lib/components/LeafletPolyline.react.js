@@ -8,27 +8,26 @@ import 'leaflet-arrowheads';
 import { Polyline } from 'react-leaflet';
 // 辅助库
 import { isBoolean } from 'lodash';
+import { useLoading } from '../utils';
 // 参数类型
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 
 /**
  * 折线图层组件LeafletPolyline
  */
-const LeafletPolyline = (props) => {
-    const {
-        id,
-        className,
-        children,
-        positions,
-        pathOptions,
-        arrowheads,
-        arrowheadsPathOptions,
-        editable,
-        nClicks,
-        mouseOverCount,
-        loading_state,
-        setProps
-    } = props;
+const LeafletPolyline = ({
+    id,
+    className,
+    children,
+    positions,
+    pathOptions,
+    arrowheads = false,
+    arrowheadsPathOptions,
+    editable = false,
+    nClicks = 0,
+    mouseOverCount = 0,
+    setProps
+}) => {
 
     const polylineRef = useRef(null);
 
@@ -87,9 +86,7 @@ const LeafletPolyline = (props) => {
                     setProps({ mouseOverCount: mouseOverCount + 1 })
                 }
             }}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }
+            data-dash-is-loading={useLoading()}
         >{children}</Polyline>
     );
 }
@@ -219,33 +216,11 @@ LeafletPolyline.propTypes = {
      */
     mouseOverCount: PropTypes.number,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletPolyline.defaultProps = {
-    arrowheads: false,
-    editable: false,
-    nClicks: 0,
-    mouseOverCount: 0
-}
 
 export default React.memo(LeafletPolyline);

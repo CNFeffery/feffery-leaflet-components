@@ -36,11 +36,6 @@ Those elements have the following types:
 - `keepUniqueLabels` (Bool; optional): 是否自动对起点、终点文字标签去重
 默认值：`false`
 - `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
-- `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
-Those elements have the following types:
-  - `is_loading` (Bool; optional): Determines if the component is loading or not
-  - `prop_name` (String; optional): Holds which property is loading
-  - `component_name` (String; optional): Holds the name of the component that is loading
 - `maxWidth` (Real; optional): 流线最大像素宽度
 默认值：`10`
 - `pulseBorderWidth` (Real; optional): 扩散圆圈边框像素宽度
@@ -50,7 +45,7 @@ Those elements have the following types:
 - `setAction` (a value equal to: 'pause', 'play', 'hide', 'show'; optional): 手动执行控制动作，可选的有`'pause'`、`'play'`、`'hide'`、`'show'`，每次有效值更新后会重置为空值
 """
 function ''_leafletflowlayer(; kwargs...)
-        available_props = Symbol[:id, :arcLabel, :arcLabelFontFamily, :arcLabelFontSize, :arcWidth, :flowData, :keepUniqueLabels, :key, :loading_state, :maxWidth, :pulseBorderWidth, :pulseRadius, :setAction]
+        available_props = Symbol[:id, :arcLabel, :arcLabelFontFamily, :arcLabelFontSize, :arcWidth, :flowData, :keepUniqueLabels, :key, :maxWidth, :pulseBorderWidth, :pulseRadius, :setAction]
         wild_props = Symbol[]
         return Component("''_leafletflowlayer", "LeafletFlowLayer", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

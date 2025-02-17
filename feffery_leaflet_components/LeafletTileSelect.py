@@ -1,6 +1,13 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+import typing  # noqa: F401
+import numbers # noqa: F401
+from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.development.base_component import ComponentType # noqa: F401
+except ImportError:
+    ComponentType = typing.TypeVar("ComponentType", bound=Component)
 
 
 class LeafletTileSelect(Component):
@@ -59,29 +66,47 @@ Keyword arguments:
     监听或设置已选中的瓦片地图服务.
 
 - containerVisible (boolean; default True):
-    监听或设置选择卡片是否展开  默认值：`False`.
-
-- loading_state (dict; optional)
-
-    `loading_state` is a dict with keys:
-
-    - is_loading (boolean; optional):
-        Determines if the component is loading or not.
-
-    - prop_name (string; optional):
-        Holds which property is loading.
-
-    - component_name (string; optional):
-        Holds the name of the component that is loading."""
+    监听或设置选择卡片是否展开  默认值：`False`."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletTileSelect'
+    Urls = TypedDict(
+        "Urls",
+            {
+            "url": NotRequired[str]
+        }
+    )
+
+    Center = TypedDict(
+        "Center",
+            {
+            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
+            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+        }
+    )
+
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, containerClassName=Component.UNDEFINED, containerStyle=Component.UNDEFINED, containerItemClassName=Component.UNDEFINED, containerItemStyle=Component.UNDEFINED, urls=Component.UNDEFINED, center=Component.UNDEFINED, zoom=Component.UNDEFINED, selectedUrl=Component.UNDEFINED, containerVisible=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'key', 'className', 'style', 'containerClassName', 'containerStyle', 'containerItemClassName', 'containerItemStyle', 'urls', 'center', 'zoom', 'selectedUrl', 'containerVisible', 'loading_state']
+    def __init__(
+        self,
+        id: typing.Optional[str] = None,
+        key: typing.Optional[str] = None,
+        className: typing.Optional[str] = None,
+        style: typing.Optional[dict] = None,
+        containerClassName: typing.Optional[str] = None,
+        containerStyle: typing.Optional[dict] = None,
+        containerItemClassName: typing.Optional[str] = None,
+        containerItemStyle: typing.Optional[dict] = None,
+        urls: typing.Optional[typing.Sequence["Urls"]] = None,
+        center: typing.Optional["Center"] = None,
+        zoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        selectedUrl: typing.Optional[str] = None,
+        containerVisible: typing.Optional[bool] = None,
+        **kwargs
+    ):
+        self._prop_names = ['id', 'key', 'className', 'style', 'containerClassName', 'containerStyle', 'containerItemClassName', 'containerItemStyle', 'urls', 'center', 'zoom', 'selectedUrl', 'containerVisible']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', 'className', 'style', 'containerClassName', 'containerStyle', 'containerItemClassName', 'containerItemStyle', 'urls', 'center', 'zoom', 'selectedUrl', 'containerVisible', 'loading_state']
+        self.available_properties = ['id', 'key', 'className', 'style', 'containerClassName', 'containerStyle', 'containerItemClassName', 'containerItemStyle', 'urls', 'center', 'zoom', 'selectedUrl', 'containerVisible']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

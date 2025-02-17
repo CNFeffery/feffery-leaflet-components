@@ -66,11 +66,6 @@ Those elements have the following types:
   - `oneBlock` (Bool; optional): 各功能按钮是否集成在同一个容器中
 默认值：`false`
 - `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
-- `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
-Those elements have the following types:
-  - `is_loading` (Bool; optional): Determines if the component is loading or not
-  - `prop_name` (String; optional): Holds which property is loading
-  - `component_name` (String; optional): Holds the name of the component that is loading
 - `maxBounds` (optional): 限制地图可移动坐标矩形范围. maxBounds has the following type: lists containing elements 'minx', 'miny', 'maxx', 'maxy'.
 Those elements have the following types:
   - `minx` (Real; optional): 矩形范围左下角经度
@@ -121,7 +116,7 @@ Those elements have the following types:
 默认值：`1`
 """
 function ''_leafletmap(; kwargs...)
-        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :crs, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :key, :loading_state, :maxBounds, :maxBoundsDelay, :maxBoundsViscosity, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scaleControl, :scaleControlOptions, :scrollWheelZoom, :showMeasurements, :smoothWheelZoom, :style, :viewAutoCorrection, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
+        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :crs, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :key, :maxBounds, :maxBoundsDelay, :maxBoundsViscosity, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scaleControl, :scaleControlOptions, :scrollWheelZoom, :showMeasurements, :smoothWheelZoom, :style, :viewAutoCorrection, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
         wild_props = Symbol[]
         return Component("''_leafletmap", "LeafletMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

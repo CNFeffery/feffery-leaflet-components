@@ -15,16 +15,14 @@ import { omitBy, isUndefined } from 'lodash';
 /**
  * 静态热力图层组件LeafletStaticHeatMap
  */
-const LeafletStaticHeatMap = (props) => {
-    const {
-        points,
-        multiplyFactor,
-        size,
-        opacity,
-        alphaRange,
-        setProps,
-        loading_state
-    } = props;
+const LeafletStaticHeatMap = ({
+    points,
+    multiplyFactor = 1,
+    size = 30000,
+    opacity = 1,
+    alphaRange,
+    setProps
+}) => {
 
     const map = useMap()
 
@@ -111,32 +109,11 @@ LeafletStaticHeatMap.propTypes = {
      */
     alphaRange: PropTypes.number,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletStaticHeatMap.defaultProps = {
-    multiplyFactor: 1,
-    size: 30000,
-    opacity: 1
-}
 
 export default React.memo(LeafletStaticHeatMap);

@@ -10,11 +10,6 @@ A LeafletMapAction component.
 Keyword arguments:
 - `id` (String; optional): 组件唯一id
 - `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
-- `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
-Those elements have the following types:
-  - `is_loading` (Bool; optional): Determines if the component is loading or not
-  - `prop_name` (String; optional): Holds which property is loading
-  - `component_name` (String; optional): Holds the name of the component that is loading
 - `mapActionConfig` (optional): 编排触发新的地图动作. mapActionConfig has the following type: lists containing elements 'type', 'center', 'zoom', 'zoomInOffset', 'zoomOutOffset', 'bounds', 'flyToDuration', 'delay'.
 Those elements have the following types:
   - `type` (a value equal to: 'set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'pan-to', 'fly-to', 'fly-to-bounds', 'invalidate-size'; optional): 地图动作类型，可选项有`'set-zoom'`、`'zoom-in'`、`'zoom-out'`、`'set-view'`、`'pan-to'`、`'fly-to'`、`'fly-to-bounds'`、`'invalidate-size'`，其中
@@ -44,7 +39,7 @@ Those elements have the following types:
 默认值：`0`
 """
 function ''_leafletmapaction(; kwargs...)
-        available_props = Symbol[:id, :key, :loading_state, :mapActionConfig]
+        available_props = Symbol[:id, :key, :mapActionConfig]
         wild_props = Symbol[]
         return Component("''_leafletmapaction", "LeafletMapAction", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

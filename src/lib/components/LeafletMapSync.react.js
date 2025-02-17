@@ -10,13 +10,12 @@ import MapContext from '../contexts/MapContext';
 /**
  * 地图同步组件LeafletMapSync
  */
-const LeafletMapSync = (props) => {
-    const {
-        id,
-        groupId,
-        syncStrategy,
-        setProps
-    } = props;
+const LeafletMapSync = ({
+    id,
+    groupId,
+    syncStrategy = 'all',
+    setProps
+}) => {
 
     const map = useMap();
     const mapContext = useContext(MapContext);
@@ -103,30 +102,11 @@ LeafletMapSync.propTypes = {
      */
     syncStrategy: PropTypes.oneOf(['all', 'center']),
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletMapSync.defaultProps = {
-    syncStrategy: 'all'
-}
 
 export default React.memo(LeafletMapSync);

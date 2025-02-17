@@ -8,25 +8,24 @@ import L from "leaflet";
 import { Rectangle } from 'react-leaflet';
 // 辅助库
 import { useRequest } from 'ahooks';
+import { useLoading } from '../utils';
 // 参数类型
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 
 /**
  * 矩形图层组件LeafletRectangle
  */
-const LeafletRectangle = (props) => {
-    const {
-        id,
-        className,
-        children,
-        bounds,
-        pathOptions,
-        editable,
-        nClicks,
-        mouseOverCount,
-        loading_state,
-        setProps
-    } = props;
+const LeafletRectangle = ({
+    id,
+    className,
+    children,
+    bounds,
+    pathOptions,
+    editable = false,
+    nClicks = 0,
+    mouseOverCount = 0,
+    setProps
+}) => {
 
     const rectangleRef = useRef(null);
 
@@ -79,9 +78,7 @@ const LeafletRectangle = (props) => {
                     setProps({ mouseOverCount: mouseOverCount + 1 })
                 }
             }}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }
+            data-dash-is-loading={useLoading()}
         >{children}</Rectangle>
     );
 }
@@ -152,32 +149,11 @@ LeafletRectangle.propTypes = {
      */
     mouseOverCount: PropTypes.number,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletRectangle.defaultProps = {
-    editable: false,
-    nClicks: 0,
-    mouseOverCount: 0
-}
 
 export default React.memo(LeafletRectangle);

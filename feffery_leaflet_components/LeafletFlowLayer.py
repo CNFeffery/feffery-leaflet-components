@@ -1,6 +1,13 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+import typing  # noqa: F401
+import numbers # noqa: F401
+from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.development.base_component import ComponentType # noqa: F401
+except ImportError:
+    ComponentType = typing.TypeVar("ComponentType", bound=Component)
 
 
 class LeafletFlowLayer(Component):
@@ -84,29 +91,66 @@ Keyword arguments:
     是否自动对起点、终点文字标签去重  默认值：`False`.
 
 - setAction (a value equal to: 'pause', 'play', 'hide', 'show'; optional):
-    手动执行控制动作，可选的有`'pause'`、`'play'`、`'hide'`、`'show'`，每次有效值更新后会重置为空值.
-
-- loading_state (dict; optional)
-
-    `loading_state` is a dict with keys:
-
-    - is_loading (boolean; optional):
-        Determines if the component is loading or not.
-
-    - prop_name (string; optional):
-        Holds which property is loading.
-
-    - component_name (string; optional):
-        Holds the name of the component that is loading."""
+    手动执行控制动作，可选的有`'pause'`、`'play'`、`'hide'`、`'show'`，每次有效值更新后会重置为空值."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletFlowLayer'
+    FlowDataFrom = TypedDict(
+        "FlowDataFrom",
+            {
+            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
+            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+        }
+    )
+
+    FlowDataTo = TypedDict(
+        "FlowDataTo",
+            {
+            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
+            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+        }
+    )
+
+    FlowDataLabels = TypedDict(
+        "FlowDataLabels",
+            {
+            "from": NotRequired[str],
+            "to": NotRequired[str]
+        }
+    )
+
+    FlowData = TypedDict(
+        "FlowData",
+            {
+            "from": NotRequired["FlowDataFrom"],
+            "to": NotRequired["FlowDataTo"],
+            "labels": NotRequired["FlowDataLabels"],
+            "color": NotRequired[str],
+            "value": NotRequired[typing.Union[int, float, numbers.Number]]
+        }
+    )
+
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, flowData=Component.UNDEFINED, pulseRadius=Component.UNDEFINED, pulseBorderWidth=Component.UNDEFINED, arcWidth=Component.UNDEFINED, maxWidth=Component.UNDEFINED, arcLabel=Component.UNDEFINED, arcLabelFontSize=Component.UNDEFINED, arcLabelFontFamily=Component.UNDEFINED, keepUniqueLabels=Component.UNDEFINED, setAction=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'key', 'flowData', 'pulseRadius', 'pulseBorderWidth', 'arcWidth', 'maxWidth', 'arcLabel', 'arcLabelFontSize', 'arcLabelFontFamily', 'keepUniqueLabels', 'setAction', 'loading_state']
+    def __init__(
+        self,
+        id: typing.Optional[str] = None,
+        key: typing.Optional[str] = None,
+        flowData: typing.Optional[typing.Sequence["FlowData"]] = None,
+        pulseRadius: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        pulseBorderWidth: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        arcWidth: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        maxWidth: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        arcLabel: typing.Optional[bool] = None,
+        arcLabelFontSize: typing.Optional[str] = None,
+        arcLabelFontFamily: typing.Optional[str] = None,
+        keepUniqueLabels: typing.Optional[bool] = None,
+        setAction: typing.Optional[Literal["pause", "play", "hide", "show"]] = None,
+        **kwargs
+    ):
+        self._prop_names = ['id', 'key', 'flowData', 'pulseRadius', 'pulseBorderWidth', 'arcWidth', 'maxWidth', 'arcLabel', 'arcLabelFontSize', 'arcLabelFontFamily', 'keepUniqueLabels', 'setAction']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', 'flowData', 'pulseRadius', 'pulseBorderWidth', 'arcWidth', 'maxWidth', 'arcLabel', 'arcLabelFontSize', 'arcLabelFontFamily', 'keepUniqueLabels', 'setAction', 'loading_state']
+        self.available_properties = ['id', 'key', 'flowData', 'pulseRadius', 'pulseBorderWidth', 'arcWidth', 'maxWidth', 'arcLabel', 'arcLabelFontSize', 'arcLabelFontFamily', 'keepUniqueLabels', 'setAction']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

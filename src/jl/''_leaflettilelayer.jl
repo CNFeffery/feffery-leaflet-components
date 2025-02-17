@@ -11,11 +11,6 @@ Keyword arguments:
 - `id` (String; optional): 组件唯一id
 - `attribution` (String; optional): 地图服务`attribution`属性
 - `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
-- `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
-Those elements have the following types:
-  - `is_loading` (Bool; optional): Determines if the component is loading or not
-  - `prop_name` (String; optional): Holds which property is loading
-  - `component_name` (String; optional): Holds the name of the component that is loading
 - `maxNativeZoom` (Real; optional): 瓦片地图服务可用的最大缩放级别。如果指定了该值，所有高于`maxNativeZoom`的缩放级别上的瓦片将从最大原生缩放级别加载并自动缩放
 - `maxZoom` (Real; optional): 当前瓦片地图服务允许加载的最大缩放级别
 默认值：`18`
@@ -32,7 +27,7 @@ Those elements have the following types:
 - `zIndex` (Real; optional): 当前图层`z`轴顺序
 """
 function ''_leaflettilelayer(; kwargs...)
-        available_props = Symbol[:id, :attribution, :key, :loading_state, :maxNativeZoom, :maxZoom, :minNativeZoom, :minZoom, :opacity, :tileSize, :tms, :url, :zIndex]
+        available_props = Symbol[:id, :attribution, :key, :maxNativeZoom, :maxZoom, :minNativeZoom, :minZoom, :opacity, :tileSize, :tms, :url, :zIndex]
         wild_props = Symbol[]
         return Component("''_leaflettilelayer", "LeafletTileLayer", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

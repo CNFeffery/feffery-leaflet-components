@@ -7,19 +7,18 @@ import PropTypes from 'prop-types';
 import { LayerGroup, useMap } from 'react-leaflet';
 // 辅助库
 import { isUndefined } from 'lodash';
+import { useLoading } from '../utils';
 
 /**
  * 图层分组组件LeafletLayerGroup
  */
-const LeafletLayerGroup = (props) => {
-    const {
-        id,
-        children,
-        hidden,
-        zIndex,
-        loading_state,
-        setProps
-    } = props;
+const LeafletLayerGroup = ({
+    id,
+    children,
+    hidden,
+    zIndex,
+    setProps
+}) => {
 
     const map = useMap();
     const layerGroupRef = useRef(null);
@@ -44,9 +43,7 @@ const LeafletLayerGroup = (props) => {
     return (
         <LayerGroup id={id}
             ref={layerGroupRef}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }
+            data-dash-is-loading={useLoading()}
         >{children}</LayerGroup>
     );
 }
@@ -78,29 +75,11 @@ LeafletLayerGroup.propTypes = {
      */
     zIndex: PropTypes.number,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletLayerGroup.defaultProps = {
-}
 
 export default React.memo(LeafletLayerGroup);

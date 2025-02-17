@@ -23,6 +23,7 @@ import './utils/SmoothWheelZoom';
 import { useSize } from 'ahooks';
 import { v4 as uuidv4 } from 'uuid';
 import { omitBy, isUndefined } from 'lodash';
+import { useLoading } from '../utils';
 // 样式
 import 'leaflet/dist/leaflet.css';
 import "./utils/leaflet-measure-path.css";
@@ -101,40 +102,38 @@ const parseCRS = (crs) => {
 /**
  * 地图容器组件LeafletMap
  */
-const LeafletMap = (props) => {
-    const {
-        id,
-        style,
-        className,
-        children,
-        center,
-        crs,
-        zoom,
-        doubleClickZoom,
-        dragging,
-        closePopupOnClick,
-        minZoom,
-        maxZoom,
-        zoomDelta,
-        zoomControl,
-        wheelPxPerZoomLevel,
-        scrollWheelZoom,
-        smoothWheelZoom,
-        scaleControl,
-        scaleControlOptions,
-        maxBounds,
-        maxBoundsViscosity,
-        maxBoundsDelay,
-        editToolbar,
-        editToolbarControlsOptions,
-        showMeasurements,
-        maxDrawnShapes,
-        measureControl,
-        measureControlOptions,
-        viewAutoCorrection,
-        setProps,
-        loading_state
-    } = props;
+const LeafletMap = ({
+    id,
+    style,
+    className,
+    children,
+    center = { lng: 0, lat: 0 },
+    crs = 'EPSG3857',
+    zoom = 3,
+    doubleClickZoom = true,
+    dragging = true,
+    closePopupOnClick = true,
+    minZoom = 0,
+    maxZoom = 18,
+    zoomDelta = 1,
+    zoomControl = true,
+    wheelPxPerZoomLevel = 60,
+    scrollWheelZoom = true,
+    smoothWheelZoom = false,
+    scaleControl = false,
+    scaleControlOptions,
+    maxBounds,
+    maxBoundsViscosity = 0,
+    maxBoundsDelay = 0,
+    editToolbar = false,
+    editToolbarControlsOptions,
+    showMeasurements = false,
+    maxDrawnShapes = null,
+    measureControl = false,
+    measureControlOptions,
+    viewAutoCorrection = false,
+    setProps
+}) => {
 
     const divRef = useRef(null);
     const scaleRef = useRef(null);
@@ -157,9 +156,7 @@ const LeafletMap = (props) => {
             style={style}
             className={className}
             ref={divRef}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }>
+            data-dash-is-loading={useLoading()}>
             <MapContainer
                 style={{
                     height: '100%'
@@ -673,50 +670,11 @@ LeafletMap.propTypes = {
      */
     viewAutoCorrection: PropTypes.bool,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletMap.defaultProps = {
-    center: { lng: 0, lat: 0 },
-    crs: 'EPSG3857',
-    zoom: 3,
-    doubleClickZoom: true,
-    dragging: true,
-    closePopupOnClick: true,
-    minZoom: 0,
-    maxZoom: 18,
-    zoomDelta: 1,
-    zoomControl: true,
-    scrollWheelZoom: true,
-    wheelPxPerZoomLevel: 60,
-    smoothWheelZoom: false,
-    scaleControl: false,
-    maxBoundsViscosity: 0,
-    maxBoundsDelay: 0,
-    editToolbar: false,
-    showMeasurements: false,
-    maxDrawnShapes: null,
-    measureControl: false,
-    viewAutoCorrection: false
-}
 
 export default React.memo(LeafletMap);

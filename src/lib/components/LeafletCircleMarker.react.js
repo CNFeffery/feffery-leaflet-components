@@ -7,24 +7,24 @@ import PropTypes from 'prop-types';
 import { CircleMarker } from 'react-leaflet';
 // 参数类型
 import { pathOptionsPropTypes } from './BasePropTypes.react';
+// 辅助库
+import { useLoading } from '../utils';
 
 /**
  * 圆形标记图层组件LeafletCircleMarker
  */
-const LeafletCircleMarker = (props) => {
-    const {
-        id,
-        className,
-        children,
-        center,
-        radius,
-        pathOptions,
-        editable,
-        nClicks,
-        mouseOverCount,
-        loading_state,
-        setProps
-    } = props;
+const LeafletCircleMarker = ({
+    id,
+    className,
+    children,
+    center,
+    radius = 10,
+    pathOptions,
+    editable = false,
+    nClicks = 0,
+    mouseOverCount = 0,
+    setProps
+}) => {
 
     const circleMarkerRef = useRef(null);
 
@@ -60,9 +60,7 @@ const LeafletCircleMarker = (props) => {
                     setProps({ mouseOverCount: mouseOverCount + 1 })
                 }
             }}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }
+            data-dash-is-loading={useLoading()}
         >{children}</CircleMarker>
     );
 }
@@ -130,21 +128,6 @@ LeafletCircleMarker.propTypes = {
      * 默认值：`0`
      */
     mouseOverCount: PropTypes.number,
-
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
 
     /**
      * Dash-assigned callback that should be called to report property changes

@@ -5,23 +5,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // leaflet核心
 import { Tooltip } from 'react-leaflet';
+// 辅助库
+import { useLoading } from '../utils';
 
 /**
  * 信息框组件LeafletTooltip
  */
-const LeafletTooltip = (props) => {
-    const {
-        id,
-        className,
-        children,
-        direction,
-        permanent,
-        sticky,
-        opacity,
-        interactive,
-        loading_state,
-        setProps
-    } = props;
+const LeafletTooltip = ({
+    id,
+    className,
+    children,
+    direction = 'auto',
+    permanent = false,
+    sticky = false,
+    opacity = 0.9,
+    interactive = false,
+    setProps
+}) => {
 
     return (
         <Tooltip
@@ -33,9 +33,7 @@ const LeafletTooltip = (props) => {
             sticky={sticky}
             opacity={opacity}
             interactive={interactive}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }
+            data-dash-is-loading={useLoading()}
         ></Tooltip>
     );
 }
@@ -91,34 +89,11 @@ LeafletTooltip.propTypes = {
      */
     interactive: PropTypes.bool,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletTooltip.defaultProps = {
-    direction: 'auto',
-    permanent: false,
-    sticky: false,
-    opacity: 0.9,
-    interactive: false
-}
 
 export default React.memo(LeafletTooltip);

@@ -17,11 +17,6 @@ Keyword arguments:
 - `interactive` (Bool; optional): 当前图层是否允许交互功能
 默认值：`false`
 - `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
-- `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
-Those elements have the following types:
-  - `is_loading` (Bool; optional): Determines if the component is loading or not
-  - `prop_name` (String; optional): Holds which property is loading
-  - `component_name` (String; optional): Holds the name of the component that is loading
 - `maxZoom` (Real; optional): 当前地图服务允许加载的最大缩放级别
 默认值：`18`
 - `minZoom` (Real; optional): 当前地图服务允许加载的最小缩放级别
@@ -34,7 +29,7 @@ Those elements have the following types:
   - `func` (String; optional)
 """
 function ''_leafletvectortile(; kwargs...)
-        available_props = Symbol[:id, :_clickedFeature, :_layerNames, :extraProps, :featureIdField, :interactive, :key, :loading_state, :maxZoom, :minZoom, :renderer, :url, :vectorTileLayerStyles]
+        available_props = Symbol[:id, :_clickedFeature, :_layerNames, :extraProps, :featureIdField, :interactive, :key, :maxZoom, :minZoom, :renderer, :url, :vectorTileLayerStyles]
         wild_props = Symbol[]
         return Component("''_leafletvectortile", "LeafletVectorTile", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

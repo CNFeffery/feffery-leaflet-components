@@ -17,6 +17,7 @@ import {
 } from './utils/exportImages.react';
 // 辅助库
 import { isUndefined, omitBy, isEqual } from 'lodash';
+import { useLoading } from '../utils';
 // 参数类型
 import { pathOptionsPropTypes } from './BasePropTypes.react';
 
@@ -55,43 +56,41 @@ const _selectedStyle = {
 /**
  * GeoJSON图层组件LeafletGeoJSON
  */
-const LeafletGeoJSON = (props) => {
-    let {
-        id,
-        data,
-        mode,
-        fitBounds,
-        fitBoundsOptions,
-        fitBoundsDelay,
-        clickFeatureZoom,
-        featureIdField,
-        selectMode,
-        disableClickSelect,
-        selectedFeatureIds,
-        featureValueField,
-        featureCategoryField,
-        featureTooltipField,
-        showTooltip,
-        hoverable,
-        defaultStyle,
-        hoverStyle,
-        selectedStyle,
-        featureValueToStyles,
-        featureCategoryToStyles,
-        tooltipDirection,
-        tooltipPermanent,
-        tooltipSticky,
-        tooltipClassName,
-        lassoSelect,
-        lassoType,
-        lassoResetSelectedFeatureIds,
-        lassoButtonPosition,
-        lassoStyle,
-        pointRenderMode,
-        circleMarkerRadius,
-        setProps,
-        loading_state
-    } = props;
+const LeafletGeoJSON = ({
+    id,
+    data,
+    mode = 'default',
+    fitBounds = true,
+    fitBoundsOptions,
+    fitBoundsDelay = 0,
+    clickFeatureZoom = false,
+    featureIdField = 'id',
+    selectMode = 'single',
+    disableClickSelect = false,
+    selectedFeatureIds = [],
+    featureValueField = 'value',
+    featureCategoryField = 'category',
+    featureTooltipField = 'tooltip',
+    showTooltip = false,
+    hoverable = false,
+    defaultStyle,
+    hoverStyle,
+    selectedStyle,
+    featureValueToStyles,
+    featureCategoryToStyles,
+    tooltipDirection = 'auto',
+    tooltipPermanent = false,
+    tooltipSticky,
+    tooltipClassName,
+    lassoSelect = false,
+    lassoType = 'intersect',
+    lassoResetSelectedFeatureIds = false,
+    lassoButtonPosition = 'topleft',
+    lassoStyle,
+    pointRenderMode = 'circle-marker',
+    circleMarkerRadius = 10,
+    setProps
+}) => {
 
     if (!data) {
         return null;
@@ -460,9 +459,7 @@ const LeafletGeoJSON = (props) => {
                 }
             }
             ref={geoJsonRef}
-            data-dash-is-loading={
-                (loading_state && loading_state.is_loading) || undefined
-            }
+            data-dash-is-loading={useLoading()}
         />
     );
 }
@@ -700,51 +697,12 @@ LeafletGeoJSON.propTypes = {
      */
     _hoveredFeature: PropTypes.object,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-LeafletGeoJSON.defaultProps = {
-    fitBounds: true,
-    fitBoundsDelay: 0,
-    featureIdField: 'id',
-    featureValueField: 'value',
-    featureCategoryField: 'category',
-    featureTooltipField: 'tooltip',
-    selectedFeatureIds: [],
-    showTooltip: false,
-    mode: 'default',
-    selectMode: 'single',
-    hoverable: false,
-    clickFeatureZoom: false,
-    disableClickSelect: false,
-    lassoSelect: false,
-    lassoType: 'intersect',
-    lassoResetSelectedFeatureIds: false,
-    lassoButtonPosition: 'topleft',
-    pointRenderMode: 'circle-marker',
-    circleMarkerRadius: 10,
-    tooltipDirection: 'auto',
-    tooltipPermanent: false
-}
 
 const preventUpdateProps = ['_clickedFeature', '_hoveredFeature'];
 

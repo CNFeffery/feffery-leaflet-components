@@ -1,6 +1,13 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+import typing  # noqa: F401
+import numbers # noqa: F401
+from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.development.base_component import ComponentType # noqa: F401
+except ImportError:
+    ComponentType = typing.TypeVar("ComponentType", bound=Component)
 
 
 class LeafletMap(Component):
@@ -204,29 +211,114 @@ Keyword arguments:
         测量工具绘制完成后的要素颜色  默认值：`'#e74c3c'`.
 
 - viewAutoCorrection (boolean; default False):
-    是否开启视角自动校正，譬如地图所在容器像素尺寸发生变化后，会自动校正地图的视角  默认值：`False`.
-
-- loading_state (dict; optional)
-
-    `loading_state` is a dict with keys:
-
-    - is_loading (boolean; optional):
-        Determines if the component is loading or not.
-
-    - prop_name (string; optional):
-        Holds which property is loading.
-
-    - component_name (string; optional):
-        Holds the name of the component that is loading."""
+    是否开启视角自动校正，譬如地图所在容器像素尺寸发生变化后，会自动校正地图的视角  默认值：`False`."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletMap'
+    Center = TypedDict(
+        "Center",
+            {
+            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
+            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+        }
+    )
+
+    Crs = TypedDict(
+        "Crs",
+            {
+            "code": NotRequired[str],
+            "proj4def": NotRequired[str],
+            "options": NotRequired[dict]
+        }
+    )
+
+    ScaleControlOptions = TypedDict(
+        "ScaleControlOptions",
+            {
+            "position": NotRequired[Literal["topleft", "topright", "bottomleft", "bottomright"]],
+            "imperial": NotRequired[bool]
+        }
+    )
+
+    MaxBounds = TypedDict(
+        "MaxBounds",
+            {
+            "minx": NotRequired[typing.Union[int, float, numbers.Number]],
+            "miny": NotRequired[typing.Union[int, float, numbers.Number]],
+            "maxx": NotRequired[typing.Union[int, float, numbers.Number]],
+            "maxy": NotRequired[typing.Union[int, float, numbers.Number]]
+        }
+    )
+
+    EditToolbarControlsOptions = TypedDict(
+        "EditToolbarControlsOptions",
+            {
+            "position": NotRequired[Literal["topleft", "topright", "bottomleft", "bottomright"]],
+            "drawMarker": NotRequired[bool],
+            "drawCircleMarker": NotRequired[bool],
+            "drawPolyline": NotRequired[bool],
+            "drawRectangle": NotRequired[bool],
+            "drawPolygon": NotRequired[bool],
+            "drawCircle": NotRequired[bool],
+            "drawText": NotRequired[bool],
+            "editMode": NotRequired[bool],
+            "dragMode": NotRequired[bool],
+            "cutPolygon": NotRequired[bool],
+            "removalMode": NotRequired[bool],
+            "rotateMode": NotRequired[bool],
+            "oneBlock": NotRequired[bool]
+        }
+    )
+
+    MeasureControlOptions = TypedDict(
+        "MeasureControlOptions",
+            {
+            "position": NotRequired[Literal["topleft", "topright", "bottomleft", "bottomright"]],
+            "activeColor": NotRequired[str],
+            "completedColor": NotRequired[str]
+        }
+    )
+
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, key=Component.UNDEFINED, style=Component.UNDEFINED, className=Component.UNDEFINED, center=Component.UNDEFINED, crs=Component.UNDEFINED, zoom=Component.UNDEFINED, doubleClickZoom=Component.UNDEFINED, dragging=Component.UNDEFINED, closePopupOnClick=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, zoomDelta=Component.UNDEFINED, zoomControl=Component.UNDEFINED, scrollWheelZoom=Component.UNDEFINED, wheelPxPerZoomLevel=Component.UNDEFINED, smoothWheelZoom=Component.UNDEFINED, scaleControl=Component.UNDEFINED, scaleControlOptions=Component.UNDEFINED, maxBounds=Component.UNDEFINED, maxBoundsViscosity=Component.UNDEFINED, maxBoundsDelay=Component.UNDEFINED, editToolbar=Component.UNDEFINED, editToolbarControlsOptions=Component.UNDEFINED, _drawnShapes=Component.UNDEFINED, showMeasurements=Component.UNDEFINED, maxDrawnShapes=Component.UNDEFINED, measureControl=Component.UNDEFINED, measureControlOptions=Component.UNDEFINED, viewAutoCorrection=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'key', 'children', 'style', 'className', 'center', 'crs', 'zoom', 'doubleClickZoom', 'dragging', 'closePopupOnClick', 'minZoom', 'maxZoom', 'zoomDelta', 'zoomControl', 'scrollWheelZoom', 'wheelPxPerZoomLevel', 'smoothWheelZoom', 'scaleControl', 'scaleControlOptions', 'maxBounds', 'maxBoundsViscosity', 'maxBoundsDelay', 'editToolbar', 'editToolbarControlsOptions', '_drawnShapes', 'showMeasurements', 'maxDrawnShapes', 'measureControl', 'measureControlOptions', 'viewAutoCorrection', 'loading_state']
+    def __init__(
+        self,
+        children: typing.Optional[typing.Union[str, int, float, ComponentType, typing.Sequence[typing.Union[str, int, float, ComponentType]]]] = None,
+        id: typing.Optional[str] = None,
+        key: typing.Optional[str] = None,
+        style: typing.Optional[dict] = None,
+        className: typing.Optional[str] = None,
+        center: typing.Optional["Center"] = None,
+        crs: typing.Optional[typing.Union[Literal["EPSG3857", "EPSG4326", "simple"], "Crs"]] = None,
+        zoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        doubleClickZoom: typing.Optional[bool] = None,
+        dragging: typing.Optional[bool] = None,
+        closePopupOnClick: typing.Optional[bool] = None,
+        minZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        maxZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        zoomDelta: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        zoomControl: typing.Optional[bool] = None,
+        scrollWheelZoom: typing.Optional[typing.Union[bool, Literal["center"]]] = None,
+        wheelPxPerZoomLevel: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        smoothWheelZoom: typing.Optional[typing.Union[bool, Literal["center"]]] = None,
+        scaleControl: typing.Optional[bool] = None,
+        scaleControlOptions: typing.Optional["ScaleControlOptions"] = None,
+        maxBounds: typing.Optional["MaxBounds"] = None,
+        maxBoundsViscosity: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        maxBoundsDelay: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        editToolbar: typing.Optional[bool] = None,
+        editToolbarControlsOptions: typing.Optional["EditToolbarControlsOptions"] = None,
+        _drawnShapes: typing.Optional[typing.Sequence] = None,
+        showMeasurements: typing.Optional[bool] = None,
+        maxDrawnShapes: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        measureControl: typing.Optional[bool] = None,
+        measureControlOptions: typing.Optional["MeasureControlOptions"] = None,
+        viewAutoCorrection: typing.Optional[bool] = None,
+        **kwargs
+    ):
+        self._prop_names = ['id', 'key', 'children', 'style', 'className', 'center', 'crs', 'zoom', 'doubleClickZoom', 'dragging', 'closePopupOnClick', 'minZoom', 'maxZoom', 'zoomDelta', 'zoomControl', 'scrollWheelZoom', 'wheelPxPerZoomLevel', 'smoothWheelZoom', 'scaleControl', 'scaleControlOptions', 'maxBounds', 'maxBoundsViscosity', 'maxBoundsDelay', 'editToolbar', 'editToolbarControlsOptions', '_drawnShapes', 'showMeasurements', 'maxDrawnShapes', 'measureControl', 'measureControlOptions', 'viewAutoCorrection']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', 'children', 'style', 'className', 'center', 'crs', 'zoom', 'doubleClickZoom', 'dragging', 'closePopupOnClick', 'minZoom', 'maxZoom', 'zoomDelta', 'zoomControl', 'scrollWheelZoom', 'wheelPxPerZoomLevel', 'smoothWheelZoom', 'scaleControl', 'scaleControlOptions', 'maxBounds', 'maxBoundsViscosity', 'maxBoundsDelay', 'editToolbar', 'editToolbarControlsOptions', '_drawnShapes', 'showMeasurements', 'maxDrawnShapes', 'measureControl', 'measureControlOptions', 'viewAutoCorrection', 'loading_state']
+        self.available_properties = ['id', 'key', 'children', 'style', 'className', 'center', 'crs', 'zoom', 'doubleClickZoom', 'dragging', 'closePopupOnClick', 'minZoom', 'maxZoom', 'zoomDelta', 'zoomControl', 'scrollWheelZoom', 'wheelPxPerZoomLevel', 'smoothWheelZoom', 'scaleControl', 'scaleControlOptions', 'maxBounds', 'maxBoundsViscosity', 'maxBoundsDelay', 'editToolbar', 'editToolbarControlsOptions', '_drawnShapes', 'showMeasurements', 'maxDrawnShapes', 'measureControl', 'measureControlOptions', 'viewAutoCorrection']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

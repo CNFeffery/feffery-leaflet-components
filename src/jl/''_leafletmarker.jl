@@ -32,11 +32,6 @@ Those elements have the following types:
   - `shadowAnchor` (Array of Reals; optional): 阴影图片的尖端坐标，以图片左上角为原点参照，格式：`[x, y]`
   - `className` (String; optional): 标记图标css类
 - `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
-- `loading_state` (optional): . loading_state has the following type: lists containing elements 'is_loading', 'prop_name', 'component_name'.
-Those elements have the following types:
-  - `is_loading` (Bool; optional): Determines if the component is loading or not
-  - `prop_name` (String; optional): Holds which property is loading
-  - `component_name` (String; optional): Holds the name of the component that is loading
 - `mouseOverCount` (Real; optional): 监听当前要素鼠标移入事件累计次数
 默认值：`0`
 - `nClicks` (Real; optional): 监听当前要素累计点击次数
@@ -52,7 +47,7 @@ Those elements have the following types:
 - `zIndexOffset` (Real; optional): 当前图层`z`轴偏移单位
 """
 function ''_leafletmarker(; kwargs...)
-        available_props = Symbol[:children, :id, :autoPan, :className, :draggable, :editable, :iconOptions, :key, :loading_state, :mouseOverCount, :nClicks, :opacity, :position, :riseOnHover, :zIndexOffset]
+        available_props = Symbol[:children, :id, :autoPan, :className, :draggable, :editable, :iconOptions, :key, :mouseOverCount, :nClicks, :opacity, :position, :riseOnHover, :zIndexOffset]
         wild_props = Symbol[]
         return Component("''_leafletmarker", "LeafletMarker", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

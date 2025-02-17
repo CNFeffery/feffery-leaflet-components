@@ -1,6 +1,13 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+import typing  # noqa: F401
+import numbers # noqa: F401
+from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.development.base_component import ComponentType # noqa: F401
+except ImportError:
+    ComponentType = typing.TypeVar("ComponentType", bound=Component)
 
 
 class LeafletGeoJSON(Component):
@@ -142,29 +149,73 @@ Keyword arguments:
     监听要素点击事件.
 
 - _hoveredFeature (dict; optional):
-    监听要素鼠标悬停事件.
-
-- loading_state (dict; optional)
-
-    `loading_state` is a dict with keys:
-
-    - is_loading (boolean; optional):
-        Determines if the component is loading or not.
-
-    - prop_name (string; optional):
-        Holds which property is loading.
-
-    - component_name (string; optional):
-        Holds the name of the component that is loading."""
+    监听要素鼠标悬停事件."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletGeoJSON'
+    FitBoundsOptions = TypedDict(
+        "FitBoundsOptions",
+            {
+            "maxZoom": NotRequired[typing.Union[int, float, numbers.Number]],
+            "animate": NotRequired[bool],
+            "duration": NotRequired[typing.Union[int, float, numbers.Number]],
+            "padding": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]]
+        }
+    )
+
+    FeatureValueToStyles = TypedDict(
+        "FeatureValueToStyles",
+            {
+            "bins": NotRequired[typing.Sequence[typing.Sequence[typing.Union[int, float, numbers.Number]]]],
+            "styles": NotRequired[typing.Sequence[typing.Any]],
+            "closed": NotRequired[Literal["left", "right"]]
+        }
+    )
+
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, data=Component.REQUIRED, mode=Component.UNDEFINED, hoverable=Component.UNDEFINED, defaultStyle=Component.UNDEFINED, hoverStyle=Component.UNDEFINED, selectedStyle=Component.UNDEFINED, fitBounds=Component.UNDEFINED, fitBoundsOptions=Component.UNDEFINED, fitBoundsDelay=Component.UNDEFINED, clickFeatureZoom=Component.UNDEFINED, showTooltip=Component.UNDEFINED, featureIdField=Component.UNDEFINED, featureValueField=Component.UNDEFINED, featureCategoryField=Component.UNDEFINED, featureTooltipField=Component.UNDEFINED, selectMode=Component.UNDEFINED, disableClickSelect=Component.UNDEFINED, selectedFeatureIds=Component.UNDEFINED, featureValueToStyles=Component.UNDEFINED, featureCategoryToStyles=Component.UNDEFINED, tooltipDirection=Component.UNDEFINED, tooltipPermanent=Component.UNDEFINED, tooltipSticky=Component.UNDEFINED, tooltipClassName=Component.UNDEFINED, lassoSelect=Component.UNDEFINED, lassoType=Component.UNDEFINED, lassoResetSelectedFeatureIds=Component.UNDEFINED, lassoButtonPosition=Component.UNDEFINED, lassoStyle=Component.UNDEFINED, pointRenderMode=Component.UNDEFINED, circleMarkerRadius=Component.UNDEFINED, _clickedFeature=Component.UNDEFINED, _hoveredFeature=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'key', 'data', 'mode', 'hoverable', 'defaultStyle', 'hoverStyle', 'selectedStyle', 'fitBounds', 'fitBoundsOptions', 'fitBoundsDelay', 'clickFeatureZoom', 'showTooltip', 'featureIdField', 'featureValueField', 'featureCategoryField', 'featureTooltipField', 'selectMode', 'disableClickSelect', 'selectedFeatureIds', 'featureValueToStyles', 'featureCategoryToStyles', 'tooltipDirection', 'tooltipPermanent', 'tooltipSticky', 'tooltipClassName', 'lassoSelect', 'lassoType', 'lassoResetSelectedFeatureIds', 'lassoButtonPosition', 'lassoStyle', 'pointRenderMode', 'circleMarkerRadius', '_clickedFeature', '_hoveredFeature', 'loading_state']
+    def __init__(
+        self,
+        id: typing.Optional[str] = None,
+        key: typing.Optional[str] = None,
+        data: typing.Optional[dict] = None,
+        mode: typing.Optional[Literal["default", "selectable", "choropleth", "category"]] = None,
+        hoverable: typing.Optional[bool] = None,
+        defaultStyle: typing.Optional[typing.Any] = None,
+        hoverStyle: typing.Optional[typing.Any] = None,
+        selectedStyle: typing.Optional[typing.Any] = None,
+        fitBounds: typing.Optional[bool] = None,
+        fitBoundsOptions: typing.Optional["FitBoundsOptions"] = None,
+        fitBoundsDelay: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        clickFeatureZoom: typing.Optional[bool] = None,
+        showTooltip: typing.Optional[bool] = None,
+        featureIdField: typing.Optional[str] = None,
+        featureValueField: typing.Optional[str] = None,
+        featureCategoryField: typing.Optional[str] = None,
+        featureTooltipField: typing.Optional[str] = None,
+        selectMode: typing.Optional[Literal["single", "multiple"]] = None,
+        disableClickSelect: typing.Optional[bool] = None,
+        selectedFeatureIds: typing.Optional[typing.Sequence] = None,
+        featureValueToStyles: typing.Optional["FeatureValueToStyles"] = None,
+        featureCategoryToStyles: typing.Optional[typing.Dict[typing.Union[str, float, int], typing.Any]] = None,
+        tooltipDirection: typing.Optional[Literal["right", "left", "top", "bottom", "center", "auto"]] = None,
+        tooltipPermanent: typing.Optional[bool] = None,
+        tooltipSticky: typing.Optional[bool] = None,
+        tooltipClassName: typing.Optional[str] = None,
+        lassoSelect: typing.Optional[bool] = None,
+        lassoType: typing.Optional[Literal["contain", "intersect"]] = None,
+        lassoResetSelectedFeatureIds: typing.Optional[bool] = None,
+        lassoButtonPosition: typing.Optional[Literal["topleft", "topright", "bottomleft", "bottomright"]] = None,
+        lassoStyle: typing.Optional[typing.Any] = None,
+        pointRenderMode: typing.Optional[Literal["marker", "circle-marker"]] = None,
+        circleMarkerRadius: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        _clickedFeature: typing.Optional[dict] = None,
+        _hoveredFeature: typing.Optional[dict] = None,
+        **kwargs
+    ):
+        self._prop_names = ['id', 'key', 'data', 'mode', 'hoverable', 'defaultStyle', 'hoverStyle', 'selectedStyle', 'fitBounds', 'fitBoundsOptions', 'fitBoundsDelay', 'clickFeatureZoom', 'showTooltip', 'featureIdField', 'featureValueField', 'featureCategoryField', 'featureTooltipField', 'selectMode', 'disableClickSelect', 'selectedFeatureIds', 'featureValueToStyles', 'featureCategoryToStyles', 'tooltipDirection', 'tooltipPermanent', 'tooltipSticky', 'tooltipClassName', 'lassoSelect', 'lassoType', 'lassoResetSelectedFeatureIds', 'lassoButtonPosition', 'lassoStyle', 'pointRenderMode', 'circleMarkerRadius', '_clickedFeature', '_hoveredFeature']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', 'data', 'mode', 'hoverable', 'defaultStyle', 'hoverStyle', 'selectedStyle', 'fitBounds', 'fitBoundsOptions', 'fitBoundsDelay', 'clickFeatureZoom', 'showTooltip', 'featureIdField', 'featureValueField', 'featureCategoryField', 'featureTooltipField', 'selectMode', 'disableClickSelect', 'selectedFeatureIds', 'featureValueToStyles', 'featureCategoryToStyles', 'tooltipDirection', 'tooltipPermanent', 'tooltipSticky', 'tooltipClassName', 'lassoSelect', 'lassoType', 'lassoResetSelectedFeatureIds', 'lassoButtonPosition', 'lassoStyle', 'pointRenderMode', 'circleMarkerRadius', '_clickedFeature', '_hoveredFeature', 'loading_state']
+        self.available_properties = ['id', 'key', 'data', 'mode', 'hoverable', 'defaultStyle', 'hoverStyle', 'selectedStyle', 'fitBounds', 'fitBoundsOptions', 'fitBoundsDelay', 'clickFeatureZoom', 'showTooltip', 'featureIdField', 'featureValueField', 'featureCategoryField', 'featureTooltipField', 'selectMode', 'disableClickSelect', 'selectedFeatureIds', 'featureValueToStyles', 'featureCategoryToStyles', 'tooltipDirection', 'tooltipPermanent', 'tooltipSticky', 'tooltipClassName', 'lassoSelect', 'lassoType', 'lassoResetSelectedFeatureIds', 'lassoButtonPosition', 'lassoStyle', 'pointRenderMode', 'circleMarkerRadius', '_clickedFeature', '_hoveredFeature']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
