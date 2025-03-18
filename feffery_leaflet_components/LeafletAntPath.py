@@ -74,7 +74,7 @@ Keyword arguments:
     @_explicitize_args
     def __init__(
         self,
-        id: typing.Optional[str] = None,
+        id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
         positions: typing.Optional[typing.Union[typing.Sequence["Positions"], typing.Sequence[typing.Sequence["Positions"]]]] = None,
         pathOptions: typing.Optional[typing.Any] = None,

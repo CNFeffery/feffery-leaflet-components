@@ -125,7 +125,7 @@ Keyword arguments:
     def __init__(
         self,
         children: typing.Optional[typing.Union[str, int, float, ComponentType, typing.Sequence[typing.Union[str, int, float, ComponentType]]]] = None,
-        id: typing.Optional[str] = None,
+        id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
         className: typing.Optional[str] = None,
         position: typing.Optional["Position"] = None,

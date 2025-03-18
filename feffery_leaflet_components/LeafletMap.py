@@ -25,9 +25,6 @@ Keyword arguments:
 - children (a list of or a singular dash component, string or number; optional):
     组件型，地图内部组件.
 
-- style (dict; optional):
-    当前组件css样式.
-
 - className (string; optional):
     当前组件css类名.
 
@@ -284,9 +281,9 @@ Keyword arguments:
     def __init__(
         self,
         children: typing.Optional[typing.Union[str, int, float, ComponentType, typing.Sequence[typing.Union[str, int, float, ComponentType]]]] = None,
-        id: typing.Optional[str] = None,
+        id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
-        style: typing.Optional[dict] = None,
+        style: typing.Optional[typing.Any] = None,
         className: typing.Optional[str] = None,
         center: typing.Optional["Center"] = None,
         crs: typing.Optional[typing.Union[Literal["EPSG3857", "EPSG4326", "simple"], "Crs"]] = None,

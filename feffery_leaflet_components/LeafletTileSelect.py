@@ -25,9 +25,6 @@ Keyword arguments:
 - className (string; optional):
     当前组件css类名.
 
-- style (dict; optional):
-    当前组件css样式.
-
 - containerClassName (string; optional):
     图层选择卡片容器css类名.
 
@@ -89,10 +86,10 @@ Keyword arguments:
     @_explicitize_args
     def __init__(
         self,
-        id: typing.Optional[str] = None,
+        id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
         className: typing.Optional[str] = None,
-        style: typing.Optional[dict] = None,
+        style: typing.Optional[typing.Any] = None,
         containerClassName: typing.Optional[str] = None,
         containerStyle: typing.Optional[dict] = None,
         containerItemClassName: typing.Optional[str] = None,
