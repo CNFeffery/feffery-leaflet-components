@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletMap(Component):
@@ -216,8 +224,8 @@ Keyword arguments:
     Center = TypedDict(
         "Center",
             {
-            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
-            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+            "lng": NotRequired[NumberType],
+            "lat": NotRequired[NumberType]
         }
     )
 
@@ -241,10 +249,10 @@ Keyword arguments:
     MaxBounds = TypedDict(
         "MaxBounds",
             {
-            "minx": NotRequired[typing.Union[int, float, numbers.Number]],
-            "miny": NotRequired[typing.Union[int, float, numbers.Number]],
-            "maxx": NotRequired[typing.Union[int, float, numbers.Number]],
-            "maxy": NotRequired[typing.Union[int, float, numbers.Number]]
+            "minx": NotRequired[NumberType],
+            "miny": NotRequired[NumberType],
+            "maxx": NotRequired[NumberType],
+            "maxy": NotRequired[NumberType]
         }
     )
 
@@ -277,37 +285,37 @@ Keyword arguments:
         }
     )
 
-    @_explicitize_args
+
     def __init__(
         self,
-        children: typing.Optional[typing.Union[str, int, float, ComponentType, typing.Sequence[typing.Union[str, int, float, ComponentType]]]] = None,
+        children: typing.Optional[ComponentType] = None,
         id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
         style: typing.Optional[typing.Any] = None,
         className: typing.Optional[str] = None,
         center: typing.Optional["Center"] = None,
         crs: typing.Optional[typing.Union[Literal["EPSG3857", "EPSG4326", "simple"], "Crs"]] = None,
-        zoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        zoom: typing.Optional[NumberType] = None,
         doubleClickZoom: typing.Optional[bool] = None,
         dragging: typing.Optional[bool] = None,
         closePopupOnClick: typing.Optional[bool] = None,
-        minZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        maxZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        zoomDelta: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        minZoom: typing.Optional[NumberType] = None,
+        maxZoom: typing.Optional[NumberType] = None,
+        zoomDelta: typing.Optional[NumberType] = None,
         zoomControl: typing.Optional[bool] = None,
         scrollWheelZoom: typing.Optional[typing.Union[bool, Literal["center"]]] = None,
-        wheelPxPerZoomLevel: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        wheelPxPerZoomLevel: typing.Optional[NumberType] = None,
         smoothWheelZoom: typing.Optional[typing.Union[bool, Literal["center"]]] = None,
         scaleControl: typing.Optional[bool] = None,
         scaleControlOptions: typing.Optional["ScaleControlOptions"] = None,
         maxBounds: typing.Optional["MaxBounds"] = None,
-        maxBoundsViscosity: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        maxBoundsDelay: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        maxBoundsViscosity: typing.Optional[NumberType] = None,
+        maxBoundsDelay: typing.Optional[NumberType] = None,
         editToolbar: typing.Optional[bool] = None,
         editToolbarControlsOptions: typing.Optional["EditToolbarControlsOptions"] = None,
         _drawnShapes: typing.Optional[typing.Sequence] = None,
         showMeasurements: typing.Optional[bool] = None,
-        maxDrawnShapes: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        maxDrawnShapes: typing.Optional[NumberType] = None,
         measureControl: typing.Optional[bool] = None,
         measureControlOptions: typing.Optional["MeasureControlOptions"] = None,
         viewAutoCorrection: typing.Optional[bool] = None,
@@ -323,3 +331,5 @@ Keyword arguments:
         args = {k: _locals[k] for k in _explicit_args if k != 'children'}
 
         super(LeafletMap, self).__init__(children=children, **args)
+
+setattr(LeafletMap, "__init__", _explicitize_args(LeafletMap.__init__))

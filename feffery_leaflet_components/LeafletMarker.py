@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletMarker(Component):
@@ -101,8 +109,8 @@ Keyword arguments:
     Position = TypedDict(
         "Position",
             {
-            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
-            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+            "lng": NotRequired[NumberType],
+            "lat": NotRequired[NumberType]
         }
     )
 
@@ -110,34 +118,34 @@ Keyword arguments:
         "IconOptions",
             {
             "iconUrl": NotRequired[str],
-            "iconSize": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
-            "iconAnchor": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
-            "popupAnchor": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
-            "tooltipAnchor": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
+            "iconSize": NotRequired[typing.Sequence[NumberType]],
+            "iconAnchor": NotRequired[typing.Sequence[NumberType]],
+            "popupAnchor": NotRequired[typing.Sequence[NumberType]],
+            "tooltipAnchor": NotRequired[typing.Sequence[NumberType]],
             "shadowUrl": NotRequired[str],
-            "shadowSize": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
-            "shadowAnchor": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
+            "shadowSize": NotRequired[typing.Sequence[NumberType]],
+            "shadowAnchor": NotRequired[typing.Sequence[NumberType]],
             "className": NotRequired[str]
         }
     )
 
-    @_explicitize_args
+
     def __init__(
         self,
-        children: typing.Optional[typing.Union[str, int, float, ComponentType, typing.Sequence[typing.Union[str, int, float, ComponentType]]]] = None,
+        children: typing.Optional[ComponentType] = None,
         id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
         className: typing.Optional[str] = None,
         position: typing.Optional["Position"] = None,
         draggable: typing.Optional[bool] = None,
         iconOptions: typing.Optional["IconOptions"] = None,
-        opacity: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        opacity: typing.Optional[NumberType] = None,
         editable: typing.Optional[bool] = None,
-        zIndexOffset: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        zIndexOffset: typing.Optional[NumberType] = None,
         riseOnHover: typing.Optional[bool] = None,
         autoPan: typing.Optional[bool] = None,
-        nClicks: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        mouseOverCount: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        nClicks: typing.Optional[NumberType] = None,
+        mouseOverCount: typing.Optional[NumberType] = None,
         **kwargs
     ):
         self._prop_names = ['id', 'key', 'className', 'children', 'position', 'draggable', 'iconOptions', 'opacity', 'editable', 'zIndexOffset', 'riseOnHover', 'autoPan', 'nClicks', 'mouseOverCount']
@@ -155,3 +163,5 @@ Keyword arguments:
                     'Required argument `' + k + '` was not specified.')
 
         super(LeafletMarker, self).__init__(children=children, **args)
+
+setattr(LeafletMarker, "__init__", _explicitize_args(LeafletMarker.__init__))

@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletMiniMap(Component):
@@ -84,24 +92,24 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletMiniMap'
 
-    @_explicitize_args
+
     def __init__(
         self,
         id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
         url: typing.Optional[str] = None,
         attribution: typing.Optional[str] = None,
-        opacity: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        zIndex: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        minZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        maxZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        opacity: typing.Optional[NumberType] = None,
+        zIndex: typing.Optional[NumberType] = None,
+        minZoom: typing.Optional[NumberType] = None,
+        maxZoom: typing.Optional[NumberType] = None,
         position: typing.Optional[Literal["topleft", "topright", "bottomleft", "bottomright"]] = None,
-        width: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        height: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        collapsedWidth: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        collapsedHeight: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        zoomLevelOffset: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        zoomLevelFixed: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        width: typing.Optional[NumberType] = None,
+        height: typing.Optional[NumberType] = None,
+        collapsedWidth: typing.Optional[NumberType] = None,
+        collapsedHeight: typing.Optional[NumberType] = None,
+        zoomLevelOffset: typing.Optional[NumberType] = None,
+        zoomLevelFixed: typing.Optional[NumberType] = None,
         zoomAnimation: typing.Optional[bool] = None,
         toggleDisplay: typing.Optional[bool] = None,
         autoToggleDisplay: typing.Optional[bool] = None,
@@ -120,3 +128,5 @@ Keyword arguments:
         args = {k: _locals[k] for k in _explicit_args}
 
         super(LeafletMiniMap, self).__init__(**args)
+
+setattr(LeafletMiniMap, "__init__", _explicitize_args(LeafletMiniMap.__init__))

@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletMapListener(Component):
@@ -67,40 +75,40 @@ Keyword arguments:
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletMapListener'
-    _center = TypedDict(
-        "_center",
+    Center = TypedDict(
+        "Center",
             {
-            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
-            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+            "lng": NotRequired[NumberType],
+            "lat": NotRequired[NumberType]
         }
     )
 
-    _clickedLatLng = TypedDict(
-        "_clickedLatLng",
+    ClickedLatLng = TypedDict(
+        "ClickedLatLng",
             {
-            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+            "lat": NotRequired[NumberType]
         }
     )
 
-    _bounds = TypedDict(
-        "_bounds",
+    Bounds = TypedDict(
+        "Bounds",
             {
-            "minx": NotRequired[typing.Union[int, float, numbers.Number]],
-            "miny": NotRequired[typing.Union[int, float, numbers.Number]],
-            "maxx": NotRequired[typing.Union[int, float, numbers.Number]],
-            "maxy": NotRequired[typing.Union[int, float, numbers.Number]]
+            "minx": NotRequired[NumberType],
+            "miny": NotRequired[NumberType],
+            "maxx": NotRequired[NumberType],
+            "maxy": NotRequired[NumberType]
         }
     )
 
-    @_explicitize_args
+
     def __init__(
         self,
         id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
-        _center: typing.Optional["_center"] = None,
-        _zoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        _clickedLatLng: typing.Optional["_clickedLatLng"] = None,
-        _bounds: typing.Optional["_bounds"] = None,
+        _center: typing.Optional["Center"] = None,
+        _zoom: typing.Optional[NumberType] = None,
+        _clickedLatLng: typing.Optional["ClickedLatLng"] = None,
+        _bounds: typing.Optional["Bounds"] = None,
         debug: typing.Optional[bool] = None,
         **kwargs
     ):
@@ -114,3 +122,5 @@ Keyword arguments:
         args = {k: _locals[k] for k in _explicit_args}
 
         super(LeafletMapListener, self).__init__(**args)
+
+setattr(LeafletMapListener, "__init__", _explicitize_args(LeafletMapListener.__init__))

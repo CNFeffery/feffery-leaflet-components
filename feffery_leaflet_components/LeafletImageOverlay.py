@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletImageOverlay(Component):
@@ -63,14 +71,14 @@ Keyword arguments:
     Bounds = TypedDict(
         "Bounds",
             {
-            "minx": typing.Union[int, float, numbers.Number],
-            "miny": typing.Union[int, float, numbers.Number],
-            "maxx": typing.Union[int, float, numbers.Number],
-            "maxy": typing.Union[int, float, numbers.Number]
+            "minx": NumberType,
+            "miny": NumberType,
+            "maxx": NumberType,
+            "maxy": NumberType
         }
     )
 
-    @_explicitize_args
+
     def __init__(
         self,
         id: typing.Optional[typing.Union[str, dict]] = None,
@@ -78,10 +86,10 @@ Keyword arguments:
         className: typing.Optional[str] = None,
         url: typing.Optional[str] = None,
         bounds: typing.Optional["Bounds"] = None,
-        opacity: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        zIndex: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        minZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        maxZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        opacity: typing.Optional[NumberType] = None,
+        zIndex: typing.Optional[NumberType] = None,
+        minZoom: typing.Optional[NumberType] = None,
+        maxZoom: typing.Optional[NumberType] = None,
         **kwargs
     ):
         self._prop_names = ['id', 'key', 'className', 'url', 'bounds', 'opacity', 'zIndex', 'minZoom', 'maxZoom']
@@ -99,3 +107,5 @@ Keyword arguments:
                     'Required argument `' + k + '` was not specified.')
 
         super(LeafletImageOverlay, self).__init__(**args)
+
+setattr(LeafletImageOverlay, "__init__", _explicitize_args(LeafletImageOverlay.__init__))

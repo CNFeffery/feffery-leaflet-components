@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletStaticHeatMap(Component):
@@ -54,22 +62,22 @@ Keyword arguments:
     Points = TypedDict(
         "Points",
             {
-            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
-            "lat": NotRequired[typing.Union[int, float, numbers.Number]],
-            "weight": NotRequired[typing.Union[int, float, numbers.Number]]
+            "lng": NotRequired[NumberType],
+            "lat": NotRequired[NumberType],
+            "weight": NotRequired[NumberType]
         }
     )
 
-    @_explicitize_args
+
     def __init__(
         self,
         id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
         points: typing.Optional[typing.Sequence["Points"]] = None,
-        multiplyFactor: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        size: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        opacity: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        alphaRange: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        multiplyFactor: typing.Optional[NumberType] = None,
+        size: typing.Optional[NumberType] = None,
+        opacity: typing.Optional[NumberType] = None,
+        alphaRange: typing.Optional[NumberType] = None,
         **kwargs
     ):
         self._prop_names = ['id', 'key', 'points', 'multiplyFactor', 'size', 'opacity', 'alphaRange']
@@ -82,3 +90,5 @@ Keyword arguments:
         args = {k: _locals[k] for k in _explicit_args}
 
         super(LeafletStaticHeatMap, self).__init__(**args)
+
+setattr(LeafletStaticHeatMap, "__init__", _explicitize_args(LeafletStaticHeatMap.__init__))

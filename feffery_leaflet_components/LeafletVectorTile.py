@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletVectorTile(Component):
@@ -68,14 +76,14 @@ Keyword arguments:
         }
     )
 
-    @_explicitize_args
+
     def __init__(
         self,
         id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
         url: typing.Optional[str] = None,
-        minZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        maxZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        minZoom: typing.Optional[NumberType] = None,
+        maxZoom: typing.Optional[NumberType] = None,
         interactive: typing.Optional[bool] = None,
         featureIdField: typing.Optional[str] = None,
         vectorTileLayerStyles: typing.Optional[typing.Union[typing.Dict[typing.Union[str, float, int], str], typing.Dict[typing.Union[str, float, int], "VectorTileLayerStyles"]]] = None,
@@ -95,3 +103,5 @@ Keyword arguments:
         args = {k: _locals[k] for k in _explicit_args}
 
         super(LeafletVectorTile, self).__init__(**args)
+
+setattr(LeafletVectorTile, "__init__", _explicitize_args(LeafletVectorTile.__init__))

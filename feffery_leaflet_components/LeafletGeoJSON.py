@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletGeoJSON(Component):
@@ -157,23 +165,23 @@ Keyword arguments:
     FitBoundsOptions = TypedDict(
         "FitBoundsOptions",
             {
-            "maxZoom": NotRequired[typing.Union[int, float, numbers.Number]],
+            "maxZoom": NotRequired[NumberType],
             "animate": NotRequired[bool],
-            "duration": NotRequired[typing.Union[int, float, numbers.Number]],
-            "padding": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]]
+            "duration": NotRequired[NumberType],
+            "padding": NotRequired[typing.Sequence[NumberType]]
         }
     )
 
     FeatureValueToStyles = TypedDict(
         "FeatureValueToStyles",
             {
-            "bins": NotRequired[typing.Sequence[typing.Sequence[typing.Union[int, float, numbers.Number]]]],
+            "bins": NotRequired[typing.Sequence[typing.Sequence[NumberType]]],
             "styles": NotRequired[typing.Sequence[typing.Any]],
             "closed": NotRequired[Literal["left", "right"]]
         }
     )
 
-    @_explicitize_args
+
     def __init__(
         self,
         id: typing.Optional[typing.Union[str, dict]] = None,
@@ -186,7 +194,7 @@ Keyword arguments:
         selectedStyle: typing.Optional[typing.Any] = None,
         fitBounds: typing.Optional[bool] = None,
         fitBoundsOptions: typing.Optional["FitBoundsOptions"] = None,
-        fitBoundsDelay: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        fitBoundsDelay: typing.Optional[NumberType] = None,
         clickFeatureZoom: typing.Optional[bool] = None,
         showTooltip: typing.Optional[bool] = None,
         featureIdField: typing.Optional[str] = None,
@@ -208,7 +216,7 @@ Keyword arguments:
         lassoButtonPosition: typing.Optional[Literal["topleft", "topright", "bottomleft", "bottomright"]] = None,
         lassoStyle: typing.Optional[typing.Any] = None,
         pointRenderMode: typing.Optional[Literal["marker", "circle-marker"]] = None,
-        circleMarkerRadius: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        circleMarkerRadius: typing.Optional[NumberType] = None,
         _clickedFeature: typing.Optional[dict] = None,
         _hoveredFeature: typing.Optional[dict] = None,
         **kwargs
@@ -228,3 +236,5 @@ Keyword arguments:
                     'Required argument `' + k + '` was not specified.')
 
         super(LeafletGeoJSON, self).__init__(**args)
+
+setattr(LeafletGeoJSON, "__init__", _explicitize_args(LeafletGeoJSON.__init__))

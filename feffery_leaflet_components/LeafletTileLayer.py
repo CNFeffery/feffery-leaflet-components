@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletTileLayer(Component):
@@ -56,20 +64,20 @@ Keyword arguments:
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletTileLayer'
 
-    @_explicitize_args
+
     def __init__(
         self,
         id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
         url: typing.Optional[str] = None,
         attribution: typing.Optional[str] = None,
-        opacity: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        zIndex: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        tileSize: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        minZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        maxZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        minNativeZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        maxNativeZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        opacity: typing.Optional[NumberType] = None,
+        zIndex: typing.Optional[NumberType] = None,
+        tileSize: typing.Optional[NumberType] = None,
+        minZoom: typing.Optional[NumberType] = None,
+        maxZoom: typing.Optional[NumberType] = None,
+        minNativeZoom: typing.Optional[NumberType] = None,
+        maxNativeZoom: typing.Optional[NumberType] = None,
         tms: typing.Optional[bool] = None,
         **kwargs
     ):
@@ -83,3 +91,5 @@ Keyword arguments:
         args = {k: _locals[k] for k in _explicit_args}
 
         super(LeafletTileLayer, self).__init__(**args)
+
+setattr(LeafletTileLayer, "__init__", _explicitize_args(LeafletTileLayer.__init__))

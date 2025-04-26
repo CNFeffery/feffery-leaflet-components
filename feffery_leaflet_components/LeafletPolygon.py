@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletPolygon(Component):
@@ -69,23 +77,23 @@ Keyword arguments:
     Positions = TypedDict(
         "Positions",
             {
-            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
-            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+            "lng": NotRequired[NumberType],
+            "lat": NotRequired[NumberType]
         }
     )
 
-    @_explicitize_args
+
     def __init__(
         self,
-        children: typing.Optional[typing.Union[str, int, float, ComponentType, typing.Sequence[typing.Union[str, int, float, ComponentType]]]] = None,
+        children: typing.Optional[ComponentType] = None,
         id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
         className: typing.Optional[str] = None,
         positions: typing.Optional[typing.Sequence[typing.Union["Positions", typing.Sequence["Positions"], typing.Sequence[typing.Sequence["Positions"]]]]] = None,
         pathOptions: typing.Optional[typing.Any] = None,
         editable: typing.Optional[bool] = None,
-        nClicks: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        mouseOverCount: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        nClicks: typing.Optional[NumberType] = None,
+        mouseOverCount: typing.Optional[NumberType] = None,
         **kwargs
     ):
         self._prop_names = ['id', 'key', 'className', 'children', 'positions', 'pathOptions', 'editable', 'nClicks', 'mouseOverCount']
@@ -103,3 +111,5 @@ Keyword arguments:
                     'Required argument `' + k + '` was not specified.')
 
         super(LeafletPolygon, self).__init__(children=children, **args)
+
+setattr(LeafletPolygon, "__init__", _explicitize_args(LeafletPolygon.__init__))

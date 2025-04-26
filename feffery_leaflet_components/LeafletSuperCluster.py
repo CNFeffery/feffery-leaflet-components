@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletSuperCluster(Component):
@@ -149,13 +157,13 @@ Keyword arguments:
         "IconOptions",
             {
             "iconUrl": NotRequired[str],
-            "iconSize": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
-            "iconAnchor": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
-            "popupAnchor": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
-            "tooltipAnchor": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
+            "iconSize": NotRequired[typing.Sequence[NumberType]],
+            "iconAnchor": NotRequired[typing.Sequence[NumberType]],
+            "popupAnchor": NotRequired[typing.Sequence[NumberType]],
+            "tooltipAnchor": NotRequired[typing.Sequence[NumberType]],
             "shadowUrl": NotRequired[str],
-            "shadowSize": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
-            "shadowAnchor": NotRequired[typing.Sequence[typing.Union[int, float, numbers.Number]]],
+            "shadowSize": NotRequired[typing.Sequence[NumberType]],
+            "shadowAnchor": NotRequired[typing.Sequence[NumberType]],
             "className": NotRequired[str]
         }
     )
@@ -164,11 +172,11 @@ Keyword arguments:
         "ClickedPoint",
             {
             "feature": NotRequired[dict],
-            "timestamp": NotRequired[typing.Union[int, float, numbers.Number]]
+            "timestamp": NotRequired[NumberType]
         }
     )
 
-    @_explicitize_args
+
     def __init__(
         self,
         id: typing.Optional[typing.Union[str, dict]] = None,
@@ -177,15 +185,15 @@ Keyword arguments:
         clusterBackground: typing.Optional[str] = None,
         clusterBorder: typing.Optional[str] = None,
         clusterTextColor: typing.Optional[str] = None,
-        clusterIconBaseSize: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        clusterIconExtraSizeFactor: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        clusterTextSizeFactor: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        minZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        maxZoom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        minPoints: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        radius: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        extent: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        nodeSize: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        clusterIconBaseSize: typing.Optional[NumberType] = None,
+        clusterIconExtraSizeFactor: typing.Optional[NumberType] = None,
+        clusterTextSizeFactor: typing.Optional[NumberType] = None,
+        minZoom: typing.Optional[NumberType] = None,
+        maxZoom: typing.Optional[NumberType] = None,
+        minPoints: typing.Optional[NumberType] = None,
+        radius: typing.Optional[NumberType] = None,
+        extent: typing.Optional[NumberType] = None,
+        nodeSize: typing.Optional[NumberType] = None,
         iconOptions: typing.Optional[typing.Union["IconOptions", typing.Dict[typing.Union[str, float, int], "IconOptions"]]] = None,
         tooltipField: typing.Optional[str] = None,
         tooltipSticky: typing.Optional[bool] = None,
@@ -208,3 +216,5 @@ Keyword arguments:
                     'Required argument `' + k + '` was not specified.')
 
         super(LeafletSuperCluster, self).__init__(**args)
+
+setattr(LeafletSuperCluster, "__init__", _explicitize_args(LeafletSuperCluster.__init__))

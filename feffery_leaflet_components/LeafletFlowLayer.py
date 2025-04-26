@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletFlowLayer(Component):
@@ -99,16 +107,16 @@ Keyword arguments:
     FlowDataFrom = TypedDict(
         "FlowDataFrom",
             {
-            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
-            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+            "lng": NotRequired[NumberType],
+            "lat": NotRequired[NumberType]
         }
     )
 
     FlowDataTo = TypedDict(
         "FlowDataTo",
             {
-            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
-            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+            "lng": NotRequired[NumberType],
+            "lat": NotRequired[NumberType]
         }
     )
 
@@ -127,20 +135,20 @@ Keyword arguments:
             "to": NotRequired["FlowDataTo"],
             "labels": NotRequired["FlowDataLabels"],
             "color": NotRequired[str],
-            "value": NotRequired[typing.Union[int, float, numbers.Number]]
+            "value": NotRequired[NumberType]
         }
     )
 
-    @_explicitize_args
+
     def __init__(
         self,
         id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
         flowData: typing.Optional[typing.Sequence["FlowData"]] = None,
-        pulseRadius: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        pulseBorderWidth: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        arcWidth: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        maxWidth: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        pulseRadius: typing.Optional[NumberType] = None,
+        pulseBorderWidth: typing.Optional[NumberType] = None,
+        arcWidth: typing.Optional[NumberType] = None,
+        maxWidth: typing.Optional[NumberType] = None,
         arcLabel: typing.Optional[bool] = None,
         arcLabelFontSize: typing.Optional[str] = None,
         arcLabelFontFamily: typing.Optional[str] = None,
@@ -158,3 +166,5 @@ Keyword arguments:
         args = {k: _locals[k] for k in _explicit_args}
 
         super(LeafletFlowLayer, self).__init__(**args)
+
+setattr(LeafletFlowLayer, "__init__", _explicitize_args(LeafletFlowLayer.__init__))

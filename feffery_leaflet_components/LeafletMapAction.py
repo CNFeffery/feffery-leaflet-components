@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletMapAction(Component):
@@ -84,18 +92,18 @@ Keyword arguments:
     MapActionConfigCenter = TypedDict(
         "MapActionConfigCenter",
             {
-            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
-            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+            "lng": NotRequired[NumberType],
+            "lat": NotRequired[NumberType]
         }
     )
 
     MapActionConfigBounds = TypedDict(
         "MapActionConfigBounds",
             {
-            "minx": NotRequired[typing.Union[int, float, numbers.Number]],
-            "miny": NotRequired[typing.Union[int, float, numbers.Number]],
-            "maxx": NotRequired[typing.Union[int, float, numbers.Number]],
-            "maxy": NotRequired[typing.Union[int, float, numbers.Number]]
+            "minx": NotRequired[NumberType],
+            "miny": NotRequired[NumberType],
+            "maxx": NotRequired[NumberType],
+            "maxy": NotRequired[NumberType]
         }
     )
 
@@ -104,16 +112,16 @@ Keyword arguments:
             {
             "type": NotRequired[Literal["set-zoom", "zoom-in", "zoom-out", "set-view", "pan-to", "fly-to", "fly-to-bounds", "invalidate-size"]],
             "center": NotRequired["MapActionConfigCenter"],
-            "zoom": NotRequired[typing.Union[int, float, numbers.Number]],
-            "zoomInOffset": NotRequired[typing.Union[int, float, numbers.Number]],
-            "zoomOutOffset": NotRequired[typing.Union[int, float, numbers.Number]],
+            "zoom": NotRequired[NumberType],
+            "zoomInOffset": NotRequired[NumberType],
+            "zoomOutOffset": NotRequired[NumberType],
             "bounds": NotRequired["MapActionConfigBounds"],
             "flyToDuration": NotRequired[Literal["instant", "fast", "normal", "slow", "auto"]],
-            "delay": NotRequired[typing.Union[int, float, numbers.Number]]
+            "delay": NotRequired[NumberType]
         }
     )
 
-    @_explicitize_args
+
     def __init__(
         self,
         id: typing.Optional[typing.Union[str, dict]] = None,
@@ -131,3 +139,5 @@ Keyword arguments:
         args = {k: _locals[k] for k in _explicit_args}
 
         super(LeafletMapAction, self).__init__(**args)
+
+setattr(LeafletMapAction, "__init__", _explicitize_args(LeafletMapAction.__init__))

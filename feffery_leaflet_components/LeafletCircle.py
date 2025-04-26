@@ -1,13 +1,21 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
 import typing  # noqa: F401
-import numbers # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
-try:
-    from dash.development.base_component import ComponentType # noqa: F401
-except ImportError:
-    ComponentType = typing.TypeVar("ComponentType", bound=Component)
+
+ComponentType = typing.Union[
+    str,
+    int,
+    float,
+    Component,
+    None,
+    typing.Sequence[typing.Union[str, int, float, Component, None]],
+]
+
+NumberType = typing.Union[
+    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+]
 
 
 class LeafletCircle(Component):
@@ -60,24 +68,24 @@ Keyword arguments:
     Center = TypedDict(
         "Center",
             {
-            "lng": NotRequired[typing.Union[int, float, numbers.Number]],
-            "lat": NotRequired[typing.Union[int, float, numbers.Number]]
+            "lng": NotRequired[NumberType],
+            "lat": NotRequired[NumberType]
         }
     )
 
-    @_explicitize_args
+
     def __init__(
         self,
-        children: typing.Optional[typing.Union[str, int, float, ComponentType, typing.Sequence[typing.Union[str, int, float, ComponentType]]]] = None,
+        children: typing.Optional[ComponentType] = None,
         id: typing.Optional[typing.Union[str, dict]] = None,
         key: typing.Optional[str] = None,
         className: typing.Optional[str] = None,
         center: typing.Optional["Center"] = None,
-        radius: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        radius: typing.Optional[NumberType] = None,
         pathOptions: typing.Optional[typing.Any] = None,
         editable: typing.Optional[bool] = None,
-        nClicks: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
-        mouseOverCount: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        nClicks: typing.Optional[NumberType] = None,
+        mouseOverCount: typing.Optional[NumberType] = None,
         **kwargs
     ):
         self._prop_names = ['id', 'key', 'className', 'children', 'center', 'radius', 'pathOptions', 'editable', 'nClicks', 'mouseOverCount']
@@ -95,3 +103,5 @@ Keyword arguments:
                     'Required argument `' + k + '` was not specified.')
 
         super(LeafletCircle, self).__init__(children=children, **args)
+
+setattr(LeafletCircle, "__init__", _explicitize_args(LeafletCircle.__init__))
