@@ -25,7 +25,7 @@ setup(
     long_description_content_type="text/markdown",
     install_requires=[
         'dm-tree>=0.1.7',
-        'dash>=3.0.0',
+        'dash>=3.1.0',
     ],
     classifiers=[
         'Framework :: Dash',
