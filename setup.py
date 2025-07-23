@@ -6,29 +6,31 @@ from setuptools import setup
 with open('package.json') as f:
     package = json.load(f)
 
-package_name = package["name"].replace(" ", "_").replace("-", "_")
+package_name = (
+    package['name'].replace(' ', '_').replace('-', '_')
+)
 
 setup(
     name=package_name,
-    version=package["version"],
+    version=package['version'],
     author_email=package['email'],
     homepage='https://github.com/CNFeffery/feffery-leaflet-components',
     author=package['author'],
     packages=[package_name],
     include_package_data=True,
-    package_data={
-        'feffery_leaflet_components': ['*']
-    },
+    package_data={'feffery_leaflet_components': ['*']},
     license=package['license'],
     description=package.get('description', package_name),
-    long_description=io.open("README.md", encoding="utf-8").read(),
-    long_description_content_type="text/markdown",
+    long_description=io.open(
+        'README.md', encoding='utf-8'
+    ).read(),
+    long_description_content_type='text/markdown',
     install_requires=[
         'dm-tree>=0.1.7',
-        'dash>=3.1.0',
+        'dash>=3.1.1',
     ],
     classifiers=[
         'Framework :: Dash',
     ],
-    url='https://github.com/CNFeffery/feffery-leaflet-components'
+    url='https://github.com/CNFeffery/feffery-leaflet-components',
 )

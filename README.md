@@ -1,5 +1,3 @@
-> 本项目即将发布正式版本，敬请期待😉
-
 <p align="center">
 	<img src="./flc-logo.svg" height=200></img>
 </p>
@@ -14,7 +12,7 @@
 
 </div>
 
-`feffery-components`计划子项目，`Plotly Dash`第三方组件库，基于`Leaflet`，将更好用的地图交互功能及可视化组件引入`Dash`的世界🥳，最新版本：`0.2.0rc3`（2024-06-27）
+`feffery-components`计划子项目，`Plotly Dash`第三方组件库，基于`Leaflet`，将更好用的地图交互功能及可视化组件引入`Dash`的世界🥳，最新版本：`0.2.0`（2024-07-23）
 
 ## Dash版本兼容性说明
 
@@ -31,7 +29,7 @@ pip install feffery-leaflet-components -U
 
 ## 2 最新预发布版本安装方式
 
-> [!NOTE]  
+> [!NOTE]
 > 最新预发布版本（2025-06-27）：`0.2.0rc3`
 
 ```bash
