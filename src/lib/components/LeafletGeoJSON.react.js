@@ -708,7 +708,7 @@ const preventUpdateProps = ['_clickedFeature', '_hoveredFeature'];
 
 export default React.memo(LeafletGeoJSON, (prevProps, nextProps) => {
     // 计算发生变化的参数名
-    const changedProps = Object.keys(nextProps).filter(key => !isEqual(prevProps[key], nextProps[key]))
+    const changedProps = Object.keys(nextProps).filter(key => !isEqual(prevProps[key], nextProps[key])).filter(key => key !== 'setProps');
 
     // changedProps中全部变化的prop都在preventUpdateProps中声明时
     // 阻止本次重绘
