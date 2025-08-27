@@ -15,6 +15,7 @@ const LeafletMapListener = ({
     _clickedLatLng,
     _bounds,
     debug = false,
+    initUpdate = true,
     setProps
 }) => {
 
@@ -32,7 +33,7 @@ const LeafletMapListener = ({
     }, [_center, _zoom, _clickedLatLng, _bounds])
 
     useEffect(() => {
-        if (map) {
+        if (initUpdate && map) {
             const currentBounds = map.getBounds()
             const zoom = map.getZoom()
             const center = map.getCenter()
@@ -167,6 +168,12 @@ LeafletMapListener.propTypes = {
      * 默认值：`false`
      */
     debug: PropTypes.bool,
+
+    /**
+     * 是否在地图初始化时获取相关地图视角状态信息
+     * 默认值：`true`
+     */
+    initUpdate: PropTypes.bool,
 
     /**
      * Dash-assigned callback that should be called to report property changes

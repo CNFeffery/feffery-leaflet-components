@@ -70,7 +70,10 @@ Keyword arguments:
         矩形区域最大纬度.
 
 - debug (boolean; default False):
-    是否开启调试模式，开启后浏览器控制台中将实时打印相关地图事件结果  默认值：`False`."""
+    是否开启调试模式，开启后浏览器控制台中将实时打印相关地图事件结果  默认值：`False`.
+
+- initUpdate (boolean; default True):
+    是否在地图初始化时获取相关地图视角状态信息  默认值：`True`."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
@@ -110,11 +113,12 @@ Keyword arguments:
         _clickedLatLng: typing.Optional["ClickedLatLng"] = None,
         _bounds: typing.Optional["Bounds"] = None,
         debug: typing.Optional[bool] = None,
+        initUpdate: typing.Optional[bool] = None,
         **kwargs
     ):
-        self._prop_names = ['id', 'key', '_center', '_zoom', '_clickedLatLng', '_bounds', 'debug']
+        self._prop_names = ['id', 'key', '_center', '_zoom', '_clickedLatLng', '_bounds', 'debug', 'initUpdate']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', '_center', '_zoom', '_clickedLatLng', '_bounds', 'debug']
+        self.available_properties = ['id', 'key', '_center', '_zoom', '_clickedLatLng', '_bounds', 'debug', 'initUpdate']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

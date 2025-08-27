@@ -25,10 +25,12 @@ Those elements have the following types:
 - `_zoom` (Real; optional): 监听当前地图缩放级别
 - `debug` (Bool; optional): 是否开启调试模式，开启后浏览器控制台中将实时打印相关地图事件结果
 默认值：`false`
+- `initUpdate` (Bool; optional): 是否在地图初始化时获取相关地图视角状态信息
+默认值：`true`
 - `key` (String; optional): 对当前组件的`key`值进行更新，可实现强制重绘当前组件的效果
 """
 function ''_leafletmaplistener(; kwargs...)
-        available_props = Symbol[:id, :_bounds, :_center, :_clickedLatLng, :_zoom, :debug, :key]
+        available_props = Symbol[:id, :_bounds, :_center, :_clickedLatLng, :_zoom, :debug, :initUpdate, :key]
         wild_props = Symbol[]
         return Component("''_leafletmaplistener", "LeafletMapListener", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end
