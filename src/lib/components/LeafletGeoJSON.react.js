@@ -63,6 +63,7 @@ const LeafletGeoJSON = ({
     fitBounds = true,
     fitBoundsOptions,
     fitBoundsDelay = 0,
+    fitBoundsTargetFeatureProperties,
     clickFeatureZoom = false,
     featureIdField = 'id',
     selectMode = 'single',
@@ -226,6 +227,25 @@ const LeafletGeoJSON = ({
             }
         }
     }, [map, selectedFeatureIds, initialized])
+
+    useEffect(() => {
+        if (fitBoundsTargetFeatureProperties) {
+            if (data) {
+                const bounds = L.latLngBounds();
+                data.features.forEach(feature => {
+                    // 若所有条件都匹配
+                    if (Object.keys(fitBoundsTargetFeatureProperties).every(key => feature.properties[key] === fitBoundsTargetFeatureProperties[key])) {
+                        const layer = L.geoJSON(feature);
+                        bounds.extend(layer.getBounds());
+                        layer.remove();
+                    }
+                });
+                map.fitBounds(bounds);
+                // 重置fitBoundsTargetFeatureProperties
+                setProps({ fitBoundsTargetFeatureProperties: null });
+            }
+        }
+    }, [fitBoundsTargetFeatureProperties])
 
     return (
         <GeoJSON
@@ -541,6 +561,11 @@ LeafletGeoJSON.propTypes = {
      * 默认值：`0`
      */
     fitBoundsDelay: PropTypes.number,
+
+    /**
+     * 针对要素范围自适应缩放功能的要素属性值匹配字典
+     */
+    fitBoundsTargetFeatureProperties: PropTypes.object,
 
     /**
      * 是否在点击要素后，自动缩放到对应要素的范围
