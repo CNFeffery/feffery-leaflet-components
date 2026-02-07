@@ -12,7 +12,7 @@
 
 </div>
 
-`feffery-components`计划子项目，`Plotly Dash`第三方组件库，基于`Leaflet`，将更好用的地图交互功能及可视化组件引入`Dash`的世界🥳，最新版本：`0.2.3`（2024-08-27）
+`feffery-components`计划子项目，`Plotly Dash`第三方组件库，基于`Leaflet`，将更好用的地图交互功能及可视化组件引入`Dash`的世界🥳，最新版本：`0.2.4`（2026-02-07）
 
 ## Dash版本兼容性说明
 
