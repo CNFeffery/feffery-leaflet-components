@@ -4,13 +4,10 @@ import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
 
+ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
-    str,
-    int,
-    float,
-    Component,
-    None,
-    typing.Sequence[typing.Union[str, int, float, Component, None]],
+    ComponentSingleType,
+    typing.Sequence[ComponentSingleType],
 ]
 
 NumberType = typing.Union[
@@ -74,7 +71,7 @@ Keyword arguments:
 
 - initUpdate (boolean; default True):
     是否在地图初始化时获取相关地图视角状态信息  默认值：`True`."""
-    _children_props = []
+    _children_props: typing.List[str] = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletMapListener'

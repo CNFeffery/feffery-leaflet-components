@@ -4,13 +4,10 @@ import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
 
+ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
-    str,
-    int,
-    float,
-    Component,
-    None,
-    typing.Sequence[typing.Union[str, int, float, Component, None]],
+    ComponentSingleType,
+    typing.Sequence[ComponentSingleType],
 ]
 
 NumberType = typing.Union[
@@ -61,7 +58,7 @@ Keyword arguments:
 
 - mouseOverCount (number; default 0):
     监听当前要素鼠标移入事件累计次数  默认值：`0`."""
-    _children_props = []
+    _children_props: typing.List[str] = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletCircleMarker'

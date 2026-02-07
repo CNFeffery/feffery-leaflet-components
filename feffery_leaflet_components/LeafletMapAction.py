@@ -4,13 +4,10 @@ import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
 
+ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
-    str,
-    int,
-    float,
-    Component,
-    None,
-    typing.Sequence[typing.Union[str, int, float, Component, None]],
+    ComponentSingleType,
+    typing.Sequence[ComponentSingleType],
 ]
 
 NumberType = typing.Union[
@@ -85,7 +82,7 @@ Keyword arguments:
 
     - delay (number; optional):
         地图动作目标执行延时，单位：毫秒  默认值：`0`."""
-    _children_props = []
+    _children_props: typing.List[str] = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletMapAction'

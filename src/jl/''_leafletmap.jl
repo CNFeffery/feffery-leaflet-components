@@ -33,6 +33,8 @@ Those elements have the following types:
 默认值：`true`
 - `dragging` (Bool; optional): 是否允许鼠标拖拽移动地图
 默认值：`true`
+- `drawnShapeFormat` (a value equal to: 'default', 'geojson'; optional): 对应`_drawnShapes`中各要素的格式类型，可选项有`'default'`、`'geojson'`
+默认值：`'default'`
 - `editToolbar` (Bool; optional): 是否显示编辑模式工具栏
 默认值：`false`
 - `editToolbarControlsOptions` (optional): 配置编辑模式工具栏. editToolbarControlsOptions has the following type: lists containing elements 'position', 'drawMarker', 'drawCircleMarker', 'drawPolyline', 'drawRectangle', 'drawPolygon', 'drawCircle', 'drawText', 'editMode', 'dragMode', 'cutPolygon', 'removalMode', 'rotateMode', 'oneBlock'.
@@ -116,7 +118,7 @@ Those elements have the following types:
 默认值：`1`
 """
 function ''_leafletmap(; kwargs...)
-        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :crs, :doubleClickZoom, :dragging, :editToolbar, :editToolbarControlsOptions, :key, :maxBounds, :maxBoundsDelay, :maxBoundsViscosity, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scaleControl, :scaleControlOptions, :scrollWheelZoom, :showMeasurements, :smoothWheelZoom, :style, :viewAutoCorrection, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
+        available_props = Symbol[:children, :id, :_drawnShapes, :center, :className, :closePopupOnClick, :crs, :doubleClickZoom, :dragging, :drawnShapeFormat, :editToolbar, :editToolbarControlsOptions, :key, :maxBounds, :maxBoundsDelay, :maxBoundsViscosity, :maxDrawnShapes, :maxZoom, :measureControl, :measureControlOptions, :minZoom, :scaleControl, :scaleControlOptions, :scrollWheelZoom, :showMeasurements, :smoothWheelZoom, :style, :viewAutoCorrection, :wheelPxPerZoomLevel, :zoom, :zoomControl, :zoomDelta]
         wild_props = Symbol[]
         return Component("''_leafletmap", "LeafletMap", "feffery_leaflet_components", available_props, wild_props; kwargs...)
 end

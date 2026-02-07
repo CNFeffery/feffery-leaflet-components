@@ -4,13 +4,10 @@ import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
 
+ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
-    str,
-    int,
-    float,
-    Component,
-    None,
-    typing.Sequence[typing.Union[str, int, float, Component, None]],
+    ComponentSingleType,
+    typing.Sequence[ComponentSingleType],
 ]
 
 NumberType = typing.Union[
@@ -188,6 +185,10 @@ Keyword arguments:
     - oneBlock (boolean; optional):
         各功能按钮是否集成在同一个容器中  默认值：`False`.
 
+- drawnShapeFormat (a value equal to: 'default', 'geojson'; default 'default'):
+    对应`_drawnShapes`中各要素的格式类型，可选项有`'default'`、`'geojson'`
+    默认值：`'default'`.
+
 - _drawnShapes (list; optional):
     监听编辑模式下已绘制矢量信息.
 
@@ -217,7 +218,7 @@ Keyword arguments:
 
 - viewAutoCorrection (boolean; default False):
     是否开启视角自动校正，譬如地图所在容器像素尺寸发生变化后，会自动校正地图的视角  默认值：`False`."""
-    _children_props = []
+    _children_props: typing.List[str] = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
     _type = 'LeafletMap'
@@ -313,6 +314,7 @@ Keyword arguments:
         maxBoundsDelay: typing.Optional[NumberType] = None,
         editToolbar: typing.Optional[bool] = None,
         editToolbarControlsOptions: typing.Optional["EditToolbarControlsOptions"] = None,
+        drawnShapeFormat: typing.Optional[Literal["default", "geojson"]] = None,
         _drawnShapes: typing.Optional[typing.Sequence] = None,
         showMeasurements: typing.Optional[bool] = None,
         maxDrawnShapes: typing.Optional[NumberType] = None,
@@ -321,9 +323,9 @@ Keyword arguments:
         viewAutoCorrection: typing.Optional[bool] = None,
         **kwargs
     ):
-        self._prop_names = ['id', 'key', 'children', 'style', 'className', 'center', 'crs', 'zoom', 'doubleClickZoom', 'dragging', 'closePopupOnClick', 'minZoom', 'maxZoom', 'zoomDelta', 'zoomControl', 'scrollWheelZoom', 'wheelPxPerZoomLevel', 'smoothWheelZoom', 'scaleControl', 'scaleControlOptions', 'maxBounds', 'maxBoundsViscosity', 'maxBoundsDelay', 'editToolbar', 'editToolbarControlsOptions', '_drawnShapes', 'showMeasurements', 'maxDrawnShapes', 'measureControl', 'measureControlOptions', 'viewAutoCorrection']
+        self._prop_names = ['id', 'key', 'children', 'style', 'className', 'center', 'crs', 'zoom', 'doubleClickZoom', 'dragging', 'closePopupOnClick', 'minZoom', 'maxZoom', 'zoomDelta', 'zoomControl', 'scrollWheelZoom', 'wheelPxPerZoomLevel', 'smoothWheelZoom', 'scaleControl', 'scaleControlOptions', 'maxBounds', 'maxBoundsViscosity', 'maxBoundsDelay', 'editToolbar', 'editToolbarControlsOptions', 'drawnShapeFormat', '_drawnShapes', 'showMeasurements', 'maxDrawnShapes', 'measureControl', 'measureControlOptions', 'viewAutoCorrection']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', 'children', 'style', 'className', 'center', 'crs', 'zoom', 'doubleClickZoom', 'dragging', 'closePopupOnClick', 'minZoom', 'maxZoom', 'zoomDelta', 'zoomControl', 'scrollWheelZoom', 'wheelPxPerZoomLevel', 'smoothWheelZoom', 'scaleControl', 'scaleControlOptions', 'maxBounds', 'maxBoundsViscosity', 'maxBoundsDelay', 'editToolbar', 'editToolbarControlsOptions', '_drawnShapes', 'showMeasurements', 'maxDrawnShapes', 'measureControl', 'measureControlOptions', 'viewAutoCorrection']
+        self.available_properties = ['id', 'key', 'children', 'style', 'className', 'center', 'crs', 'zoom', 'doubleClickZoom', 'dragging', 'closePopupOnClick', 'minZoom', 'maxZoom', 'zoomDelta', 'zoomControl', 'scrollWheelZoom', 'wheelPxPerZoomLevel', 'smoothWheelZoom', 'scaleControl', 'scaleControlOptions', 'maxBounds', 'maxBoundsViscosity', 'maxBoundsDelay', 'editToolbar', 'editToolbarControlsOptions', 'drawnShapeFormat', '_drawnShapes', 'showMeasurements', 'maxDrawnShapes', 'measureControl', 'measureControlOptions', 'viewAutoCorrection']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

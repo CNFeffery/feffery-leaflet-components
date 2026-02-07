@@ -41,7 +41,12 @@ const customTranslation = {
     }
 }
 
-const extractDrawnShapes = (item, i) => {
+const extractDrawnShapes = (item, i, drawnShapeFormat) => {
+
+    // 直接返回GeoJSON格式要素数据
+    if ( drawnShapeFormat === 'geojson' ) {
+        return item.pm._layer.toGeoJSON();
+    };
 
     const drawnShape = {
         id: item._leaflet_id,
@@ -127,6 +132,7 @@ const LeafletMap = ({
     maxBoundsDelay = 0,
     editToolbar = false,
     editToolbarControlsOptions,
+    drawnShapeFormat = 'default',
     showMeasurements = false,
     maxDrawnShapes = null,
     measureControl = false,
@@ -319,7 +325,7 @@ const LeafletMap = ({
                                 })
                                 .map(
                                     (item, i) => {
-                                        return extractDrawnShapes(item, i)
+                                        return extractDrawnShapes(item, i, drawnShapeFormat)
                                     }
 
                                 );
@@ -329,7 +335,7 @@ const LeafletMap = ({
                             e.layer.on('pm:edit', function (x) {
                                 const drawnShapes = map.pm.getGeomanDrawLayers().map(
                                     (item, i) => {
-                                        return extractDrawnShapes(item, i)
+                                        return extractDrawnShapes(item, i, drawnShapeFormat)
                                     }
 
                                 );
@@ -620,6 +626,12 @@ LeafletMap.propTypes = {
          */
         oneBlock: PropTypes.bool
     }),
+
+    /**
+     * 对应`_drawnShapes`中各要素的格式类型，可选项有`'default'`、`'geojson'`
+     * 默认值：`'default'`
+     */
+    drawnShapeFormat: PropTypes.oneOf(['default', 'geojson']),
 
     /**
      * 监听编辑模式下已绘制矢量信息
