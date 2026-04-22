@@ -46,6 +46,9 @@ Keyword arguments:
 
     `_clickedLatLng` is a dict with keys:
 
+    - lng (number; optional):
+        点击位置对应经度.
+
     - lat (number; optional):
         点击位置对应纬度.
 
@@ -86,6 +89,7 @@ Keyword arguments:
     ClickedLatLng = TypedDict(
         "ClickedLatLng",
             {
+            "lng": NotRequired[NumberType],
             "lat": NotRequired[NumberType]
         }
     )

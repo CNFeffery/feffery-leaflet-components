@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 // react核心
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 // leaflet核心
-import { useMap } from 'react-leaflet';
+import {useMap} from 'react-leaflet';
 
 /**
  * 地图事件监听组件LeafletMapListener
@@ -16,9 +16,8 @@ const LeafletMapListener = ({
     _bounds,
     debug = false,
     initUpdate = true,
-    setProps
+    setProps,
 }) => {
-
     const map = useMap();
 
     useEffect(() => {
@@ -27,16 +26,16 @@ const LeafletMapListener = ({
                 _center,
                 _zoom,
                 _clickedLatLng,
-                _bounds
-            })
+                _bounds,
+            });
         }
-    }, [_center, _zoom, _clickedLatLng, _bounds])
+    }, [_center, _zoom, _clickedLatLng, _bounds]);
 
     useEffect(() => {
         if (initUpdate && map) {
-            const currentBounds = map.getBounds()
-            const zoom = map.getZoom()
-            const center = map.getCenter()
+            const currentBounds = map.getBounds();
+            const zoom = map.getZoom();
+            const center = map.getCenter();
             setProps({
                 _zoom: zoom,
                 _center: center,
@@ -44,26 +43,23 @@ const LeafletMapListener = ({
                     minx: currentBounds._southWest.lng,
                     miny: currentBounds._southWest.lat,
                     maxx: currentBounds._northEast.lng,
-                    maxy: currentBounds._northEast.lat
-                }
-            })
+                    maxy: currentBounds._northEast.lat,
+                },
+            });
         }
-
-    }, [map])
+    }, [map]);
 
     useEffect(() => {
         map.on('click', (e) => {
-
             setProps({
-                _clickedLatLng: e.latlng
-            })
-        })
+                _clickedLatLng: e.latlng,
+            });
+        });
 
         map.on('zoomend', (e) => {
-
-            const currentBounds = map.getBounds()
-            const zoom = map.getZoom()
-            const center = map.getCenter()
+            const currentBounds = map.getBounds();
+            const zoom = map.getZoom();
+            const center = map.getCenter();
 
             setProps({
                 _zoom: zoom,
@@ -72,15 +68,14 @@ const LeafletMapListener = ({
                     minx: currentBounds._southWest.lng,
                     miny: currentBounds._southWest.lat,
                     maxx: currentBounds._northEast.lng,
-                    maxy: currentBounds._northEast.lat
-                }
-            })
-        })
+                    maxy: currentBounds._northEast.lat,
+                },
+            });
+        });
 
         map.on('moveend', (e) => {
-
-            const currentBounds = map.getBounds()
-            const center = map.getCenter()
+            const currentBounds = map.getBounds();
+            const center = map.getCenter();
 
             setProps({
                 _center: center,
@@ -88,15 +83,14 @@ const LeafletMapListener = ({
                     minx: currentBounds._southWest.lng,
                     miny: currentBounds._southWest.lat,
                     maxx: currentBounds._northEast.lng,
-                    maxy: currentBounds._northEast.lat
-                }
-            })
-        })
-
-    }, [])
+                    maxy: currentBounds._northEast.lat,
+                },
+            });
+        });
+    }, []);
 
     return <></>;
-}
+};
 
 LeafletMapListener.propTypes = {
     /**
@@ -120,7 +114,7 @@ LeafletMapListener.propTypes = {
         /**
          * 中心点纬度
          */
-        lat: PropTypes.number
+        lat: PropTypes.number,
     }),
 
     /**
@@ -135,10 +129,11 @@ LeafletMapListener.propTypes = {
         /**
          * 点击位置对应经度
          */
+        lng: PropTypes.number,
         /**
          * 点击位置对应纬度
          */
-        lat: PropTypes.number
+        lat: PropTypes.number,
     }),
 
     /**
@@ -160,7 +155,7 @@ LeafletMapListener.propTypes = {
         /**
          * 矩形区域最大纬度
          */
-        maxy: PropTypes.number
+        maxy: PropTypes.number,
     }),
 
     /**
@@ -179,7 +174,7 @@ LeafletMapListener.propTypes = {
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
-    setProps: PropTypes.func
+    setProps: PropTypes.func,
 };
 
 export default React.memo(LeafletMapListener);

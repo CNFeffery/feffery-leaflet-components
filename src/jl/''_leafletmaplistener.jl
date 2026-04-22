@@ -19,8 +19,9 @@ Those elements have the following types:
 Those elements have the following types:
   - `lng` (Real; optional): 中心点经度
   - `lat` (Real; optional): 中心点纬度
-- `_clickedLatLng` (optional): 监听地图鼠标点击事件. _clickedLatLng has the following type: lists containing elements 'lat'.
+- `_clickedLatLng` (optional): 监听地图鼠标点击事件. _clickedLatLng has the following type: lists containing elements 'lng', 'lat'.
 Those elements have the following types:
+  - `lng` (Real; optional): 点击位置对应经度
   - `lat` (Real; optional): 点击位置对应纬度
 - `_zoom` (Real; optional): 监听当前地图缩放级别
 - `debug` (Bool; optional): 是否开启调试模式，开启后浏览器控制台中将实时打印相关地图事件结果
