@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -32,13 +37,13 @@ Keyword arguments:
     默认值：`'topleft'`.
 
 - tileWait (number; optional):
-    地图瓦片文件加载等待时长，单位：毫秒  默认值：500.
+    地图瓦片文件加载等待时长，单位：毫秒 默认值：500.
 
 - filename (string; default 'map'):
-    图片导出文件名  默认值：`'map'`.
+    图片导出文件名 默认值：`'map'`.
 
 - hideControlContainer (boolean; optional):
-    导出图片时是否自动隐藏其他无关控件  默认值：`True`.
+    导出图片时是否自动隐藏其他无关控件 默认值：`True`.
 
 - customSizeTooltip (string; optional):
     为自定义导出尺寸控件设置提示文案内容.

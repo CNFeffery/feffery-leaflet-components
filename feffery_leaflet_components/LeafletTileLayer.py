@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -34,19 +39,19 @@ Keyword arguments:
     地图服务`attribution`属性.
 
 - opacity (number; default 1):
-    图层透明度  默认值：`1`.
+    图层透明度 默认值：`1`.
 
 - zIndex (number; optional):
     当前图层`z`轴顺序.
 
 - tileSize (number; default 256):
-    瓦片服务图片像素边长  默认值：`256`.
+    瓦片服务图片像素边长 默认值：`256`.
 
 - minZoom (number; default 0):
-    当前瓦片地图服务允许加载的最小缩放级别  默认值：`0`.
+    当前瓦片地图服务允许加载的最小缩放级别 默认值：`0`.
 
 - maxZoom (number; default 18):
-    当前瓦片地图服务允许加载的最大缩放级别  默认值：`18`.
+    当前瓦片地图服务允许加载的最大缩放级别 默认值：`18`.
 
 - minNativeZoom (number; optional):
     瓦片地图服务可用的最小缩放级别。如果指定了该值，所有低于`minNativeZoom`的缩放级别上的瓦片将从最小原生缩放级别加载并自动缩放.
@@ -55,7 +60,7 @@ Keyword arguments:
     瓦片地图服务可用的最大缩放级别。如果指定了该值，所有高于`maxNativeZoom`的缩放级别上的瓦片将从最大原生缩放级别加载并自动缩放.
 
 - tms (boolean; default False):
-    设置当前地图服务是否符合`tms`类型  默认值：`False`."""
+    设置当前地图服务是否符合`tms`类型 默认值：`False`."""
     _children_props: typing.List[str] = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'

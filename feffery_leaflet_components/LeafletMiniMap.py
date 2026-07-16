@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -50,31 +55,31 @@ Keyword arguments:
     默认值：`'bottomright'`.
 
 - width (number; optional):
-    迷你地图整体像素宽度  默认值：`150`.
+    迷你地图整体像素宽度 默认值：`150`.
 
 - height (number; optional):
-    迷你地图整体像素高度  默认值：`150`.
+    迷你地图整体像素高度 默认值：`150`.
 
 - collapsedWidth (number; optional):
-    迷你地图折叠状态下的像素宽度  默认值：`19`.
+    迷你地图折叠状态下的像素宽度 默认值：`19`.
 
 - collapsedHeight (number; optional):
-    迷你地图折叠状态下的像素高度  默认值：`19`.
+    迷你地图折叠状态下的像素高度 默认值：`19`.
 
 - zoomLevelOffset (number; optional):
-    迷你地图与主体地图的缩放级别偏差  默认值：`-5`.
+    迷你地图与主体地图的缩放级别偏差 默认值：`-5`.
 
 - zoomLevelFixed (number; optional):
     迷你地图强制锁定的缩放级别.
 
 - zoomAnimation (boolean; optional):
-    迷你地图是否启用缩放变化动画  默认值：`False`.
+    迷你地图是否启用缩放变化动画 默认值：`False`.
 
 - toggleDisplay (boolean; optional):
-    是否渲染迷你地图折叠按钮  默认值：`False`.
+    是否渲染迷你地图折叠按钮 默认值：`False`.
 
 - autoToggleDisplay (boolean; optional):
-    当参数`zoomLevelFixed`有效，且主体地图范围不再适应迷你地图时，是否自动隐藏迷你地图  默认值：`False`.
+    当参数`zoomLevelFixed`有效，且主体地图范围不再适应迷你地图时，是否自动隐藏迷你地图 默认值：`False`.
 
 - aimingRectOptions (optional):
     迷你地图范围标识框要素样式.

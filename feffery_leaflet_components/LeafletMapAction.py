@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -34,9 +39,9 @@ Keyword arguments:
 
     - type (a value equal to: 'set-zoom', 'zoom-in', 'zoom-out', 'set-view', 'pan-to', 'fly-to', 'fly-to-bounds', 'invalidate-size'; optional):
         地图动作类型，可选项有`'set-zoom'`、`'zoom-in'`、`'zoom-out'`、`'set-view'`、`'pan-to'`、`'fly-to'`、`'fly-to-bounds'`、`'invalidate-size'`，其中
-        `'set-zoom'`模式用于更新地图缩放级别；  `'zoom-in'`用于在当前地图缩放级别基础上，放大设定的级别；
-        `'zoom-out'`用于在当前地图缩放级别基础上，缩小设定的级别;  `'set-view'`用于更新地图视角；
-        `'pan-to'`用于移动地图中心点位置；  `'fly-to'`用于以飞行动画模式更新地图视角;
+        `'set-zoom'`模式用于更新地图缩放级别； `'zoom-in'`用于在当前地图缩放级别基础上，放大设定的级别；
+        `'zoom-out'`用于在当前地图缩放级别基础上，缩小设定的级别; `'set-view'`用于更新地图视角；
+        `'pan-to'`用于移动地图中心点位置； `'fly-to'`用于以飞行动画模式更新地图视角;
         `'fly-to-bounds'`用于以飞行动画模式令地图视角自适应目标矩形区域范围;
         `'invalidate-size'`用于手动刷新矫正地图视角；.
 
@@ -81,7 +86,7 @@ Keyword arguments:
         地图飞行类动画对应过渡时长，单位：秒，适用的地图动作类型：`'fly-to'`、`'fly-to-bounds'`.
 
     - delay (number; optional):
-        地图动作目标执行延时，单位：毫秒  默认值：`0`."""
+        地图动作目标执行延时，单位：毫秒 默认值：`0`."""
     _children_props: typing.List[str] = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'

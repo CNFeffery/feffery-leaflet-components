@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -70,10 +75,10 @@ Keyword arguments:
         矩形区域最大纬度.
 
 - debug (boolean; default False):
-    是否开启调试模式，开启后浏览器控制台中将实时打印相关地图事件结果  默认值：`False`.
+    是否开启调试模式，开启后浏览器控制台中将实时打印相关地图事件结果 默认值：`False`.
 
 - initUpdate (boolean; default True):
-    是否在地图初始化时获取相关地图视角状态信息  默认值：`True`."""
+    是否在地图初始化时获取相关地图视角状态信息 默认值：`True`."""
     _children_props: typing.List[str] = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'

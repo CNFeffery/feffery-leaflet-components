@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -45,28 +50,28 @@ Keyword arguments:
     默认值：`10`.
 
 - clusterIconExtraSizeFactor (number; default 40):
-    聚类簇尺寸扩张系数，具体计算规则见参数`clusterIconBaseSize`说明  默认值：`40`.
+    聚类簇尺寸扩张系数，具体计算规则见参数`clusterIconBaseSize`说明 默认值：`40`.
 
 - clusterTextSizeFactor (number; default 0.4):
-    聚类簇文字尺寸占对应簇整体尺寸的比例  默认值：`0.4`.
+    聚类簇文字尺寸占对应簇整体尺寸的比例 默认值：`0.4`.
 
 - minZoom (number; optional):
-    聚类簇生成对应的最小缩放级别  默认值：`0`.
+    聚类簇生成对应的最小缩放级别 默认值：`0`.
 
 - maxZoom (number; optional):
-    聚类簇生成对应的最大缩放级别  默认值：`16`.
+    聚类簇生成对应的最大缩放级别 默认值：`16`.
 
 - minPoints (number; optional):
-    形成聚类簇所需的最小标记点数量  默认值：`2`.
+    形成聚类簇所需的最小标记点数量 默认值：`2`.
 
 - radius (number; optional):
-    聚类簇像素半径  默认值：`40`.
+    聚类簇像素半径 默认值：`40`.
 
 - extent (number; optional):
-    当前地图中使用的瓦片地图像素边长  默认值：`512`.
+    当前地图中使用的瓦片地图像素边长 默认值：`512`.
 
 - nodeSize (number; optional):
-    控制聚类过程`KD`树节点尺寸  默认值：`64`.
+    控制聚类过程`KD`树节点尺寸 默认值：`64`.
 
 - iconOptions (dict; optional):
     配置图标，支持分类独立控制.
@@ -128,13 +133,13 @@ Keyword arguments:
         标记图标css类.
 
 - tooltipField (string; default 'tooltip'):
-    标记点数据作为信息框内容的字段  默认值：`'tooltip'`.
+    标记点数据作为信息框内容的字段 默认值：`'tooltip'`.
 
 - tooltipSticky (boolean; optional):
-    信息框是否跟随鼠标位置  默认值：`False`.
+    信息框是否跟随鼠标位置 默认值：`False`.
 
 - categoryField (string; default 'category'):
-    标记点数据作为类别的字段  默认值：`'category'`.
+    标记点数据作为类别的字段 默认值：`'category'`.
 
 - clickedPoint (dict; optional):
     监听标记点点击事件.

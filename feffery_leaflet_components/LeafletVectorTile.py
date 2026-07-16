@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -31,16 +36,16 @@ Keyword arguments:
     切片服务地址.
 
 - minZoom (number; default 1):
-    当前地图服务允许加载的最小缩放级别  默认值：`0`.
+    当前地图服务允许加载的最小缩放级别 默认值：`0`.
 
 - maxZoom (number; default 18):
-    当前地图服务允许加载的最大缩放级别  默认值：`18`.
+    当前地图服务允许加载的最大缩放级别 默认值：`18`.
 
 - interactive (boolean; default False):
-    当前图层是否允许交互功能  默认值：`False`.
+    当前图层是否允许交互功能 默认值：`False`.
 
 - featureIdField (string; default 'id'):
-    切片数据要素属性中作为图层唯一识别`id`的字段  默认值：`'id'`.
+    切片数据要素属性中作为图层唯一识别`id`的字段 默认值：`'id'`.
 
 - vectorTileLayerStyles (dict; optional):
     针对不同切片图层设置样式，键：图层名称，值：样式字典或`javascript`控制函数字符串.
@@ -55,7 +60,7 @@ Keyword arguments:
     额外自定义参数.
 
 - renderer (a value equal to: 'svg', 'canvas'; default 'svg'):
-    渲染方式，可选项有`'svg'`、`'canvas'`  默认值：`'svg'`.
+    渲染方式，可选项有`'svg'`、`'canvas'` 默认值：`'svg'`.
 
 - _layerNames (list; optional):
     监听当前服务中已加载的全部图层名称.

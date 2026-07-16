@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -72,28 +77,28 @@ Keyword arguments:
         当前流线流量数值，与流线显示的宽度相关联.
 
 - pulseRadius (number; default 30):
-    扩散圆圈效果像素半径  默认值：`30`.
+    扩散圆圈效果像素半径 默认值：`30`.
 
 - pulseBorderWidth (number; default 3):
-    扩散圆圈边框像素宽度  默认值：`3`.
+    扩散圆圈边框像素宽度 默认值：`3`.
 
 - arcWidth (number; default 1):
-    流线最小像素宽度  默认值：`1`.
+    流线最小像素宽度 默认值：`1`.
 
 - maxWidth (number; default 10):
-    流线最大像素宽度  默认值：`10`.
+    流线最大像素宽度 默认值：`10`.
 
 - arcLabel (boolean; default True):
-    是否显示流线起点、终点文字标签  默认值：`True`.
+    是否显示流线起点、终点文字标签 默认值：`True`.
 
 - arcLabelFontSize (string; default '10px'):
-    流线起点、终点文字标签字体大小  默认值：`'10px'`.
+    流线起点、终点文字标签字体大小 默认值：`'10px'`.
 
 - arcLabelFontFamily (string; default 'sans-serif'):
-    流线起点、终点文字标签字体  默认值：`'sans-serif'`.
+    流线起点、终点文字标签字体 默认值：`'sans-serif'`.
 
 - keepUniqueLabels (boolean; default False):
-    是否自动对起点、终点文字标签去重  默认值：`False`.
+    是否自动对起点、终点文字标签去重 默认值：`False`.
 
 - setAction (a value equal to: 'pause', 'play', 'hide', 'show'; optional):
     手动执行控制动作，可选的有`'pause'`、`'play'`、`'hide'`、`'show'`，每次有效值更新后会重置为空值."""

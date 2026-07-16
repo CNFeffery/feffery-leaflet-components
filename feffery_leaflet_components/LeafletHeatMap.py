@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -42,16 +47,16 @@ Keyword arguments:
         当前热力点权重.
 
 - minOpacity (number; default 0):
-    透明度下限，取值应在`0`到`1`之间  默认值：`0`.
+    透明度下限，取值应在`0`到`1`之间 默认值：`0`.
 
 - max (number; default 1):
-    权重上限范围  默认值：`1`.
+    权重上限范围 默认值：`1`.
 
 - radius (number; default 25):
-    热力点像素半径  默认值：`25`.
+    热力点像素半径 默认值：`25`.
 
 - blur (number; default 15):
-    热力点模糊程度  默认值：`15`.
+    热力点模糊程度 默认值：`15`.
 
 - gradient (dict; optional):
     颜色分段规则，譬如：`{0.4: 'blue', 0.65: 'lime', 1: 'red'}`."""

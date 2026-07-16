@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -34,8 +39,7 @@ Keyword arguments:
     当前组件css类名.
 
 - center (dict; default { lng: 0, lat: 0 }):
-    地图默认中心坐标，格式：`{'lng': xxx, 'lat': xxx}`  默认值：`{'lng': 0, 'lat':
-    0}`.
+    地图默认中心坐标，格式：`{'lng': xxx, 'lat': xxx}` 默认值：`{'lng': 0, 'lat': 0}`.
 
     `center` is a dict with keys:
 
@@ -47,7 +51,7 @@ Keyword arguments:
 
 - crs (dict; default 'EPSG3857'):
     为当前地图配置坐标参考系，当传入字符型时可选项有`'EPSG3857'`、`'EPSG4326'`、`'simple'`，
-    当传入字典时，用于构造自定义坐标系参数  默认值：`'EPSG3857'`.
+    当传入字典时，用于构造自定义坐标系参数 默认值：`'EPSG3857'`.
 
     `crs` is a a value equal to: 'EPSG3857', 'EPSG4326', 'simple' |
     dict with keys:
@@ -62,42 +66,42 @@ Keyword arguments:
         坐标系其他配置参数.
 
 - zoom (number; default 3):
-    地图默认缩放级别  默认值：`3`.
+    地图默认缩放级别 默认值：`3`.
 
 - doubleClickZoom (boolean; default True):
-    是否允许鼠标双击地图进行放大  默认值：`True`.
+    是否允许鼠标双击地图进行放大 默认值：`True`.
 
 - dragging (boolean; default True):
-    是否允许鼠标拖拽移动地图  默认值：`True`.
+    是否允许鼠标拖拽移动地图 默认值：`True`.
 
 - closePopupOnClick (boolean; default True):
-    是否允许鼠标点击地图空白处关闭已打开的`leafletPopup`弹出层  默认值：`True`.
+    是否允许鼠标点击地图空白处关闭已打开的`leafletPopup`弹出层 默认值：`True`.
 
 - minZoom (number; default 0):
-    地图最小缩放级别  默认值：`0`.
+    地图最小缩放级别 默认值：`0`.
 
 - maxZoom (number; default 18):
-    地图最大缩放级别  默认值：`18`.
+    地图最大缩放级别 默认值：`18`.
 
 - zoomDelta (number; default 1):
-    地图单次缩放变化对应的缩放级别步长  默认值：`1`.
+    地图单次缩放变化对应的缩放级别步长 默认值：`1`.
 
 - zoomControl (boolean; default True):
-    是否显示地图缩放组件  默认值：`True`.
+    是否显示地图缩放组件 默认值：`True`.
 
 - scrollWheelZoom (boolean | a value equal to: 'center'; default True):
     是否允许通用鼠标滚轮缩放地图，当传入`'center'`时会在允许鼠标滚轮缩放地图时无视鼠标实际位置，以地图当前中心作为缩放依据的中心
     默认值：`True`.
 
 - wheelPxPerZoomLevel (number; default 60):
-    控制鼠标滚轮滚动多少像素会触发一个单位`zoomDelta`级别的地图缩放  默认值：`60`.
+    控制鼠标滚轮滚动多少像素会触发一个单位`zoomDelta`级别的地图缩放 默认值：`60`.
 
 - smoothWheelZoom (boolean | a value equal to: 'center'; default False):
     针对鼠标滚轮缩放地图是否开启丝滑模式，当传入`'center'`时会在允许鼠标滚轮缩放地图时无视鼠标实际位置，以地图当前中心作为丝滑缩放依据的中心
     默认值：`False`.
 
 - scaleControl (boolean; default False):
-    是否显示地图比例尺  默认值：`False`.
+    是否显示地图比例尺 默认值：`False`.
 
 - scaleControlOptions (dict; optional):
     配置地图比例尺相关参数.
@@ -132,10 +136,10 @@ Keyword arguments:
     默认值：`0`.
 
 - maxBoundsDelay (number; default 0):
-    `maxBounds`参数初始化生效延时，单位：毫秒  默认值：`0`.
+    `maxBounds`参数初始化生效延时，单位：毫秒 默认值：`0`.
 
 - editToolbar (boolean; default False):
-    是否显示编辑模式工具栏  默认值：`False`.
+    是否显示编辑模式工具栏 默认值：`False`.
 
 - editToolbarControlsOptions (dict; optional):
     配置编辑模式工具栏.
@@ -147,43 +151,43 @@ Keyword arguments:
         默认值：`'topleft'`.
 
     - drawMarker (boolean; optional):
-        是否开启“标记点绘制”功能  默认值：`True`.
+        是否开启“标记点绘制”功能 默认值：`True`.
 
     - drawCircleMarker (boolean; optional):
-        是否开启“圆形标记点”绘制功能  默认值：`True`.
+        是否开启“圆形标记点”绘制功能 默认值：`True`.
 
     - drawPolyline (boolean; optional):
-        是否开启“折线”绘制功能  默认值：`True`.
+        是否开启“折线”绘制功能 默认值：`True`.
 
     - drawRectangle (boolean; optional):
-        是否开启“矩形”绘制功能  默认值：`True`.
+        是否开启“矩形”绘制功能 默认值：`True`.
 
     - drawPolygon (boolean; optional):
-        是否开启“多边形”绘制功能  默认值：`True`.
+        是否开启“多边形”绘制功能 默认值：`True`.
 
     - drawCircle (boolean; optional):
-        是否开启“圆形”绘制功能  默认值：`True`.
+        是否开启“圆形”绘制功能 默认值：`True`.
 
     - drawText (boolean; optional):
-        是否开启“文字”绘制功能  默认值：`False`.
+        是否开启“文字”绘制功能 默认值：`False`.
 
     - editMode (boolean; optional):
-        是否开启“编辑要素”功能  默认值：`True`.
+        是否开启“编辑要素”功能 默认值：`True`.
 
     - dragMode (boolean; optional):
-        是否开启“拖拽要素”功能  默认值：`True`.
+        是否开启“拖拽要素”功能 默认值：`True`.
 
     - cutPolygon (boolean; optional):
-        是否开启“裁剪要素”功能  默认值：`False`.
+        是否开启“裁剪要素”功能 默认值：`False`.
 
     - removalMode (boolean; optional):
-        是否开启“移除要素”功能  默认值：`True`.
+        是否开启“移除要素”功能 默认值：`True`.
 
     - rotateMode (boolean; optional):
-        是否开启“旋转要素”功能  默认值：`True`.
+        是否开启“旋转要素”功能 默认值：`True`.
 
     - oneBlock (boolean; optional):
-        各功能按钮是否集成在同一个容器中  默认值：`False`.
+        各功能按钮是否集成在同一个容器中 默认值：`False`.
 
 - drawnShapeFormat (a value equal to: 'default', 'geojson'; default 'default'):
     对应`_drawnShapes`中各要素的格式类型，可选项有`'default'`、`'geojson'`
@@ -193,13 +197,13 @@ Keyword arguments:
     监听编辑模式下已绘制矢量信息.
 
 - showMeasurements (boolean; default False):
-    是否为编辑模式下创建的矢量要素添加长度、面积标注  默认值：`False`.
+    是否为编辑模式下创建的矢量要素添加长度、面积标注 默认值：`False`.
 
 - maxDrawnShapes (number; optional):
     针对编辑模式，设置最多允许绘制的矢量要素个数，默认无限制.
 
 - measureControl (boolean; default False):
-    是否显示测量工具栏  默认值：`False`.
+    是否显示测量工具栏 默认值：`False`.
 
 - measureControlOptions (dict; optional):
     配置测量工具.
@@ -211,13 +215,16 @@ Keyword arguments:
         默认值：`'topleft'`.
 
     - activeColor (string; optional):
-        测量工具所绘制要素颜色  默认值：`'#f1c40f'`.
+        测量工具所绘制要素颜色 默认值：`'#f1c40f'`.
 
     - completedColor (string; optional):
-        测量工具绘制完成后的要素颜色  默认值：`'#e74c3c'`.
+        测量工具绘制完成后的要素颜色 默认值：`'#e74c3c'`.
 
 - viewAutoCorrection (boolean; default False):
-    是否开启视角自动校正，譬如地图所在容器像素尺寸发生变化后，会自动校正地图的视角  默认值：`False`."""
+    是否开启视角自动校正，譬如地图所在容器像素尺寸发生变化后，会自动校正地图的视角 默认值：`False`.
+
+- mapInstanceName (string; optional):
+    设置向浏览器环境window对象下暴露的当前地图实例对应属性名，譬如`'flcMap'`，默认不暴露."""
     _children_props: typing.List[str] = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
@@ -321,11 +328,12 @@ Keyword arguments:
         measureControl: typing.Optional[bool] = None,
         measureControlOptions: typing.Optional["MeasureControlOptions"] = None,
         viewAutoCorrection: typing.Optional[bool] = None,
+        mapInstanceName: typing.Optional[str] = None,
         **kwargs
     ):
-        self._prop_names = ['id', 'key', 'children', 'style', 'className', 'center', 'crs', 'zoom', 'doubleClickZoom', 'dragging', 'closePopupOnClick', 'minZoom', 'maxZoom', 'zoomDelta', 'zoomControl', 'scrollWheelZoom', 'wheelPxPerZoomLevel', 'smoothWheelZoom', 'scaleControl', 'scaleControlOptions', 'maxBounds', 'maxBoundsViscosity', 'maxBoundsDelay', 'editToolbar', 'editToolbarControlsOptions', 'drawnShapeFormat', '_drawnShapes', 'showMeasurements', 'maxDrawnShapes', 'measureControl', 'measureControlOptions', 'viewAutoCorrection']
+        self._prop_names = ['id', 'key', 'children', 'style', 'className', 'center', 'crs', 'zoom', 'doubleClickZoom', 'dragging', 'closePopupOnClick', 'minZoom', 'maxZoom', 'zoomDelta', 'zoomControl', 'scrollWheelZoom', 'wheelPxPerZoomLevel', 'smoothWheelZoom', 'scaleControl', 'scaleControlOptions', 'maxBounds', 'maxBoundsViscosity', 'maxBoundsDelay', 'editToolbar', 'editToolbarControlsOptions', 'drawnShapeFormat', '_drawnShapes', 'showMeasurements', 'maxDrawnShapes', 'measureControl', 'measureControlOptions', 'viewAutoCorrection', 'mapInstanceName']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', 'children', 'style', 'className', 'center', 'crs', 'zoom', 'doubleClickZoom', 'dragging', 'closePopupOnClick', 'minZoom', 'maxZoom', 'zoomDelta', 'zoomControl', 'scrollWheelZoom', 'wheelPxPerZoomLevel', 'smoothWheelZoom', 'scaleControl', 'scaleControlOptions', 'maxBounds', 'maxBoundsViscosity', 'maxBoundsDelay', 'editToolbar', 'editToolbarControlsOptions', 'drawnShapeFormat', '_drawnShapes', 'showMeasurements', 'maxDrawnShapes', 'measureControl', 'measureControlOptions', 'viewAutoCorrection']
+        self.available_properties = ['id', 'key', 'children', 'style', 'className', 'center', 'crs', 'zoom', 'doubleClickZoom', 'dragging', 'closePopupOnClick', 'minZoom', 'maxZoom', 'zoomDelta', 'zoomControl', 'scrollWheelZoom', 'wheelPxPerZoomLevel', 'smoothWheelZoom', 'scaleControl', 'scaleControlOptions', 'maxBounds', 'maxBoundsViscosity', 'maxBoundsDelay', 'editToolbar', 'editToolbarControlsOptions', 'drawnShapeFormat', '_drawnShapes', 'showMeasurements', 'maxDrawnShapes', 'measureControl', 'measureControlOptions', 'viewAutoCorrection', 'mapInstanceName']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

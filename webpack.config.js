@@ -53,6 +53,9 @@ module.exports = (env, argv) => {
             path: path.resolve(__dirname, dashLibraryName),
             chunkFilename: '[name].js',
             filename,
+            // Webpack 4 defaults to MD4, which is disabled by OpenSSL 3 in
+            // current Node.js releases.
+            hashFunction: 'sha256',
             library: dashLibraryName,
             libraryTarget: 'window',
         },

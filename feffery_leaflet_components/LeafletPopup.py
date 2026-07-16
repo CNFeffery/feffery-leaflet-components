@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -34,16 +39,16 @@ Keyword arguments:
     弹框内部元素.
 
 - keepInView (boolean; default False):
-    已展开的弹框是否限制在地图范围内显示  默认值：`False`.
+    已展开的弹框是否限制在地图范围内显示 默认值：`False`.
 
 - closeButton (boolean; default False):
-    是否显示关闭按钮  默认值：`False`.
+    是否显示关闭按钮 默认值：`False`.
 
 - closeOnEscapeKey (boolean; default True):
-    通过键盘`esc`键是否可关闭弹框  默认值：`True`.
+    通过键盘`esc`键是否可关闭弹框 默认值：`True`.
 
 - closeOnClick (boolean; default True):
-    点击地图空白处是否可关闭弹框  默认值：`True`.
+    点击地图空白处是否可关闭弹框 默认值：`True`.
 
 - width (number; optional):
     为弹框设置固定像素宽度值."""

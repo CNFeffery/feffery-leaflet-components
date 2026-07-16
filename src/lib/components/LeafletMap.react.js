@@ -138,6 +138,7 @@ const LeafletMap = ({
     measureControl = false,
     measureControlOptions,
     viewAutoCorrection = false,
+    mapInstanceName,
     setProps
 }) => {
 
@@ -190,6 +191,10 @@ const LeafletMap = ({
                 }
                 maxBoundsViscosity={maxBoundsViscosity}
                 whenCreated={map => {
+                    // 若mapInstanceName参数有效，则将当前地图实例挂载到window对象下对应属性名上
+                    if (mapInstanceName) {
+                        window[mapInstanceName] = map;
+                    };
                     if (measureControl) {
                         // https://github.com/ljagis/leaflet-measure/issues/171#issuecomment-1137483548
                         // 修复测量过程地图异常移动的问题
@@ -681,6 +686,11 @@ LeafletMap.propTypes = {
      * 默认值：`false`
      */
     viewAutoCorrection: PropTypes.bool,
+
+    /**
+     * 设置向浏览器环境window对象下暴露的当前地图实例对应属性名，譬如`'flcMap'`，默认不暴露
+     */
+    mapInstanceName: PropTypes.string,
 
     /**
      * Dash-assigned callback that should be called to report property changes

@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -45,7 +50,7 @@ Keyword arguments:
         纬度.
 
 - draggable (boolean; optional):
-    当前标记是否可拖拽  默认值：`False`.
+    当前标记是否可拖拽 默认值：`False`.
 
 - iconOptions (dict; optional):
     配置图标参数.
@@ -80,25 +85,25 @@ Keyword arguments:
         标记图标css类.
 
 - opacity (number; optional):
-    图标透明度  默认值：`1`.
+    图标透明度 默认值：`1`.
 
 - editable (boolean; default False):
-    当前要素是否可编辑  默认值：`False`.
+    当前要素是否可编辑 默认值：`False`.
 
 - zIndexOffset (number; optional):
     当前图层`z`轴偏移单位.
 
 - riseOnHover (boolean; optional):
-    当鼠标悬浮于当前标记上时，是否自动调整图层至顶层  默认值：`False`.
+    当鼠标悬浮于当前标记上时，是否自动调整图层至顶层 默认值：`False`.
 
 - autoPan (boolean; optional):
-    当拖拽标记至地图边缘时，设置是否允许地图自动移动以适应边缘  默认值：`False`.
+    当拖拽标记至地图边缘时，设置是否允许地图自动移动以适应边缘 默认值：`False`.
 
 - nClicks (number; default 0):
-    监听当前要素累计点击次数  默认值：`0`.
+    监听当前要素累计点击次数 默认值：`0`.
 
 - mouseOverCount (number; default 0):
-    监听当前要素鼠标移入事件累计次数  默认值：`0`."""
+    监听当前要素鼠标移入事件累计次数 默认值：`0`."""
     _children_props: typing.List[str] = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'

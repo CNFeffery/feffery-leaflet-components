@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -35,7 +40,7 @@ Keyword arguments:
     默认值：`'default'`.
 
 - hoverable (boolean; default False):
-    是否开启要素鼠标悬浮效果  默认值：`False`.
+    是否开启要素鼠标悬浮效果 默认值：`False`.
 
 - defaultStyle (optional):
     要素默认样式.
@@ -47,7 +52,7 @@ Keyword arguments:
     当`selectMode`为`'single'`或``'multiple'`时，设置要素在选中时的样式.
 
 - fitBounds (boolean; default True):
-    是否启用图层范围自适应缩放功能  默认值：`True`.
+    是否启用图层范围自适应缩放功能 默认值：`True`.
 
 - fitBoundsOptions (dict; optional):
     配置图层范围自适应缩放的选项.
@@ -61,40 +66,40 @@ Keyword arguments:
         缩放过程是否开启过渡动画效果.
 
     - duration (number; optional):
-        缩放过程动画时长，单位：秒  默认值：`0.25`.
+        缩放过程动画时长，单位：秒 默认值：`0.25`.
 
     - padding (list of numbers; optional):
         缩放过程后，各个方向上额外的像素留白大小，格式：`[上下留白, 左右留白]`.
 
 - fitBoundsDelay (number; default 0):
-    针对图层范围自适应缩放设置执行延时时长，单位：毫秒  默认值：`0`.
+    针对图层范围自适应缩放设置执行延时时长，单位：毫秒 默认值：`0`.
 
 - fitBoundsTargetFeatureProperties (dict; optional):
     针对要素范围自适应缩放功能的要素属性值匹配字典.
 
 - clickFeatureZoom (boolean; default False):
-    是否在点击要素后，自动缩放到对应要素的范围  默认值：`False`.
+    是否在点击要素后，自动缩放到对应要素的范围 默认值：`False`.
 
 - showTooltip (boolean; default False):
-    是否为要素启用信息框功能  默认值：`False`.
+    是否为要素启用信息框功能 默认值：`False`.
 
 - featureIdField (string; default 'id'):
-    设置作为唯一识别`id`的字段名  默认值：`'id'`.
+    设置作为唯一识别`id`的字段名 默认值：`'id'`.
 
 - featureValueField (string; default 'value'):
-    设置作为要素数值的字段名  默认值：`'value'`.
+    设置作为要素数值的字段名 默认值：`'value'`.
 
 - featureCategoryField (string; default 'category'):
-    设置作为要素类别的字段名  默认值：`'category'`.
+    设置作为要素类别的字段名 默认值：`'category'`.
 
 - featureTooltipField (string; default 'tooltip'):
-    设置作为要素鼠标信息框内容的字段名  默认值：`'tooltip'`.
+    设置作为要素鼠标信息框内容的字段名 默认值：`'tooltip'`.
 
 - selectMode (a value equal to: 'single', 'multiple'; default 'single'):
-    要素点击选择模式，可选项有`'single'`（单选模式）、`'multiple'`（多选模式）  默认值：`'single'`.
+    要素点击选择模式，可选项有`'single'`（单选模式）、`'multiple'`（多选模式） 默认值：`'single'`.
 
 - disableClickSelect (boolean; default False):
-    是否禁用主动点击选择要素功能  默认值：`False`.
+    是否禁用主动点击选择要素功能 默认值：`False`.
 
 - selectedFeatureIds (list; optional):
     监听或设置当前已选中要素`id`数组.
@@ -111,7 +116,7 @@ Keyword arguments:
         按顺序定义与分段区间一一对应的样式.
 
     - closed (a value equal to: 'left', 'right'; optional):
-        区间闭合方式，可选项有`'left'`（左闭）、`'right'`（右闭）  默认值：`'left'`.
+        区间闭合方式，可选项有`'left'`（左闭）、`'right'`（右闭） 默认值：`'left'`.
 
 - featureCategoryToStyles (dict with strings as keys and values of type ; optional):
     配置分类设色模式，键为分类值，值为样式字典.
@@ -121,23 +126,23 @@ Keyword arguments:
     默认值：`'auto'`.
 
 - tooltipPermanent (boolean; default False):
-    是否永久展开要素对应的信息框，而无需鼠标移入触发  默认值：`False`.
+    是否永久展开要素对应的信息框，而无需鼠标移入触发 默认值：`False`.
 
 - tooltipSticky (boolean; optional):
-    要素对应信息框是否跟随鼠标位置  默认值：`False`.
+    要素对应信息框是否跟随鼠标位置 默认值：`False`.
 
 - tooltipClassName (string; optional):
     要素信息框css类名.
 
 - lassoSelect (boolean; default False):
-    多选模式下，是否开启套圈选择功能  默认值：`False`.
+    多选模式下，是否开启套圈选择功能 默认值：`False`.
 
 - lassoType (a value equal to: 'contain', 'intersect'; default 'intersect'):
     套圈选择功能空间关系判定方式，可选项有`'contain'`（包含检查）、`'intersect'`（相交检查）
     默认值：`'intersect'`.
 
 - lassoResetSelectedFeatureIds (boolean; default False):
-    套圈选择功能开启时，是否在每次新点击套索按钮时重置`selectedFeatureIds`  默认值：`False`.
+    套圈选择功能开启时，是否在每次新点击套索按钮时重置`selectedFeatureIds` 默认值：`False`.
 
 - lassoButtonPosition (a value equal to: 'topleft', 'topright', 'bottomleft', 'bottomright'; default 'topleft'):
     套圈选择功能触发按钮方位，可选项有`'topleft'`、`'topright'`、`'bottomleft'`、`'bottomright'`
@@ -147,11 +152,10 @@ Keyword arguments:
     套圈样式.
 
 - pointRenderMode (a value equal to: 'marker', 'circle-marker'; default 'circle-marker'):
-    针对点要素的渲染策略，可选项有`'marker'`、`'circle-marker'`
-    默认值：`'circle-marker'`.
+    针对点要素的渲染策略，可选项有`'marker'`、`'circle-marker'` 默认值：`'circle-marker'`.
 
 - circleMarkerRadius (number; default 10):
-    当`pointRenderMode='circle-marker'`时的圆形标记像素半径  默认值：`10`.
+    当`pointRenderMode='circle-marker'`时的圆形标记像素半径 默认值：`10`.
 
 - _clickedFeature (dict; optional):
     监听要素点击事件.

@@ -3,15 +3,20 @@
 import typing  # noqa: F401
 from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.types import NumberType  # noqa: F401
+except ImportError:
+    # Backwards compatibility for dash<=4.1.0
+    if typing.TYPE_CHECKING:
+        raise
+    NumberType = typing.Union[  # noqa: F401
+        typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
+    ]
 
 ComponentSingleType = typing.Union[str, int, float, Component, None]
 ComponentType = typing.Union[
     ComponentSingleType,
     typing.Sequence[ComponentSingleType],
-]
-
-NumberType = typing.Union[
-    typing.SupportsFloat, typing.SupportsInt, typing.SupportsComplex
 ]
 
 
@@ -54,38 +59,38 @@ Keyword arguments:
     矢量样式配置参数.
 
 - arrowheads (dict; default False):
-    配置额外箭头效果  默认值：`False`.
+    配置额外箭头效果 默认值：`False`.
 
     `arrowheads` is a boolean | dict with keys:
 
     - yawn (number; optional):
-        箭头开合角度  默认值：`60`.
+        箭头开合角度 默认值：`60`.
 
     - fill (boolean; optional):
-        是否绘制实心箭头  默认值：`False`.
+        是否绘制实心箭头 默认值：`False`.
 
     - size (number | string; optional):
-        箭头尺寸比例，传入数值型是以米为单位，传入字符串时表示对应所附着折线的百分比，或css格式尺寸值  默认值：`'15%'`.
+        箭头尺寸比例，传入数值型是以米为单位，传入字符串时表示对应所附着折线的百分比，或css格式尺寸值 默认值：`'15%'`.
 
     - frequency (a value equal to: 'allvertices', 'endonly' | number | string; optional):
         箭头在折线上的绘制频率，可选项有`'allvertices'`（每个折点对应1个箭头）、`'endonly'`（只在线要素末端绘制1个箭头）
         当传入以`'m'`结尾的字符串时表示以米为单位的间隔，传入以`'px'`结尾的字符串时表示以像素为单位的间隔
-        传入数值型时表示以等间距方式绘制固定数量的箭头  默认值：`'allvertices'`.
+        传入数值型时表示以等间距方式绘制固定数量的箭头 默认值：`'allvertices'`.
 
     - proportionalToTotal (boolean; optional):
-        当`size`设置为百分比形式时，针对多段折线要素，是否以整体折线长度总和为百分比对应的单位1  默认值：`False`.
+        当`size`设置为百分比形式时，针对多段折线要素，是否以整体折线长度总和为百分比对应的单位1 默认值：`False`.
 
 - arrowheadsPathOptions (optional):
     箭头样式配置参数，默认沿用`pathOptions`.
 
 - editable (boolean; default False):
-    当前要素是否可编辑  默认值：`False`.
+    当前要素是否可编辑 默认值：`False`.
 
 - nClicks (number; default 0):
-    监听当前要素累计点击次数  默认值：`0`.
+    监听当前要素累计点击次数 默认值：`0`.
 
 - mouseOverCount (number; default 0):
-    监听当前要素鼠标移入事件累计次数  默认值：`0`."""
+    监听当前要素鼠标移入事件累计次数 默认值：`0`."""
     _children_props: typing.List[str] = []
     _base_nodes = ['children']
     _namespace = 'feffery_leaflet_components'
